@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  ParrotGame
+
+  Created by Eric Liang on 9/3/21.
+  
+*/
+
+CFBundleDisplayName = "Widget Parrot";
+NSUserTrackingUsageDescription = "Your data will be used to provide you a better and personalized ad experience.";
