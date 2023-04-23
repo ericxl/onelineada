@@ -80,13 +80,10 @@
 		079C00DD26ACEA98000784CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		07D0FCFC26E346900027E7A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		07D0FCFE26E346930027E7A2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		07D0FD1826E34C3F0027E7A2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		07D9014C2633D356009276E7 /* iPhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iPhone.entitlements; sourceTree = "<group>"; };
 		07D903C226349F83009276E7 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		07D903F12634A387009276E7 /* Data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = Data; path = ../iOSBuild/Data; sourceTree = SOURCE_ROOT; };
 		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
-		07E65C1F263A2CFB00614F13 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		C9034C3F29F49ED5007A37A9 /* UnityEngineAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UnityEngineAPI.h; path = ../../UnityProject/Assets/UnityAccessibility/PlugIns/iOS/UnityEngineAPI/UnityEngineAPI.h; sourceTree = "<group>"; };
 		C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "../iOSBuild/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
@@ -129,14 +126,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07E65C1E263A2CDF00614F13 /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				07E65C1F263A2CFB00614F13 /* Base.xcconfig */,
-			);
-			path = Configurations;
-			sourceTree = "<group>";
-		};
 		C9588CC929ECCD4600055160 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,8 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */,
-				07E65C1E263A2CDF00614F13 /* Configurations */,
-				E4327E6B26335A9900376CAB /* ParrotGame */,
+				E4327E6B26335A9900376CAB /* UnityGame */,
 				C9588CDE29ECD05100055160 /* AccessibilityBundle */,
 				E4327E8726335B3600376CAB /* Frameworks */,
 				E4327E6A26335A9900376CAB /* Products */,
@@ -193,7 +181,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E4327E6B26335A9900376CAB /* ParrotGame */ = {
+		E4327E6B26335A9900376CAB /* UnityGame */ = {
 			isa = PBXGroup;
 			children = (
 				07D903F12634A387009276E7 /* Data */,
@@ -204,7 +192,7 @@
 				E4327E7A26335A9A00376CAB /* Info.plist */,
 				07D0FCFD26E346900027E7A2 /* InfoPlist.strings */,
 			);
-			path = ParrotGame;
+			path = UnityGame;
 			sourceTree = "<group>";
 		};
 		E4327E8726335B3600376CAB /* Frameworks */ = {
@@ -285,8 +273,6 @@
 			knownRegions = (
 				en,
 				Base,
-				"zh-Hans",
-				"zh-Hant",
 			);
 			mainGroup = E4327E6026335A9900376CAB;
 			productRefGroup = E4327E6A26335A9900376CAB /* Products */;
@@ -383,8 +369,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				07D0FCFC26E346900027E7A2 /* en */,
-				07D0FCFE26E346930027E7A2 /* zh-Hans */,
-				07D0FD1826E34C3F0027E7A2 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -592,18 +576,17 @@
 		};
 		E4327E7E26335A9A00376CAB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07E65C1F263A2CFB00614F13 /* Base.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ParrotGame/iPhone.entitlements;
+				CODE_SIGN_ENTITLEMENTS = UnityGame/iPhone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = V2HKDY23RK;
 				ENABLE_BITCODE = NO;
 				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
 				INFOPLIST_FILE = ../iOSBuild/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -612,8 +595,12 @@
 					"$(inherited)",
 					"-mno-thumb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(MAIN_APP_BUNDLE_IDENTIFIER)";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.shirley2997.testapp;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"UnityFramework\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.testcompany.unitygametest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
@@ -622,18 +609,17 @@
 		};
 		E4327E7F26335A9A00376CAB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07E65C1F263A2CFB00614F13 /* Base.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ParrotGame/iPhone.entitlements;
+				CODE_SIGN_ENTITLEMENTS = UnityGame/iPhone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = V2HKDY23RK;
 				ENABLE_BITCODE = NO;
 				GCC_USE_INDIRECT_FUNCTION_CALLS = NO;
 				INFOPLIST_FILE = ../iOSBuild/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -642,8 +628,12 @@
 					"$(inherited)",
 					"-mno-thumb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(MAIN_APP_BUNDLE_IDENTIFIER)";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.shirley2997.testapp;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"UnityFramework\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.testcompany.unitygametest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;

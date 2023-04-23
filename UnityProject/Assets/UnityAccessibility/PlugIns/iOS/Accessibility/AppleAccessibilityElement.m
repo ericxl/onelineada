@@ -77,7 +77,7 @@
     {
         return [AppleAccessibilityRuntime sharedInstance].unityAccessibilityIdentifier(self.identifier);
     }
-    return [super accessibilityIdentifier];
+    return nil;
 }
 
 - (BOOL)accessibilityViewIsModal
@@ -113,9 +113,15 @@
             [elements addObject:pair.element];
         }
     }
-    NSArray *newArray = _AccessibilityElementOrdering(elements, _AccessibilityElementOrderingFrameGetter);
-    newArray = _AccessibilityElementModalFiltering(newArray, _AccessibilityElementModalFilteringGetter);
-    return newArray;
+    id modal = [elements _unityAccessibilityModalElement];
+    if (modal != nil)
+    {
+        return @[modal];
+    }
+    else
+    {
+        return [elements _unityAccessibilitySorted];
+    }
 }
 
 - (BOOL)accessibilityScroll:(UIAccessibilityScrollDirection)direction

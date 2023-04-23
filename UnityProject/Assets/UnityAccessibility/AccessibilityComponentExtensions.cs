@@ -95,6 +95,40 @@ namespace Apple.Accessibility
             return text.text;
         }
 
+        internal static AccessibilityTrait AccessibilityTraitsForComponent(TMPro.TextMeshProUGUI text, GameObject go)
+        {
+            if (text.isActiveAndEnabled)
+            {
+                return AccessibilityTrait.StaticText;
+            }
+            else
+            {
+                return AccessibilityTrait.StaticText | AccessibilityTrait.NotEnabled;
+            }
+        }
+
+        internal static string AccessibilityLabelForComponent(TMPro.TextMeshProUGUI text, GameObject go)
+        {
+            return text.text;
+        }
+
+        internal static AccessibilityTrait AccessibilityTraitsForComponent(TMPro.TextMeshPro text, GameObject go)
+        {
+            if (text.isActiveAndEnabled)
+            {
+                return AccessibilityTrait.StaticText;
+            }
+            else
+            {
+                return AccessibilityTrait.StaticText | AccessibilityTrait.NotEnabled;
+            }
+        }
+
+        internal static string AccessibilityLabelForComponent(TMPro.TextMeshPro text, GameObject go)
+        {
+            return text.text;
+        }
+
         internal static Rect AccessibilityFrameForComponent(SpriteRenderer render, GameObject go)
         {
             var screenPos = Camera.main.WorldToScreenPoint(go.transform.position);

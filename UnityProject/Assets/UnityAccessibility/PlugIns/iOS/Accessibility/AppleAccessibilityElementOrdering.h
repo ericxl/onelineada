@@ -12,13 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef CGRect (*AccessibilityElementOrderingFrameGetter)(id element);
-APPLE_ACCESSIBILITY_HIDDEN NSArray *_Nullable _AccessibilityElementOrdering(NSArray *elements, AccessibilityElementOrderingFrameGetter frameGetter);
-
-typedef BOOL (*AccessibilityElementModalGetter)(id element);
-APPLE_ACCESSIBILITY_HIDDEN NSArray *_Nullable _AccessibilityElementModalFiltering(NSArray *elements, AccessibilityElementModalGetter modalGetter);
-
-APPLE_ACCESSIBILITY_HIDDEN CGRect _AccessibilityElementOrderingFrameGetter(id object);
-APPLE_ACCESSIBILITY_HIDDEN BOOL _AccessibilityElementModalFilteringGetter(id object);
+@interface NSArray (UnityAccessibilityAdditions)
+- (id)_unityAccessibilityModalElement;
+- (nullable NSArray *)_unityAccessibilitySorted;
+@end
 
 NS_ASSUME_NONNULL_END

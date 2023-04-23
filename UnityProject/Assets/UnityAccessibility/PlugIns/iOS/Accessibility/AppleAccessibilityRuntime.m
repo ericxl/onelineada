@@ -60,7 +60,7 @@ APPLE_ACCESSIBILITY_HIDDEN
 
 - (AccessibilityElementIndexPair *)_accessibilityElementIndexPairForIdentifier:(NSNumber *)identifier
 {
-    AppleAccessibilityElement *element = [[AppleAccessibilityElement alloc] initWithAccessibilityContainer:self.topLevelUnityView];
+    AppleAccessibilityElement *element = [[AppleAccessibilityElement alloc] init];
     element.identifier = identifier;
 
     AccessibilityElementIndexPair *pair = [[AccessibilityElementIndexPair alloc] init];
@@ -91,12 +91,6 @@ APPLE_ACCESSIBILITY_HIDDEN
     {
         pair.parentIdentifier = parentIdentifier;
         pair.element.parent = parentIdentifier;
-        NSArray *children = parentPair.element.accessibilityElements ?: NSArray.new;
-        NSMutableArray *mutable = [children mutableCopy];
-        [mutable addObject:pair.element];
-
-        NSArray *newArray = _AccessibilityElementOrdering(mutable, _AccessibilityElementOrderingFrameGetter);
-        newArray = _AccessibilityElementModalFiltering(newArray, _AccessibilityElementModalFilteringGetter);
     }
 }
 
@@ -135,132 +129,15 @@ APPLE_ACCESSIBILITY_HIDDEN
             [elements addObject:pair.element];
         }
     }
-    NSArray *newArray = _AccessibilityElementOrdering(elements, _AccessibilityElementOrderingFrameGetter);
-    newArray = _AccessibilityElementModalFiltering(elements, _AccessibilityElementModalFilteringGetter);
-    return newArray;
-}
-
-@end
-
-@implementation AppleAccessibilityRuntime(Testing)
-
-- (BOOL)runUnitTestWithName:(NSString *)name
-{
-    SEL testSel = NSSelectorFromString(name);
-    if ( [self respondsToSelector:testSel] )
+    id modal = [elements _unityAccessibilityModalElement];
+    if ( modal != nil )
     {
-        IMP testImp = [self methodForSelector:testSel];
-        if ( testImp )
-        {
-            bool (*testFunc)(id, SEL) = (void *)testImp;
-            return testFunc(self, testSel);
-        }
+        return @[modal];
     }
-    return false;
-}
-
-- (BOOL)runUnitTestForIdentifier:(NSNumber *)identifier keyPath:(NSString *)keyPath expected:(NSString *)expected
-{
-    for ( AccessibilityElementIndexPair *pair in _elements )
+    else
     {
-        if ( [pair.element.identifier isEqual:identifier] )
-        {
-            return [[pair.element valueForKeyPath:keyPath] isEqualToString:expected];
-        }
+        return [elements _unityAccessibilitySorted];
     }
-    return NO;
-}
-
-- (BOOL)test_SmokeTestSucceeded
-{
-    return true;
-}
-
-- (BOOL)test_SmokeTestFailed
-{
-    return false;
-}
-
-#if 0
-- (BOOL)test_SmokeTestUnimplemented
-{
-    return false;
-}
-#endif
-
-- (BOOL)_test_elementNamedButtonExists
-{
-    for ( AccessibilityElementIndexPair *pair in _elements )
-    {
-        if ( [pair.element.accessibilityLabel isEqualToString:@"Button"] )
-        {
-            return YES;
-        }
-    }
-    return NO;
-}
-
-- (BOOL)_test_anyElementsExist
-{
-    return [_elements count] > 0;
-}
-
-- (BOOL)_test_performMagicTapOnButton
-{
-    for ( AccessibilityElementIndexPair *pair in _elements )
-    {
-        if ( [pair.element.accessibilityLabel isEqualToString:@"Button"] )
-        {
-            BOOL succeeded = [pair.element accessibilityPerformMagicTap];
-            return succeeded;
-        }
-    }
-    return false;
-}
-
-- (BOOL)_test_performEscapeOnButton
-{
-    for ( AccessibilityElementIndexPair *pair in _elements )
-    {
-        if ( [pair.element.accessibilityLabel isEqualToString:@"Button"] )
-        {
-            BOOL succeeded = [pair.element accessibilityPerformEscape];
-            return succeeded;
-        }
-    }
-    return false;
-}
-
-- (BOOL)_test_AccessibilityIncrementOnButton
-{
-    for ( AccessibilityElementIndexPair *pair in _elements )
-    {
-        if ( [pair.element.accessibilityLabel isEqualToString:@"Button"] )
-        {
-            [pair.element accessibilityIncrement];
-            return true;
-        }
-    }
-    return false;
-}
-
-- (BOOL)_test_AccessibilityDecrementOnButton
-{
-    for ( AccessibilityElementIndexPair *pair in _elements )
-    {
-        if ( [pair.element.accessibilityLabel isEqualToString:@"Button"] )
-        {
-            [pair.element accessibilityDecrement];
-            return true;
-        }
-    }
-    return false;
-}
-
-
-- (BOOL)test_elementWithId:(NSNumber *)identifier hasAccessibilityLabel:(NSString *)label
-{
-    return NO;
 }
 
 @end

@@ -573,12 +573,20 @@ namespace Apple.Accessibility
             Rect defaultProvider(Component c)
             {
                 Rect defaultFrame = Rect.zero;
-                foreach (Renderer r in c.GetComponents<Renderer>())
+                var rectTransform = GetComponent<RectTransform>();
+                if (false)
                 {
-                    Vector3 center = r.bounds.center;
-                    Vector3 extents = r.bounds.extents;
+                    //var canvas = GetComponentInParent<Canvas>();
+                    //Camera.main.worldto
+                }
+                else
+                {
+                    foreach (Renderer r in c.GetComponents<Renderer>())
+                    {
+                        Vector3 center = r.bounds.center;
+                        Vector3 extents = r.bounds.extents;
 
-                    Vector3[] vertices = new[] {
+                        Vector3[] vertices = new[] {
                         new Vector3( center.x + extents.x, center.y + extents.y, center.z + extents.z ),
                         new Vector3( center.x + extents.x, center.y + extents.y, center.z - extents.z ),
                         new Vector3( center.x + extents.x, center.y - extents.y, center.z + extents.z ),
@@ -589,14 +597,15 @@ namespace Apple.Accessibility
                         new Vector3( center.x - extents.x, center.y - extents.y, center.z - extents.z ),
                     };
 
-                    IEnumerable<Vector3> screenVertices = vertices.Select(corner => Camera.main.WorldToScreenPoint(corner));
-                    float maxX = screenVertices.Max(corner => corner.x);
-                    float minX = screenVertices.Min(corner => corner.x);
-                    float maxY = screenVertices.Max(corner => corner.y);
-                    float minY = screenVertices.Min(corner => corner.y);
+                        IEnumerable<Vector3> screenVertices = vertices.Select(corner => Camera.main.WorldToScreenPoint(corner));
+                        float maxX = screenVertices.Max(corner => corner.x);
+                        float minX = screenVertices.Min(corner => corner.x);
+                        float maxY = screenVertices.Max(corner => corner.y);
+                        float minY = screenVertices.Min(corner => corner.y);
 
-                    defaultFrame = new Rect(minX, Screen.height - maxY, maxX - minX, maxY - minY);
-                    break;
+                        defaultFrame = new Rect(minX, Screen.height - maxY, maxX - minX, maxY - minY);
+                        break;
+                    }
                 }
                 return defaultFrame;
             }
@@ -604,7 +613,7 @@ namespace Apple.Accessibility
         }
 
 
-        [SerializeField] private bool _userAccessibilityLabelProvided = true;
+        [SerializeField] private bool _userAccessibilityLabelProvided = false;
         [SerializeField] private string m_userAccessibilityLabel;
         internal string _accessibilityLabel()
         {

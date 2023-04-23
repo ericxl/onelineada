@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AppleAccessibilityElement : UIAccessibilityElement
+@interface AppleAccessibilityElement : NSObject
 @property (nonatomic, copy) NSNumber *identifier;
 @property (nonatomic, copy) NSNumber *parent;
 @property (nonatomic, strong) NSArray<UIAccessibilityCustomAction *> *actions;

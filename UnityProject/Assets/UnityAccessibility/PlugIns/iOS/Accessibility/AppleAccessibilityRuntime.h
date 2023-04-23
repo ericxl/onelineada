@@ -45,8 +45,3 @@
 - (NSMutableDictionary<NSNumber *, id> *)identifierToElement;
 
 @end
-
-@interface AppleAccessibilityRuntime(Testing)
-- (BOOL)runUnitTestWithName:(NSString *)name;
-- (BOOL)runUnitTestForIdentifier:(NSNumber *)identifier keyPath:(NSString *)keyPath expected:(NSString *)expected;
-@end
