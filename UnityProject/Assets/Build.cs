@@ -13,7 +13,7 @@ public class Build : MonoBehaviour
 
         //Debug.LogError(Application.dataPath);
 
-        var path = Path.Combine(Path.GetDirectoryName(Application.dataPath), "iOSBuild");
+        var path = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Application.dataPath)), "iOSBuild");
         buildPlayerOptions.locationPathName = path;
         buildPlayerOptions.target = BuildTarget.iOS;
 
