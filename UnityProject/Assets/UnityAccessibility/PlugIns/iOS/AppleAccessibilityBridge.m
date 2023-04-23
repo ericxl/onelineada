@@ -752,13 +752,3 @@ APPLE_ACCESSIBILITY_EXTERN void _UnityAX_UnregisterElementWithIdentifier(int32_t
 {
     [AppleAccessibilityRuntime.sharedInstance unregisterAccessibilityElementWithIdentifier:@(identifier)];
 }
-
-APPLE_ACCESSIBILITY_EXTERN bool _UnityAX_RuniOSSideUnitTestWithName(const char *name)
-{
-    return [AppleAccessibilityRuntime.sharedInstance runUnitTestWithName:[NSString stringWithUTF8String:name]];
-}
-
-APPLE_ACCESSIBILITY_EXTERN bool _UnityAX_RuniOSSideUnitTestWithKeyPathExpectingStringResult(int32_t identifier, const char *keyPath, const char *expected)
-{
-    return [AppleAccessibilityRuntime.sharedInstance runUnitTestForIdentifier:@(identifier) keyPath:[NSString stringWithUTF8String:keyPath] expected:[NSString stringWithUTF8String:expected]];
-}

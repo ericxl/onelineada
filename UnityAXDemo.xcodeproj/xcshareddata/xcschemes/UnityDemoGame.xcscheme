@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1250"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07D901642633EFBF009276E7"
-               BuildableName = "UnitySupport.framework"
-               BlueprintName = "UnitySupport"
-               ReferencedContainer = "container:ParrotGame.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -40,6 +24,19 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E4327E6826335A9900376CAB"
+            BuildableName = "UnityDemoGame.app"
+            BlueprintName = "UnityDemoGame"
+            ReferencedContainer = "container:UnityAXDemo.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../Configurations/IAPConfiguration.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -50,10 +47,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07D901642633EFBF009276E7"
-            BuildableName = "UnitySupport.framework"
-            BlueprintName = "UnitySupport"
-            ReferencedContainer = "container:ParrotGame.xcodeproj">
+            BlueprintIdentifier = "E4327E6826335A9900376CAB"
+            BuildableName = "UnityDemoGame.app"
+            BlueprintName = "UnityDemoGame"
+            ReferencedContainer = "container:UnityAXDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

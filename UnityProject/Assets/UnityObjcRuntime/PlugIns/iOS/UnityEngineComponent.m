@@ -15,6 +15,7 @@
 {
     UnityEngineComponent *result = [UnityEngineComponent new];
     result->_instanceID = instanceID;
+    return result;
 }
 
 - (UnityEngineComponent *)getComponent:(NSString *)component

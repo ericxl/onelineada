@@ -846,7 +846,7 @@ namespace Apple.Accessibility
         #region Native Bridge
 
         private static bool __registered = false;
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void RegisterCallbacks()
         {
             if (!__registered)
