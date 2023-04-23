@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
-               BuildableName = "UnityEngineAPI_Accessibility.framework"
-               BlueprintName = "UnityEngineAPI+Accessibility"
+               BuildableName = "UnityEngineAPI_Accessibility_Plugin.framework"
+               BlueprintName = "UnityEngineAPI+Accessibility+Plugin"
                ReferencedContainer = "container:UnityAXDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
-            BuildableName = "UnityEngineAPI_Accessibility.framework"
-            BlueprintName = "UnityEngineAPI+Accessibility"
+            BuildableName = "UnityEngineAPI_Accessibility_Plugin.framework"
+            BlueprintName = "UnityEngineAPI+Accessibility+Plugin"
             ReferencedContainer = "container:UnityAXDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

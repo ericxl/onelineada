@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		079C00DE26ACEA98000784CB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C00DD26ACEA98000784CB /* StoreKit.framework */; };
 		07C3307326A12AD700EBA463 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C3307226A12AD700EBA463 /* GameKit.framework */; };
-		C9588CDD29ECD03700055160 /* AccessibilityBundle.axbundle in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9588CD929ECD01400055160 /* AccessibilityBundle.axbundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9588CE029ECD06A00055160 /* AccessibilityGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9588CDF29ECD06A00055160 /* AccessibilityGlue.m */; };
+		C94BD1AE29F5D4340084A154 /* UnityEngineGameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C94BD1AC29F5D4340084A154 /* UnityEngineGameObject.h */; };
+		C94BD1AF29F5D4340084A154 /* UnityEngineGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1AD29F5D4340084A154 /* UnityEngineGameObject.m */; };
+		C94BD1B529F5DB5E0084A154 /* AccessibilityGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */; };
 		C9FBDC4629F5A34D00A306B4 /* UnityEngineScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FBDC3429F5A2EB00A306B4 /* UnityEngineScene.h */; };
 		C9FBDC4729F5A34D00A306B4 /* UnityEngineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3529F5A2EB00A306B4 /* UnityEngineScene.m */; };
 		C9FBDC4829F5A34D00A306B4 /* UnityEngineBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3729F5A2EB00A306B4 /* UnityEngineBridge.m */; };
@@ -59,13 +60,6 @@
 			remoteGlobalIDString = 9D25AB9D213FB47800354C27;
 			remoteInfo = UnityFramework;
 		};
-		C9FBDC8929F5B1B700A306B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E4327E6126335A9900376CAB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C9588CD829ECD01400055160;
-			remoteInfo = AccessibilityBundle;
-		};
 		C9FBDC8B29F5B1BD00A306B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */;
@@ -93,7 +87,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				C9588CDD29ECD03700055160 /* AccessibilityBundle.axbundle in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,9 +98,10 @@
 		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		C94BD1AC29F5D4340084A154 /* UnityEngineGameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityEngineGameObject.h; sourceTree = "<group>"; };
+		C94BD1AD29F5D4340084A154 /* UnityEngineGameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityEngineGameObject.m; sourceTree = "<group>"; };
+		C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityGlue.m; sourceTree = "<group>"; };
 		C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "iOSBuild/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
-		C9588CD929ECD01400055160 /* AccessibilityBundle.axbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccessibilityBundle.axbundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9588CDF29ECD06A00055160 /* AccessibilityGlue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityGlue.m; sourceTree = "<group>"; };
 		C9FBDC3129F5A2EB00A306B4 /* UnityEngineComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityEngineComponent.h; sourceTree = "<group>"; };
 		C9FBDC3229F5A2EB00A306B4 /* UnityEngineBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityEngineBridge.h; sourceTree = "<group>"; };
 		C9FBDC3329F5A2EB00A306B4 /* UnityEngineObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityEngineObject.m; sourceTree = "<group>"; };
@@ -117,7 +111,7 @@
 		C9FBDC3729F5A2EB00A306B4 /* UnityEngineBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityEngineBridge.m; sourceTree = "<group>"; };
 		C9FBDC3829F5A2EB00A306B4 /* UnityEngineObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityEngineObject.h; sourceTree = "<group>"; };
 		C9FBDC3929F5A2EB00A306B4 /* UnityEngineComponent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityEngineComponent.m; sourceTree = "<group>"; };
-		C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UnityEngineAPI_Accessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UnityEngineAPI_Accessibility_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9FBDC6F29F5AFE200A306B4 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		C9FBDC7129F5AFE200A306B4 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = MainApp/main.mm; sourceTree = "<group>"; };
 		C9FBDC7429F5AFE200A306B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Unity-iPhone/Images.xcassets"; sourceTree = "<group>"; };
@@ -144,13 +138,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C9588CD629ECD01400055160 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C9FBDC3C29F5A33900A306B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -170,12 +157,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C9588CDE29ECD05100055160 /* AccessibilityBundle */ = {
+		C94BD1B329F5DAE80084A154 /* UnityAccessibilityPlugin */ = {
 			isa = PBXGroup;
 			children = (
-				C9588CDF29ECD06A00055160 /* AccessibilityGlue.m */,
+				C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */,
 			);
-			path = AccessibilityBundle;
+			name = UnityAccessibilityPlugin;
+			path = UnityProject/Assets/UnityAccessibilityPlugin/PlugIns/iOS;
 			sourceTree = "<group>";
 		};
 		C9588CE929ED2CDF00055160 /* UnityEngineAPI+Accessibility */ = {
@@ -224,6 +212,8 @@
 				C9FBDC3929F5A2EB00A306B4 /* UnityEngineComponent.m */,
 				C9FBDC3829F5A2EB00A306B4 /* UnityEngineObject.h */,
 				C9FBDC3329F5A2EB00A306B4 /* UnityEngineObject.m */,
+				C94BD1AC29F5D4340084A154 /* UnityEngineGameObject.h */,
+				C94BD1AD29F5D4340084A154 /* UnityEngineGameObject.m */,
 				C9FBDC3429F5A2EB00A306B4 /* UnityEngineScene.h */,
 				C9FBDC3529F5A2EB00A306B4 /* UnityEngineScene.m */,
 			);
@@ -257,7 +247,7 @@
 				C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */,
 				C9FBDC6C29F5AFAD00A306B4 /* Unity-iPhone */,
 				C9588CE929ED2CDF00055160 /* UnityEngineAPI+Accessibility */,
-				C9588CDE29ECD05100055160 /* AccessibilityBundle */,
+				C94BD1B329F5DAE80084A154 /* UnityAccessibilityPlugin */,
 				E4327E8726335B3600376CAB /* Frameworks */,
 				E4327E6A26335A9900376CAB /* Products */,
 			);
@@ -267,8 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				E4327E6926335A9900376CAB /* UnityDemoGame.app */,
-				C9588CD929ECD01400055160 /* AccessibilityBundle.axbundle */,
-				C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility.framework */,
+				C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility_Plugin.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9FBDC4E29F5A34D00A306B4 /* UnityEngineObject.h in Headers */,
+				C94BD1AE29F5D4340084A154 /* UnityEngineGameObject.h in Headers */,
 				C9FBDC4A29F5A34D00A306B4 /* UnityEngineComponent.h in Headers */,
 				C9FBDC4B29F5A34D00A306B4 /* UnityEngineBridge.h in Headers */,
 				C9FBDC4629F5A34D00A306B4 /* UnityEngineScene.h in Headers */,
@@ -304,26 +294,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C9588CD829ECD01400055160 /* AccessibilityBundle */ = {
+		C9FBDC3E29F5A33900A306B4 /* UnityEngineAPI+Accessibility+Plugin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C9588CDA29ECD01400055160 /* Build configuration list for PBXNativeTarget "AccessibilityBundle" */;
-			buildPhases = (
-				C9588CD529ECD01400055160 /* Sources */,
-				C9588CD629ECD01400055160 /* Frameworks */,
-				C9588CD729ECD01400055160 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AccessibilityBundle;
-			productName = AccessibilityBundle;
-			productReference = C9588CD929ECD01400055160 /* AccessibilityBundle.axbundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		C9FBDC3E29F5A33900A306B4 /* UnityEngineAPI+Accessibility */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityEngineAPI+Accessibility" */;
+			buildConfigurationList = C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityEngineAPI+Accessibility+Plugin" */;
 			buildPhases = (
 				C9FBDC3A29F5A33900A306B4 /* Headers */,
 				C9FBDC3B29F5A33900A306B4 /* Sources */,
@@ -334,9 +307,9 @@
 			);
 			dependencies = (
 			);
-			name = "UnityEngineAPI+Accessibility";
+			name = "UnityEngineAPI+Accessibility+Plugin";
 			productName = UnityEngineAPI;
-			productReference = C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility.framework */;
+			productReference = C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility_Plugin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E4327E6826335A9900376CAB /* UnityDemoGame */ = {
@@ -353,7 +326,6 @@
 			);
 			dependencies = (
 				C9FBDC8C29F5B1BD00A306B4 /* PBXTargetDependency */,
-				C9FBDC8A29F5B1B700A306B4 /* PBXTargetDependency */,
 			);
 			name = UnityDemoGame;
 			productName = TesterApp;
@@ -369,9 +341,6 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					C9588CD829ECD01400055160 = {
-						CreatedOnToolsVersion = 14.3;
-					};
 					C9FBDC3E29F5A33900A306B4 = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -401,8 +370,7 @@
 			projectRoot = "";
 			targets = (
 				E4327E6826335A9900376CAB /* UnityDemoGame */,
-				C9588CD829ECD01400055160 /* AccessibilityBundle */,
-				C9FBDC3E29F5A33900A306B4 /* UnityEngineAPI+Accessibility */,
+				C9FBDC3E29F5A33900A306B4 /* UnityEngineAPI+Accessibility+Plugin */,
 			);
 		};
 /* End PBXProject section */
@@ -433,13 +401,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C9588CD729ECD01400055160 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C9FBDC3D29F5A33900A306B4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -464,14 +425,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C9588CD529ECD01400055160 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9588CE029ECD06A00055160 /* AccessibilityGlue.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C9FBDC3B29F5A33900A306B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +432,8 @@
 				C9FBDC4D29F5A34D00A306B4 /* UnityEngineObject.m in Sources */,
 				C9FBDC4829F5A34D00A306B4 /* UnityEngineBridge.m in Sources */,
 				C9FBDCAD29F5B39B00A306B4 /* AppleAccessibilityElementOrdering.m in Sources */,
+				C94BD1B529F5DB5E0084A154 /* AccessibilityGlue.m in Sources */,
+				C94BD1AF29F5D4340084A154 /* UnityEngineGameObject.m in Sources */,
 				C9FBDCAA29F5B39B00A306B4 /* AppleAccessibilitySafeOverride.m in Sources */,
 				C9FBDCA929F5B39B00A306B4 /* AppleAccessibilityRuntime.m in Sources */,
 				C9FBDCAB29F5B39B00A306B4 /* AppleAccessibilityBridge.m in Sources */,
@@ -500,11 +455,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C9FBDC8A29F5B1B700A306B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C9588CD829ECD01400055160 /* AccessibilityBundle */;
-			targetProxy = C9FBDC8929F5B1B700A306B4 /* PBXContainerItemProxy */;
-		};
 		C9FBDC8C29F5B1BD00A306B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UnityFramework;
@@ -513,82 +463,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		C9588CDB29ECD01400055160 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V2HKDY23RK;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSPrincipalClass = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"'@executable_path/Frameworks'",
-					"'@loader_path/Frameworks'",
-					"'@loader_path/../Frameworks'",
-					"'@executable_path/../Frameworks'",
-					"'@executable_path/../../Frameworks'",
-					"'@loader_path/../../Frameworks'",
-					"'@loader_path/../../../Frameworks'",
-					"'@executable_path/../../../Frameworks'",
-				);
-				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					UnityFramework,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiassistant.AccessibilityBundle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				WRAPPER_EXTENSION = axbundle;
-			};
-			name = Debug;
-		};
-		C9588CDC29ECD01400055160 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V2HKDY23RK;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSPrincipalClass = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"'@executable_path/Frameworks'",
-					"'@loader_path/Frameworks'",
-					"'@loader_path/../Frameworks'",
-					"'@executable_path/../Frameworks'",
-					"'@executable_path/../../Frameworks'",
-					"'@loader_path/../../Frameworks'",
-					"'@loader_path/../../../Frameworks'",
-					"'@executable_path/../../../Frameworks'",
-				);
-				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					UnityFramework,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiassistant.AccessibilityBundle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				WRAPPER_EXTENSION = axbundle;
-			};
-			name = Release;
-		};
 		C9FBDC4429F5A33900A306B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -840,16 +714,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C9588CDA29ECD01400055160 /* Build configuration list for PBXNativeTarget "AccessibilityBundle" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C9588CDB29ECD01400055160 /* Debug */,
-				C9588CDC29ECD01400055160 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityEngineAPI+Accessibility" */ = {
+		C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityEngineAPI+Accessibility+Plugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C9FBDC4429F5A33900A306B4 /* Debug */,

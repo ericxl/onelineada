@@ -41,7 +41,8 @@ NSArray<NSNumber *> *uebStringToNumberArray(NSString *string)
     return nil;
 }
 
-
+_GameAXDelegate_GameObjectFind _GameAXDelegate_GameObjectFind_Func = NULL;
+void _GameAXRegisterFunc_GameObjectFind(void *func) { _GameAXDelegate_GameObjectFind_Func = func; }
 
 _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject_Func = NULL;
 void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(void *func) { _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject_Func = func; }

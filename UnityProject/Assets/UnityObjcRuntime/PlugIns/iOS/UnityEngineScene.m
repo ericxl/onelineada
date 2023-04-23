@@ -3,6 +3,7 @@
 #import "UnityEngineComponent.h"
 
 @implementation UnityEngineScene
+
 + (instancetype)current
 {
     return [UnityEngineScene new];
@@ -15,7 +16,7 @@
     NSMutableArray *result = [NSMutableArray new];
     for (NSNumber *number in numberArray)
     {
-        UnityEngineComponent *component = [UnityEngineComponent componentWithID:number.intValue];
+        UnityEngineComponent *component = [UnityEngineComponent objectWithID:number.intValue];
         [result addObject:component];
     }
     return [result copy];

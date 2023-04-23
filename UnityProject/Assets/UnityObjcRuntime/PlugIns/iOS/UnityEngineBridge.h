@@ -8,6 +8,10 @@ extern NSArray<NSNumber *> *uebStringToNumberArray(NSString *string);
 
 
 
+typedef int(* _GameAXDelegate_GameObjectFind)(const char *);
+extern _GameAXDelegate_GameObjectFind _GameAXDelegate_GameObjectFind_Func;
+extern void _GameAXRegisterFunc_GameObjectFind(void *func);
+
 typedef char *(* _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject)(void);
 extern _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject_Func;
 extern void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(void *func);

@@ -7,6 +7,15 @@ using UnityEngine;
 
 public class CSharpRuntimeSupport
 {
+    private delegate int _GameAXDelegate_GameObjectFind(string name);
+    [DllImport("__Internal")] private static extern void _GameAXRegisterFunc_GameObjectFind(_GameAXDelegate_GameObjectFind func);
+    [AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_GameObjectFind))]
+    private static int _GameAXImpl_GameObjectFind(string name)
+    {
+        var gameObject = UnityEngine.GameObject.Find(name);
+        return gameObject ? gameObject.GetInstanceID() : -1;
+    }
+
     private delegate string _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject();
     [DllImport("__Internal")] private static extern void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject func);
     [AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject))]
@@ -55,11 +64,11 @@ public class CSharpRuntimeSupport
                 .Invoke(null, new object[] { iid });
     }
 
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void BeforeSplashScreen()
     {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        _GameAXRegisterFunc_GameObjectFind(_GameAXImpl_GameObjectFind);
         _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(_GameAXImpl_FindObjectsGetInstanceIDsOfTypeGameObject);
         _GameAXRegisterFunc_GetComponentForObject(_GameAXImpl_GetComponentForObject);
         _GameAXRegisterFunc_AddComponentForObject(_GameAXImpl_AddComponentForObject);
