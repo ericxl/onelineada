@@ -1,16 +1,5 @@
 #import "UnityEngineBridge.h"
 
-
-const char *uebFromNSString(NSString *str)
-{
-    return str ? str.UTF8String : NULL;
-}
-
-NSString *uebToNSString(const char *cString)
-{
-    return cString ? [NSString stringWithUTF8String:cString] : nil;
-}
-
 NSArray<NSNumber *> *uebStringToNumberArray(NSString *string)
 {
     if ( string == nil )
@@ -41,17 +30,6 @@ NSArray<NSNumber *> *uebStringToNumberArray(NSString *string)
     return nil;
 }
 
-_GameAXDelegate_GameObjectFind _GameAXDelegate_GameObjectFind_Func = NULL;
-void _GameAXRegisterFunc_GameObjectFind(void *func) { _GameAXDelegate_GameObjectFind_Func = func; }
-
-_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject_Func = NULL;
-void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(void *func) { _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject_Func = func; }
-
-_GameAXDelegate_GetComponentForObject _GameAXDelegate_GetComponentForObject_Func = NULL;
-void _GameAXRegisterFunc_GetComponentForObject(void *func) { _GameAXDelegate_GetComponentForObject_Func = func; }
-
-_GameAXDelegate_AddComponentForObject _GameAXDelegate_AddComponentForObject_Func = NULL;
-void _GameAXRegisterFunc_AddComponentForObject(void *func) { _GameAXDelegate_AddComponentForObject_Func = func; }
-
-
-
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineGameObjectFind);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineGameObjectAddComponent);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineGameObjectGetComponent);

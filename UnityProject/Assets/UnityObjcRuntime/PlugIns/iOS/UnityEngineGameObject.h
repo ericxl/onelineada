@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable instancetype)find:(NSString *)name;
 
-- (nullable UnityEngineComponent *)getComponent:(NSString *)component;
 - (nullable UnityEngineComponent *)addComponent:(NSString *)component;
+- (nullable UnityEngineComponent *)getComponent:(NSString *)component;
 
 @end
 

@@ -8,7 +8,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UnityEngineScene: UnityEngineObject
 + (instancetype)current;
-- (NSArray<UnityEngineComponent *> *)findObjectsGetInstanceIDsOfTypeGameObject;
 @end
 
 

@@ -1,25 +1,20 @@
 #import <Foundation/Foundation.h>
 
-extern const char *uebFromNSString(NSString *str);
-
-extern NSString *uebToNSString(const char *cString);
+#define FROM_NSSTRING(nsstring) (nsstring ? nsstring.UTF8String : NULL)
+#define TO_NSSTRING(str) (str ? [NSString stringWithUTF8String:str] : nil)
 
 extern NSArray<NSNumber *> *uebStringToNumberArray(NSString *string);
 
+#define CSHARP_BRIDGE_INTERFACE(name, return_type, params) \
+typedef return_type(* _CSharpDelegate_##name) params; \
+extern _CSharpDelegate_##name name##_CSharpFunc; \
+extern void _CSharpRegisterFunc_##name (void *func);
+
+#define CSHARP_BRIDGE_IMPLEMENTATION(name) \
+_CSharpDelegate_##name name##_CSharpFunc = NULL; \
+void _CSharpRegisterFunc_##name (void *func) { name##_CSharpFunc = func ; }
 
 
-typedef int(* _GameAXDelegate_GameObjectFind)(const char *);
-extern _GameAXDelegate_GameObjectFind _GameAXDelegate_GameObjectFind_Func;
-extern void _GameAXRegisterFunc_GameObjectFind(void *func);
-
-typedef char *(* _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject)(void);
-extern _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject_Func;
-extern void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(void *func);
-
-typedef int (* _GameAXDelegate_GetComponentForObject)(int, const char *);
-extern _GameAXDelegate_GetComponentForObject _GameAXDelegate_GetComponentForObject_Func;
-extern void _GameAXRegisterFunc_GetComponentForObject(void *func);
-
-typedef int (* _GameAXDelegate_AddComponentForObject)(int, const char *);
-extern _GameAXDelegate_AddComponentForObject _GameAXDelegate_AddComponentForObject_Func;
-extern void _GameAXRegisterFunc_AddComponentForObject(void *func);
+CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectFind, int, (const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectAddComponent, int, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectGetComponent, int, (int, const char *));

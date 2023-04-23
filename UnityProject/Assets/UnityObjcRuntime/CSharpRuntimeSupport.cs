@@ -7,45 +7,30 @@ using UnityEngine;
 
 public class CSharpRuntimeSupport
 {
-    private delegate int _GameAXDelegate_GameObjectFind(string name);
-    [DllImport("__Internal")] private static extern void _GameAXRegisterFunc_GameObjectFind(_GameAXDelegate_GameObjectFind func);
-    [AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_GameObjectFind))]
-    private static int _GameAXImpl_GameObjectFind(string name)
+    private delegate int _CSharpDelegate_UnityEngineGameObjectFind(string name);
+    [DllImport("__Internal")] private static extern void _CSharpRegisterFunc_UnityEngineGameObjectFind(_CSharpDelegate_UnityEngineGameObjectFind func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineGameObjectFind))]
+    private static int _CSharpImpl_UnityEngineGameObjectFind(string name)
     {
         var gameObject = UnityEngine.GameObject.Find(name);
         return gameObject ? gameObject.GetInstanceID() : -1;
     }
 
-    private delegate string _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject();
-    [DllImport("__Internal")] private static extern void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject func);
-    [AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject))]
-    private static string _GameAXImpl_FindObjectsGetInstanceIDsOfTypeGameObject()
-    {
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-        var ids = allObjects.Select(s => s.GetInstanceID().ToString()).ToArray();
-        var joined = string.Join(",", ids);
-        return "[" + joined + "]";
-    }
+    //private delegate string _GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject();
+    //[DllImport("__Internal")] private static extern void _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject func);
+    //[AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_FindObjectsGetInstanceIDsOfTypeGameObject))]
+    //private static string _GameAXImpl_FindObjectsGetInstanceIDsOfTypeGameObject()
+    //{
+    //    GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+    //    var ids = allObjects.Select(s => s.GetInstanceID().ToString()).ToArray();
+    //    var joined = string.Join(",", ids);
+    //    return "[" + joined + "]";
+    //}
 
-    private delegate int _GameAXDelegate_GetComponentForObject(int objectInstanceID, string componentName);
-    [DllImport("__Internal")] private static extern void _GameAXRegisterFunc_GetComponentForObject(_GameAXDelegate_GetComponentForObject func);
-    [AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_GetComponentForObject))]
-    private static int _GameAXImpl_GetComponentForObject(int objectInstanceID, string componentName)
-    {
-        var obj = FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null || obj is not GameObject) return -1;
-        
-        var type = Type.GetType(componentName);
-        if (type == null) return -1;
-
-        var component = (obj as GameObject).GetComponent(type);
-        return component ? component.GetInstanceID() : -1;
-    }
-
-    private delegate int _GameAXDelegate_AddComponentForObject(int objectInstanceID, string componentName);
-    [DllImport("__Internal")] private static extern void _GameAXRegisterFunc_AddComponentForObject(_GameAXDelegate_GetComponentForObject func);
-    [AOT.MonoPInvokeCallback(typeof(_GameAXDelegate_GetComponentForObject))]
-    private static int _GameAXImpl_AddComponentForObject(int objectInstanceID, string componentName)
+    private delegate int _CSharpDelegate_UnityEngineGameObjectAddComponent(int objectInstanceID, string componentName);
+    [DllImport("__Internal")] private static extern void _CSharpRegisterFunc_UnityEngineGameObjectAddComponent(_CSharpDelegate_UnityEngineGameObjectAddComponent func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineGameObjectAddComponent))]
+    private static int _CSharpImpl_UnityEngineGameObjectAddComponent(int objectInstanceID, string componentName)
     {
         var obj = FindObjectFromInstanceID(objectInstanceID);
         if (obj == null || obj is not GameObject) return -1;
@@ -54,6 +39,21 @@ public class CSharpRuntimeSupport
         if (type == null) return -1;
 
         var component = (obj as GameObject).AddComponent(type);
+        return component ? component.GetInstanceID() : -1;
+    }
+
+    private delegate int _CSharpDelegate_UnityEngineGameObjectGetComponent(int objectInstanceID, string componentName);
+    [DllImport("__Internal")] private static extern void _CSharpRegisterFunc_UnityEngineGameObjectGetComponent(_CSharpDelegate_UnityEngineGameObjectGetComponent func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineGameObjectGetComponent))]
+    private static int _CSharpImpl_UnityEngineGameObjectGetComponent(int objectInstanceID, string componentName)
+    {
+        var obj = FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null || obj is not GameObject) return -1;
+        
+        var type = Type.GetType(componentName);
+        if (type == null) return -1;
+
+        var component = (obj as GameObject).GetComponent(type);
         return component ? component.GetInstanceID() : -1;
     }
 
@@ -68,13 +68,9 @@ public class CSharpRuntimeSupport
     private static void BeforeSplashScreen()
     {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        _GameAXRegisterFunc_GameObjectFind(_GameAXImpl_GameObjectFind);
-        _GameAXRegisterFunc_FindObjectsGetInstanceIDsOfTypeGameObject(_GameAXImpl_FindObjectsGetInstanceIDsOfTypeGameObject);
-        _GameAXRegisterFunc_GetComponentForObject(_GameAXImpl_GetComponentForObject);
-        _GameAXRegisterFunc_AddComponentForObject(_GameAXImpl_AddComponentForObject);
+        _CSharpRegisterFunc_UnityEngineGameObjectFind(_CSharpImpl_UnityEngineGameObjectFind);
+        _CSharpRegisterFunc_UnityEngineGameObjectAddComponent(_CSharpImpl_UnityEngineGameObjectAddComponent);
+        _CSharpRegisterFunc_UnityEngineGameObjectGetComponent(_CSharpImpl_UnityEngineGameObjectGetComponent);
 #endif
     }
 }
-
-
-

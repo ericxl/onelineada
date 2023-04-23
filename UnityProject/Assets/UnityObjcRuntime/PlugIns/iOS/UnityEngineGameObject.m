@@ -13,19 +13,19 @@
 
 + (instancetype)find:(NSString *)name
 {
-    int instanceID = _GameAXDelegate_GameObjectFind_Func(uebFromNSString(name));
+    int instanceID = UnityEngineGameObjectFind_CSharpFunc(FROM_NSSTRING(name));
     return [UnityEngineGameObject objectWithID:instanceID];
-}
-
-- (UnityEngineComponent *)getComponent:(NSString *)component
-{
-    int instanceID = _GameAXDelegate_GetComponentForObject_Func(self.instanceID, uebFromNSString(component));
-    return [UnityEngineComponent objectWithID:instanceID];
 }
 
 - (UnityEngineComponent *)addComponent:(NSString *)component
 {
-    int instanceID = _GameAXDelegate_AddComponentForObject_Func(self.instanceID, uebFromNSString(component));
+    int instanceID = UnityEngineGameObjectAddComponent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
+    return [UnityEngineComponent objectWithID:instanceID];
+}
+
+- (UnityEngineComponent *)getComponent:(NSString *)component
+{
+    int instanceID = UnityEngineGameObjectGetComponent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
     return [UnityEngineComponent objectWithID:instanceID];
 }
 
