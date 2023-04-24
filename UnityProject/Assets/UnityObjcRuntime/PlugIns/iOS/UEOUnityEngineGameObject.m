@@ -5,9 +5,9 @@
 //  Created by Eric Liang on 4/23/23.
 //
 
-#import "UnityEngineGameObject.h"
-#import "UnityEngineBridge.h"
-#import "UnityEngineComponent.h"
+#import "UEOUnityEngineGameObject.h"
+#import "UEOBridge.h"
+#import "UEOUnityEngineComponent.h"
 
 @implementation UnityEngineGameObject
 

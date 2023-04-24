@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UnityEngineAPI.h"
+#import "UnityEngineObjC.h"
 
 @interface _AXLoader: NSObject
 @end

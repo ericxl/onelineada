@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "UnityEngineObject.h"
+#import "UEOUnityEngineObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

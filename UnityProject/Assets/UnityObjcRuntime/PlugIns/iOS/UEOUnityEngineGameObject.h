@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UnityEngineObject.h"
+#import "UEOUnityEngineObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class UnityEngineComponent;
