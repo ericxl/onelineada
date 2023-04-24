@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace Apple.Accessibility
 {
@@ -49,15 +50,10 @@ namespace Apple.Accessibility
 #endif
         }
 
-        #region Private
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")] private static extern void _UnityAX_PostScreenChangedNotification();
         [DllImport("__Internal")] private static extern void _UnityAX_PostLayoutChangedNotification();
         [DllImport("__Internal")] private static extern void _UnityAX_PostAnnouncementNotification(string announcement);
         [DllImport("__Internal")] private static extern void _UnityAX_PostPageScrolledNotification(string pageScrolled);
-#endif
 
-        #endregion
     }
 }

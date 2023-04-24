@@ -11,7 +11,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@: %@", [super description], TO_NSSTRING(UnityEngineObjectToString_CSharpFunc(self.instanceID))];
+    return [NSString stringWithFormat:@"%@: %@", [super description], [self safeCSharpStringForKey:@"ToString"]];
 }
 
 - (BOOL)isEqual:(id)object
@@ -33,11 +33,15 @@
     NSString *typeFullName = TO_NSSTRING(UnityEngineObjectTypeFullName_CSharpFunc(instanceID));
     if ( [typeFullName isEqualToString:@"UnityEngine.GameObject"] )
     {
-        cls = UnityEngineGameObject.class;
+        cls = NSClassFromString(@"UnityEngineGameObject");
+    }
+    else if ( [typeFullName isEqualToString:@"Apple.Accessibility.UnityAccessibilityNode"] )
+    {
+        cls = NSClassFromString(@"UnityAccessibilityNodeComponent");
     }
     else
     {
-        cls = UnityEngineComponent.class;
+        cls = NSClassFromString(@"UnityEngineComponent");
     }
     UnityEngineObject *result = [cls new];
     result->_instanceID = instanceID;
@@ -47,6 +51,17 @@
 - (int)instanceID
 {
     return _instanceID;
+}
+
+
+- (NSString *)typeFullName
+{
+    return TO_NSSTRING(UnityEngineObjectTypeFullName_CSharpFunc(_instanceID));
+}
+
+- (nullable NSString *)safeCSharpStringForKey:(NSString *)key
+{
+    return TO_NSSTRING(UnityEngineObjectSafeCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
 + (NSArray<UnityEngineObject *> *)findObjectsOfType:(NSString *)component

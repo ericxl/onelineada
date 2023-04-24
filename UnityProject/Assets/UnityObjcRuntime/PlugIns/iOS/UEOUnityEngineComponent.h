@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UnityEngineComponent: UnityEngineObject
 - (nullable UnityEngineComponent *)getComponent:(NSString *)component;
+- (nullable NSArray<UnityEngineComponent *> *)getComponents:(NSString *)component;
+- (nullable UnityEngineComponent *)getComponentInChildren:(NSString *)component;
+- (nullable NSArray<UnityEngineComponent *> *)getComponentsInChildren:(NSString *)component;
 @end
 
 NS_ASSUME_NONNULL_END

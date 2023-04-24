@@ -21,15 +21,15 @@
 
 + (void)addAccessibility
 {
-    [[UnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display/Days Survived Text"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
-    [[UnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Character Name Text"] addComponent:@"Apple.Accessibility.AccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display/Days Survived Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
+    [[UnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Character Name Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"];
 }
 
 @end

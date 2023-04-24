@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 using Apple.Accessibility;
@@ -8,9 +8,9 @@ public class AccessibilitySetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var testObject = GameObject.Find("/HUD Canvas/Version Text");
-        int instanceID = testObject.GetInstanceID();
-        Debug.Log(testObject.GetType().FullName);
+        //var testObject = GameObject.Find("/HUD Canvas/Version Text");
+        //int instanceID = testObject.GetInstanceID();
+        //Debug.Log(testObject.GetType().FullName);
         //Debug.Log(GameObject.Find("/HUD Canvas/Version Text").ToString());
         //GameObject.Find("/HUD Canvas/Version Text").AddComponent<AccessibilityNode>();
         //GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label").AddComponent<AccessibilityNode>();
@@ -21,9 +21,14 @@ public class AccessibilitySetup : MonoBehaviour
         //GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Hope Bar Group").AddComponent<AccessibilityNode>();
         //GameObject.Find("/In-world Canvas/Card Description Display/Card Text").AddComponent<AccessibilityNode>();
         //GameObject.Find("/In-world Canvas/Card Description Display/Character Name Text").AddComponent<AccessibilityNode>();
+        var textObject = GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label");
+        var tmpro = textObject.GetComponent<TMPro.TextMeshProUGUI>();
+        Debug.Log(tmpro.text);
+        Debug.Log("reflectedText: " + CSharpRuntimeSupport.safeValueForKey<string>(tmpro, "ToString"));
     }
     private void Update()
     {
+        //Debug.Log("VO running: " + AccessibilitySettings.IsVoiceOverRunning);
         //if (GameObject.Find("/Card(Clone)")!= null)
         //{
         //    if (GameObject.Find("/Card(Clone)").GetComponent<AccessibilityNode>() == null)

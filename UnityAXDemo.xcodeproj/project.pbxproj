@@ -14,6 +14,9 @@
 		C94BD1B529F5DB5E0084A154 /* AccessibilityGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */; };
 		C94BD1BD29F5F4870084A154 /* UEOBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = C94BD1BB29F5F4860084A154 /* UEOBridge.h */; };
 		C94BD1BE29F5F4870084A154 /* UEOBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1BC29F5F4870084A154 /* UEOBridge.m */; };
+		C94BD1C229F62AB70084A154 /* AccessibilitySettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1C029F62AB70084A154 /* AccessibilitySettings.m */; };
+		C94BD1C529F637C50084A154 /* UnityAccessibilityNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C94BD1C329F637C50084A154 /* UnityAccessibilityNode.h */; };
+		C94BD1C629F637C50084A154 /* UnityAccessibilityNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1C429F637C50084A154 /* UnityAccessibilityNode.m */; };
 		C9FBDC4629F5A34D00A306B4 /* UEOUnityEngineScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FBDC3429F5A2EB00A306B4 /* UEOUnityEngineScene.h */; };
 		C9FBDC4729F5A34D00A306B4 /* UEOUnityEngineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3529F5A2EB00A306B4 /* UEOUnityEngineScene.m */; };
 		C9FBDC4829F5A34D00A306B4 /* UEOUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */; };
@@ -105,6 +108,9 @@
 		C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityGlue.m; sourceTree = "<group>"; };
 		C94BD1BB29F5F4860084A154 /* UEOBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOBridge.h; sourceTree = "<group>"; };
 		C94BD1BC29F5F4870084A154 /* UEOBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOBridge.m; sourceTree = "<group>"; };
+		C94BD1C029F62AB70084A154 /* AccessibilitySettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilitySettings.m; sourceTree = "<group>"; };
+		C94BD1C329F637C50084A154 /* UnityAccessibilityNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAccessibilityNode.h; sourceTree = "<group>"; };
+		C94BD1C429F637C50084A154 /* UnityAccessibilityNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAccessibilityNode.m; sourceTree = "<group>"; };
 		C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "iOSBuild/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
 		C9FBDC3129F5A2EB00A306B4 /* UEOUnityEngineComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineComponent.h; sourceTree = "<group>"; };
 		C9FBDC3229F5A2EB00A306B4 /* UEOUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUtilities.h; sourceTree = "<group>"; };
@@ -232,6 +238,9 @@
 			children = (
 				C9FBDC9629F5B37F00A306B4 /* AppleAccessibility.h */,
 				C9FBDCA029F5B37F00A306B4 /* AppleAccessibilityBase.h */,
+				C94BD1C029F62AB70084A154 /* AccessibilitySettings.m */,
+				C94BD1C329F637C50084A154 /* UnityAccessibilityNode.h */,
+				C94BD1C429F637C50084A154 /* UnityAccessibilityNode.m */,
 				C9FBDC9829F5B37F00A306B4 /* AppleAccessibilityBridge.m */,
 				C9FBDC9929F5B37F00A306B4 /* AppleAccessibilityElement.h */,
 				C9FBDC9B29F5B37F00A306B4 /* AppleAccessibilityElement.m */,
@@ -292,6 +301,7 @@
 				C94BD1AE29F5D4340084A154 /* UEOUnityEngineGameObject.h in Headers */,
 				C9FBDC4A29F5A34D00A306B4 /* UEOUnityEngineComponent.h in Headers */,
 				C9FBDC4B29F5A34D00A306B4 /* UEOUtilities.h in Headers */,
+				C94BD1C529F637C50084A154 /* UnityAccessibilityNode.h in Headers */,
 				C9FBDC4629F5A34D00A306B4 /* UEOUnityEngineScene.h in Headers */,
 				C94BD1BD29F5F4870084A154 /* UEOBridge.h in Headers */,
 				C9FBDC4C29F5A34D00A306B4 /* UnityEngineObjC.h in Headers */,
@@ -440,7 +450,9 @@
 				C94BD1BE29F5F4870084A154 /* UEOBridge.m in Sources */,
 				C9FBDC4829F5A34D00A306B4 /* UEOUtilities.m in Sources */,
 				C9FBDCAD29F5B39B00A306B4 /* AppleAccessibilityElementOrdering.m in Sources */,
+				C94BD1C629F637C50084A154 /* UnityAccessibilityNode.m in Sources */,
 				C94BD1B529F5DB5E0084A154 /* AccessibilityGlue.m in Sources */,
+				C94BD1C229F62AB70084A154 /* AccessibilitySettings.m in Sources */,
 				C94BD1AF29F5D4340084A154 /* UEOUnityEngineGameObject.m in Sources */,
 				C9FBDCAA29F5B39B00A306B4 /* AppleAccessibilitySafeOverride.m in Sources */,
 				C9FBDCA929F5B39B00A306B4 /* AppleAccessibilityRuntime.m in Sources */,

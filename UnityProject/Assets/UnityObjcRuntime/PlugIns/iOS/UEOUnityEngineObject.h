@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable instancetype)objectWithID:(int)instanceID;
 
 @property (nonatomic, assign, readonly) int instanceID;
+@property (nonatomic, strong, readonly) NSString *typeFullName;
+
+- (nullable NSString *)safeCSharpStringForKey:(NSString *)key;
 
 + (nullable NSArray<UnityEngineObject *> *)findObjectsOfType:(NSString *)component;
 

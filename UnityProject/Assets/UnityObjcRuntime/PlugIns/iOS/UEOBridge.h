@@ -8,11 +8,15 @@
 #import <Foundation/Foundation.h>
 #import "UnityEngineObjC.h"
 
-CSHARP_BRIDGE_INTERFACE(UnityEngineObjectToString, const char *, (int));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectTypeFullName, const char *, (int));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectFindObjectsOfType, const char *, (const char *));
+
 CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectFind, int, (const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectAddComponent, int, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectGetComponent, int, (int, const char *));
-CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponent, int, (int, const char *));
 
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponent, int, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponents, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentInChildren, int, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentsInChildren, const char *, (int, const char *));
