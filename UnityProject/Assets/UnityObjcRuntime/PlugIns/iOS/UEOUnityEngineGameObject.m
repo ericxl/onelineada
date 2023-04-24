@@ -8,8 +8,45 @@
 #import "UEOUnityEngineGameObject.h"
 #import "UEOBridge.h"
 #import "UEOUnityEngineComponent.h"
+#import "UEOUnityEngineTransform.h"
+#import "UEOUnityEngineScene.h"
 
 @implementation UnityEngineGameObject
+
+- (int)layer
+{
+    return [self safeCSharpIntForKey:@"layer"];
+}
+
+- (NSString *)tag
+{
+    return [self safeCSharpStringForKey:@"tag"];
+}
+
+- (BOOL)activeSelf
+{
+    return [self safeCSharpBoolForKey:@"activeSelf"];
+}
+
+- (BOOL)activeInHierarchy
+{
+    return [self safeCSharpBoolForKey:@"activeInHierarchy"];
+}
+
+- (UnityEngineGameObject *)gameObject
+{
+    return SAFE_CAST_CLASS(UnityEngineGameObject, [self safeCSharpObjectForKey:@"gameObject"]);
+}
+
+- (UnityEngineTransform *)transform
+{
+    return SAFE_CAST_CLASS(UnityEngineTransform, [self safeCSharpObjectForKey:@"transform"]);
+}
+
+- (UnityEngineScene *)scene
+{
+    return SAFE_CAST_CLASS(UnityEngineScene, [self safeCSharpObjectForKey:@"scene"]);
+}
 
 + (instancetype)find:(NSString *)name
 {

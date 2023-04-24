@@ -23,8 +23,11 @@ public class AccessibilitySetup : MonoBehaviour
         //GameObject.Find("/In-world Canvas/Card Description Display/Character Name Text").AddComponent<AccessibilityNode>();
         var textObject = GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label");
         var tmpro = textObject.GetComponent<TMPro.TextMeshProUGUI>();
-        Debug.Log(tmpro.text);
+        Debug.Log(tmpro.gameObject.transform);
         Debug.Log("reflectedText: " + CSharpRuntimeSupport.safeValueForKey<string>(tmpro, "ToString"));
+        //tmpro.transform
+        //var transform = CSharpRuntimeSupport.safeValueForKey<UnityEngine.Object>(tmpro, "transform");
+        Debug.Log("reflectedTransform: " + transform.ToString());
     }
     private void Update()
     {

@@ -35,6 +35,10 @@
     {
         cls = NSClassFromString(@"UnityEngineGameObject");
     }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.Transform"] )
+    {
+        cls = NSClassFromString(@"UnityEngineTransform");
+    }
     else if ( [typeFullName isEqualToString:@"Apple.Accessibility.UnityAccessibilityNode"] )
     {
         cls = NSClassFromString(@"UnityAccessibilityNodeComponent");
@@ -59,9 +63,24 @@
     return TO_NSSTRING(UnityEngineObjectTypeFullName_CSharpFunc(_instanceID));
 }
 
-- (nullable NSString *)safeCSharpStringForKey:(NSString *)key
+- (BOOL)safeCSharpBoolForKey:(NSString *)key
+{
+    return UnityEngineObjectSafeCSharpBoolForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
+}
+
+- (int)safeCSharpIntForKey:(NSString *)key
+{
+    return UnityEngineObjectSafeCSharpIntForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
+}
+
+- (NSString *)safeCSharpStringForKey:(NSString *)key
 {
     return TO_NSSTRING(UnityEngineObjectSafeCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
+}
+
+- (UnityEngineObject *)safeCSharpObjectForKey:(NSString *)key
+{
+    return [UnityEngineObject objectWithID:UnityEngineObjectSafeCSharpObjectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))];
 }
 
 + (NSArray<UnityEngineObject *> *)findObjectsOfType:(NSString *)component

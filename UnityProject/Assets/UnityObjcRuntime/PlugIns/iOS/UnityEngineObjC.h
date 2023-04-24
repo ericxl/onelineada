@@ -8,6 +8,13 @@
 #define FROM_NSSTRING(nsstring) (nsstring ? nsstring.UTF8String : NULL)
 #define TO_NSSTRING(str) (str ? [NSString stringWithUTF8String:str] : nil)
 
+#define SAFE_CAST_CLASS(cls, obj) \
+    ({ \
+        id object = obj; \
+        cls *__castedObject = [object isKindOfClass:[cls class]] ? object : nil; \
+        __castedObject; \
+    })
+
 #define CSHARP_BRIDGE_INTERFACE(name, return_type, params) \
 typedef return_type(* _CSharpDelegate_##name) params; \
 extern _CSharpDelegate_##name name##_CSharpFunc; \
