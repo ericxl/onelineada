@@ -1,64 +1,64 @@
 #import "UEOUnityEngineComponent.h"
-#import "UEOBridge.h"
+#import "UEOUtilities.h"
 #import "UEOUnityEngineGameObject.h"
 #import "UEOUnityEngineTransform.h"
 
-@implementation UnityEngineComponent
+@implementation UEOUnityEngineComponent
 
 - (NSString *)tag
 {
     return [self safeCSharpStringForKey:@"tag"];
 }
 
-- (UnityEngineGameObject *)gameObject
+- (UEOUnityEngineGameObject *)gameObject
 {
-    return SAFE_CAST_CLASS(UnityEngineGameObject, [self safeCSharpObjectForKey:@"gameObject"]);
+    return SAFE_CAST_CLASS(UEOUnityEngineGameObject, [self safeCSharpObjectForKey:@"gameObject"]);
 }
 
-- (UnityEngineTransform *)transform
+- (UEOUnityEngineTransform *)transform
 {
-    return SAFE_CAST_CLASS(UnityEngineTransform, [self safeCSharpObjectForKey:@"transform"]);
+    return SAFE_CAST_CLASS(UEOUnityEngineTransform, [self safeCSharpObjectForKey:@"transform"]);
 }
 
-- (UnityEngineComponent *)getComponent:(NSString *)component
+- (UEOUnityEngineComponent *)getComponent:(NSString *)component
 {
     int instanceID = UnityEngineComponentGetComponent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [UnityEngineComponent objectWithID:instanceID];
+    return [UEOUnityEngineComponent objectWithID:instanceID];
 }
 
-- (NSArray<UnityEngineComponent *> *)getComponents:(NSString *)component
+- (NSArray<UEOUnityEngineComponent *> *)getComponents:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponents_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjects:^id(NSNumber *obj) {
-        return [UnityEngineObject objectWithID:obj.intValue];
+    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+        return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }
 
-- (UnityEngineComponent *)getComponentInChildren:(NSString *)component
+- (UEOUnityEngineComponent *)getComponentInChildren:(NSString *)component
 {
     int instanceID = UnityEngineComponentGetComponentInChildren_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [UnityEngineComponent objectWithID:instanceID];
+    return [UEOUnityEngineComponent objectWithID:instanceID];
 }
 
-- (NSArray<UnityEngineComponent *> *)getComponentsInChildren:(NSString *)component
+- (NSArray<UEOUnityEngineComponent *> *)getComponentsInChildren:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponentsInChildren_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjects:^id(NSNumber *obj) {
-        return [UnityEngineObject objectWithID:obj.intValue];
+    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+        return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }
 
-- (UnityEngineComponent *)getComponentInParent:(NSString *)component
+- (UEOUnityEngineComponent *)getComponentInParent:(NSString *)component
 {
     int instanceID = UnityEngineComponentGetComponentInParent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [UnityEngineComponent objectWithID:instanceID];
+    return [UEOUnityEngineComponent objectWithID:instanceID];
 }
 
-- (NSArray<UnityEngineComponent *> *)getComponentsInParent:(NSString *)component
+- (NSArray<UEOUnityEngineComponent *> *)getComponentsInParent:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponentsInParent_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjects:^id(NSNumber *obj) {
-        return [UnityEngineObject objectWithID:obj.intValue];
+    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+        return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }
 

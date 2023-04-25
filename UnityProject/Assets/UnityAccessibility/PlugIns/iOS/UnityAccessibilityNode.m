@@ -7,18 +7,28 @@
 
 #import "UnityAccessibilityNode.h"
 
-@implementation UnityAccessibilityNodeComponent
+@implementation UEOUnityAccessibilityNodeComponent
+
+- (NSString *)className
+{
+    return [self safeCSharpStringForKey:@"ClassName"];
+}
+
+- (void)setClassName:(NSString *)className
+{
+    [self safeSetCSharpStringForKey:@"ClassName" value:className];
+}
 
 @end
 
-@interface UnityAccessibilityNode()
+@interface UnityAXElement()
 {
     int _instanceID;
 }
 @end
-@implementation UnityAccessibilityNode
+@implementation UnityAXElement
 
-static NSMutableDictionary<NSNumber *, UnityAccessibilityNode *> *_gNodeMap;
+static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
 
 + (void)load
 {
@@ -28,7 +38,7 @@ static NSMutableDictionary<NSNumber *, UnityAccessibilityNode *> *_gNodeMap;
     });
 }
 
-+ (instancetype)nodeFrom:(UnityAccessibilityNodeComponent *)component
++ (instancetype)nodeFrom:(UEOUnityAccessibilityNodeComponent *)component
 {
     if ( component == nil )
     {
@@ -38,34 +48,37 @@ static NSMutableDictionary<NSNumber *, UnityAccessibilityNode *> *_gNodeMap;
     {
         return nil;
     }
-    if ( [_gNodeMap objectForKey:@(component.instanceID)] != nil )
+    id object = [_gNodeMap objectForKey:@(component.instanceID)];
+    Class cls = UnityAXElement.class;
+    NSString *className = [component className];
+    if ( className.length != 0 && NSClassFromString(className) != Nil)
     {
-        return [_gNodeMap objectForKey:@(component.instanceID)];
+        cls = NSClassFromString(className);
     }
-    UnityAccessibilityNode *node = [UnityAccessibilityNode new];
-    node->_instanceID = component.instanceID;
-    [_gNodeMap setObject:node forKey:@(component.instanceID)];
-    return node;
+    if ( object != nil )
+    {
+        if ( [object class] != cls )
+        {
+            object = nil;
+        }
+    }
+    if ( object == nil )
+    {
+        UnityAXElement *node = [cls new];
+        node->_instanceID = component.instanceID;
+        [_gNodeMap setObject:node forKey:@(component.instanceID)];
+    }
+    return object;
 }
 
-- (UnityAccessibilityNodeComponent *)component
+- (UEOUnityAccessibilityNodeComponent *)component
 {
-    return [UnityAccessibilityNodeComponent objectWithID:self->_instanceID];
+    return [UEOUnityAccessibilityNodeComponent objectWithID:self->_instanceID];
 }
 
-- (BOOL)isAccessibilityElement
+- (UEOUnityEngineGameObject *)gameObject
 {
-    return YES;
-}
-
-- (NSString *)accessibilityLabel
-{
-    return [self.component description];
-}
-
-- (CGRect)accessibilityFrame
-{
-    return CGRectMake(0, 0, 100, 100);
+    return [self.component gameObject];
 }
 
 @end

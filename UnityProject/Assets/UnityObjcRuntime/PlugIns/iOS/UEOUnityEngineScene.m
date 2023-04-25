@@ -2,7 +2,7 @@
 #import "UEOUnityEngineScene.h"
 #import "UEOUnityEngineComponent.h"
 
-@implementation UnityEngineScene
+@implementation UEOUnityEngineScene
 
 + (instancetype)current
 {

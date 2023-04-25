@@ -43,12 +43,11 @@ AppleAccessibilityDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 - (NSArray *)accessibilityElements
 {
-//    return [AppleAccessibilityRuntime.sharedInstance accessibilityChildrenForUnityView:self];
-    NSArray *nodeComponents = [UnityEngineObject findObjectsOfType:@"Apple.Accessibility.UnityAccessibilityNode"];
-    NSArray *nodes = [nodeComponents _ueoFlatMapedObjects:^id _Nonnull(id  _Nonnull obj) {
-        if ( [obj isKindOfClass:UnityAccessibilityNodeComponent.class] )
+    NSArray *nodeComponents = [UEOUnityEngineObject findObjectsOfType:@"Apple.Accessibility.UnityAccessibilityNode"];
+    NSArray *nodes = [nodeComponents _ueoFlatMapedObjectsWithBlock:^id _Nonnull(id  _Nonnull obj) {
+        if ( [obj isKindOfClass:UEOUnityAccessibilityNodeComponent.class] )
         {
-            return [UnityAccessibilityNode nodeFrom:(UnityAccessibilityNodeComponent *)obj];
+            return [UnityAXElement nodeFrom:(UEOUnityAccessibilityNodeComponent *)obj];
         }
         return nil;
     }];

@@ -11,7 +11,7 @@
 #import "UEOUnityEngineTransform.h"
 #import "UEOUnityEngineScene.h"
 
-@implementation UnityEngineGameObject
+@implementation UEOUnityEngineGameObject
 
 - (int)layer
 {
@@ -33,37 +33,37 @@
     return [self safeCSharpBoolForKey:@"activeInHierarchy"];
 }
 
-- (UnityEngineGameObject *)gameObject
+- (UEOUnityEngineGameObject *)gameObject
 {
-    return SAFE_CAST_CLASS(UnityEngineGameObject, [self safeCSharpObjectForKey:@"gameObject"]);
+    return SAFE_CAST_CLASS(UEOUnityEngineGameObject, [self safeCSharpObjectForKey:@"gameObject"]);
 }
 
-- (UnityEngineTransform *)transform
+- (UEOUnityEngineTransform *)transform
 {
-    return SAFE_CAST_CLASS(UnityEngineTransform, [self safeCSharpObjectForKey:@"transform"]);
+    return SAFE_CAST_CLASS(UEOUnityEngineTransform, [self safeCSharpObjectForKey:@"transform"]);
 }
 
-- (UnityEngineScene *)scene
+- (UEOUnityEngineScene *)scene
 {
-    return SAFE_CAST_CLASS(UnityEngineScene, [self safeCSharpObjectForKey:@"scene"]);
+    return SAFE_CAST_CLASS(UEOUnityEngineScene, [self safeCSharpObjectForKey:@"scene"]);
 }
 
 + (instancetype)find:(NSString *)name
 {
     int instanceID = UnityEngineGameObjectFind_CSharpFunc(FROM_NSSTRING(name));
-    return [UnityEngineGameObject objectWithID:instanceID];
+    return [UEOUnityEngineGameObject objectWithID:instanceID];
 }
 
-- (UnityEngineComponent *)addComponent:(NSString *)component
+- (UEOUnityEngineComponent *)addComponent:(NSString *)component
 {
     int instanceID = UnityEngineGameObjectAddComponent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [UnityEngineComponent objectWithID:instanceID];
+    return [UEOUnityEngineComponent objectWithID:instanceID];
 }
 
-- (UnityEngineComponent *)getComponent:(NSString *)component
+- (UEOUnityEngineComponent *)getComponent:(NSString *)component
 {
     int instanceID = UnityEngineGameObjectGetComponent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [UnityEngineComponent objectWithID:instanceID];
+    return [UEOUnityEngineComponent objectWithID:instanceID];
 }
 
 @end

@@ -5,95 +5,132 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public static class CSharpRuntimeSupport
+static class CSharpRuntimeSupportUtilities
 {
-    private delegate string _CSharpDelegate_UnityEngineObjectTypeFullName(int objectInstanceID);
-    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpDelegate_UnityEngineObjectTypeFullName func);
-    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectTypeFullName))]
-    private static string _CSharpImpl_UnityEngineObjectTypeFullName(int objectInstanceID)
+    internal static Vector2 ToVector2(this string vectorStr)
     {
-        var obj = FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null) return null;
+        string[] components = vectorStr.Trim(new char[] { '(', ')' }).Split(',');
 
-        return obj.GetType().FullName;
+        // Parse the components as floats
+        if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y))
+        {
+            // Create a new Vector2 from the parsed values
+            return new Vector2(x, y);
+        }
+        else
+        {
+            return Vector2.zero;
+        }
     }
 
-    private delegate bool _CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey(int objectInstanceID, string key);
-    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey func);
-    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey))]
-    private static bool _CSharpImpl_UnityEngineObjectSafeCSharpBoolForKey(int objectInstanceID, string key)
+    internal static Vector3 ToVector3(this string vectorStr)
     {
-        if (string.IsNullOrEmpty(key)) return false;
-        var obj = FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null) return false;
+        string[] components = vectorStr.Trim(new char[] { '(', ')' }).Split(',');
 
-        return safeValueForKey<bool>(obj, key);
+        // Parse the components as floats
+        if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z))
+        {
+            // Create a new Vector2 from the parsed values
+            return new Vector3(x, y, z);
+        }
+        else
+        {
+            return Vector2.zero;
+        }
     }
 
-    private delegate int _CSharpDelegate_UnityEngineObjectSafeCSharpIntForKey(int objectInstanceID, string key);
-    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpIntForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpIntForKey func);
-    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpIntForKey))]
-    private static int _CSharpImpl_UnityEngineObjectSafeCSharpIntForKey(int objectInstanceID, string key)
+    internal static string ToJsonString(this Vector2[] vectors)
     {
-        if (string.IsNullOrEmpty(key)) return 0;
-        var obj = FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null) return 0;
-
-        return safeValueForKey<int>(obj, key);
+        var strings = vectors.Select(v => v.ToString()).ToArray();
+        var joined = string.Join(",", strings);
+        return "[" + joined + "]";
     }
 
-    private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key);
-    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey func);
-    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey))]
-    private static string _CSharpImpl_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key)
+    internal static string ToJsonString(this Vector3[] vectors)
     {
-        if (string.IsNullOrEmpty(key)) return null;
-        var obj = FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null) return null;
-
-        return safeValueForKey<string>(obj, key);
+        var strings = vectors.Select(v => v.ToString()).ToArray();
+        var joined = string.Join(",", strings);
+        return "[" + joined + "]";
     }
 
-    private delegate int _CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey(int objectInstanceID, string key);
-    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey func);
-    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey))]
-    private static int _CSharpImpl_UnityEngineObjectSafeCSharpObjectForKey(int objectInstanceID, string key)
+    internal static string InstanceIDsToJsonString(this UnityEngine.Object[] objects)
     {
-        if (string.IsNullOrEmpty(key)) return -1;
-        var obj = FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null) return -1;
-
-        return safeValueForKey<UnityEngine.Object>(obj, key)?.GetInstanceID() ?? 0;
+        var ids = objects.Select(s => s.GetInstanceID().ToString()).ToArray();
+        var joined = string.Join(",", ids);
+        return "[" + joined + "]";
     }
 
-    public static T safeValueForKey<T>(object obj, string methodName)
+    internal static UnityEngine.Object FindObjectFromInstanceID(int iid)
+    {
+        return (UnityEngine.Object)typeof(UnityEngine.Object)
+                .GetMethod("FindObjectFromInstanceID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
+                .Invoke(null, new object[] { iid });
+    }
+
+    internal static T safeValueForKey<T>(object obj, string methodName)
     {
         var type = obj.GetType();
-        var mi = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
-        if (mi != null && typeof(T).IsAssignableFrom(mi.ReturnType))
+        var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+        var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        var fieldInfo = type.GetField(methodName);
+        if (methodInfo != null && typeof(T).IsAssignableFrom(methodInfo.ReturnType))
         {
-            return (T)mi.Invoke(obj, null);
+            return (T)methodInfo.Invoke(obj, null);
         }
-        var pi = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-        if (pi != null && typeof(T).IsAssignableFrom(pi.PropertyType))
+        else if (propertyInfo != null && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
         {
-            return (T)pi.GetValue(obj);
+            return (T)propertyInfo.GetValue(obj);
+        }
+        else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
+        {
+            return (T)fieldInfo.GetValue(obj);
         }
         return default(T);
     }
 
-
-    private delegate string _CSharpDelegate_UnityEngineObjectFindObjectsOfType(string componentName);
-    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpDelegate_UnityEngineObjectFindObjectsOfType func);
-    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectFindObjectsOfType))]
-    private static string _CSharpImpl_UnityEngineObjectFindObjectsOfType(string componentName)
+    internal static T safeValueForKeyStatic<T>(Type type, string methodName)
     {
-        var type = Type.GetType(componentName);
-        if (type == null) return null;
-
-        return UnityEngine.Object.FindObjectsOfType(type).InstanceIDsToJsonString();
+        var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+        var propertyInfo = type.GetProperty(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        var fieldInfo = type.GetField(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        if (methodInfo != null && typeof(T).IsAssignableFrom(methodInfo.ReturnType))
+        {
+            return (T)methodInfo.Invoke(null, null);
+        }
+        else if (propertyInfo != null && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+        {
+            return (T)propertyInfo.GetValue(null);
+        }
+        else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
+        {
+            return (T)fieldInfo.GetValue(null);
+        }
+        return default(T);
     }
 
+    internal static void safeSetValueForKey<T>(object obj, string methodName, T value)
+    {
+        var type = obj.GetType();
+        var methodInfo = type.GetMethod(methodName, new[] { typeof(T) });
+        var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        var fieldInfo = type.GetField(methodName);
+        if (methodInfo != null && methodInfo.ReturnType == typeof(void))
+        {
+            methodInfo.Invoke(obj, new[] { (object)value });
+        }
+        else if (propertyInfo != null && propertyInfo.CanWrite && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+        {
+            propertyInfo.SetValue(obj, value);
+        }
+        else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
+        {
+            fieldInfo.SetValue(obj, value);
+        }
+    }
+}
+
+static class ObjcRuntimeUnityEngineGameObject
+{
     private delegate int _CSharpDelegate_UnityEngineGameObjectFind(string name);
     [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpDelegate_UnityEngineGameObjectFind func);
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineGameObjectFind))]
@@ -108,7 +145,7 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineGameObjectAddComponent))]
     private static int _CSharpImpl_UnityEngineGameObjectAddComponent(int objectInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(objectInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
         if (obj == null || obj is not GameObject) return -1;
 
         var type = Type.GetType(componentName);
@@ -123,9 +160,9 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineGameObjectGetComponent))]
     private static int _CSharpImpl_UnityEngineGameObjectGetComponent(int objectInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(objectInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
         if (obj == null || obj is not GameObject) return -1;
-        
+
         var type = Type.GetType(componentName);
         if (type == null) return -1;
 
@@ -133,12 +170,263 @@ public static class CSharpRuntimeSupport
         return component ? component.GetInstanceID() : -1;
     }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void SubsystemRegistration()
+    {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpImpl_UnityEngineGameObjectFind);
+        _UEORegisterCSharpFunc_UnityEngineGameObjectAddComponent(_CSharpImpl_UnityEngineGameObjectAddComponent);
+        _UEORegisterCSharpFunc_UnityEngineGameObjectGetComponent(_CSharpImpl_UnityEngineGameObjectGetComponent);
+#endif
+    }
+}
+
+static class ObjcRuntimeUnityEngineRectTransform
+{
+    private delegate string _CSharpDelegate_UnityEngineRectTransformGetWorldCorners(int objectInstanceID);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners))]
+    private static string _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID)
+    {
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null || obj is not RectTransform) return null;
+
+        Vector3[] corners = new Vector3[4];
+        (obj as RectTransform).GetWorldCorners(corners);
+        return corners.ToJsonString();
+    }
+
+    private delegate string _CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, string vector3String);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineRectTransformUtilityWorldToScreenPoint(_CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint))]
+    private static string _CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, string vector3String)
+    {
+        var camera = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(cameraInstanceID);
+        if (camera != null && camera is not Camera) return Vector2.zero.ToString();
+
+        return RectTransformUtility.WorldToScreenPoint((Camera)camera, vector3String.ToVector3()).ToString();
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void SubsystemRegistration()
+    {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpImpl_UnityEngineRectTransformGetWorldCorners);
+        _UEORegisterCSharpFunc_UnityEngineRectTransformUtilityWorldToScreenPoint(_CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint);
+#endif
+    }
+}
+
+static class CSharpRuntimeSupport
+{
+    private delegate string _CSharpDelegate_UnityEngineObjectTypeFullName(int objectInstanceID);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpDelegate_UnityEngineObjectTypeFullName func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectTypeFullName))]
+    private static string _CSharpImpl_UnityEngineObjectTypeFullName(int objectInstanceID)
+    {
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return null;
+
+        return obj.GetType().FullName;
+    }
+
+    private delegate bool _CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey))]
+    private static bool _CSharpImpl_UnityEngineObjectSafeCSharpBoolForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return false;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return false;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<bool>(obj, key);
+    }
+
+    private delegate int _CSharpDelegate_UnityEngineObjectSafeCSharpIntForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpIntForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpIntForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpIntForKey))]
+    private static int _CSharpImpl_UnityEngineObjectSafeCSharpIntForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return 0;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return 0;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<int>(obj, key);
+    }
+
+    private delegate float _CSharpDelegate_UnityEngineObjectSafeCSharpFloatForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpFloatForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpFloatForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpFloatForKey))]
+    private static float _CSharpImpl_UnityEngineObjectSafeCSharpFloatForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return 0;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return 0;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<float>(obj, key);
+    }
+
+    private delegate double _CSharpDelegate_UnityEngineObjectSafeCSharpDoubleForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpDoubleForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpDoubleForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpDoubleForKey))]
+    private static double _CSharpImpl_UnityEngineObjectSafeCSharpDoubleForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return 0;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return 0;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<double>(obj, key);
+    }
+
+    private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey))]
+    private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return Vector3.zero.ToString();
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return Vector3.zero.ToString();
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(obj, key).ToString();
+    }
+
+    private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey))]
+    private static string _CSharpImpl_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return null;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return null;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<string>(obj, key);
+    }
+
+    private delegate int _CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey))]
+    private static int _CSharpImpl_UnityEngineObjectSafeCSharpObjectForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return -1;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return -1;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(obj, key)?.GetInstanceID() ?? 0;
+    }
+
+    private delegate bool _CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKeyStatic))]
+    private static bool _CSharpImpl_UnityEngineObjectSafeCSharpBoolForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return false;
+        var type = Type.GetType(typeName);
+        if (type == null) return false;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<bool>(type, key);
+    }
+
+    private delegate int _CSharpDelegate_UnityEngineObjectSafeCSharpIntForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpIntForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpIntForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpIntForKeyStatic))]
+    private static int _CSharpImpl_UnityEngineObjectSafeCSharpIntForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return 0;
+        var type = Type.GetType(typeName);
+        if (type == null) return 0;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<int>(type, key);
+    }
+
+    private delegate float _CSharpDelegate_UnityEngineObjectSafeCSharpFloatForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpFloatForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpFloatForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpFloatForKeyStatic))]
+    private static float _CSharpImpl_UnityEngineObjectSafeCSharpFloatForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return 0;
+        var type = Type.GetType(typeName);
+        if (type == null) return 0;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<float>(type, key);
+    }
+
+    private delegate double _CSharpDelegate_UnityEngineObjectSafeCSharpDoubleForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpDoubleForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpDoubleForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpDoubleForKeyStatic))]
+    private static double _CSharpImpl_UnityEngineObjectSafeCSharpDoubleForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return 0;
+        var type = Type.GetType(typeName);
+        if (type == null) return 0;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<double>(type, key);
+    }
+
+    private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic))]
+    private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return Vector3.zero.ToString();
+        var type = Type.GetType(typeName);
+        if (type == null) return Vector3.zero.ToString();
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector3>(type, key).ToString();
+    }
+
+    private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKeyStatic))]
+    private static string _CSharpImpl_UnityEngineObjectSafeCSharpStringForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return null;
+        var type = Type.GetType(typeName);
+        if (type == null) return null;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<string>(type, key);
+    }
+
+    private delegate int _CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKeyStatic(string typeName, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKeyStatic func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKeyStatic))]
+    private static int _CSharpImpl_UnityEngineObjectSafeCSharpObjectForKeyStatic(string typeName, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return -1;
+        var type = Type.GetType(typeName);
+        if (type == null) return -1;
+
+        return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<UnityEngine.Object>(type, key)?.GetInstanceID() ?? 0;
+    }
+
+    private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey))]
+    private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return;
+
+        CSharpRuntimeSupportUtilities.safeSetValueForKey<string>(obj, key, value);
+    }
+
+    private delegate string _CSharpDelegate_UnityEngineObjectFindObjectsOfType(string componentName);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpDelegate_UnityEngineObjectFindObjectsOfType func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectFindObjectsOfType))]
+    private static string _CSharpImpl_UnityEngineObjectFindObjectsOfType(string componentName)
+    {
+        var type = Type.GetType(componentName);
+        if (type == null) return null;
+
+        return UnityEngine.Object.FindObjectsOfType(type).InstanceIDsToJsonString();
+    }
+
     private delegate int _CSharpDelegate_UnityEngineComponentGetComponent(int objectInstanceID, string componentName);
     [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponent(_CSharpDelegate_UnityEngineComponentGetComponent func);
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponent))]
     private static int _CSharpImpl_UnityEngineComponentGetComponent(int componnetInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(componnetInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return -1;
 
         var type = Type.GetType(componentName);
@@ -153,7 +441,7 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponents))]
     private static string _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(componnetInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return null;
 
         var type = Type.GetType(componentName);
@@ -167,7 +455,7 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentInChildren))]
     private static int _CSharpImpl_UnityEngineComponentGetComponentInChildren(int componnetInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(componnetInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return -1;
 
         var type = Type.GetType(componentName);
@@ -182,7 +470,7 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren))]
     private static string _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(componnetInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return null;
 
         var type = Type.GetType(componentName);
@@ -196,7 +484,7 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentInParent))]
     private static int _CSharpImpl_UnityEngineComponentGetComponentInParent(int componnetInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(componnetInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return -1;
 
         var type = Type.GetType(componentName);
@@ -211,27 +499,13 @@ public static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInParent))]
     private static string _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
     {
-        var obj = FindObjectFromInstanceID(componnetInstanceID);
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return null;
 
         var type = Type.GetType(componentName);
         if (type == null) return null;
 
         return (obj as Component).GetComponentsInParent(type).InstanceIDsToJsonString();
-    }
-
-    private static string InstanceIDsToJsonString(this UnityEngine.Object[] objects)
-    {
-        var ids = objects.Select(s => s.GetInstanceID().ToString()).ToArray();
-        var joined = string.Join(",", ids);
-        return "[" + joined + "]";
-    }
-
-    private static UnityEngine.Object FindObjectFromInstanceID(int iid)
-    {
-        return (UnityEngine.Object)typeof(UnityEngine.Object)
-                .GetMethod("FindObjectFromInstanceID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
-                .Invoke(null, new object[] { iid });
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -241,12 +515,23 @@ public static class CSharpRuntimeSupport
         _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpImpl_UnityEngineObjectTypeFullName);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKey(_CSharpImpl_UnityEngineObjectSafeCSharpBoolForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpIntForKey(_CSharpImpl_UnityEngineObjectSafeCSharpIntForKey);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpFloatForKey(_CSharpImpl_UnityEngineObjectSafeCSharpFloatForKey);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpDoubleForKey(_CSharpImpl_UnityEngineObjectSafeCSharpDoubleForKey);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKey(_CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeCSharpStringForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKey(_CSharpImpl_UnityEngineObjectSafeCSharpObjectForKey);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpBoolForKeyStatic);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpIntForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpIntForKeyStatic);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpFloatForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpFloatForKeyStatic);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpDoubleForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpDoubleForKeyStatic);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKeyStatic);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpStringForKeyStatic);
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpObjectForKeyStatic);
+
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey);
+
         _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpImpl_UnityEngineObjectFindObjectsOfType);
-        _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpImpl_UnityEngineGameObjectFind);
-        _UEORegisterCSharpFunc_UnityEngineGameObjectAddComponent(_CSharpImpl_UnityEngineGameObjectAddComponent);
-        _UEORegisterCSharpFunc_UnityEngineGameObjectGetComponent(_CSharpImpl_UnityEngineGameObjectGetComponent);
+
         _UEORegisterCSharpFunc_UnityEngineComponentGetComponent(_CSharpImpl_UnityEngineComponentGetComponent);
         _UEORegisterCSharpFunc_UnityEngineComponentGetComponents(_CSharpImpl_UnityEngineComponentGetComponents);
         _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInChildren(_CSharpImpl_UnityEngineComponentGetComponentInChildren);

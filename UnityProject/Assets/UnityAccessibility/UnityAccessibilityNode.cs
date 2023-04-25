@@ -6,6 +6,9 @@ namespace Apple.Accessibility
 {
     public class UnityAccessibilityNode : MonoBehaviour
     {
+        public string ClassName;
+
+        Vector3 nodePosition => transform.position;
     }
 }
 

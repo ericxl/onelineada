@@ -8,25 +8,26 @@
 #import <Foundation/Foundation.h>
 #import "UEOUnityEngineObject.h"
 
-NS_ASSUME_NONNULL_BEGIN
-@class UnityEngineComponent;
-@class UnityEngineTransform;
-@class UnityEngineScene;
+@class UEOUnityEngineComponent;
+@class UEOUnityEngineTransform;
+@class UEOUnityEngineScene;
 
-@interface UnityEngineGameObject : UnityEngineObject
+NS_ASSUME_NONNULL_BEGIN
+
+@interface UEOUnityEngineGameObject : UEOUnityEngineObject
 
 @property (nonatomic, assign, readonly) int layer;
 @property (nonatomic, strong, readonly, nullable) NSString *tag;
 @property (nonatomic, assign, readonly) BOOL activeSelf;
 @property (nonatomic, assign, readonly) BOOL activeInHierarchy;
-@property (nonatomic, strong, readonly, nullable) UnityEngineGameObject *gameObject;
-@property (nonatomic, strong, readonly, nullable) UnityEngineTransform *transform;
-@property (nonatomic, strong, readonly, nullable) UnityEngineScene *scene;
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineTransform *transform;
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineScene *scene;
 
 + (nullable instancetype)find:(NSString *)name;
 
-- (nullable UnityEngineComponent *)addComponent:(NSString *)component;
-- (nullable UnityEngineComponent *)getComponent:(NSString *)component;
+- (nullable UEOUnityEngineComponent *)addComponent:(NSString *)component;
+- (nullable UEOUnityEngineComponent *)getComponent:(NSString *)component;
 
 @end
 

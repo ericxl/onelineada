@@ -1,13 +1,14 @@
-#import "UEOBridge.h"
+#import "UEOBase.h"
 #import "UEOUnityEngineObject.h"
+#import "UnityEngineObjC.h"
 
-@interface UnityEngineObject()
+@interface UEOUnityEngineObject()
 {
     int _instanceID;
 }
 @end
 
-@implementation UnityEngineObject
+@implementation UEOUnityEngineObject
 
 - (NSString *)description
 {
@@ -16,11 +17,11 @@
 
 - (BOOL)isEqual:(id)object
 {
-    if ( ![object isKindOfClass:UnityEngineObject.class] )
+    if ( ![object isKindOfClass:UEOUnityEngineObject.class] )
     {
         return NO;
     }
-    return [(UnityEngineObject *)object instanceID] == self.instanceID;
+    return [(UEOUnityEngineObject *)object instanceID] == self.instanceID;
 }
 
 + (instancetype)objectWithID:(int)instanceID
@@ -29,25 +30,33 @@
     {
         return nil;
     }
-    Class cls = UnityEngineObject.class;
+    Class cls = UEOUnityEngineObject.class;
     NSString *typeFullName = TO_NSSTRING(UnityEngineObjectTypeFullName_CSharpFunc(instanceID));
     if ( [typeFullName isEqualToString:@"UnityEngine.GameObject"] )
     {
-        cls = NSClassFromString(@"UnityEngineGameObject");
+        cls = UEOUnityEngineGameObject.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.Camera"] )
+    {
+        cls = UEOUnityEngineCamera.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.RectTransform"] )
+    {
+        cls = UEOUnityEngineRectTransform.class;
     }
     else if ( [typeFullName isEqualToString:@"UnityEngine.Transform"] )
     {
-        cls = NSClassFromString(@"UnityEngineTransform");
+        cls = UEOUnityEngineTransform.class;
     }
     else if ( [typeFullName isEqualToString:@"Apple.Accessibility.UnityAccessibilityNode"] )
     {
-        cls = NSClassFromString(@"UnityAccessibilityNodeComponent");
+        cls = NSClassFromString(@"UEOUnityAccessibilityNodeComponent");
     }
     else
     {
-        cls = NSClassFromString(@"UnityEngineComponent");
+        cls = UEOUnityEngineComponent.class;
     }
-    UnityEngineObject *result = [cls new];
+    UEOUnityEngineObject *result = [cls new];
     result->_instanceID = instanceID;
     return result;
 }
@@ -56,7 +65,6 @@
 {
     return _instanceID;
 }
-
 
 - (NSString *)typeFullName
 {
@@ -73,21 +81,56 @@
     return UnityEngineObjectSafeCSharpIntForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
 }
 
+- (simd_float3)safeCSharpVector3ForKey:(NSString *)key
+{
+    return UEOSimdFloat3FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+}
+
 - (NSString *)safeCSharpStringForKey:(NSString *)key
 {
     return TO_NSSTRING(UnityEngineObjectSafeCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
-- (UnityEngineObject *)safeCSharpObjectForKey:(NSString *)key
+- (UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key
 {
-    return [UnityEngineObject objectWithID:UnityEngineObjectSafeCSharpObjectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))];
+    return [UEOUnityEngineObject objectWithID:UnityEngineObjectSafeCSharpObjectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))];
 }
 
-+ (NSArray<UnityEngineObject *> *)findObjectsOfType:(NSString *)component
++ (BOOL)safeCSharpBoolForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return UnityEngineObjectSafeCSharpBoolForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key));
+}
+
++ (int)safeCSharpIntForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return UnityEngineObjectSafeCSharpIntForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key));
+}
+
++ (simd_float3)safeCSharpVector3ForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return UEOSimdFloat3FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector3ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+}
+
++ (NSString *)safeCSharpStringForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return TO_NSSTRING(UnityEngineObjectSafeCSharpStringForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key)));
+}
+
++ (UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return [UEOUnityEngineObject objectWithID:UnityEngineObjectSafeCSharpObjectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))];
+}
+
+- (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)string
+{
+    UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(string));
+}
+
++ (NSArray<UEOUnityEngineObject *> *)findObjectsOfType:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineObjectFindObjectsOfType_CSharpFunc(FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjects:^id(NSNumber *obj) {
-        return [UnityEngineObject objectWithID:obj.intValue];
+    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+        return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }
 

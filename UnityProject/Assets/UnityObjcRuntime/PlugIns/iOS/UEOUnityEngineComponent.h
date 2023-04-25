@@ -8,22 +8,23 @@
 #import <Foundation/Foundation.h>
 #import "UEOUnityEngineObject.h"
 
-NS_ASSUME_NONNULL_BEGIN
-@class UnityEngineGameObject;
-@class UnityEngineTransform;
+@class UEOUnityEngineGameObject;
+@class UEOUnityEngineTransform;
 
-@interface UnityEngineComponent: UnityEngineObject
+NS_ASSUME_NONNULL_BEGIN
+
+@interface UEOUnityEngineComponent: UEOUnityEngineObject
 
 @property (nonatomic, strong, readonly, nullable) NSString *tag;
-@property (nonatomic, strong, readonly, nullable) UnityEngineGameObject *gameObject;
-@property (nonatomic, strong, readonly, nullable) UnityEngineTransform *transform;
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineTransform *transform;
 
-- (nullable UnityEngineComponent *)getComponent:(NSString *)component;
-- (nullable NSArray<UnityEngineComponent *> *)getComponents:(NSString *)component;
-- (nullable UnityEngineComponent *)getComponentInChildren:(NSString *)component;
-- (nullable NSArray<UnityEngineComponent *> *)getComponentsInChildren:(NSString *)component;
-- (nullable UnityEngineComponent *)getComponentInParent:(NSString *)component;
-- (nullable NSArray<UnityEngineComponent *> *)getComponentsInParent:(NSString *)component;
+- (nullable UEOUnityEngineComponent *)getComponent:(NSString *)component;
+- (nullable NSArray<UEOUnityEngineComponent *> *)getComponents:(NSString *)component;
+- (nullable UEOUnityEngineComponent *)getComponentInChildren:(NSString *)component;
+- (nullable NSArray<UEOUnityEngineComponent *> *)getComponentsInChildren:(NSString *)component;
+- (nullable UEOUnityEngineComponent *)getComponentInParent:(NSString *)component;
+- (nullable NSArray<UEOUnityEngineComponent *> *)getComponentsInParent:(NSString *)component;
 
 @end
 

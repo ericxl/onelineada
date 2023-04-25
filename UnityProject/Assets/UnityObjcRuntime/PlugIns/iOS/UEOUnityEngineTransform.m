@@ -7,6 +7,6 @@
 
 #import "UEOUnityEngineTransform.h"
 
-@implementation UnityEngineTransform
+@implementation UEOUnityEngineTransform
 
 @end

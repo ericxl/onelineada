@@ -10,13 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UnityAccessibilityNodeComponent : UnityEngineComponent
+@interface UEOUnityAccessibilityNodeComponent : UEOUnityEngineComponent
+
+@property (nonatomic, strong, nullable) NSString *className;
 
 @end
 
-@interface UnityAccessibilityNode : NSObject
+@interface UnityAXElement : NSObject
 
-+ (nullable instancetype)nodeFrom:(UnityAccessibilityNodeComponent *)component;
++ (nullable instancetype)nodeFrom:(UEOUnityAccessibilityNodeComponent *)component;
+@property (nonatomic, strong, readonly, nullable) UEOUnityAccessibilityNodeComponent *component;
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
 
 @end
 

@@ -4,9 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class UnityEngineComponent;
-
-@interface UnityEngineScene: UnityEngineObject
+@interface UEOUnityEngineScene: UEOUnityEngineObject
 + (instancetype)current;
 @end
 
