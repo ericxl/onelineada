@@ -203,3 +203,45 @@ NSString *UEOFormatFloatWithPercentage(float value)
     NSString *(*format)(float, NSInteger) = dlsym(dlopen("/System/Library/PrivateFrameworks/AXCoreUtilities.framework/AXCoreUtilities", RTLD_NOW), "AXFormatFloatWithPercentage");
     return format(value, 0);
 }
+
+static CGRect _UEOFrameForRectsWithVariadics(CGRect firstArgument, va_list arguments)
+{
+    CGRect result = CGRectNull;
+    if ( !CGRectIsEmpty(firstArgument) )
+    {
+        result = firstArgument;
+    }
+
+    BOOL done = NO;
+    while ( !done )
+    {
+        CGRect nextArgument = va_arg(arguments, CGRect);
+        if ( !CGRectIsEmpty(nextArgument) )
+        {
+            done = CGRectEqualToRect(nextArgument, __UEORectForRectsSentinel);
+            if ( !done )
+            {
+                if ( CGRectIsEmpty(result) )
+                {
+                    result = nextArgument;
+                }
+                else
+                {
+                    result = CGRectUnion(result, nextArgument);
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+CGRect _UEORectForRects(CGRect firstArgument, ...)
+{
+    va_list args;
+    va_start(args, firstArgument);
+    CGRect result = _UEOFrameForRectsWithVariadics(firstArgument, args);
+    va_end(args);
+
+    return result;
+}

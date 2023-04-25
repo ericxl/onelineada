@@ -39,4 +39,8 @@ extern simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array);
 
 extern NSString *UEOFormatFloatWithPercentage(float value);
 
+#define __UEORectForRectsSentinel CGRectMake(CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX)
+#define UEORectForRects(firstRect, ...) _UEORectForRects(firstRect, ##__VA_ARGS__, __UEORectForRectsSentinel)
+extern CGRect _UEORectForRects(CGRect firstArgument, ...);
+
 NS_ASSUME_NONNULL_END

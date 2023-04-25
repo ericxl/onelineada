@@ -27,6 +27,8 @@
 		C955385529F8696D00C59CB2 /* UEOUnityEngineUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C955385329F8696D00C59CB2 /* UEOUnityEngineUIImage.m */; };
 		C955385829F86B3A00C59CB2 /* UnityAXElementBarGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C955385629F86B3A00C59CB2 /* UnityAXElementBarGroup.h */; };
 		C955385929F86B3A00C59CB2 /* UnityAXElementBarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */; };
+		C955386629F8821500C59CB2 /* UnityAXElementCard.h in Headers */ = {isa = PBXBuildFile; fileRef = C955386429F8821500C59CB2 /* UnityAXElementCard.h */; };
+		C955386729F8821500C59CB2 /* UnityAXElementCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C955386529F8821500C59CB2 /* UnityAXElementCard.m */; };
 		C95E925129F65F8300166778 /* UEOUnityEngineTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */; };
 		C95E925229F65F8300166778 /* UEOUnityEngineTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */; };
 		C95E925729F780C600166778 /* UnityAXElementText.h in Headers */ = {isa = PBXBuildFile; fileRef = C95E925529F780C600166778 /* UnityAXElementText.h */; };
@@ -141,6 +143,8 @@
 		C955385329F8696D00C59CB2 /* UEOUnityEngineUIImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineUIImage.m; sourceTree = "<group>"; };
 		C955385629F86B3A00C59CB2 /* UnityAXElementBarGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXElementBarGroup.h; sourceTree = "<group>"; };
 		C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementBarGroup.m; sourceTree = "<group>"; };
+		C955386429F8821500C59CB2 /* UnityAXElementCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXElementCard.h; sourceTree = "<group>"; };
+		C955386529F8821500C59CB2 /* UnityAXElementCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementCard.m; sourceTree = "<group>"; };
 		C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "iOSBuild/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
 		C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineTransform.h; sourceTree = "<group>"; };
 		C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineTransform.m; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 				C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */,
 				C955385629F86B3A00C59CB2 /* UnityAXElementBarGroup.h */,
 				C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */,
+				C955386429F8821500C59CB2 /* UnityAXElementCard.h */,
+				C955386529F8821500C59CB2 /* UnityAXElementCard.m */,
 			);
 			name = UnityAccessibilityPlugin;
 			path = UnityProject/Assets/UnityAccessibilityPlugin/PlugIns/iOS;
@@ -383,6 +389,7 @@
 				C95E925729F780C600166778 /* UnityAXElementText.h in Headers */,
 				C955385829F86B3A00C59CB2 /* UnityAXElementBarGroup.h in Headers */,
 				C94BD1BD29F5F4870084A154 /* UEOBridge.h in Headers */,
+				C955386629F8821500C59CB2 /* UnityAXElementCard.h in Headers */,
 				C955384C29F867FE00C59CB2 /* UEOUnityEngineUIText.h in Headers */,
 				C9FBDC4C29F5A34D00A306B4 /* UnityEngineObjC.h in Headers */,
 			);
@@ -529,6 +536,7 @@
 				C95E926029F7A40300166778 /* UEOUnityEngineRectTransform.m in Sources */,
 				C9FBDC4D29F5A34D00A306B4 /* UEOUnityEngineObject.m in Sources */,
 				C955384629F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m in Sources */,
+				C955386729F8821500C59CB2 /* UnityAXElementCard.m in Sources */,
 				C94BD1BE29F5F4870084A154 /* UEOBridge.m in Sources */,
 				C9FBDC4829F5A34D00A306B4 /* UEOUtilities.m in Sources */,
 				C9FBDCAD29F5B39B00A306B4 /* AppleAccessibilityElementOrdering.m in Sources */,

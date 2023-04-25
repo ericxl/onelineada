@@ -15,7 +15,7 @@
 
 + (void)load
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 8 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 15 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [_AXLoader addAccessibility];
     });
 }
@@ -28,8 +28,7 @@
     [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
     [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
     [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementText"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Character Name Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementText"];
+    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/Card(Clone)"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementCard"];
 }
 
 @end
