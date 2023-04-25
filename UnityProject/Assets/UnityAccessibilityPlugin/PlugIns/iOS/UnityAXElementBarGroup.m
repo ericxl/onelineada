@@ -1,14 +1,14 @@
 //
-//  UnityAXElementText.m
+//  UnityAXElementBarGroup.m
 //  UnityEngineAPI+Accessibility+Plugin
 //
-//  Created by Eric Liang on 4/24/23.
+//  Created by Eric Liang on 4/25/23.
 //
 
-#import "UnityAXElementText.h"
+#import "UnityAXElementBarGroup.h"
 #import "UnityEngineObjC.h"
 
-@implementation UnityAXElementText
+@implementation UnityAXElementBarGroup
 
 - (CGRect)accessibilityFrame
 {
@@ -34,20 +34,21 @@
     return RECT_TO_SCREEN_RECT(CGRectMake(minX, UEOUnityEngineScreen.height - maxY, maxX - minX, maxY - minY));
 }
 
+- (NSString *)accessibilityLabel
+{
+    return [self.component.name _ueoDropLast:@" Bar Group"];
+}
+
 - (NSString *)accessibilityValue
 {
-    id textComponent = [self.component getComponentInChildren:@"UnityEngine.UI.Text"] ?: [self.component getComponentInChildren:@"TMPro.TextMeshProUGUI"];
-    return [textComponent safeCSharpStringForKey:@"text"];
+    id image = [self.component.transform find:[self.component.name _ueoDropLast:@" Group"]];
+    UEOUnityEngineUIImage *imageComponent = SAFE_CAST_CLASS(UEOUnityEngineUIImage, [image getComponent:@"UnityEngine.UI.Image"]);
+    return UEOFormatFloatWithPercentage(imageComponent.fillAmount);
 }
 
 - (BOOL)isAccessibilityElement
 {
     return YES;
-}
-
-- (UIAccessibilityTraits)accessibilityTraits
-{
-    return UIAccessibilityTraitStaticText;
 }
 
 @end

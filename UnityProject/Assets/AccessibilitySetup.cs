@@ -11,22 +11,22 @@ public class AccessibilitySetup : MonoBehaviour
         //var testObject = GameObject.Find("/HUD Canvas/Version Text");
         //int instanceID = testObject.GetInstanceID();
         //Debug.Log(testObject.GetType().FullName);
-        //Debug.Log(GameObject.Find("/HUD Canvas/Version Text").ToString());
-        GameObject.Find("/HUD Canvas/Version Text").AddComponent<AccessibilityNode>();
-        GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label").AddComponent<AccessibilityNode>();
-        GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Text").AddComponent<AccessibilityNode>();
-        GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Coal Bar Group").AddComponent<AccessibilityNode>();
-        GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Food Bar Group").AddComponent<AccessibilityNode>();
-        GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Health Bar Group").AddComponent<AccessibilityNode>();
-        GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Hope Bar Group").AddComponent<AccessibilityNode>();
-        GameObject.Find("/In-world Canvas/Card Description Display/Card Text").AddComponent<AccessibilityNode>();
-        GameObject.Find("/In-world Canvas/Card Description Display/Character Name Text").AddComponent<AccessibilityNode>();
+        Debug.Log(GameObject.Find("/HUD Canvas/Version Text").GetComponent<UnityEngine.UI.Image>().fillAmount);
+        //GameObject.Find("/HUD Canvas/Version Text").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Text").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Coal Bar Group").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Food Bar Group").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Health Bar Group").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/HUD Canvas/Top Pane/Stats Display/Hope Bar Group").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/In-world Canvas/Card Description Display/Card Text").AddComponent<AccessibilityNode>();
+        //GameObject.Find("/In-world Canvas/Card Description Display/Character Name Text").AddComponent<AccessibilityNode>();
 
 
 
 
 
-        var textObject = GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label");
+        //var textObject = GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label");
 
 
 
@@ -48,7 +48,6 @@ public class AccessibilitySetup : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log("screen height: " + Screen.height);
         //if (GameObject.Find("/Card(Clone)")!= null)
         //{
         //    if (GameObject.Find("/Card(Clone)").GetComponent<AccessibilityNode>() == null)

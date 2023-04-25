@@ -26,7 +26,7 @@
 
 + (instancetype)objectWithID:(int)instanceID
 {
-    if ( instanceID == -1 )
+    if ( instanceID == 0 )
     {
         return nil;
     }
@@ -47,6 +47,14 @@
     else if ( [typeFullName isEqualToString:@"UnityEngine.Transform"] )
     {
         cls = UEOUnityEngineTransform.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Text"] )
+    {
+        cls = UEOUnityEngineUIText.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Image"] )
+    {
+        cls = UEOUnityEngineUIImage.class;
     }
     else if ( [typeFullName isEqualToString:@"Apple.Accessibility.UnityAccessibilityNode"] )
     {
@@ -71,6 +79,16 @@
     return TO_NSSTRING(UnityEngineObjectTypeFullName_CSharpFunc(_instanceID));
 }
 
+- (NSString *)name;
+{
+    return [self safeCSharpStringForKey:@"name"];
+}
+
+- (void)setName:(NSString *)name
+{
+    return [self safeSetCSharpStringForKey:@"name" value:name];
+}
+
 - (BOOL)safeCSharpBoolForKey:(NSString *)key
 {
     return UnityEngineObjectSafeCSharpBoolForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
@@ -79,6 +97,16 @@
 - (int)safeCSharpIntForKey:(NSString *)key
 {
     return UnityEngineObjectSafeCSharpIntForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
+}
+
+- (float)safeCSharpFloatForKey:(NSString *)key
+{
+    return UnityEngineObjectSafeCSharpFloatForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
+}
+
+- (double)safeCSharpDoubleForKey:(NSString *)key
+{
+    return UnityEngineObjectSafeCSharpDoubleForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
 }
 
 - (simd_float3)safeCSharpVector3ForKey:(NSString *)key
@@ -121,9 +149,14 @@
     return [UEOUnityEngineObject objectWithID:UnityEngineObjectSafeCSharpObjectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))];
 }
 
-- (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)string
+- (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value
 {
-    UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(string));
+    UnityEngineObjectSafeSetCSharpFloatForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
+}
+
+- (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)value
+{
+    UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(value));
 }
 
 + (NSArray<UEOUnityEngineObject *> *)findObjectsOfType:(NSString *)component

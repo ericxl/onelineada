@@ -15,8 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) int instanceID;
 @property (nonatomic, strong, readonly) NSString *typeFullName;
 
+@property (nonatomic, strong) NSString *name;
+
 - (BOOL)safeCSharpBoolForKey:(NSString *)key;
 - (int)safeCSharpIntForKey:(NSString *)key;
+- (float)safeCSharpFloatForKey:(NSString *)key;
+- (double)safeCSharpDoubleForKey:(NSString *)key;
 - (simd_float3)safeCSharpVector3ForKey:(NSString *)key;
 - (nullable NSString *)safeCSharpStringForKey:(NSString *)key;
 - (nullable UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key;
@@ -26,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)safeCSharpStringForKey:(NSString *)key forType:(NSString *)cSharpType;
 + (nullable UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key forType:(NSString *)cSharpType;
 
-- (void)safeSetCSharpStringForKey:(NSString *)key value:(nullable NSString *)string;
+- (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value;
+- (void)safeSetCSharpStringForKey:(NSString *)key value:(nullable NSString *)value;
 
 + (nullable NSArray<UEOUnityEngineObject *> *)findObjectsOfType:(NSString *)component;
 

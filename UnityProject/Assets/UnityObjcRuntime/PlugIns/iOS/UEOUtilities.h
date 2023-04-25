@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (UEOExtensions)
 - (nullable NSArray<NSNumber *> *)_ueoToNumberArray;
 - (nullable NSArray<NSString *> *)_ueoToStringArray;
+- (NSString *)_ueoDropLast:(NSString *)substring;
 @end
 
 @interface NSArray<ObjectType> (UEOExtensions)
@@ -22,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)_ueoFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
 - (ObjectType)_ueoMaxObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
 - (ObjectType)_ueoMinObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
+- (NSNumber *)_ueoMaxNumber;
+- (NSNumber *)_ueoMinNumber;
 @end
 
 extern NSString *UEOSimdFloat2ToString(simd_float2 vector);
@@ -33,5 +36,7 @@ extern NSString *UEOSimdFloat3ToString(simd_float3 vector);
 extern simd_float3 UEOSimdFloat3FromString(NSString *str);
 extern NSArray<NSNumber *> *UEOSimdFloat3ToArray(simd_float3 vector);
 extern simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array);
+
+extern NSString *UEOFormatFloatWithPercentage(float value);
 
 NS_ASSUME_NONNULL_END

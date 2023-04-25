@@ -137,7 +137,7 @@ static class ObjcRuntimeUnityEngineGameObject
     private static int _CSharpImpl_UnityEngineGameObjectFind(string name)
     {
         var gameObject = UnityEngine.GameObject.Find(name);
-        return gameObject ? gameObject.GetInstanceID() : -1;
+        return gameObject ? gameObject.GetInstanceID() : 0;
     }
 
     private delegate int _CSharpDelegate_UnityEngineGameObjectAddComponent(int objectInstanceID, string componentName);
@@ -146,13 +146,13 @@ static class ObjcRuntimeUnityEngineGameObject
     private static int _CSharpImpl_UnityEngineGameObjectAddComponent(int objectInstanceID, string componentName)
     {
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null || obj is not GameObject) return -1;
+        if (obj == null || obj is not GameObject) return 0;
 
         var type = Type.GetType(componentName);
-        if (type == null) return -1;
+        if (type == null) return 0;
 
         var component = (obj as GameObject).AddComponent(type);
-        return component ? component.GetInstanceID() : -1;
+        return component ? component.GetInstanceID() : 0;
     }
 
     private delegate int _CSharpDelegate_UnityEngineGameObjectGetComponent(int objectInstanceID, string componentName);
@@ -161,13 +161,13 @@ static class ObjcRuntimeUnityEngineGameObject
     private static int _CSharpImpl_UnityEngineGameObjectGetComponent(int objectInstanceID, string componentName)
     {
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null || obj is not GameObject) return -1;
+        if (obj == null || obj is not GameObject) return 0;
 
         var type = Type.GetType(componentName);
-        if (type == null) return -1;
+        if (type == null) return 0;
 
         var component = (obj as GameObject).GetComponent(type);
-        return component ? component.GetInstanceID() : -1;
+        return component ? component.GetInstanceID() : 0;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -177,6 +177,29 @@ static class ObjcRuntimeUnityEngineGameObject
         _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpImpl_UnityEngineGameObjectFind);
         _UEORegisterCSharpFunc_UnityEngineGameObjectAddComponent(_CSharpImpl_UnityEngineGameObjectAddComponent);
         _UEORegisterCSharpFunc_UnityEngineGameObjectGetComponent(_CSharpImpl_UnityEngineGameObjectGetComponent);
+#endif
+    }
+}
+
+static class ObjcRuntimeUnityEngineTransform
+{
+    private delegate int _CSharpDelegate_UnityEngineTransformFind(int transformInstanceID, string childName);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineTransformFind(_CSharpDelegate_UnityEngineTransformFind func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineTransformFind))]
+    private static int _CSharpImpl_UnityEngineTransformFind(int transformInstanceID, string childName)
+    {
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(transformInstanceID);
+        if (obj == null || obj is not Transform) return 0;
+
+        var child = (obj as Transform).Find(childName);
+        return child ? child.GetInstanceID() : 0;
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void SubsystemRegistration()
+    {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        _UEORegisterCSharpFunc_UnityEngineTransformFind(_CSharpImpl_UnityEngineTransformFind);
 #endif
     }
 }
@@ -307,9 +330,9 @@ static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKey))]
     private static int _CSharpImpl_UnityEngineObjectSafeCSharpObjectForKey(int objectInstanceID, string key)
     {
-        if (string.IsNullOrEmpty(key)) return -1;
+        if (string.IsNullOrEmpty(key)) return 0;
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-        if (obj == null) return -1;
+        if (obj == null) return 0;
 
         return CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(obj, key)?.GetInstanceID() ?? 0;
     }
@@ -391,11 +414,23 @@ static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpObjectForKeyStatic))]
     private static int _CSharpImpl_UnityEngineObjectSafeCSharpObjectForKeyStatic(string typeName, string key)
     {
-        if (string.IsNullOrEmpty(key)) return -1;
+        if (string.IsNullOrEmpty(key)) return 0;
         var type = Type.GetType(typeName);
-        if (type == null) return -1;
+        if (type == null) return 0;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<UnityEngine.Object>(type, key)?.GetInstanceID() ?? 0;
+    }
+
+    private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey(int objectInstanceID, string key, float value);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpFloatForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey))]
+    private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpFloatForKey(int objectInstanceID, string key, float value)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return;
+
+        CSharpRuntimeSupportUtilities.safeSetValueForKey<float>(obj, key, value);
     }
 
     private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value);
@@ -427,13 +462,13 @@ static class CSharpRuntimeSupport
     private static int _CSharpImpl_UnityEngineComponentGetComponent(int componnetInstanceID, string componentName)
     {
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-        if (obj == null || obj is not Component) return -1;
+        if (obj == null || obj is not Component) return 0;
 
         var type = Type.GetType(componentName);
-        if (type == null) return -1;
+        if (type == null) return 0;
 
         var component = (obj as Component).GetComponent(type);
-        return component ? component.GetInstanceID() : -1;
+        return component ? component.GetInstanceID() : 0;
     }
 
     private delegate string _CSharpDelegate_UnityEngineComponentGetComponents(int objectInstanceID, string componentName);
@@ -456,13 +491,13 @@ static class CSharpRuntimeSupport
     private static int _CSharpImpl_UnityEngineComponentGetComponentInChildren(int componnetInstanceID, string componentName)
     {
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-        if (obj == null || obj is not Component) return -1;
+        if (obj == null || obj is not Component) return 0;
 
         var type = Type.GetType(componentName);
-        if (type == null) return -1;
+        if (type == null) return 0;
 
         var component = (obj as Component).GetComponentInChildren(type);
-        return component ? component.GetInstanceID() : -1;
+        return component ? component.GetInstanceID() : 0;
     }
 
     private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInChildren(int objectInstanceID, string componentName);
@@ -485,13 +520,13 @@ static class CSharpRuntimeSupport
     private static int _CSharpImpl_UnityEngineComponentGetComponentInParent(int componnetInstanceID, string componentName)
     {
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-        if (obj == null || obj is not Component) return -1;
+        if (obj == null || obj is not Component) return 0;
 
         var type = Type.GetType(componentName);
-        if (type == null) return -1;
+        if (type == null) return 0;
 
         var component = (obj as Component).GetComponentInParent(type);
-        return component ? component.GetInstanceID() : -1;
+        return component ? component.GetInstanceID() : 0;
     }
 
     private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInParent(int objectInstanceID, string componentName);
@@ -528,6 +563,7 @@ static class CSharpRuntimeSupport
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpStringForKeyStatic);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpObjectForKeyStatic);
 
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpFloatForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpFloatForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey);
 
         _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpImpl_UnityEngineObjectFindObjectsOfType);

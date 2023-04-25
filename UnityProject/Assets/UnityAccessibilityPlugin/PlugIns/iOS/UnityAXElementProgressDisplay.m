@@ -1,14 +1,14 @@
 //
-//  UnityAXElementText.m
+//  UnityAXElementProgressDisplay.m
 //  UnityEngineAPI+Accessibility+Plugin
 //
-//  Created by Eric Liang on 4/24/23.
+//  Created by Eric Liang on 4/25/23.
 //
 
-#import "UnityAXElementText.h"
+#import "UnityAXElementProgressDisplay.h"
 #import "UnityEngineObjC.h"
 
-@implementation UnityAXElementText
+@implementation UnityAXElementProgressDisplay
 
 - (CGRect)accessibilityFrame
 {
@@ -36,7 +36,15 @@
 
 - (NSString *)accessibilityValue
 {
-    id textComponent = [self.component getComponentInChildren:@"UnityEngine.UI.Text"] ?: [self.component getComponentInChildren:@"TMPro.TextMeshProUGUI"];
+    id text = [self.component.transform find:@"Days Survived Text"];
+    id textComponent = [text getComponentInChildren:@"UnityEngine.UI.Text"] ?: [text getComponentInChildren:@"TMPro.TextMeshProUGUI"];
+    return [textComponent safeCSharpStringForKey:@"text"];
+}
+
+- (NSString *)accessibilityLabel
+{
+    id text = [self.component.transform find:@"Days Survived Label"];
+    id textComponent = [text getComponentInChildren:@"UnityEngine.UI.Text"] ?: [text getComponentInChildren:@"TMPro.TextMeshProUGUI"];
     return [textComponent safeCSharpStringForKey:@"text"];
 }
 

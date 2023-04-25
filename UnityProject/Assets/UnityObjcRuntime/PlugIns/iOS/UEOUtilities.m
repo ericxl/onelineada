@@ -6,6 +6,7 @@
 //
 
 #import "UEOUtilities.h"
+#import <dlfcn.h>
 
 @implementation NSString (UEOExtensions)
 
@@ -45,6 +46,17 @@
         [substrings addObject:substring];
     }
     return [substrings copy];
+}
+
+- (NSString *)_ueoDropLast:(NSString *)substring
+{
+    NSRange range = [self rangeOfString:substring options:NSBackwardsSearch];
+    if ( range.location != NSNotFound && range.location + range.length == self.length ) {
+        // Remove the substring
+        return [self stringByReplacingCharactersInRange:range withString:@""];
+    } else {
+        return self;
+    }
 }
 
 @end
@@ -100,6 +112,27 @@
     }
 
     return minObject;
+}
+
+- (NSNumber *)_ueoMaxNumber
+{
+    return [self _ueoMaxObjectWithBlock:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if ( ![obj1 isKindOfClass:NSNumber.class] || ![obj2 isKindOfClass:NSNumber.class] )
+        {
+            [NSException raise:NSInternalInconsistencyException format:@"Must be array of numbers"];
+        }
+        return [(NSNumber *)obj1 compare:(NSNumber *)obj2];
+    }];
+}
+- (NSNumber *)_ueoMinNumber
+{
+    return [self _ueoMinObjectWithBlock:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if ( ![obj1 isKindOfClass:NSNumber.class] || ![obj2 isKindOfClass:NSNumber.class] )
+        {
+            [NSException raise:NSInternalInconsistencyException format:@"Must be array of numbers"];
+        }
+        return [(NSNumber *)obj1 compare:(NSNumber *)obj2];
+    }];
 }
 
 @end
@@ -162,4 +195,11 @@ simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array)
         return simd_make_float3(0, 0, 0);
     }
     return simd_make_float3([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue, [array objectAtIndex:2].floatValue);
+}
+
+
+NSString *UEOFormatFloatWithPercentage(float value)
+{
+    NSString *(*format)(float, NSInteger) = dlsym(dlopen("/System/Library/PrivateFrameworks/AXCoreUtilities.framework/AXCoreUtilities", RTLD_NOW), "AXFormatFloatWithPercentage");
+    return format(value, 0);
 }
