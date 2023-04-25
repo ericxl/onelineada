@@ -11,7 +11,7 @@ public class AccessibilitySetup : MonoBehaviour
         //var testObject = GameObject.Find("/HUD Canvas/Version Text");
         //int instanceID = testObject.GetInstanceID();
         //Debug.Log(testObject.GetType().FullName);
-        Debug.Log(GameObject.Find("/HUD Canvas/Version Text").GetComponent<UnityEngine.UI.Image>().fillAmount);
+        //Debug.Log(GameObject.Find("/HUD Canvas/Version Text").GetComponent<UnityEngine.UI.Image>().fillAmount);
         //GameObject.Find("/HUD Canvas/Version Text").AddComponent<AccessibilityNode>();
         //GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label").AddComponent<AccessibilityNode>();
         //GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Text").AddComponent<AccessibilityNode>();

@@ -9,6 +9,7 @@
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectTypeFullName);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectFindObjectsOfType);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVoidForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpBoolForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpIntForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpFloatForKey);

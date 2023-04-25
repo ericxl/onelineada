@@ -184,6 +184,21 @@ namespace DeckSwipe.World {
 			}
 		}
 
-	}
+
+		private void SwipeLeft()
+		{
+			card.PerformLeftDecision(Controller);
+			CardDescriptionDisplay.ResetDescription();
+			animationSuspended = false;
+			animationState = AnimationState.FlyingAway;
+		}
+		private void SwipeRight()
+		{
+			card.PerformRightDecision(Controller);
+			CardDescriptionDisplay.ResetDescription();
+			animationSuspended = false;
+			animationState = AnimationState.FlyingAway;
+		}
+    }
 
 }

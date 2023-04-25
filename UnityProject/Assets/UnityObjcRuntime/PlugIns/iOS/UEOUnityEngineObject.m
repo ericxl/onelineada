@@ -89,6 +89,11 @@
     return [self safeSetCSharpStringForKey:@"name" value:name];
 }
 
+- (void)safeCSharpPerformFunctionForKey:(NSString *)key
+{
+    UnityEngineObjectSafeCSharpVoidForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
+}
+
 - (BOOL)safeCSharpBoolForKey:(NSString *)key
 {
     return UnityEngineObjectSafeCSharpBoolForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));

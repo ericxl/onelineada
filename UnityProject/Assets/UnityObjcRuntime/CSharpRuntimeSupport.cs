@@ -67,6 +67,16 @@ static class CSharpRuntimeSupportUtilities
                 .Invoke(null, new object[] { iid });
     }
 
+    internal static void safeVoidForKey(object obj, string methodName)
+    {
+        var type = obj.GetType();
+        var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+        if (methodInfo != null && methodInfo.ReturnType == typeof(void))
+        {
+            methodInfo.Invoke(obj, null);
+        }
+    }
+
     internal static T safeValueForKey<T>(object obj, string methodName)
     {
         var type = obj.GetType();
@@ -251,6 +261,18 @@ static class CSharpRuntimeSupport
         if (obj == null) return null;
 
         return obj.GetType().FullName;
+    }
+
+    private delegate void _CSharpDelegate_UnityEngineObjectSafeCSharpVoidForKey(int objectInstanceID, string key);
+    [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVoidForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpVoidForKey func);
+    [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVoidForKey))]
+    private static void _CSharpImpl_UnityEngineObjectSafeCSharpVoidForKey(int objectInstanceID, string key)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+        var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+        if (obj == null) return;
+
+        CSharpRuntimeSupportUtilities.safeVoidForKey(obj, key);
     }
 
     private delegate bool _CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKey(int objectInstanceID, string key);
@@ -548,6 +570,8 @@ static class CSharpRuntimeSupport
     {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpImpl_UnityEngineObjectTypeFullName);
+
+        _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVoidForKey(_CSharpImpl_UnityEngineObjectSafeCSharpVoidForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKey(_CSharpImpl_UnityEngineObjectSafeCSharpBoolForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpIntForKey(_CSharpImpl_UnityEngineObjectSafeCSharpIntForKey);
         _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpFloatForKey(_CSharpImpl_UnityEngineObjectSafeCSharpFloatForKey);

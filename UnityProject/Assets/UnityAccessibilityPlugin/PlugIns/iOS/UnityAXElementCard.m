@@ -53,4 +53,26 @@
 
 - (BOOL)isAccessibilityElement { return YES; }
 
+- (UIAccessibilityTraits)accessibilityTraits
+{
+    return UIAccessibilityTraitAdjustable;
+}
+
+- (NSString *)accessibilityValue
+{
+    UEOUnityEngineComponent *left = [[[UEOUnityEngineGameObject find:@"/Card(Clone)"].transform find:@"Left Action Text"] getComponent:@"TMPro.TextMeshPro"];
+    UEOUnityEngineComponent *right = [[[UEOUnityEngineGameObject find:@"/Card(Clone)"].transform find:@"Right Action Text"] getComponent:@"TMPro.TextMeshPro"];
+    return [NSString stringWithFormat:@"Swipe up for %@, down for %@", [right safeCSharpStringForKey:@"text"], [left safeCSharpStringForKey:@"text"]];
+}
+
+- (void)accessibilityIncrement
+{
+    [[[UEOUnityEngineGameObject find:@"/Card(Clone)"] getComponent:@"DeckSwipe.World.CardBehaviour"] safeCSharpPerformFunctionForKey:@"SwipeRight"];
+}
+
+- (void)accessibilityDecrement
+{
+    [[[UEOUnityEngineGameObject find:@"/Card(Clone)"] getComponent:@"DeckSwipe.World.CardBehaviour"] safeCSharpPerformFunctionForKey:@"SwipeLeft"];
+}
+
 @end

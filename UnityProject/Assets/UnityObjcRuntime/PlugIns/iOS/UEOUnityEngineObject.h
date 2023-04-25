@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *name;
 
+- (void)safeCSharpPerformFunctionForKey:(NSString *)key;
 - (BOOL)safeCSharpBoolForKey:(NSString *)key;
 - (int)safeCSharpIntForKey:(NSString *)key;
 - (float)safeCSharpFloatForKey:(NSString *)key;
