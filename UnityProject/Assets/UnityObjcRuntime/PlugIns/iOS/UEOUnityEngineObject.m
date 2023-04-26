@@ -56,9 +56,9 @@
     {
         cls = UEOUnityEngineUIImage.class;
     }
-    else if ( [typeFullName isEqualToString:@"Apple.Accessibility.UnityAccessibilityNode"] )
+    else if ( [typeFullName isEqualToString:@"UnityObjCRuntimeBehaviour"] )
     {
-        cls = NSClassFromString(@"UEOUnityAccessibilityNodeComponent");
+        cls = UEOUnityObjCRuntimeBehaviour.class;
     }
     else
     {

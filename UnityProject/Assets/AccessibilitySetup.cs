@@ -1,7 +1,6 @@
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
-using Apple.Accessibility;
 
 public class AccessibilitySetup : MonoBehaviour
 {
@@ -26,12 +25,12 @@ public class AccessibilitySetup : MonoBehaviour
 
 
 
-        //var textObject = GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label");
+        var textObject = GameObject.Find("/HUD Canvas/Bottom Pane/Progress Display/Days Survived Label");
 
 
 
 
-        ////var tmpro = textObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //var tmpro = textObject.GetComponent<TMPro.TextMeshProUGUI>();
         //var node = textObject.AddComponent<UnityAccessibilityNode>();
         //var v3 = Vector3.zero;
         //Debug.Log("0 instanceID: " + CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(0).ToString());
@@ -43,8 +42,19 @@ public class AccessibilitySetup : MonoBehaviour
         //tmpro.ClassName
         //var transform = CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(tmpro, "transform");
         //Debug.Log("reflectedTransform: " + transform.ToString());
-        //Camera.main.
-        //Debug.Log("reflectedTransformPos: " + CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(node, "nodePosition"));
+        ////Camera.main.
+        ////Debug.Log("reflectedTransformPos: " + CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(node, "nodePosition"));
+
+
+        //var testObject = GameObject.Find("/HUD Canvas/Version Text");
+        //var be = testObject.AddComponent<UnityObjCRuntimeBehaviour>();
+        //be["ClassName"] = "hello world";
+        //Debug.Log("class name via reflection" + CSharpRuntimeSupportUtilities.safeValueForKey<string>(be, "ClassName"));
+        //Debug.Log("class name via subscript" + be["ClassName"]);
+
+        //CSharpRuntimeSupportUtilities.safeSetValueForKey<string>(be, "ClassName", "new value set via reflection");
+        //Debug.Log("class name via reflection" + CSharpRuntimeSupportUtilities.safeValueForKey<string>(be, "ClassName"));
+        //Debug.Log("class name via subscript" + be["ClassName"]);
     }
     private void Update()
     {

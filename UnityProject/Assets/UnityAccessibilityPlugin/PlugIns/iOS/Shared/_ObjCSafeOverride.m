@@ -2,22 +2,22 @@
 //  AppleAccessibilitySafeOverride.m
 //  AppleAccessibility
 //
-//  Copyright © 2021 Apple, Inc. All rights reserved.
+//  Created by Eric Liang on 4/23/23.
 //
 
-#import "AppleAccessibilitySafeOverride.h"
+#import "_ObjCSafeOverride.h"
 #import <objc/runtime.h>
 
-@implementation _AppleAccessibilitySafeOverride
+@implementation _ObjCSafeOverride
 
-+ (NSString *)appleAccessibilitySafeOverrideTargetClassName
++ (NSString *)objCSafeOverrideTargetClassName
 {
     // Safe categories will override this method. We want to return nil here
     // (instead of NSObject) to validate that the safe category was installed
     return nil;
 }
 
-+ (void)installAppleAccessibilitySafeOverrideOnClassNamed:(NSString *)targetClassName
++ (void)installObjCSafeOverrideOnClassNamed:(NSString *)targetClassName
 {
     // make sure we have the class
     Class targetClass = NSClassFromString(targetClassName);
@@ -31,7 +31,7 @@
         unsigned int x;
         for ( x = 0; x < newCount && newMethods[x] != NULL; x++ )
         {
-            [self _addAccessibilityUnityOverrideMethod:newMethods[x] toClass:targetClass isClass:NO];
+            [self _addObjCOverrideMethod:newMethods[x] toClass:targetClass isClass:NO];
         }
     }
     if ( newMethods != NULL )
@@ -49,7 +49,7 @@
         {
             if ( method_getName(newMethods[x]) != @selector(load) )
             {
-                [self _addAccessibilityUnityOverrideMethod:newMethods[x] toClass:object_getClass(targetClass) isClass:YES];
+                [self _addObjCOverrideMethod:newMethods[x] toClass:object_getClass(targetClass) isClass:YES];
             }
         }
     }
@@ -59,10 +59,10 @@
         free(newMethods);
     }
 
-    // Give classes a chance to load their accessibility
+    // Give classes a chance to load setups
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-    SEL setupExistingObjectsSelector = @selector(unityAccessibilitySetupExistingObjects);
+    SEL setupExistingObjectsSelector = @selector(objCOverrideSetupExistingObjects);
 #pragma clang diagnostic pop
     if ( setupExistingObjectsSelector != NULL && [self respondsToSelector:setupExistingObjectsSelector] )
     {
@@ -73,7 +73,7 @@
     }
 }
 
-+ (void)_addAccessibilityUnityOverrideMethod:(Method)newMethod toClass:(Class)targetClass isClass:(BOOL)isClass
++ (void)_addObjCOverrideMethod:(Method)newMethod toClass:(Class)targetClass isClass:(BOOL)isClass
 {
     SEL newSelector = method_getName(newMethod);
     IMP originalIMP = NULL;
@@ -101,7 +101,7 @@
         if ( superClass != NULL )
         {
             Class superDuperClass = class_getSuperclass(superClass);
-            if ( superDuperClass == [_AppleAccessibilitySafeOverride class] )
+            if ( superDuperClass == [_ObjCSafeOverride class] )
             {
                 BOOL add = class_addMethod((isClass ? object_getClass(superClass) : superClass), newSelector, originalIMP, method_getTypeEncoding(existingMethod));
                 // if method doesn't exist and try to replace is method exist
@@ -117,20 +117,20 @@
 
 @end
 
-void _AppleAccessibilitySafeOverrideInstall(NSString *categoryName)
+void _ObjCSafeOverrideInstall(NSString *categoryName)
 {
     Class class = NSClassFromString(categoryName);
     if ( class != nil )
     {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        SEL initializeAppleAccessibilitySafeCategorySelector = @selector(_initializeAppleAccessibilitySafeOverride);
+        SEL initializeObjCSafeOverrideSelector = @selector(_initializeObjCSafeOverride);
 #pragma clang diagnostic pop
-        if ( initializeAppleAccessibilitySafeCategorySelector != nil && [class respondsToSelector:initializeAppleAccessibilitySafeCategorySelector] )
+        if ( initializeObjCSafeOverrideSelector != nil && [class respondsToSelector:initializeObjCSafeOverrideSelector] )
         {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [class performSelector:initializeAppleAccessibilitySafeCategorySelector];
+            [class performSelector:initializeObjCSafeOverrideSelector];
 #pragma clang diagnostic pop
         }
     }

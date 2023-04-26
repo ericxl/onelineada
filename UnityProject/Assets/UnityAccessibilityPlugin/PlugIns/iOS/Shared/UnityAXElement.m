@@ -5,21 +5,7 @@
 //  Created by Eric Liang on 4/23/23.
 //
 
-#import "UnityAccessibilityNode.h"
-
-@implementation UEOUnityAccessibilityNodeComponent
-
-- (NSString *)className
-{
-    return [self safeCSharpStringForKey:@"ClassName"];
-}
-
-- (void)setClassName:(NSString *)className
-{
-    [self safeSetCSharpStringForKey:@"ClassName" value:className];
-}
-
-@end
+#import "UnityAXElement.h"
 
 @interface UnityAXElement()
 {
@@ -38,13 +24,13 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     });
 }
 
-+ (instancetype)nodeFrom:(UEOUnityAccessibilityNodeComponent *)component
++ (instancetype)nodeFrom:(UEOUnityObjCRuntimeBehaviour *)component
 {
     if ( component == nil )
     {
         return nil;
     }
-    if ( ![component.typeFullName isEqualToString:@"Apple.Accessibility.UnityAccessibilityNode"] )
+    if ( ![component.typeFullName isEqualToString:@"UnityObjCRuntimeBehaviour"] )
     {
         return nil;
     }
@@ -71,14 +57,29 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     return object;
 }
 
-- (UEOUnityAccessibilityNodeComponent *)component
+- (UEOUnityObjCRuntimeBehaviour *)component
 {
-    return [UEOUnityAccessibilityNodeComponent objectWithID:self->_instanceID];
+    return [UEOUnityObjCRuntimeBehaviour objectWithID:self->_instanceID];
 }
 
 - (UEOUnityEngineGameObject *)gameObject
 {
     return [self.component gameObject];
+}
+
+@end
+
+
+@implementation UEOUnityObjCRuntimeBehaviour(AccessibilityExtension)
+
+- (NSString *)className
+{
+    return [self safeCSharpStringForKey:@"AccessibilityElementClassName"];;
+}
+
+- (void)setClassName:(NSString *)className
+{
+    [self safeSetCSharpStringForKey:@"AccessibilityElementClassName" value:className];
 }
 
 @end

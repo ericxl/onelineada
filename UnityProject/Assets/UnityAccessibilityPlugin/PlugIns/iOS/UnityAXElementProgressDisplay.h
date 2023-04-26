@@ -6,7 +6,7 @@
 //
 
 #import "UEOUnityEngineComponent.h"
-#import "UnityAccessibilityNode.h"
+#import "UnityAXElement.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

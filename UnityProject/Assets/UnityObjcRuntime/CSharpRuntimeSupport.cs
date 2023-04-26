@@ -7,6 +7,11 @@ using UnityEngine;
 
 static class CSharpRuntimeSupportUtilities
 {
+    internal static Type GetSafeTypeName(string typeName)
+    {
+        return Type.GetType(typeName);
+    }
+
     internal static Vector2 ToVector2(this string vectorStr)
     {
         string[] components = vectorStr.Trim(new char[] { '(', ')' }).Split(',');
@@ -83,17 +88,22 @@ static class CSharpRuntimeSupportUtilities
         var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
         var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
         var fieldInfo = type.GetField(methodName);
+        var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
         if (methodInfo != null && typeof(T).IsAssignableFrom(methodInfo.ReturnType))
         {
             return (T)methodInfo.Invoke(obj, null);
         }
-        else if (propertyInfo != null && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+        else if (propertyInfo != null && propertyInfo.CanRead && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
         {
             return (T)propertyInfo.GetValue(obj);
         }
         else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
         {
             return (T)fieldInfo.GetValue(obj);
+        }
+        else if (indexerInfo != null && indexerInfo.CanRead && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
+        {
+            return (T)indexerInfo.GetValue(obj, new string[] { methodName });
         }
         return default(T);
     }
@@ -124,6 +134,7 @@ static class CSharpRuntimeSupportUtilities
         var methodInfo = type.GetMethod(methodName, new[] { typeof(T) });
         var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
         var fieldInfo = type.GetField(methodName);
+        var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
         if (methodInfo != null && methodInfo.ReturnType == typeof(void))
         {
             methodInfo.Invoke(obj, new[] { (object)value });
@@ -135,6 +146,10 @@ static class CSharpRuntimeSupportUtilities
         else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
         {
             fieldInfo.SetValue(obj, value);
+        }
+        else if (indexerInfo != null && indexerInfo.CanWrite && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
+        {
+            indexerInfo.SetValue(obj, value, new string[] { methodName });
         }
     }
 }
@@ -157,8 +172,7 @@ static class ObjcRuntimeUnityEngineGameObject
     {
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
         if (obj == null || obj is not GameObject) return 0;
-
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return 0;
 
         var component = (obj as GameObject).AddComponent(type);
@@ -173,7 +187,7 @@ static class ObjcRuntimeUnityEngineGameObject
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
         if (obj == null || obj is not GameObject) return 0;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return 0;
 
         var component = (obj as GameObject).GetComponent(type);
@@ -365,7 +379,7 @@ static class CSharpRuntimeSupport
     private static bool _CSharpImpl_UnityEngineObjectSafeCSharpBoolForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return false;
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return false;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<bool>(type, key);
@@ -377,7 +391,7 @@ static class CSharpRuntimeSupport
     private static int _CSharpImpl_UnityEngineObjectSafeCSharpIntForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return 0;
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return 0;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<int>(type, key);
@@ -389,7 +403,7 @@ static class CSharpRuntimeSupport
     private static float _CSharpImpl_UnityEngineObjectSafeCSharpFloatForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return 0;
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return 0;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<float>(type, key);
@@ -401,7 +415,7 @@ static class CSharpRuntimeSupport
     private static double _CSharpImpl_UnityEngineObjectSafeCSharpDoubleForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return 0;
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return 0;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<double>(type, key);
@@ -413,7 +427,7 @@ static class CSharpRuntimeSupport
     private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return Vector3.zero.ToString();
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return Vector3.zero.ToString();
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector3>(type, key).ToString();
@@ -425,7 +439,7 @@ static class CSharpRuntimeSupport
     private static string _CSharpImpl_UnityEngineObjectSafeCSharpStringForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return null;
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return null;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<string>(type, key);
@@ -437,7 +451,7 @@ static class CSharpRuntimeSupport
     private static int _CSharpImpl_UnityEngineObjectSafeCSharpObjectForKeyStatic(string typeName, string key)
     {
         if (string.IsNullOrEmpty(key)) return 0;
-        var type = Type.GetType(typeName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
         if (type == null) return 0;
 
         return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<UnityEngine.Object>(type, key)?.GetInstanceID() ?? 0;
@@ -472,7 +486,7 @@ static class CSharpRuntimeSupport
     [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectFindObjectsOfType))]
     private static string _CSharpImpl_UnityEngineObjectFindObjectsOfType(string componentName)
     {
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return null;
 
         return UnityEngine.Object.FindObjectsOfType(type).InstanceIDsToJsonString();
@@ -486,7 +500,7 @@ static class CSharpRuntimeSupport
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return 0;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return 0;
 
         var component = (obj as Component).GetComponent(type);
@@ -501,7 +515,7 @@ static class CSharpRuntimeSupport
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return null;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return null;
 
         return (obj as Component).GetComponents(type).InstanceIDsToJsonString();
@@ -515,7 +529,7 @@ static class CSharpRuntimeSupport
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return 0;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return 0;
 
         var component = (obj as Component).GetComponentInChildren(type);
@@ -530,7 +544,7 @@ static class CSharpRuntimeSupport
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return null;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return null;
 
         return (obj as Component).GetComponentsInChildren(type).InstanceIDsToJsonString();
@@ -544,7 +558,7 @@ static class CSharpRuntimeSupport
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return 0;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return 0;
 
         var component = (obj as Component).GetComponentInParent(type);
@@ -559,7 +573,7 @@ static class CSharpRuntimeSupport
         var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
         if (obj == null || obj is not Component) return null;
 
-        var type = Type.GetType(componentName);
+        var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
         if (type == null) return null;
 
         return (obj as Component).GetComponentsInParent(type).InstanceIDsToJsonString();

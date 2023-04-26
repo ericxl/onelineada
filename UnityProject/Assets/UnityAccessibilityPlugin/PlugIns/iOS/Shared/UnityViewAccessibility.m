@@ -8,12 +8,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-#import "AppleAccessibilitySafeOverride.h"
+#import "_ObjCSafeOverride.h"
 
 #import "UnityEngineObjC.h"
 #import "UnityAccessibilityNode.h"
 
-AppleAccessibilityDefineSafeOverride(@"UnityView", UnityViewAccessibility)
+ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 @implementation NSArray (UnityAccessibilityAdditions)
 - (id)_unityAccessibilityModalElement
@@ -34,6 +34,11 @@ AppleAccessibilityDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 @end
 
 @implementation UnityViewAccessibility
+
++ (void)objCOverrideSetupExistingObjects
+{
+    
+}
 
 // by default Unity engine sets this to YES
 - (BOOL)isAccessibilityElement
@@ -59,11 +64,11 @@ AppleAccessibilityDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 - (NSArray *)accessibilityElements
 {
-    NSArray *nodeComponents = [UEOUnityEngineObject findObjectsOfType:@"Apple.Accessibility.UnityAccessibilityNode"];
+    NSArray *nodeComponents = [UEOUnityEngineObject findObjectsOfType:@"UnityObjCRuntimeBehaviour"];
     NSArray *nodes = [nodeComponents _ueoFlatMapedObjectsWithBlock:^id _Nonnull(id  _Nonnull obj) {
-        if ( [obj isKindOfClass:UEOUnityAccessibilityNodeComponent.class] )
+        if ( [obj isKindOfClass:UEOUnityObjCRuntimeBehaviour.class] )
         {
-            return [UnityAXElement nodeFrom:(UEOUnityAccessibilityNodeComponent *)obj];
+            return [UnityAXElement nodeFrom:(UEOUnityObjCRuntimeBehaviour *)obj];
         }
         return nil;
     }];

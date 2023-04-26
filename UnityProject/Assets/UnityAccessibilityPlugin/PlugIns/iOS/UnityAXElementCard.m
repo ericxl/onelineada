@@ -7,7 +7,7 @@
 
 #import "UnityAXElementCard.h"
 #import "UnityEngineObjC.h"
-#import "UnityAccessibilityNode.h"
+#import "UnityAXElement.h"
 
 @implementation UnityAXElementCard
 

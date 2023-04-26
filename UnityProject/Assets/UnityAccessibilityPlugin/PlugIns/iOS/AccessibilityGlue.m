@@ -7,8 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "UnityEngineObjC.h"
-#import "UnityAccessibilityNode.h"
-#import "AppleAccessibilitySafeOverride.h"
+#import "_ObjCSafeOverride.h"
+#import "UnityAXElement.h"
 
 @interface _AXLoader: NSObject
 @end
@@ -23,14 +23,14 @@
 
 + (void)addAccessibility
 {
-    _AppleAccessibilitySafeOverrideInstall(@"UnityViewAccessibility");
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementText"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementProgressDisplay"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementCard"];
+    _ObjCSafeOverrideInstall(@"UnityViewAccessibility");
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementText"];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementProgressDisplay"];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementCard"];
 }
 
 @end
