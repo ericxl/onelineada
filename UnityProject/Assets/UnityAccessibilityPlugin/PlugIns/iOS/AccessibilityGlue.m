@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "UnityEngineObjC.h"
 #import "UnityAccessibilityNode.h"
+#import "AppleAccessibilitySafeOverride.h"
 
 @interface _AXLoader: NSObject
 @end
@@ -22,6 +23,7 @@
 
 + (void)addAccessibility
 {
+    _AppleAccessibilitySafeOverrideInstall(@"UnityViewAccessibility");
     [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementText"];
     [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementProgressDisplay"];
     [(UEOUnityAccessibilityNodeComponent *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"Apple.Accessibility.UnityAccessibilityNode"] setClassName:@"UnityAXElementBarGroup"];

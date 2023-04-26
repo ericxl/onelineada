@@ -6,9 +6,8 @@
 //
 
 #import "UEOUnityEngineRectTransform.h"
-#import "UEOBase.h"
-#import "UEOBridge.h"
 #import "UEOUtilities.h"
+
 @implementation UEOUnityEngineRectTransform
 
 - (NSArray<NSString *> *)getWorldCorners

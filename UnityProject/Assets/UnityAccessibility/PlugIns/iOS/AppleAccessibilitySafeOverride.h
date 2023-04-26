@@ -6,9 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AppleAccessibilityBase.h"
 
-APPLE_ACCESSIBILITY_HIDDEN
 @interface _AppleAccessibilitySafeOverride : NSObject
 
 // This attempts to install the methods of the subclass as a category on the named class
@@ -19,17 +17,17 @@ APPLE_ACCESSIBILITY_HIDDEN
 
 @end
 
-APPLE_ACCESSIBILITY_HIDDEN void _AppleAccessibilitySafeOverrideInstall(NSString *categoryName);
+extern void _AppleAccessibilitySafeOverrideInstall(NSString *categoryName);
 
 #define AppleAccessibilityDefineSafeOverride(quotedTargetClassName, override) \
     AppleAccessibilityDeclareSafeOverride(override) \
     AppleAccessibilityDefineDeclaredSafeOverride(quotedTargetClassName, override)
 
 #define AppleAccessibilityDeclareSafeOverride(override) \
-    APPLE_ACCESSIBILITY_HIDDEN \
+    __attribute__((visibility("hidden"))) \
     @interface __##override##_super : _AppleAccessibilitySafeOverride \
     @end \
-    APPLE_ACCESSIBILITY_HIDDEN \
+    __attribute__((visibility("hidden"))) \
     @interface override : __##override##_super \
     @end
 

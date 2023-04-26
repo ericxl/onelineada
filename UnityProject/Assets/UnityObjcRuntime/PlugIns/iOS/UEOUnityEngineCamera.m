@@ -6,7 +6,6 @@
 //
 
 #import "UEOUnityEngineCamera.h"
-#import "UEOBridge.h"
 #import "UEOUtilities.h"
 
 @implementation UEOUnityEngineCamera

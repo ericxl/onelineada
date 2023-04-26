@@ -6,8 +6,7 @@
 //
 
 #import "UEOUnityEngineTransform.h"
-#import "UEOBase.h"
-#import "UEOBridge.h"
+#import "UEOUtilities.h"
 
 @implementation UEOUnityEngineTransform
 

@@ -6,7 +6,7 @@
 //
 
 #import "UEOUnityEngineGameObject.h"
-#import "UEOBridge.h"
+#import "UEOUtilities.h"
 #import "UEOUnityEngineComponent.h"
 #import "UEOUnityEngineTransform.h"
 #import "UEOUnityEngineScene.h"

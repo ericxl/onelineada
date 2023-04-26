@@ -8,14 +8,30 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-#import "AppleAccessibilityRuntime.h"
 #import "AppleAccessibilitySafeOverride.h"
-#import "AppleAccessibilityElementOrdering.h"
 
 #import "UnityEngineObjC.h"
 #import "UnityAccessibilityNode.h"
 
 AppleAccessibilityDefineSafeOverride(@"UnityView", UnityViewAccessibility)
+
+@implementation NSArray (UnityAccessibilityAdditions)
+- (id)_unityAccessibilityModalElement
+{
+    for (id obj in self)
+    {
+        if ([obj accessibilityViewIsModal])
+        {
+            return obj;
+        }
+    }
+    return nil;
+}
+- (nullable NSArray *)_unityAccessibilitySorted
+{
+    return [self sortedArrayUsingSelector:NSSelectorFromString(@"accessibilityCompareGeometry:")];
+}
+@end
 
 @implementation UnityViewAccessibility
 
