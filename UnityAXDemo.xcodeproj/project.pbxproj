@@ -27,10 +27,8 @@
 		C955387129F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.h in Headers */ = {isa = PBXBuildFile; fileRef = C955386F29F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.h */; };
 		C955387229F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387029F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.m */; };
 		C955387929F8E54E00C59CB2 /* UnityAXElement.h in Headers */ = {isa = PBXBuildFile; fileRef = C955387429F8E54E00C59CB2 /* UnityAXElement.h */; };
-		C955387A29F8E54E00C59CB2 /* _ObjCSafeOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387529F8E54E00C59CB2 /* _ObjCSafeOverride.m */; };
 		C955387B29F8E54E00C59CB2 /* UnityAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387629F8E54E00C59CB2 /* UnityAXElement.m */; };
 		C955387C29F8E54E00C59CB2 /* UnityViewAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */; };
-		C955387D29F8E54E00C59CB2 /* _ObjCSafeOverride.h in Headers */ = {isa = PBXBuildFile; fileRef = C955387829F8E54E00C59CB2 /* _ObjCSafeOverride.h */; };
 		C95E925129F65F8300166778 /* UEOUnityEngineTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */; };
 		C95E925229F65F8300166778 /* UEOUnityEngineTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */; };
 		C95E925729F780C600166778 /* UnityAXElementText.h in Headers */ = {isa = PBXBuildFile; fileRef = C95E925529F780C600166778 /* UnityAXElementText.h */; };
@@ -139,10 +137,8 @@
 		C955386F29F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityObjCRuntimeBehaviour.h; sourceTree = "<group>"; };
 		C955387029F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityObjCRuntimeBehaviour.m; sourceTree = "<group>"; };
 		C955387429F8E54E00C59CB2 /* UnityAXElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnityAXElement.h; sourceTree = "<group>"; };
-		C955387529F8E54E00C59CB2 /* _ObjCSafeOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ObjCSafeOverride.m; sourceTree = "<group>"; };
 		C955387629F8E54E00C59CB2 /* UnityAXElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityAXElement.m; sourceTree = "<group>"; };
 		C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityViewAccessibility.m; sourceTree = "<group>"; };
-		C955387829F8E54E00C59CB2 /* _ObjCSafeOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ObjCSafeOverride.h; sourceTree = "<group>"; };
 		C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "iOSBuild/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
 		C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineTransform.h; sourceTree = "<group>"; };
 		C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineTransform.m; sourceTree = "<group>"; };
@@ -238,8 +234,6 @@
 		C955387329F8E50300C59CB2 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C955387829F8E54E00C59CB2 /* _ObjCSafeOverride.h */,
-				C955387529F8E54E00C59CB2 /* _ObjCSafeOverride.m */,
 				C955387429F8E54E00C59CB2 /* UnityAXElement.h */,
 				C955387629F8E54E00C59CB2 /* UnityAXElement.m */,
 				C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */,
@@ -360,7 +354,6 @@
 				C95E925B29F791AD00166778 /* UEOUnityEngineCamera.h in Headers */,
 				C9FBDC4A29F5A34D00A306B4 /* UEOUnityEngineComponent.h in Headers */,
 				C955387929F8E54E00C59CB2 /* UnityAXElement.h in Headers */,
-				C955387D29F8E54E00C59CB2 /* _ObjCSafeOverride.h in Headers */,
 				C95E925F29F7A40300166778 /* UEOUnityEngineRectTransform.h in Headers */,
 				C9FBDC4B29F5A34D00A306B4 /* UEOUtilities.h in Headers */,
 				C955384529F85F3A00C59CB2 /* UnityAXElementProgressDisplay.h in Headers */,
@@ -532,7 +525,6 @@
 				C955385929F86B3A00C59CB2 /* UnityAXElementBarGroup.m in Sources */,
 				C9FBDC4929F5A34D00A306B4 /* UEOUnityEngineComponent.m in Sources */,
 				C9FBDC4729F5A34D00A306B4 /* UEOUnityEngineScene.m in Sources */,
-				C955387A29F8E54E00C59CB2 /* _ObjCSafeOverride.m in Sources */,
 				C95E925829F780C600166778 /* UnityAXElementText.m in Sources */,
 				C955387229F8D6CD00C59CB2 /* UEOUnityObjCRuntimeBehaviour.m in Sources */,
 				C955385129F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.m in Sources */,

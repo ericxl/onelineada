@@ -89,4 +89,46 @@ extern NSString *UEOFormatFloatWithPercentage(float value);
 #define UEORectForRects(firstRect, ...) _UEORectForRects(firstRect, ##__VA_ARGS__, __UEORectForRectsSentinel)
 extern CGRect _UEORectForRects(CGRect firstArgument, ...);
 
+
+#pragma mark Safe Override
+
+extern void _ObjCSafeOverrideInstall(NSString *categoryName);
+
+#define ObjCDefineSafeOverride(quotedTargetClassName, override) \
+    ObjCDeclareSafeOverride(override) \
+    ObjCDefineDeclaredSafeOverride(quotedTargetClassName, override)
+
+#define ObjCDeclareSafeOverride(override) \
+    __attribute__((visibility("hidden"))) \
+    @interface __##override##_super : _ObjCSafeOverride \
+    @end \
+    __attribute__((visibility("hidden"))) \
+    @interface override : __##override##_super \
+    @end
+
+#define ObjCDefineDeclaredSafeOverride(quotedTargetClassName, override) \
+    @implementation __##override##_super \
+    @end \
+    @implementation override (SafeOverride) \
+    + (NSString *)objCSafeOverrideTargetClassName \
+    { \
+        return quotedTargetClassName; \
+    } \
+    + (void)_initializeObjCSafeOverride \
+    { \
+        [self installObjCSafeOverrideOnClassNamed:quotedTargetClassName]; \
+    } \
+    @end \
+
+@interface _ObjCSafeOverride : NSObject
+
+// This attempts to install the methods of the subclass as a category on the named class
++ (void)installObjCSafeOverrideOnClassNamed:(NSString *)targetClassName;
+
+// Returns the name of the safe category target class
+@property (nonatomic, strong, readonly, class) NSString *objCSafeOverrideTargetClassName;
+
+@end
+
+
 NS_ASSUME_NONNULL_END

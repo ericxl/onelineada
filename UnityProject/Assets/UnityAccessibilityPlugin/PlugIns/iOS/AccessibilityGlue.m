@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "UnityEngineObjC.h"
-#import "_ObjCSafeOverride.h"
 #import "UnityAXElement.h"
 
 @interface _AXLoader: NSObject
