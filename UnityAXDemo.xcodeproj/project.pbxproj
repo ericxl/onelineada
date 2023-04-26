@@ -159,7 +159,7 @@
 		C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUtilities.m; sourceTree = "<group>"; };
 		C9FBDC3829F5A2EB00A306B4 /* UEOUnityEngineObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineObject.h; sourceTree = "<group>"; };
 		C9FBDC3929F5A2EB00A306B4 /* UEOUnityEngineComponent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineComponent.m; sourceTree = "<group>"; };
-		C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UnityEngineAPI_Accessibility_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FBDC3F29F5A33900A306B4 /* UnityObjCRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UnityObjCRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9FBDC6F29F5AFE200A306B4 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		C9FBDC7129F5AFE200A306B4 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = MainApp/main.mm; sourceTree = "<group>"; };
 		C9FBDC7429F5AFE200A306B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Unity-iPhone/Images.xcassets"; sourceTree = "<group>"; };
@@ -241,13 +241,35 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		C9588CE929ED2CDF00055160 /* UnityEngineAPI+Accessibility */ = {
+		C9588CE929ED2CDF00055160 /* UnityObjCRuntime */ = {
 			isa = PBXGroup;
 			children = (
-				C9FBDC9429F5B34100A306B4 /* UnityEngineObjC */,
+				C955386E29F8D64100C59CB2 /* ObjC */,
+				C955384929F867BD00C59CB2 /* UI */,
+				C9FBDC3629F5A2EB00A306B4 /* UnityEngineObjC.h */,
+				C9FBDC3229F5A2EB00A306B4 /* UEOUtilities.h */,
+				C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */,
+				C9FBDC3829F5A2EB00A306B4 /* UEOUnityEngineObject.h */,
+				C9FBDC3329F5A2EB00A306B4 /* UEOUnityEngineObject.m */,
+				C95E925929F791AD00166778 /* UEOUnityEngineCamera.h */,
+				C95E925A29F791AD00166778 /* UEOUnityEngineCamera.m */,
+				C9FBDC3129F5A2EB00A306B4 /* UEOUnityEngineComponent.h */,
+				C9FBDC3929F5A2EB00A306B4 /* UEOUnityEngineComponent.m */,
+				C94BD1AC29F5D4340084A154 /* UEOUnityEngineGameObject.h */,
+				C94BD1AD29F5D4340084A154 /* UEOUnityEngineGameObject.m */,
+				C955384E29F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.h */,
+				C955384F29F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.m */,
+				C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */,
+				C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */,
+				C95E925D29F7A40300166778 /* UEOUnityEngineRectTransform.h */,
+				C95E925E29F7A40300166778 /* UEOUnityEngineRectTransform.m */,
+				C9FBDC3429F5A2EB00A306B4 /* UEOUnityEngineScene.h */,
+				C9FBDC3529F5A2EB00A306B4 /* UEOUnityEngineScene.m */,
+				C95E926229F83EE900166778 /* UEOUnityEngineScreen.h */,
+				C95E926329F83EE900166778 /* UEOUnityEngineScreen.m */,
 			);
-			name = "UnityEngineAPI+Accessibility";
-			path = UnityProject/Assets;
+			name = UnityObjCRuntime;
+			path = UnityObjCRuntime/PlugIns/iOS;
 			sourceTree = "<group>";
 		};
 		C9FBDC6129F5AF8200A306B4 /* Products */ = {
@@ -276,43 +298,12 @@
 			path = iOSBuild;
 			sourceTree = "<group>";
 		};
-		C9FBDC9429F5B34100A306B4 /* UnityEngineObjC */ = {
-			isa = PBXGroup;
-			children = (
-				C955386E29F8D64100C59CB2 /* ObjC */,
-				C955384929F867BD00C59CB2 /* UI */,
-				C9FBDC3629F5A2EB00A306B4 /* UnityEngineObjC.h */,
-				C9FBDC3229F5A2EB00A306B4 /* UEOUtilities.h */,
-				C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */,
-				C9FBDC3829F5A2EB00A306B4 /* UEOUnityEngineObject.h */,
-				C9FBDC3329F5A2EB00A306B4 /* UEOUnityEngineObject.m */,
-				C95E925929F791AD00166778 /* UEOUnityEngineCamera.h */,
-				C95E925A29F791AD00166778 /* UEOUnityEngineCamera.m */,
-				C9FBDC3129F5A2EB00A306B4 /* UEOUnityEngineComponent.h */,
-				C9FBDC3929F5A2EB00A306B4 /* UEOUnityEngineComponent.m */,
-				C94BD1AC29F5D4340084A154 /* UEOUnityEngineGameObject.h */,
-				C94BD1AD29F5D4340084A154 /* UEOUnityEngineGameObject.m */,
-				C955384E29F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.h */,
-				C955384F29F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.m */,
-				C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */,
-				C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */,
-				C95E925D29F7A40300166778 /* UEOUnityEngineRectTransform.h */,
-				C95E925E29F7A40300166778 /* UEOUnityEngineRectTransform.m */,
-				C9FBDC3429F5A2EB00A306B4 /* UEOUnityEngineScene.h */,
-				C9FBDC3529F5A2EB00A306B4 /* UEOUnityEngineScene.m */,
-				C95E926229F83EE900166778 /* UEOUnityEngineScreen.h */,
-				C95E926329F83EE900166778 /* UEOUnityEngineScreen.m */,
-			);
-			name = UnityEngineObjC;
-			path = UnityObjcRuntime/PlugIns/iOS;
-			sourceTree = "<group>";
-		};
 		E4327E6026335A9900376CAB = {
 			isa = PBXGroup;
 			children = (
 				C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */,
 				C9FBDC6C29F5AFAD00A306B4 /* Unity-iPhone */,
-				C9588CE929ED2CDF00055160 /* UnityEngineAPI+Accessibility */,
+				C9588CE929ED2CDF00055160 /* UnityObjCRuntime */,
 				C94BD1B329F5DAE80084A154 /* UnityAccessibilityPlugin */,
 				E4327E8726335B3600376CAB /* Frameworks */,
 				E4327E6A26335A9900376CAB /* Products */,
@@ -323,7 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				E4327E6926335A9900376CAB /* UnityDemoGame.app */,
-				C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility_Plugin.framework */,
+				C9FBDC3F29F5A33900A306B4 /* UnityObjCRuntime.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -373,9 +364,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C9FBDC3E29F5A33900A306B4 /* UnityEngineAPI+Accessibility+Plugin */ = {
+		C9FBDC3E29F5A33900A306B4 /* UnityObjCRuntime */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityEngineAPI+Accessibility+Plugin" */;
+			buildConfigurationList = C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityObjCRuntime" */;
 			buildPhases = (
 				C9FBDC3A29F5A33900A306B4 /* Headers */,
 				C9FBDC3B29F5A33900A306B4 /* Sources */,
@@ -386,9 +377,9 @@
 			);
 			dependencies = (
 			);
-			name = "UnityEngineAPI+Accessibility+Plugin";
+			name = UnityObjCRuntime;
 			productName = UnityEngineAPI;
-			productReference = C9FBDC3F29F5A33900A306B4 /* UnityEngineAPI_Accessibility_Plugin.framework */;
+			productReference = C9FBDC3F29F5A33900A306B4 /* UnityObjCRuntime.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E4327E6826335A9900376CAB /* UnityDemoGame */ = {
@@ -449,7 +440,7 @@
 			projectRoot = "";
 			targets = (
 				E4327E6826335A9900376CAB /* UnityDemoGame */,
-				C9FBDC3E29F5A33900A306B4 /* UnityEngineAPI+Accessibility+Plugin */,
+				C9FBDC3E29F5A33900A306B4 /* UnityObjCRuntime */,
 			);
 		};
 /* End PBXProject section */
@@ -801,7 +792,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityEngineAPI+Accessibility+Plugin" */ = {
+		C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "UnityObjCRuntime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C9FBDC4429F5A33900A306B4 /* Debug */,
