@@ -16,4 +16,14 @@
     return SAFE_CAST_CLASS(UEOUnityEngineTransform, [UEOUnityEngineTransform objectWithID:instanceID]);
 }
 
+- (simd_float3)position
+{
+    return [self safeCSharpVector3ForKey:@"position"];
+}
+
+- (void)setPosition:(simd_float3)position
+{
+    [self safeSetCSharpVector3ForKey:@"position" value:position];
+}
+
 @end

@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)safeSetCSharpBoolForKey:(NSString *)key value:(BOOL)value;
 - (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value;
+- (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value;
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(nullable NSString *)value;
 
 + (nullable NSArray<UEOUnityEngineObject *> *)findObjectsOfType:(NSString *)component;

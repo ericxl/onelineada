@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UEOUnityEngineTransform : UEOUnityEngineComponent
 
 - (nullable UEOUnityEngineTransform *)find:(NSString *)childName;
-
+@property (nonatomic, assign) simd_float3 position;
 @end
 
 NS_ASSUME_NONNULL_END

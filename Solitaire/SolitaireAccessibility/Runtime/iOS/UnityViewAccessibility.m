@@ -44,17 +44,15 @@ ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
         return [super accessibilityElements];
     }
     NSArray *elements =
-    [NSArray ueoArrayByIgnoringNilElementsWithCount:7,
+    [NSArray ueoArrayByIgnoringNilElementsWithCount:8,
      [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGameInfo"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
      [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGameControls"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
      [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasWin"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
      [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasHome"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
      [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupMatch"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
      [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupOptions"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupLeaderboard"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")]
-//     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGamePopupMatch"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-//     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGamePopupOptions"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-//     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGamePopupLeaderboard"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupLeaderboard"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/GamePresenter"] withClass:NSClassFromString(@"SolitaireMainGameParentAXElement")]
     ];
 
     return [elements _axModaledSorted];

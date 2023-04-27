@@ -29,6 +29,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpObjectForKeyStatic);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpBoolForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpFloatForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector3ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpStringForKey);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineComponentGetComponent);
@@ -314,6 +315,27 @@ simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array)
     return simd_make_float3([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue, [array objectAtIndex:2].floatValue);
 }
 
+float UEOSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2)
+{
+    simd_float3 diff = v1 - v2;
+    return simd_dot(diff, diff);
+}
+
+BOOL UEOSimdFloat3Equal(simd_float3 v1, simd_float3 v2)
+{
+    return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
+}
+
+static const float EPSILON = 1e-6;
+BOOL UEOSimdFloat3ApproximatelyEqual(simd_float3 v1, simd_float3 v2)
+{
+    return UEOSimdFloat3SquareMagnitude(v1, v2) < EPSILON;
+}
+
+BOOL UEOSimdFloat3ApproximatelyEqualWithinMargin(simd_float3 v1, simd_float3 v2, float margin)
+{
+    return UEOSimdFloat3SquareMagnitude(v1, v2) < margin;
+}
 
 NSString *UEOFormatFloatWithPercentage(float value)
 {

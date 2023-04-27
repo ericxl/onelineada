@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -14,35 +13,39 @@ namespace UnityObjCRuntime
             return Type.GetType(typeName);
         }
 
-        internal static Vector2 ToVector2(this string vectorStr)
+        internal static bool TryToVector2(this string s, out Vector2 result)
         {
-            string[] components = vectorStr.Trim(new char[] { '(', ')' }).Split(',');
+            string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
 
             // Parse the components as floats
             if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y))
             {
                 // Create a new Vector2 from the parsed values
-                return new Vector2(x, y);
+                result = new Vector2(x, y);
+                return true;
             }
             else
             {
-                return Vector2.zero;
+                result = Vector2.zero;
+                return false;
             }
         }
 
-        internal static Vector3 ToVector3(this string vectorStr)
+        internal static bool TryToVector3(this string s, out Vector3 result)
         {
-            string[] components = vectorStr.Trim(new char[] { '(', ')' }).Split(',');
+            string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
 
             // Parse the components as floats
             if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z))
             {
                 // Create a new Vector2 from the parsed values
-                return new Vector3(x, y, z);
+                result = new Vector3(x, y, z);
+                return true;
             }
             else
             {
-                return Vector2.zero;
+                result = Vector3.zero;
+                return false;
             }
         }
 
@@ -252,8 +255,9 @@ namespace UnityObjCRuntime
         {
             var camera = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(cameraInstanceID);
             if (camera != null && camera is not Camera) return Vector2.zero.ToString();
+            if (!vector3String.TryToVector3(out Vector3 vector3)) return Vector2.zero.ToString();
 
-            return RectTransformUtility.WorldToScreenPoint((Camera)camera, vector3String.ToVector3()).ToString();
+            return RectTransformUtility.WorldToScreenPoint((Camera)camera, vector3).ToString();
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
@@ -511,6 +515,20 @@ namespace UnityObjCRuntime
             CSharpRuntimeSupportUtilities.safeSetValueForKey<float>(obj, key, value);
         }
 
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, string value);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector3ForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey))]
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, string value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            if (!value.TryToVector3(out Vector3 vector3)) return;
+
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector3>(obj, key, vector3);
+        }
+
         private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey))]
@@ -645,6 +663,7 @@ namespace UnityObjCRuntime
 
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpBoolForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpBoolForKey);
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpFloatForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpFloatForKey);
+            _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector3ForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpVector3ForKey);
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey);
 
             _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpImpl_UnityEngineObjectFindObjectsOfType);

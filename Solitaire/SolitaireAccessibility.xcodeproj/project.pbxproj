@@ -18,6 +18,8 @@
 		C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */; };
 		C9AA10A129FA5D7100B02DD7 /* liblibUnityObjCRuntime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA109E29FA5D5A00B02DD7 /* liblibUnityObjCRuntime.a */; };
 		C9AA10A729FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */; };
+		C9AA10AF29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10AE29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m */; };
+		C9AA10B129FB067000B02DD7 /* SolitairePilePresenterAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10B029FB067000B02DD7 /* SolitairePilePresenterAXElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireToggleAXElement.m; sourceTree = "<group>"; };
 		C9AA109929FA5D5A00B02DD7 /* UnityObjCRuntime.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnityObjCRuntime.xcodeproj; path = ../UnityObjCRuntime.xcodeproj; sourceTree = "<group>"; };
 		C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireInGameLabelAXElement.m; sourceTree = "<group>"; };
+		C9AA10AE29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireMainGameParentAXElement.m; sourceTree = "<group>"; };
+		C9AA10B029FB067000B02DD7 /* SolitairePilePresenterAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitairePilePresenterAXElement.m; sourceTree = "<group>"; };
 		C9FBDC3F29F5A33900A306B4 /* SolitaireAccessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SolitaireAccessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4327E8826335B3600376CAB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E4327E8A26335B3600376CAB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -91,6 +95,8 @@
 				C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */,
 				C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */,
 				C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */,
+				C9AA10AE29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m */,
+				C9AA10B029FB067000B02DD7 /* SolitairePilePresenterAXElement.m */,
 				C95E925629F780C600166778 /* UnityAXElementText.m */,
 			);
 			path = Accessibility;
@@ -233,9 +239,11 @@
 			files = (
 				C9AA106C29FA468100B02DD7 /* SolitaireButtonRectAXElement.m in Sources */,
 				C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */,
+				C9AA10B129FB067000B02DD7 /* SolitairePilePresenterAXElement.m in Sources */,
 				C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */,
 				C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */,
 				C9AA105B29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m in Sources */,
+				C9AA10AF29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m in Sources */,
 				C9AA103C29FA0BDC00B02DD7 /* UnityAccessibility.m in Sources */,
 				C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */,
 				C9AA10A729FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m in Sources */,

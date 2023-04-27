@@ -178,6 +178,11 @@
     UnityEngineObjectSafeSetCSharpFloatForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
 }
 
+- (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value
+{
+    UnityEngineObjectSafeSetCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UEOSimdFloat3ToString(value)));
+}
+
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)value
 {
     UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(value));

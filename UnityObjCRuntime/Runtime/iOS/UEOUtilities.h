@@ -7,8 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UnityEngineObjC.h"
-#import <simd/types.h>
-#import <simd/vector_make.h>
+#import <simd/simd.h>
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectTypeFullName, const char *, (int));
 
@@ -31,6 +30,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKeyStatic, int, (con
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpBoolForKey, void, (int, const char *, BOOL));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpFloatForKey, void, (int, const char *, float));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector3ForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpStringForKey, void, (int, const char *, const char *));
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectFindObjectsOfType, const char *, (const char *));
@@ -92,6 +92,10 @@ extern NSString *UEOSimdFloat3ToString(simd_float3 vector);
 extern simd_float3 UEOSimdFloat3FromString(NSString *str);
 extern NSArray<NSNumber *> *UEOSimdFloat3ToArray(simd_float3 vector);
 extern simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array);
+extern float UEOSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2);
+extern BOOL UEOSimdFloat3Equal(simd_float3 v1, simd_float3 v2);
+extern BOOL UEOSimdFloat3ApproximatelyEqual(simd_float3 v1, simd_float3 v2);
+extern BOOL UEOSimdFloat3ApproximatelyEqualWithinMargin(simd_float3 v1, simd_float3 v2, float margin);
 
 extern NSString *UEOFormatFloatWithPercentage(float value);
 
