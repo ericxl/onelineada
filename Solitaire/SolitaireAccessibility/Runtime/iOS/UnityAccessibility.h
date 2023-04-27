@@ -14,13 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)node:(UEOUnityEngineObject *)component withClass:(Class)axClass;
 
+@property (nonatomic, strong, readonly, nullable) UEOUnityEngineTransform *transform;
 @property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
 
 @end
 
 @interface NSArray (UnityAccessibilityAdditions)
-- (id)_unityAccessibilityModalElement;
-- (nullable NSArray *)_unityAccessibilitySorted;
+- (nullable NSArray *)_axModaledSorted;
 @end
 
 NS_ASSUME_NONNULL_END

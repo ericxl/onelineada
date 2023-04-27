@@ -65,11 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (UEOExtensions)
 - (nullable NSArray<NSNumber *> *)ueoToNumberArray;
 - (nullable NSArray<NSString *> *)ueoToStringArray;
+- (NSString *)ueoDropFirst:(NSString *)substring;
 - (NSString *)ueoDropLast:(NSString *)substring;
 @end
 
 @interface NSArray<__covariant ObjectType> (UEOExtensions)
 - (NSArray<ObjectType> *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item, NSUInteger index))filterBlock;
+- (nullable ObjectType)ueoFirstObjectUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))predicateBlock;
 - (NSArray *)ueoMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
 - (NSArray *)ueoFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
 - (ObjectType)ueoMaxObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
@@ -78,6 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSNumber *)ueoMinNumber;
 + (nullable instancetype)ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...;
 @end
+
+extern CGPoint UEOCGRectGetCenter(CGRect rect);
 
 extern NSString *UEOSimdFloat2ToString(simd_float2 vector);
 extern simd_float2 UEOSimdFloat2FromString(NSString *str);

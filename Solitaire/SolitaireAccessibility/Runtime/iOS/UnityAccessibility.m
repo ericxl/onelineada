@@ -26,10 +26,18 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
 
 + (instancetype)node:(UEOUnityEngineObject *)component withClass:(Class)axClass
 {
+    if ( ![component isKindOfClass:UEOUnityEngineGameObject.class] )
+    {
+        if ( [component isKindOfClass:UEOUnityEngineComponent.class] )
+        {
+            component = [(UEOUnityEngineComponent *)component gameObject];
+        }
+    }
     if ( component == nil )
     {
         return nil;
     }
+    
     id object = [_gNodeMap objectForKey:@(component.instanceID)];
     Class cls = axClass;
     if ( object != nil )
@@ -48,6 +56,11 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     return object;
 }
 
+- (UEOUnityEngineTransform *)transform
+{
+    return [self.gameObject transform];
+}
+
 - (UEOUnityEngineGameObject *)gameObject
 {
     return [UEOUnityEngineGameObject objectWithID:self->_instanceID];
@@ -56,21 +69,24 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
 @end
 
 @implementation NSArray (UnityAccessibilityAdditions)
-- (id)_unityAccessibilityModalElement
+
+- (NSArray *)_axModaledSorted
 {
-    for (id obj in self)
+    id modalElement = [self ueoFirstObjectUsingBlock:^BOOL(id  _Nonnull item) {
+        return [item accessibilityViewIsModal] && ![item accessibilityElementsHidden];
+    }];
+    if ( modalElement != nil )
     {
-        if ([obj accessibilityViewIsModal])
-        {
-            return obj;
-        }
+        return @[modalElement];
     }
-    return nil;
+    else
+    {
+        return [[self ueoFilterObjectsUsingBlock:^BOOL(id  _Nonnull item, NSUInteger index) {
+            return ![item accessibilityElementsHidden];
+        }] sortedArrayUsingSelector:NSSelectorFromString(@"accessibilityCompareGeometry:")];
+    }
 }
-- (nullable NSArray *)_unityAccessibilitySorted
-{
-    return [self sortedArrayUsingSelector:NSSelectorFromString(@"accessibilityCompareGeometry:")];
-}
+
 @end
 
 @interface _AXGameGlue: NSObject

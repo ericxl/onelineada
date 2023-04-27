@@ -83,20 +83,36 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     NSArray *matches = [regex matchesInString:self options:0 range:NSMakeRange(0, [self length])];
 
     NSMutableArray *substrings = [NSMutableArray arrayWithCapacity:[matches count]];
-    for (NSTextCheckingResult *match in matches) {
+    for (NSTextCheckingResult *match in matches)
+    {
         NSString *substring = [self substringWithRange:[match rangeAtIndex:0]];
         [substrings addObject:substring];
     }
     return [substrings copy];
 }
 
+- (NSString *)ueoDropFirst:(NSString *)substring
+{
+    NSRange range = [self rangeOfString:substring];
+    if ( range.location != NSNotFound && range.location == 0 )
+    {
+        return [self stringByReplacingCharactersInRange:range withString:@""];
+    }
+    else
+    {
+        return self;
+    }
+}
+
 - (NSString *)ueoDropLast:(NSString *)substring
 {
     NSRange range = [self rangeOfString:substring options:NSBackwardsSearch];
-    if ( range.location != NSNotFound && range.location + range.length == self.length ) {
-        // Remove the substring
+    if ( range.location != NSNotFound && range.location + range.length == self.length )
+    {
         return [self stringByReplacingCharactersInRange:range withString:@""];
-    } else {
+    }
+    else
+    {
         return self;
     }
 }
@@ -117,6 +133,24 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
         if ( filterBlock(obj, idx) )
         {
             [result addObject:obj];
+        }
+    }];
+
+    return result;
+}
+
+- (id)ueoFirstObjectUsingBlock:(BOOL (NS_NOESCAPE ^)(id item))predicateBlock
+{
+    if ( predicateBlock == nil )
+    {
+        return [self firstObject];
+    }
+    __block id result = nil;
+    [self enumerateObjectsUsingBlock:^(id __nonnull obj, NSUInteger idx, BOOL *__nonnull stop) {
+        if ( predicateBlock(obj) )
+        {
+            result = obj;
+            *stop = YES;
         }
     }];
 
@@ -214,6 +248,11 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
 }
 
 @end
+
+CGPoint UEOCGRectGetCenter(CGRect rect)
+{
+    return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+}
 
 NSString *UEOSimdFloat2ToString(simd_float2 vector)
 {

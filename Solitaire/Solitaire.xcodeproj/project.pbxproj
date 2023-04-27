@@ -37,6 +37,12 @@
 		C9AA105F29FA396300B02DD7 /* UEOUnityEngineBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA105D29FA396300B02DD7 /* UEOUnityEngineBehaviour.m */; };
 		C9AA106229FA3A6700B02DD7 /* UEOUnityEngineCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = C9AA106029FA3A6700B02DD7 /* UEOUnityEngineCanvas.h */; };
 		C9AA106329FA3A6700B02DD7 /* UEOUnityEngineCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106129FA3A6700B02DD7 /* UEOUnityEngineCanvas.m */; };
+		C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */; };
+		C9AA106C29FA468100B02DD7 /* SolitaireButtonRectAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */; };
+		C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */; };
+		C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */; };
+		C9AA107529FA53DC00B02DD7 /* UEOUnityEngineUIToggle.h in Headers */ = {isa = PBXBuildFile; fileRef = C9AA107329FA53DC00B02DD7 /* UEOUnityEngineUIToggle.h */; };
+		C9AA107629FA53DC00B02DD7 /* UEOUnityEngineUIToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA107429FA53DC00B02DD7 /* UEOUnityEngineUIToggle.m */; };
 		C9FBDC4629F5A34D00A306B4 /* UEOUnityEngineScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FBDC3429F5A2EB00A306B4 /* UEOUnityEngineScene.h */; };
 		C9FBDC4729F5A34D00A306B4 /* UEOUnityEngineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3529F5A2EB00A306B4 /* UEOUnityEngineScene.m */; };
 		C9FBDC4829F5A34D00A306B4 /* UEOUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */; };
@@ -146,6 +152,12 @@
 		C9AA105D29FA396300B02DD7 /* UEOUnityEngineBehaviour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineBehaviour.m; sourceTree = "<group>"; };
 		C9AA106029FA3A6700B02DD7 /* UEOUnityEngineCanvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineCanvas.h; sourceTree = "<group>"; };
 		C9AA106129FA3A6700B02DD7 /* UEOUnityEngineCanvas.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineCanvas.m; sourceTree = "<group>"; };
+		C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireLogoAXElement.m; sourceTree = "<group>"; };
+		C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireButtonRectAXElement.m; sourceTree = "<group>"; };
+		C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireButtonRoundAXElement.m; sourceTree = "<group>"; };
+		C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireToggleAXElement.m; sourceTree = "<group>"; };
+		C9AA107329FA53DC00B02DD7 /* UEOUnityEngineUIToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineUIToggle.h; sourceTree = "<group>"; };
+		C9AA107429FA53DC00B02DD7 /* UEOUnityEngineUIToggle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineUIToggle.m; sourceTree = "<group>"; };
 		C9FBDC3129F5A2EB00A306B4 /* UEOUnityEngineComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineComponent.h; sourceTree = "<group>"; };
 		C9FBDC3229F5A2EB00A306B4 /* UEOUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUtilities.h; sourceTree = "<group>"; };
 		C9FBDC3329F5A2EB00A306B4 /* UEOUnityEngineObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineObject.m; sourceTree = "<group>"; };
@@ -208,6 +220,8 @@
 				C955384B29F867FE00C59CB2 /* UEOUnityEngineUIText.m */,
 				C955385229F8696D00C59CB2 /* UEOUnityEngineUIImage.h */,
 				C955385329F8696D00C59CB2 /* UEOUnityEngineUIImage.m */,
+				C9AA107329FA53DC00B02DD7 /* UEOUnityEngineUIToggle.h */,
+				C9AA107429FA53DC00B02DD7 /* UEOUnityEngineUIToggle.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -250,6 +264,10 @@
 			isa = PBXGroup;
 			children = (
 				C9AA105A29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m */,
+				C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */,
+				C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */,
+				C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */,
+				C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */,
 				C95E925629F780C600166778 /* UnityAXElementText.m */,
 				C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */,
 				C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */,
@@ -336,6 +354,7 @@
 				C9FBDC4B29F5A34D00A306B4 /* UEOUtilities.h in Headers */,
 				C955385029F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.h in Headers */,
 				C95E926429F83EE900166778 /* UEOUnityEngineScreen.h in Headers */,
+				C9AA107529FA53DC00B02DD7 /* UEOUnityEngineUIToggle.h in Headers */,
 				C9FBDC4629F5A34D00A306B4 /* UEOUnityEngineScene.h in Headers */,
 				C9AA105E29FA396300B02DD7 /* UEOUnityEngineBehaviour.h in Headers */,
 				C955385429F8696D00C59CB2 /* UEOUnityEngineUIImage.h in Headers */,
@@ -483,6 +502,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C95E926029F7A40300166778 /* UEOUnityEngineRectTransform.m in Sources */,
+				C9AA107629FA53DC00B02DD7 /* UEOUnityEngineUIToggle.m in Sources */,
+				C9AA106C29FA468100B02DD7 /* SolitaireButtonRectAXElement.m in Sources */,
+				C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */,
 				C9AA105F29FA396300B02DD7 /* UEOUnityEngineBehaviour.m in Sources */,
 				C9FBDC4D29F5A34D00A306B4 /* UEOUnityEngineObject.m in Sources */,
 				C9FBDC4829F5A34D00A306B4 /* UEOUtilities.m in Sources */,
@@ -493,6 +515,7 @@
 				C9AA103629FA0BDC00B02DD7 /* UnityAXElementBarGroup.m in Sources */,
 				C95E925229F65F8300166778 /* UEOUnityEngineTransform.m in Sources */,
 				C955384D29F867FE00C59CB2 /* UEOUnityEngineUIText.m in Sources */,
+				C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */,
 				C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */,
 				C95E925C29F791AD00166778 /* UEOUnityEngineCamera.m in Sources */,
 				C9FBDC4929F5A34D00A306B4 /* UEOUnityEngineComponent.m in Sources */,
@@ -501,6 +524,7 @@
 				C9AA103C29FA0BDC00B02DD7 /* UnityAccessibility.m in Sources */,
 				C9AA103929FA0BDC00B02DD7 /* UnityAXElementCard.m in Sources */,
 				C955385129F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.m in Sources */,
+				C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */,
 				C9AA103B29FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.m in Sources */,
 				C9AA103729FA0BDC00B02DD7 /* UnityViewAccessibility.m in Sources */,
 			);
