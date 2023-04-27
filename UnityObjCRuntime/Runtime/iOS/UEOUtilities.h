@@ -63,23 +63,20 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneName, const char *,
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (UEOExtensions)
-- (nullable NSArray<NSNumber *> *)_ueoToNumberArray;
-- (nullable NSArray<NSString *> *)_ueoToStringArray;
-- (NSString *)_ueoDropLast:(NSString *)substring;
+- (nullable NSArray<NSNumber *> *)ueoToNumberArray;
+- (nullable NSArray<NSString *> *)ueoToStringArray;
+- (NSString *)ueoDropLast:(NSString *)substring;
 @end
 
 @interface NSArray<__covariant ObjectType> (UEOExtensions)
-- (NSArray<ObjectType> *)_ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item, NSUInteger index))filterBlock;
-- (NSArray *)_ueoMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
-- (NSArray *)_ueoFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
-- (ObjectType)_ueoMaxObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
-- (ObjectType)_ueoMinObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
-- (NSNumber *)_ueoMaxNumber;
-- (NSNumber *)_ueoMinNumber;
-+ (nullable instancetype)_ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...;
-
-// Might be nil if there's nothing useful passed in (you will get nil instead of empty array)
-+ (nullable instancetype)_ueoArrayWithPossiblyNilArrays:(NSUInteger)arrayCount, ...;
+- (NSArray<ObjectType> *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item, NSUInteger index))filterBlock;
+- (NSArray *)ueoMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
+- (NSArray *)ueoFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
+- (ObjectType)ueoMaxObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
+- (ObjectType)ueoMinObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
+- (NSNumber *)ueoMaxNumber;
+- (NSNumber *)ueoMinNumber;
++ (nullable instancetype)ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...;
 @end
 
 extern NSString *UEOSimdFloat2ToString(simd_float2 vector);

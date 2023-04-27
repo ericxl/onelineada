@@ -15,23 +15,23 @@
 - (CGRect)accessibilityFrame
 {
     NSArray<NSString *> *corners = [(UEOUnityEngineRectTransform *)[self.gameObject transform] getWorldCorners];
-    NSArray<NSArray<NSNumber *> *> *screenCorners = [corners _ueoMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
+    NSArray<NSArray<NSNumber *> *> *screenCorners = [corners ueoMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
         simd_float3 vector = UEOSimdFloat3FromString(obj);
         simd_float2 screenCorner = [UEOUnityEngineRectTransform rectUtilityWorldToScreenPoint:nil worldPoint:vector];
         return UEOSimdFloat2ToArray(screenCorner);
     }];
-    float maxX = [[screenCorners _ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    float maxX = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:0];
-    }] _ueoMaxNumber].floatValue;
-    float minX = [[screenCorners _ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    }] ueoMaxNumber].floatValue;
+    float minX = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:0];
-    }] _ueoMinNumber].floatValue;
-    float maxY = [[screenCorners _ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    }] ueoMinNumber].floatValue;
+    float maxY = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:1];
-    }] _ueoMaxNumber].floatValue;
-    float minY = [[screenCorners _ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    }] ueoMaxNumber].floatValue;
+    float minY = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:1];
-    }] _ueoMinNumber].floatValue;
+    }] ueoMinNumber].floatValue;
 
     return RECT_TO_SCREEN_RECT(CGRectMake(minX, UEOUnityEngineScreen.height - maxY, maxX - minX, maxY - minY));
 }

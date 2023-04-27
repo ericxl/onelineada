@@ -29,7 +29,7 @@
 - (NSArray<UEOUnityEngineComponent *> *)getComponents:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponents_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+    return [[arrayString ueoToNumberArray] ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }
@@ -43,7 +43,7 @@
 - (NSArray<UEOUnityEngineComponent *> *)getComponentsInChildren:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponentsInChildren_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+    return [[arrayString ueoToNumberArray] ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }
@@ -57,7 +57,7 @@
 - (NSArray<UEOUnityEngineComponent *> *)getComponentsInParent:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponentsInParent_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+    return [[arrayString ueoToNumberArray] ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }

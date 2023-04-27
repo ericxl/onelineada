@@ -168,7 +168,7 @@
 + (NSArray<UEOUnityEngineObject *> *)findObjectsOfType:(NSString *)component
 {
     NSString *arrayString = TO_NSSTRING(UnityEngineObjectFindObjectsOfType_CSharpFunc(FROM_NSSTRING(component)));
-    return [[arrayString _ueoToNumberArray] _ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
+    return [[arrayString ueoToNumberArray] ueoMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UEOUnityEngineObject objectWithID:obj.intValue];
     }];
 }

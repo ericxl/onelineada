@@ -52,7 +52,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
 
 @implementation NSString (UEOExtensions)
 
-- (NSArray<NSNumber *> *)_ueoToNumberArray
+- (NSArray<NSNumber *> *)ueoToNumberArray
 {
     NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -77,7 +77,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return nil;
 }
 
-- (NSArray<NSString *> *)_ueoToStringArray
+- (NSArray<NSString *> *)ueoToStringArray
 {
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\((.*?)\\)" options:NSRegularExpressionCaseInsensitive error:nil];
     NSArray *matches = [regex matchesInString:self options:0 range:NSMakeRange(0, [self length])];
@@ -90,7 +90,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return [substrings copy];
 }
 
-- (NSString *)_ueoDropLast:(NSString *)substring
+- (NSString *)ueoDropLast:(NSString *)substring
 {
     NSRange range = [self rangeOfString:substring options:NSBackwardsSearch];
     if ( range.location != NSNotFound && range.location + range.length == self.length ) {
@@ -105,7 +105,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
 
 @implementation NSArray (UEOExtensions)
 
-- (NSArray *)_ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(id item, NSUInteger index))filterBlock
+- (NSArray *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(id item, NSUInteger index))filterBlock
 {
     if ( filterBlock == nil )
     {
@@ -123,7 +123,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return result;
 }
 
-- (NSArray *)_ueoMapedObjectsWithBlock:(id (^)(id))block
+- (NSArray *)ueoMapedObjectsWithBlock:(id (^)(id))block
 {
     NSMutableArray *result = [NSMutableArray new];
     for ( id object in self )
@@ -134,7 +134,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return [result copy];
 }
 
-- (NSArray *)_ueoFlatMapedObjectsWithBlock:(id (^)(id))block
+- (NSArray *)ueoFlatMapedObjectsWithBlock:(id (^)(id))block
 {
     NSMutableArray *result = [NSMutableArray new];
     for (id object in self)
@@ -148,7 +148,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return [result copy];
 }
 
-- (id)_ueoMaxObjectWithBlock:(NSComparisonResult (^)(id obj1, id obj2))block
+- (id)ueoMaxObjectWithBlock:(NSComparisonResult (^)(id obj1, id obj2))block
 {
     id maxObject = nil;
 
@@ -161,7 +161,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return maxObject;
 }
 
-- (id)_ueoMinObjectWithBlock:(NSComparisonResult (^)(id obj1, id obj2))block
+- (id)ueoMinObjectWithBlock:(NSComparisonResult (^)(id obj1, id obj2))block
 {
     id minObject = nil;
 
@@ -174,9 +174,9 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     return minObject;
 }
 
-- (NSNumber *)_ueoMaxNumber
+- (NSNumber *)ueoMaxNumber
 {
-    return [self _ueoMaxObjectWithBlock:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    return [self ueoMaxObjectWithBlock:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         if ( ![obj1 isKindOfClass:NSNumber.class] || ![obj2 isKindOfClass:NSNumber.class] )
         {
             [NSException raise:NSInternalInconsistencyException format:@"Must be array of numbers"];
@@ -184,9 +184,9 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
         return [(NSNumber *)obj1 compare:(NSNumber *)obj2];
     }];
 }
-- (NSNumber *)_ueoMinNumber
+- (NSNumber *)ueoMinNumber
 {
-    return [self _ueoMinObjectWithBlock:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    return [self ueoMinObjectWithBlock:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         if ( ![obj1 isKindOfClass:NSNumber.class] || ![obj2 isKindOfClass:NSNumber.class] )
         {
             [NSException raise:NSInternalInconsistencyException format:@"Must be array of numbers"];
@@ -195,7 +195,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     }];
 }
 
-+ (instancetype)_ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...
++ (instancetype)ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...
 {
     NSMutableArray *result = [NSMutableArray array];
 
@@ -211,29 +211,6 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
     }
     va_end(args);
     return result;
-}
-
-+ (instancetype)_ueoArrayWithPossiblyNilArrays:(NSUInteger)arrayCount, ...
-{
-    NSMutableArray *result = nil;
-
-    va_list args;
-    va_start(args, arrayCount);
-    for ( NSUInteger i = 0; i < arrayCount; i++ )
-    {
-        NSArray *value = va_arg(args, id);
-        if ( [value count] > 0 )
-        {
-            if ( result == nil )
-            {
-                result = [NSMutableArray array];
-            }
-            [result addObjectsFromArray:value];
-        }
-    }
-    va_end(args);
-    return result;
-
 }
 
 @end

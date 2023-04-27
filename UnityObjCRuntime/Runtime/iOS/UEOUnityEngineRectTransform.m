@@ -12,7 +12,7 @@
 
 - (NSArray<NSString *> *)getWorldCorners
 {
-    return [TO_NSSTRING(UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID)) _ueoToStringArray];
+    return [TO_NSSTRING(UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID)) ueoToStringArray];
 }
 
 + (simd_float2)rectUtilityWorldToScreenPoint:(nullable UEOUnityEngineCamera *)camera worldPoint:(simd_float3)worldPoint

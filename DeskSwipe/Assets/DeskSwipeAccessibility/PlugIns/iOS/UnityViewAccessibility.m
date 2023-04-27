@@ -40,7 +40,7 @@ ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
     if ( [UEOUnityEngineScene activeSceneIsLoaded] && [UEOUnityEngineScene.activeSceneName isEqualToString:@"Main"] )
     {
         NSArray *elements =
-        [NSArray _ueoArrayByIgnoringNilElementsWithCount:7,
+        [NSArray ueoArrayByIgnoringNilElementsWithCount:7,
              [UnityAXElement node:[UEOUnityEngineGameObject find:@"/HUD Canvas/Version Text"] withClass:NSClassFromString(@"UnityAXElementText")],
              [UnityAXElement node:[UEOUnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display"] withClass:NSClassFromString(@"UnityAXElementProgressDisplay")],
              [UnityAXElement node:[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] withClass:NSClassFromString(@"UnityAXElementBarGroup")],
