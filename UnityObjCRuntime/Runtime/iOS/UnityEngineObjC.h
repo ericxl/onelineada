@@ -54,8 +54,11 @@ extern void _UEORegisterCSharpFunc_##name (void *func) { name##_CSharpFunc = fun
 #import "UEOUnityEngineMonoBehaviour.h"
 #import "UEOUnityEngineTransform.h"
 #import "UEOUnityEngineRectTransform.h"
+#import "UEOUnityEngineRenderer.h"
 #import "UEOUnityEngineScene.h"
 #import "UEOUnityEngineScreen.h"
+#import "UEOUnityEngineSprite.h"
+#import "UEOUnityEngineSpriteRenderer.h"
 
 #import "UEOUnityEngineUIText.h"
 #import "UEOUnityEngineUIImage.h"

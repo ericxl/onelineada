@@ -43,11 +43,6 @@
     return SAFE_CAST_CLASS(UEOUnityEngineTransform, [self safeCSharpObjectForKey:@"transform"]);
 }
 
-- (UEOUnityEngineScene *)scene
-{
-    return SAFE_CAST_CLASS(UEOUnityEngineScene, [self safeCSharpObjectForKey:@"scene"]);
-}
-
 + (instancetype)find:(NSString *)name
 {
     int instanceID = UnityEngineGameObjectFind_CSharpFunc(FROM_NSSTRING(name));

@@ -9,7 +9,8 @@ public class AXTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var card = Object.FindObjectOfType<CardPresenter>();
-        var pos = card.transform.position;
+        var card = Object.FindObjectOfType<SpriteRenderer>().sprite;
+        Debug.Log(Rect.zero.ToString());
+        //var pos = card.transform.localScale = Vector3.zero;
     }
 }

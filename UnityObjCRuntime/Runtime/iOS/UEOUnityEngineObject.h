@@ -22,7 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (int)safeCSharpIntForKey:(NSString *)key;
 - (float)safeCSharpFloatForKey:(NSString *)key;
 - (double)safeCSharpDoubleForKey:(NSString *)key;
+- (simd_float2)safeCSharpVector2ForKey:(NSString *)key;
 - (simd_float3)safeCSharpVector3ForKey:(NSString *)key;
+- (simd_float4)safeCSharpVector4ForKey:(NSString *)key;
+- (CGRect)safeCSharpRectForKey:(NSString *)key;
 - (nullable NSString *)safeCSharpStringForKey:(NSString *)key;
 - (nullable UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key;
 + (BOOL)safeCSharpBoolForKey:(NSString *)key forType:(NSString *)cSharpType;
@@ -33,7 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)safeSetCSharpBoolForKey:(NSString *)key value:(BOOL)value;
 - (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value;
+- (void)safeSetCSharpVector2ForKey:(NSString *)key value:(simd_float2)value;
 - (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value;
+- (void)safeSetCSharpVector4ForKey:(NSString *)key value:(simd_float4)value;
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(nullable NSString *)value;
 
 + (nullable NSArray<UEOUnityEngineObject *> *)findObjectsOfType:(NSString *)component;

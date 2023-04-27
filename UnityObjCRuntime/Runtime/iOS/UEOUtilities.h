@@ -16,7 +16,10 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpBoolForKey, BOOL, (int, const
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpIntForKey, int, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpFloatForKey, float, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpDoubleForKey, double, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector2ForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector3ForKey, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector4ForKey, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpRectForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKey, int, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpBoolForKeyStatic, BOOL, (const char *, const char *));
@@ -24,7 +27,9 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpIntForKeyStatic, int, (const 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpFloatForKeyStatic, float, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpDoubleForKeyStatic, double, (const char *, const char *));
 
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector2ForKeyStatic, const char *, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector3ForKeyStatic, const char *, (const char *, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector4ForKeyStatic, const char *, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKeyStatic, const char *, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKeyStatic, int, (const char *, const char *));
 
@@ -60,6 +65,10 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineRectTransformUtilityWorldToScreenPoint, const
 CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneIsLoaded, BOOL, (void));
 CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneName, const char *, (void));
 
+#pragma mark Camera
+CSHARP_BRIDGE_INTERFACE(UnityEngineCameraWorldToScreenPoint, const char *, (int, const char *));
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (UEOExtensions)
@@ -84,14 +93,21 @@ NS_ASSUME_NONNULL_BEGIN
 extern CGPoint UEOCGRectGetCenter(CGRect rect);
 
 extern NSString *UEOSimdFloat2ToString(simd_float2 vector);
-extern simd_float2 UEOSimdFloat2FromString(NSString *str);
-extern NSArray<NSNumber *> *UEOSimdFloat2ToArray(simd_float2 vector);
-extern simd_float2 UEOSimdFloat2FromArray(NSArray<NSNumber *> *array);
-
 extern NSString *UEOSimdFloat3ToString(simd_float3 vector);
+extern NSString *UEOSimdFloat4ToString(simd_float4 vector);
+
+extern simd_float2 UEOSimdFloat2FromString(NSString *str);
 extern simd_float3 UEOSimdFloat3FromString(NSString *str);
+extern simd_float4 UEOSimdFloat4FromString(NSString *str);
+
+extern NSArray<NSNumber *> *UEOSimdFloat2ToArray(simd_float2 vector);
 extern NSArray<NSNumber *> *UEOSimdFloat3ToArray(simd_float3 vector);
+extern NSArray<NSNumber *> *UEOSimdFloat4ToArray(simd_float4 vector);
+
+extern simd_float2 UEOSimdFloat2FromArray(NSArray<NSNumber *> *array);
 extern simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array);
+extern simd_float4 UEOSimdFloat4FromArray(NSArray<NSNumber *> *array);
+
 extern float UEOSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2);
 extern BOOL UEOSimdFloat3Equal(simd_float3 v1, simd_float3 v2);
 extern BOOL UEOSimdFloat3ApproximatelyEqual(simd_float3 v1, simd_float3 v2);

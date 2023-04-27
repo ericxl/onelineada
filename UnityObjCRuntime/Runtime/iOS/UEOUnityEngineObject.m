@@ -54,6 +54,18 @@
     {
         cls = UEOUnityEngineRectTransform.class;
     }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.Renderer"] )
+    {
+        cls = UEOUnityEngineRenderer.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.Sprite"] )
+    {
+        cls = UEOUnityEngineSprite.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.SpriteRenderer"] )
+    {
+        cls = UEOUnityEngineSpriteRenderer.class;
+    }
     else if ( [typeFullName isEqualToString:@"UnityEngine.Transform"] )
     {
         cls = UEOUnityEngineTransform.class;
@@ -128,9 +140,24 @@
     return UnityEngineObjectSafeCSharpDoubleForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
 }
 
+- (simd_float2)safeCSharpVector2ForKey:(NSString *)key
+{
+    return UEOSimdFloat2FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector2ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+}
+
 - (simd_float3)safeCSharpVector3ForKey:(NSString *)key
 {
     return UEOSimdFloat3FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+}
+
+- (simd_float4)safeCSharpVector4ForKey:(NSString *)key
+{
+    return UEOSimdFloat4FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector4ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+}
+
+- (CGRect)safeCSharpRectForKey:(NSString *)key
+{
+    return CGRectFromString(TO_NSSTRING(UnityEngineObjectSafeCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
 }
 
 - (NSString *)safeCSharpStringForKey:(NSString *)key
@@ -153,9 +180,19 @@
     return UnityEngineObjectSafeCSharpIntForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key));
 }
 
++ (simd_float2)safeCSharpVector2ForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return UEOSimdFloat2FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector2ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+}
+
 + (simd_float3)safeCSharpVector3ForKey:(NSString *)key forType:(NSString *)cSharpType
 {
     return UEOSimdFloat3FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector3ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+}
+
++ (simd_float4)safeCSharpVector4ForKey:(NSString *)key forType:(NSString *)cSharpType
+{
+    return UEOSimdFloat4FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector4ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
 }
 
 + (NSString *)safeCSharpStringForKey:(NSString *)key forType:(NSString *)cSharpType

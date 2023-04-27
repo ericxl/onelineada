@@ -11,7 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UEOUnityEngineCamera : UEOUnityEngineComponent
 
-@property (nonatomic, strong, readonly) UEOUnityEngineCamera *main;
+@property (nonatomic, strong, class, readonly) UEOUnityEngineCamera *main;
+
+- (simd_float3)worldToScreenPoint:(simd_float3)screenPoint;
 
 @end
 

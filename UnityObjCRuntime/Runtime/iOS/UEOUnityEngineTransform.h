@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable UEOUnityEngineTransform *)find:(NSString *)childName;
 @property (nonatomic, assign) simd_float3 position;
+@property (nonatomic, assign) simd_float3 localScale;
 @end
 
 NS_ASSUME_NONNULL_END

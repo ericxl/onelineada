@@ -16,14 +16,19 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpBoolForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpIntForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpFloatForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpDoubleForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector2ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector3ForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector4ForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpRectForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpStringForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpObjectForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpBoolForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpIntForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpFloatForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpDoubleForKeyStatic);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector2ForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector3ForKeyStatic);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector4ForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpStringForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpObjectForKeyStatic);
 
@@ -50,6 +55,8 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineRectTransformUtilityWorldToScreenPoint);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneIsLoaded);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
+
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
 
 @implementation NSString (UEOExtensions)
 
@@ -260,6 +267,16 @@ NSString *UEOSimdFloat2ToString(simd_float2 vector)
     return [NSString stringWithFormat:@"(%f, %f)", vector[0], vector[1]];
 }
 
+NSString *UEOSimdFloat3ToString(simd_float3 vector)
+{
+    return [NSString stringWithFormat:@"(%f, %f, %f)", vector.x, vector.y, vector.z];
+}
+
+NSString *UEOSimdFloat4ToString(simd_float4 vector)
+{
+    return [NSString stringWithFormat:@"(%f, %f, %f, %f)", vector.x, vector.y, vector.z, vector.w];
+}
+
 simd_float2 UEOSimdFloat2FromString(NSString *str)
 {
     NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
@@ -269,25 +286,6 @@ simd_float2 UEOSimdFloat2FromString(NSString *str)
         return simd_make_float2(0, 0);
     }
     return simd_make_float2([components[0] floatValue], [components[1] floatValue]);
-}
-
-NSArray<NSNumber *> *UEOSimdFloat2ToArray(simd_float2 vector)
-{
-    return [NSArray arrayWithObjects:@(vector[0]), @(vector[1]), nil];
-}
-
-simd_float2 UEOSimdFloat2FromArray(NSArray<NSNumber *> *array)
-{
-    if ( [array count] != 2 )
-    {
-        return simd_make_float2(0, 0);
-    }
-    return simd_make_float2([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue);
-}
-
-NSString *UEOSimdFloat3ToString(simd_float3 vector)
-{
-    return [NSString stringWithFormat:@"(%f, %f, %f)", vector[0], vector[1], vector[2]];
 }
 
 simd_float3 UEOSimdFloat3FromString(NSString *str)
@@ -301,9 +299,39 @@ simd_float3 UEOSimdFloat3FromString(NSString *str)
     return simd_make_float3([components[0] floatValue], [components[1] floatValue], [components[2] floatValue]);
 }
 
+simd_float4 UEOSimdFloat4FromString(NSString *str)
+{
+    NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
+    NSArray *components = [trimmedString componentsSeparatedByString:@","];
+    if ( components.count != 4 )
+    {
+        return simd_make_float4(0, 0, 0, 0);
+    }
+    return simd_make_float4([components[0] floatValue], [components[1] floatValue], [components[2] floatValue], [components[3] floatValue]);
+}
+
+NSArray<NSNumber *> *UEOSimdFloat2ToArray(simd_float2 vector)
+{
+    return [NSArray arrayWithObjects:@(vector.x), @(vector.y), nil];
+}
+
 NSArray<NSNumber *> *UEOSimdFloat3ToArray(simd_float3 vector)
 {
-    return [NSArray arrayWithObjects:@(vector[0]), @(vector[1]), @(vector[2]), nil];
+    return [NSArray arrayWithObjects:@(vector.x), @(vector.y), @(vector.z), nil];
+}
+
+NSArray<NSNumber *> *UEOSimdFloat4ToArray(simd_float4 vector)
+{
+    return [NSArray arrayWithObjects:@(vector.x), @(vector.y), @(vector.z), @(vector.w), nil];
+}
+
+simd_float2 UEOSimdFloat2FromArray(NSArray<NSNumber *> *array)
+{
+    if ( [array count] != 2 )
+    {
+        return simd_make_float2(0, 0);
+    }
+    return simd_make_float2([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue);
 }
 
 simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array)
@@ -313,6 +341,15 @@ simd_float3 UEOSimdFloat3FromArray(NSArray<NSNumber *> *array)
         return simd_make_float3(0, 0, 0);
     }
     return simd_make_float3([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue, [array objectAtIndex:2].floatValue);
+}
+
+simd_float4 UEOSimdFloat4FromArray(NSArray<NSNumber *> *array)
+{
+    if ( [array count] != 4 )
+    {
+        return simd_make_float4(0, 0, 0, 0);
+    }
+    return simd_make_float4([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue, [array objectAtIndex:2].floatValue, [array objectAtIndex:3].floatValue);
 }
 
 float UEOSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2)

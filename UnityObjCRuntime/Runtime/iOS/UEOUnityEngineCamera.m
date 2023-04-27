@@ -15,4 +15,10 @@
     return SAFE_CAST_CLASS(UEOUnityEngineCamera, [UEOUnityEngineCamera safeCSharpObjectForKey:@"main" forType:@"UnityEngine.Camera"]);
 }
 
+- (simd_float3)worldToScreenPoint:(simd_float3)screenPoint
+{
+    const char *vectorStr = UnityEngineCameraWorldToScreenPoint_CSharpFunc(self.instanceID, FROM_NSSTRING(UEOSimdFloat3ToString(screenPoint)));
+    return UEOSimdFloat3FromString(TO_NSSTRING(vectorStr));
+}
+
 @end

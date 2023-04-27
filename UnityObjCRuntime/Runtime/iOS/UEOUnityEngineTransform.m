@@ -26,4 +26,14 @@
     [self safeSetCSharpVector3ForKey:@"position" value:position];
 }
 
+- (simd_float3)localScale
+{
+    return [self safeCSharpVector3ForKey:@"localScale"];
+}
+
+- (void)setLocalScale:(simd_float3)localScale
+{
+    [self safeSetCSharpVector3ForKey:@"localScale" value:localScale];
+}
+
 @end

@@ -24,6 +24,9 @@
 		C9AA109429FA5C9600B02DD7 /* UEOUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */; };
 		C9AA10AA29FAFF6A00B02DD7 /* UEOUnityEngineUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10A929FAFF6A00B02DD7 /* UEOUnityEngineUIButton.m */; };
 		C9AA10AD29FB004500B02DD7 /* UEOUnityEngineUISelectable.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10AC29FB004500B02DD7 /* UEOUnityEngineUISelectable.m */; };
+		C9AA10B629FB2D1300B02DD7 /* UEOUnityEngineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10B529FB2D1300B02DD7 /* UEOUnityEngineRenderer.m */; };
+		C9AA10B929FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10B829FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.m */; };
+		C9AA10BC29FB2D9700B02DD7 /* UEOUnityEngineSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10BB29FB2D9700B02DD7 /* UEOUnityEngineSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +73,12 @@
 		C9AA10A929FAFF6A00B02DD7 /* UEOUnityEngineUIButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineUIButton.m; sourceTree = "<group>"; };
 		C9AA10AB29FB004500B02DD7 /* UEOUnityEngineUISelectable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineUISelectable.h; sourceTree = "<group>"; };
 		C9AA10AC29FB004500B02DD7 /* UEOUnityEngineUISelectable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineUISelectable.m; sourceTree = "<group>"; };
+		C9AA10B429FB2D1300B02DD7 /* UEOUnityEngineRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineRenderer.h; sourceTree = "<group>"; };
+		C9AA10B529FB2D1300B02DD7 /* UEOUnityEngineRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineRenderer.m; sourceTree = "<group>"; };
+		C9AA10B729FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineSpriteRenderer.h; sourceTree = "<group>"; };
+		C9AA10B829FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineSpriteRenderer.m; sourceTree = "<group>"; };
+		C9AA10BA29FB2D9700B02DD7 /* UEOUnityEngineSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineSprite.h; sourceTree = "<group>"; };
+		C9AA10BB29FB2D9700B02DD7 /* UEOUnityEngineSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineSprite.m; sourceTree = "<group>"; };
 		C9FBDC3129F5A2EB00A306B4 /* UEOUnityEngineComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineComponent.h; sourceTree = "<group>"; };
 		C9FBDC3229F5A2EB00A306B4 /* UEOUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUtilities.h; sourceTree = "<group>"; };
 		C9FBDC3329F5A2EB00A306B4 /* UEOUnityEngineObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineObject.m; sourceTree = "<group>"; };
@@ -136,10 +145,16 @@
 				C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */,
 				C95E925D29F7A40300166778 /* UEOUnityEngineRectTransform.h */,
 				C95E925E29F7A40300166778 /* UEOUnityEngineRectTransform.m */,
+				C9AA10B429FB2D1300B02DD7 /* UEOUnityEngineRenderer.h */,
+				C9AA10B529FB2D1300B02DD7 /* UEOUnityEngineRenderer.m */,
 				C9FBDC3429F5A2EB00A306B4 /* UEOUnityEngineScene.h */,
 				C9FBDC3529F5A2EB00A306B4 /* UEOUnityEngineScene.m */,
 				C95E926229F83EE900166778 /* UEOUnityEngineScreen.h */,
 				C95E926329F83EE900166778 /* UEOUnityEngineScreen.m */,
+				C9AA10BA29FB2D9700B02DD7 /* UEOUnityEngineSprite.h */,
+				C9AA10BB29FB2D9700B02DD7 /* UEOUnityEngineSprite.m */,
+				C9AA10B729FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.h */,
+				C9AA10B829FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.m */,
 			);
 			name = UnityObjCRuntime;
 			path = UnityObjCRuntime/Runtime/iOS;
@@ -242,12 +257,15 @@
 				C9AA108829FA5C9200B02DD7 /* UEOUnityEngineTransform.m in Sources */,
 				C9AA109429FA5C9600B02DD7 /* UEOUtilities.m in Sources */,
 				C9AA109329FA5C9200B02DD7 /* UEOUnityEngineRectTransform.m in Sources */,
+				C9AA10B929FB2D5400B02DD7 /* UEOUnityEngineSpriteRenderer.m in Sources */,
 				C9AA108D29FA5C9200B02DD7 /* UEOUnityEngineMonoBehaviour.m in Sources */,
+				C9AA10BC29FB2D9700B02DD7 /* UEOUnityEngineSprite.m in Sources */,
 				C9AA108E29FA5C9200B02DD7 /* UEOUnityEngineGameObject.m in Sources */,
 				C9AA109129FA5C9200B02DD7 /* UEOUnityEngineUIText.m in Sources */,
 				C9AA108F29FA5C9200B02DD7 /* UEOUnityEngineScene.m in Sources */,
 				C9AA109029FA5C9200B02DD7 /* UEOUnityEngineBehaviour.m in Sources */,
 				C9AA109229FA5C9200B02DD7 /* UEOUnityEngineCamera.m in Sources */,
+				C9AA10B629FB2D1300B02DD7 /* UEOUnityEngineRenderer.m in Sources */,
 				C9AA108929FA5C9200B02DD7 /* UEOUnityEngineUIImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

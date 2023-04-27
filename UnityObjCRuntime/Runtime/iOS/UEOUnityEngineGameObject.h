@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL activeInHierarchy;
 @property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
 @property (nonatomic, strong, readonly, nullable) UEOUnityEngineTransform *transform;
-@property (nonatomic, strong, readonly, nullable) UEOUnityEngineScene *scene;
 
 + (nullable instancetype)find:(NSString *)name;
 
