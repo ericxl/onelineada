@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
-               BuildableName = "SolitaireAccessibility.framework"
-               BlueprintName = "SolitaireAccessibility"
-               ReferencedContainer = "container:Solitaire.xcodeproj">
+               BlueprintIdentifier = "C9AA107C29FA5C5A00B02DD7"
+               BuildableName = "liblibUnityObjCRuntime.a"
+               BlueprintName = "libUnityObjCRuntime"
+               ReferencedContainer = "container:UnityObjCRuntime.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,10 +49,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
-            BuildableName = "SolitaireAccessibility.framework"
-            BlueprintName = "SolitaireAccessibility"
-            ReferencedContainer = "container:Solitaire.xcodeproj">
+            BlueprintIdentifier = "C9AA107C29FA5C5A00B02DD7"
+            BuildableName = "liblibUnityObjCRuntime.a"
+            BlueprintName = "libUnityObjCRuntime"
+            ReferencedContainer = "container:UnityObjCRuntime.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

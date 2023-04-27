@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E4327E6826335A9900376CAB"
-               BuildableName = "DeskSwipe.app"
-               BlueprintName = "DeskSwipe"
-               ReferencedContainer = "container:DeskSwipe.xcodeproj">
+               BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
+               BuildableName = "DeskSwipeAccessibility.framework"
+               BlueprintName = "DeskSwipeAccessibility"
+               ReferencedContainer = "container:DeskSwipeAccessibility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,16 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4327E6826335A9900376CAB"
-            BuildableName = "DeskSwipe.app"
-            BlueprintName = "DeskSwipe"
-            ReferencedContainer = "container:DeskSwipe.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
          identifier = "../../Configurations/IAPConfiguration.storekit">
       </StoreKitConfigurationFileReference>
@@ -60,15 +50,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4327E6826335A9900376CAB"
-            BuildableName = "DeskSwipe.app"
-            BlueprintName = "DeskSwipe"
-            ReferencedContainer = "container:DeskSwipe.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
