@@ -17,7 +17,7 @@
                BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
                BuildableName = "DeskSwipeAccessibility.framework"
                BlueprintName = "DeskSwipeAccessibility"
-               ReferencedContainer = "container:UnityAXDemo.xcodeproj">
+               ReferencedContainer = "container:DeskSwipe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -52,7 +52,7 @@
             BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
             BuildableName = "DeskSwipeAccessibility.framework"
             BlueprintName = "DeskSwipeAccessibility"
-            ReferencedContainer = "container:UnityAXDemo.xcodeproj">
+            ReferencedContainer = "container:DeskSwipe.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

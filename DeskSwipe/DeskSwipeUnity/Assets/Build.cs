@@ -11,8 +11,6 @@ public class Build : MonoBehaviour
     {
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
 
-        //Debug.LogError(Application.dataPath);
-
         var path = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Application.dataPath)), "iOSBuild");
         buildPlayerOptions.locationPathName = path;
         buildPlayerOptions.target = BuildTarget.iOS;

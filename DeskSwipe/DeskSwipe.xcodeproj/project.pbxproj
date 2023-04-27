@@ -154,7 +154,7 @@
 		C9FBDC7829F5B03D00A306B4 /* LaunchScreen-iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen-iPad.storyboard"; sourceTree = "<group>"; };
 		C9FBDC7929F5B03D00A306B4 /* LaunchScreen-iPhonePortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreen-iPhonePortrait.png"; sourceTree = "<group>"; };
 		C9FBDC7A29F5B03D00A306B4 /* LaunchScreen-iPhoneLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreen-iPhoneLandscape.png"; sourceTree = "<group>"; };
-		E4327E6926335A9900376CAB /* UnityDemoGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnityDemoGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4327E6926335A9900376CAB /* DeskSwipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskSwipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4327E8826335B3600376CAB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E4327E8A26335B3600376CAB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -188,7 +188,7 @@
 				C9AA104429FA2B7800B02DD7 /* Accessibility */,
 			);
 			name = DeskSwipeAccessibility;
-			path = DeskSwipe/Assets/DeskSwipeAccessibility/PlugIns/iOS;
+			path = DeskSwipeAccessibility/Runtime/iOS;
 			sourceTree = "<group>";
 		};
 		C955384929F867BD00C59CB2 /* UI */ = {
@@ -229,7 +229,7 @@
 				C95E926329F83EE900166778 /* UEOUnityEngineScreen.m */,
 			);
 			name = UnityObjCRuntime;
-			path = UnityObjCRuntime/Runtime/iOS;
+			path = ../UnityObjCRuntime/Runtime/iOS;
 			sourceTree = "<group>";
 		};
 		C9AA104429FA2B7800B02DD7 /* Accessibility */ = {
@@ -284,7 +284,7 @@
 		E4327E6A26335A9900376CAB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4327E6926335A9900376CAB /* UnityDemoGame.app */,
+				E4327E6926335A9900376CAB /* DeskSwipe.app */,
 				C9FBDC3F29F5A33900A306B4 /* DeskSwipeAccessibility.framework */,
 			);
 			name = Products;
@@ -348,9 +348,9 @@
 			productReference = C9FBDC3F29F5A33900A306B4 /* DeskSwipeAccessibility.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E4327E6826335A9900376CAB /* UnityDemoGame */ = {
+		E4327E6826335A9900376CAB /* DeskSwipe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4327E7D26335A9A00376CAB /* Build configuration list for PBXNativeTarget "UnityDemoGame" */;
+			buildConfigurationList = E4327E7D26335A9A00376CAB /* Build configuration list for PBXNativeTarget "DeskSwipe" */;
 			buildPhases = (
 				E4327E6526335A9900376CAB /* Sources */,
 				E4327E6626335A9900376CAB /* Frameworks */,
@@ -363,9 +363,9 @@
 			dependencies = (
 				C9FBDC8C29F5B1BD00A306B4 /* PBXTargetDependency */,
 			);
-			name = UnityDemoGame;
+			name = DeskSwipe;
 			productName = TesterApp;
-			productReference = E4327E6926335A9900376CAB /* UnityDemoGame.app */;
+			productReference = E4327E6926335A9900376CAB /* DeskSwipe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -386,7 +386,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E4327E6426335A9900376CAB /* Build configuration list for PBXProject "UnityAXDemo" */;
+			buildConfigurationList = E4327E6426335A9900376CAB /* Build configuration list for PBXProject "DeskSwipe" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -405,7 +405,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4327E6826335A9900376CAB /* UnityDemoGame */,
+				E4327E6826335A9900376CAB /* DeskSwipe */,
 				C9FBDC3E29F5A33900A306B4 /* DeskSwipeAccessibility */,
 			);
 		};
@@ -765,7 +765,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4327E6426335A9900376CAB /* Build configuration list for PBXProject "UnityAXDemo" */ = {
+		E4327E6426335A9900376CAB /* Build configuration list for PBXProject "DeskSwipe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4327E7B26335A9A00376CAB /* Debug */,
@@ -774,7 +774,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4327E7D26335A9A00376CAB /* Build configuration list for PBXNativeTarget "UnityDemoGame" */ = {
+		E4327E7D26335A9A00376CAB /* Build configuration list for PBXNativeTarget "DeskSwipe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4327E7E26335A9A00376CAB /* Debug */,
