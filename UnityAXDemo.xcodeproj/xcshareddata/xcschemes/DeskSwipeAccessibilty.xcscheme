@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
-               BuildableName = "UnityObjCRuntime.framework"
-               BlueprintName = "UnityObjCRuntime"
+               BuildableName = "DeskSwipeAccessibility.framework"
+               BlueprintName = "DeskSwipeAccessibility"
                ReferencedContainer = "container:UnityAXDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C9FBDC3E29F5A33900A306B4"
-            BuildableName = "UnityObjCRuntime.framework"
-            BlueprintName = "UnityObjCRuntime"
+            BuildableName = "DeskSwipeAccessibility.framework"
+            BlueprintName = "DeskSwipeAccessibility"
             ReferencedContainer = "container:UnityAXDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -1,14 +1,14 @@
 //
-//  UnityAXElementProgressDisplay.m
+//  UnityAXElementBarGroup.m
 //  UnityEngineAPI+Accessibility+Plugin
 //
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UnityAXElementProgressDisplay.h"
+#import "UnityAXElementBarGroup.h"
 #import "UnityEngineObjC.h"
 
-@implementation UnityAXElementProgressDisplay
+@implementation UnityAXElementBarGroup
 
 - (CGRect)accessibilityFrame
 {
@@ -34,28 +34,21 @@
     return RECT_TO_SCREEN_RECT(CGRectMake(minX, UEOUnityEngineScreen.height - maxY, maxX - minX, maxY - minY));
 }
 
-- (NSString *)accessibilityValue
-{
-    id text = [self.component.transform find:@"Days Survived Text"];
-    id textComponent = [text getComponentInChildren:@"UnityEngine.UI.Text"] ?: [text getComponentInChildren:@"TMPro.TextMeshProUGUI"];
-    return [textComponent safeCSharpStringForKey:@"text"];
-}
-
 - (NSString *)accessibilityLabel
 {
-    id text = [self.component.transform find:@"Days Survived Label"];
-    id textComponent = [text getComponentInChildren:@"UnityEngine.UI.Text"] ?: [text getComponentInChildren:@"TMPro.TextMeshProUGUI"];
-    return [textComponent safeCSharpStringForKey:@"text"];
+    return [self.gameObject.name _ueoDropLast:@" Bar Group"];
+}
+
+- (NSString *)accessibilityValue
+{
+    id image = [self.gameObject.transform find:[self.gameObject.name _ueoDropLast:@" Group"]];
+    UEOUnityEngineUIImage *imageComponent = SAFE_CAST_CLASS(UEOUnityEngineUIImage, [image getComponent:@"UnityEngine.UI.Image"]);
+    return UEOFormatFloatWithPercentage(imageComponent.fillAmount);
 }
 
 - (BOOL)isAccessibilityElement
 {
     return YES;
-}
-
-- (UIAccessibilityTraits)accessibilityTraits
-{
-    return UIAccessibilityTraitStaticText;
 }
 
 @end

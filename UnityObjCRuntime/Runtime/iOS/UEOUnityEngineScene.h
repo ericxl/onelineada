@@ -4,8 +4,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UEOUnityEngineScene: UEOUnityEngineObject
-+ (instancetype)current;
+@interface UEOUnityEngineScene: NSObject
++ (BOOL)activeSceneIsLoaded;
++ (nullable NSString *)activeSceneName;
 @end
 
 

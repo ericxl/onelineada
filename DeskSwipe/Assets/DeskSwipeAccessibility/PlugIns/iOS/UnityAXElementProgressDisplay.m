@@ -1,14 +1,14 @@
 //
-//  UnityAXElementBarGroup.m
+//  UnityAXElementProgressDisplay.m
 //  UnityEngineAPI+Accessibility+Plugin
 //
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UnityAXElementBarGroup.h"
+#import "UnityAXElementProgressDisplay.h"
 #import "UnityEngineObjC.h"
 
-@implementation UnityAXElementBarGroup
+@implementation UnityAXElementProgressDisplay
 
 - (CGRect)accessibilityFrame
 {
@@ -34,21 +34,28 @@
     return RECT_TO_SCREEN_RECT(CGRectMake(minX, UEOUnityEngineScreen.height - maxY, maxX - minX, maxY - minY));
 }
 
-- (NSString *)accessibilityLabel
-{
-    return [self.component.name _ueoDropLast:@" Bar Group"];
-}
-
 - (NSString *)accessibilityValue
 {
-    id image = [self.component.transform find:[self.component.name _ueoDropLast:@" Group"]];
-    UEOUnityEngineUIImage *imageComponent = SAFE_CAST_CLASS(UEOUnityEngineUIImage, [image getComponent:@"UnityEngine.UI.Image"]);
-    return UEOFormatFloatWithPercentage(imageComponent.fillAmount);
+    id text = [self.gameObject.transform find:@"Days Survived Text"];
+    id textComponent = [text getComponentInChildren:@"UnityEngine.UI.Text"] ?: [text getComponentInChildren:@"TMPro.TextMeshProUGUI"];
+    return [textComponent safeCSharpStringForKey:@"text"];
+}
+
+- (NSString *)accessibilityLabel
+{
+    id text = [self.gameObject.transform find:@"Days Survived Label"];
+    id textComponent = [text getComponentInChildren:@"UnityEngine.UI.Text"] ?: [text getComponentInChildren:@"TMPro.TextMeshProUGUI"];
+    return [textComponent safeCSharpStringForKey:@"text"];
 }
 
 - (BOOL)isAccessibilityElement
 {
     return YES;
+}
+
+- (UIAccessibilityTraits)accessibilityTraits
+{
+    return UIAccessibilityTraitStaticText;
 }
 
 @end

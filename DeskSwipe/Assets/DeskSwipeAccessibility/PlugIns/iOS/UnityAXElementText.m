@@ -36,7 +36,7 @@
 
 - (NSString *)accessibilityValue
 {
-    id textComponent = [self.component getComponentInChildren:@"UnityEngine.UI.Text"] ?: [self.component getComponentInChildren:@"TMPro.TextMeshProUGUI"];
+    id textComponent = [self.gameObject.transform getComponentInChildren:@"UnityEngine.UI.Text"] ?: [self.gameObject.transform getComponentInChildren:@"TMPro.TextMeshProUGUI"];
     return [textComponent safeCSharpStringForKey:@"text"];
 }
 

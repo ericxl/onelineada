@@ -58,6 +58,4 @@ extern void _UEORegisterCSharpFunc_##name (void *func) { name##_CSharpFunc = fun
 #import "UEOUnityEngineUIText.h"
 #import "UEOUnityEngineUIImage.h"
 
-#import "UEOUnityObjCRuntimeBehaviour.h"
-
 #endif /* Unity_ENGINE_API_h */

@@ -47,6 +47,8 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineTransformFind);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineRectTransformGetWorldCorners);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineRectTransformUtilityWorldToScreenPoint);
 
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneIsLoaded);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
 
 @implementation NSString (UEOExtensions)
 
@@ -191,6 +193,47 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineRectTransformUtilityWorldToScreenPoint);
         }
         return [(NSNumber *)obj1 compare:(NSNumber *)obj2];
     }];
+}
+
++ (instancetype)_ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...
+{
+    NSMutableArray *result = [NSMutableArray array];
+
+    va_list args;
+    va_start(args, elementCount);
+    for ( NSUInteger i = 0; i < elementCount; i++ )
+    {
+        id value = va_arg(args, id);
+        if ( value != nil )
+        {
+            [result addObject:value];
+        }
+    }
+    va_end(args);
+    return result;
+}
+
++ (instancetype)_ueoArrayWithPossiblyNilArrays:(NSUInteger)arrayCount, ...
+{
+    NSMutableArray *result = nil;
+
+    va_list args;
+    va_start(args, arrayCount);
+    for ( NSUInteger i = 0; i < arrayCount; i++ )
+    {
+        NSArray *value = va_arg(args, id);
+        if ( [value count] > 0 )
+        {
+            if ( result == nil )
+            {
+                result = [NSMutableArray array];
+            }
+            [result addObjectsFromArray:value];
+        }
+    }
+    va_end(args);
+    return result;
+
 }
 
 @end

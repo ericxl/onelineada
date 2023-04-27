@@ -56,10 +56,6 @@
     {
         cls = UEOUnityEngineUIImage.class;
     }
-    else if ( [typeFullName isEqualToString:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] )
-    {
-        cls = UEOUnityObjCRuntimeBehaviour.class;
-    }
     else
     {
         cls = UEOUnityEngineComponent.class;

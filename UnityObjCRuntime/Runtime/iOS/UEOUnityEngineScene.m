@@ -4,9 +4,14 @@
 
 @implementation UEOUnityEngineScene
 
-+ (instancetype)current
++ (BOOL)activeSceneIsLoaded
 {
-    return nil;
+    return UnityEngineSceneManagerGetActiveSceneIsLoaded_CSharpFunc();
+}
+
++ (nullable NSString *)activeSceneName
+{
+    return TO_NSSTRING(UnityEngineSceneManagerGetActiveSceneName_CSharpFunc());
 }
 
 @end

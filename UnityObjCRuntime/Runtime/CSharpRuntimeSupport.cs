@@ -266,6 +266,34 @@ namespace UnityObjCRuntime
         }
     }
 
+    static class ObjcRuntimeUnityEngineScene
+    {
+        private delegate bool _CSharpDelegate_UnityEngineSceneManagerGetActiveSceneIsLoaded();
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneIsLoaded(_CSharpDelegate_UnityEngineSceneManagerGetActiveSceneIsLoaded func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineSceneManagerGetActiveSceneIsLoaded))]
+        private static bool _CSharpImpl_UnityEngineSceneManagerGetActiveSceneIsLoaded()
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().isLoaded;
+        }
+
+        private delegate string _CSharpDelegate_UnityEngineSceneManagerGetActiveSceneName();
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneName(_CSharpDelegate_UnityEngineSceneManagerGetActiveSceneName func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineSceneManagerGetActiveSceneName))]
+        private static string _CSharpImpl_UnityEngineSceneManagerGetActiveSceneName()
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        static void AfterAssembliesLoaded()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneIsLoaded(_CSharpImpl_UnityEngineSceneManagerGetActiveSceneIsLoaded);
+            _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneName(_CSharpImpl_UnityEngineSceneManagerGetActiveSceneName);
+#endif
+        }
+    }
+
     static class CSharpRuntimeSupport
     {
         private delegate string _CSharpDelegate_UnityEngineObjectTypeFullName(int objectInstanceID);

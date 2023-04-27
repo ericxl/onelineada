@@ -56,6 +56,9 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineTransformFind, int, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineRectTransformGetWorldCorners, const char *, (int));
 CSHARP_BRIDGE_INTERFACE(UnityEngineRectTransformUtilityWorldToScreenPoint, const char *, (int, const char *));
 
+#pragma mark Scene
+CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneIsLoaded, BOOL, (void));
+CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneName, const char *, (void));
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -73,6 +76,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (ObjectType)_ueoMinObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
 - (NSNumber *)_ueoMaxNumber;
 - (NSNumber *)_ueoMinNumber;
++ (nullable instancetype)_ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...;
+
+// Might be nil if there's nothing useful passed in (you will get nil instead of empty array)
++ (nullable instancetype)_ueoArrayWithPossiblyNilArrays:(NSUInteger)arrayCount, ...;
 @end
 
 extern NSString *UEOSimdFloat2ToString(simd_float2 vector);
