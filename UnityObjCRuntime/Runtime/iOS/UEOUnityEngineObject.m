@@ -1,4 +1,10 @@
-#import "UEOUtilities.h"
+//
+//  UEOUnityEngineObject.h
+//  UnityObjCRuntime
+//
+//  Created by Eric Liang on 4/26/23.
+//
+
 #import "UEOUnityEngineObject.h"
 #import "UnityEngineObjC.h"
 
@@ -39,6 +45,10 @@
     else if ( [typeFullName isEqualToString:@"UnityEngine.Camera"] )
     {
         cls = UEOUnityEngineCamera.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.Canvas"] )
+    {
+        cls = UEOUnityEngineCanvas.class;
     }
     else if ( [typeFullName isEqualToString:@"UnityEngine.RectTransform"] )
     {

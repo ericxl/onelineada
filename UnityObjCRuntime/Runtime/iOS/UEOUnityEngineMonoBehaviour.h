@@ -5,11 +5,11 @@
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UEOUnityEngineComponent.h"
+#import "UEOUnityEngineBehaviour.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UEOUnityEngineMonoBehaviour : UEOUnityEngineComponent
+@interface UEOUnityEngineMonoBehaviour : UEOUnityEngineBehaviour
 
 @end
 
