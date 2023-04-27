@@ -18,8 +18,6 @@
     return [NSString stringWithFormat:@"%@, %@", [characterNameText safeCSharpStringForKey:@"text"], [cardText safeCSharpStringForKey:@"text"], nil];
 }
 
-- (BOOL)accessibilityViewIsModal { return YES; }
-
 - (CGRect)accessibilityFrame
 {
     UEOUnityEngineComponent *characterNameText = SAFE_CAST_CLASS(UEOUnityEngineComponent, [[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Character Name Text"] getComponent:@"UnityEngine.UI.Text"] ?: [[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Character Name Text"] getComponent:@"TMPro.TextMeshProUGUI"]);
