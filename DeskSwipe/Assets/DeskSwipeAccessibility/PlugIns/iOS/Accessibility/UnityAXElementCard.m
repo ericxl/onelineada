@@ -5,9 +5,10 @@
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UnityAXElementCard.h"
-#import "UnityEngineObjC.h"
-#import "UnityAXElement.h"
+#import "UnityAccessibility.h"
+
+@interface UnityAXElementCard : UnityAXElement
+@end
 
 @implementation UnityAXElementCard
 

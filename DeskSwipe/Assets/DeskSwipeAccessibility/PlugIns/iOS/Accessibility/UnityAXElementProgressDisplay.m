@@ -5,8 +5,10 @@
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UnityAXElementProgressDisplay.h"
-#import "UnityEngineObjC.h"
+#import "UnityAccessibility.h"
+
+@interface UnityAXElementProgressDisplay : UnityAXElement
+@end
 
 @implementation UnityAXElementProgressDisplay
 

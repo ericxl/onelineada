@@ -1,5 +1,5 @@
 //
-//  UnityAXElement.h
+//  UnityAccessibility.h
 //  UnityEngineAPI+Accessibility+Plugin
 //
 //  Created by Eric Liang on 4/23/23.
@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
 
+@end
+
+@interface NSArray (UnityAccessibilityAdditions)
+- (id)_unityAccessibilityModalElement;
+- (nullable NSArray *)_unityAccessibilitySorted;
 @end
 
 NS_ASSUME_NONNULL_END

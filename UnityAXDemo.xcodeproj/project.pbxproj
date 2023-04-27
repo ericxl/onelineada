@@ -25,18 +25,13 @@
 		C95E926029F7A40300166778 /* UEOUnityEngineRectTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925E29F7A40300166778 /* UEOUnityEngineRectTransform.m */; };
 		C95E926429F83EE900166778 /* UEOUnityEngineScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = C95E926229F83EE900166778 /* UEOUnityEngineScreen.h */; };
 		C95E926529F83EE900166778 /* UEOUnityEngineScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E926329F83EE900166778 /* UEOUnityEngineScreen.m */; };
-		C9AA103129FA0BDC00B02DD7 /* UnityAXElementText.h in Headers */ = {isa = PBXBuildFile; fileRef = C95E925529F780C600166778 /* UnityAXElementText.h */; };
-		C9AA103229FA0BDC00B02DD7 /* UnityAXElement.h in Headers */ = {isa = PBXBuildFile; fileRef = C955387429F8E54E00C59CB2 /* UnityAXElement.h */; };
-		C9AA103329FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = C955384329F85F3A00C59CB2 /* UnityAXElementProgressDisplay.h */; };
-		C9AA103429FA0BDC00B02DD7 /* AccessibilityGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */; };
-		C9AA103529FA0BDC00B02DD7 /* UnityAXElementBarGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C955385629F86B3A00C59CB2 /* UnityAXElementBarGroup.h */; };
+		C9AA103229FA0BDC00B02DD7 /* UnityAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = C955387429F8E54E00C59CB2 /* UnityAccessibility.h */; };
 		C9AA103629FA0BDC00B02DD7 /* UnityAXElementBarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */; };
 		C9AA103729FA0BDC00B02DD7 /* UnityViewAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */; };
-		C9AA103829FA0BDC00B02DD7 /* UnityAXElementCard.h in Headers */ = {isa = PBXBuildFile; fileRef = C955386429F8821500C59CB2 /* UnityAXElementCard.h */; };
 		C9AA103929FA0BDC00B02DD7 /* UnityAXElementCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C955386529F8821500C59CB2 /* UnityAXElementCard.m */; };
 		C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925629F780C600166778 /* UnityAXElementText.m */; };
 		C9AA103B29FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */; };
-		C9AA103C29FA0BDC00B02DD7 /* UnityAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387629F8E54E00C59CB2 /* UnityAXElement.m */; };
+		C9AA103C29FA0BDC00B02DD7 /* UnityAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387629F8E54E00C59CB2 /* UnityAccessibility.m */; };
 		C9FBDC4629F5A34D00A306B4 /* UEOUnityEngineScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FBDC3429F5A2EB00A306B4 /* UEOUnityEngineScene.h */; };
 		C9FBDC4729F5A34D00A306B4 /* UEOUnityEngineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3529F5A2EB00A306B4 /* UEOUnityEngineScene.m */; };
 		C9FBDC4829F5A34D00A306B4 /* UEOUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3729F5A2EB00A306B4 /* UEOUtilities.m */; };
@@ -119,8 +114,6 @@
 		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		C94BD1AC29F5D4340084A154 /* UEOUnityEngineGameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineGameObject.h; sourceTree = "<group>"; };
 		C94BD1AD29F5D4340084A154 /* UEOUnityEngineGameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineGameObject.m; sourceTree = "<group>"; };
-		C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityGlue.m; sourceTree = "<group>"; };
-		C955384329F85F3A00C59CB2 /* UnityAXElementProgressDisplay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXElementProgressDisplay.h; sourceTree = "<group>"; };
 		C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementProgressDisplay.m; sourceTree = "<group>"; };
 		C955384A29F867FE00C59CB2 /* UEOUnityEngineUIText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineUIText.h; sourceTree = "<group>"; };
 		C955384B29F867FE00C59CB2 /* UEOUnityEngineUIText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineUIText.m; sourceTree = "<group>"; };
@@ -128,17 +121,14 @@
 		C955384F29F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineMonoBehaviour.m; sourceTree = "<group>"; };
 		C955385229F8696D00C59CB2 /* UEOUnityEngineUIImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineUIImage.h; sourceTree = "<group>"; };
 		C955385329F8696D00C59CB2 /* UEOUnityEngineUIImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineUIImage.m; sourceTree = "<group>"; };
-		C955385629F86B3A00C59CB2 /* UnityAXElementBarGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXElementBarGroup.h; sourceTree = "<group>"; };
 		C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementBarGroup.m; sourceTree = "<group>"; };
-		C955386429F8821500C59CB2 /* UnityAXElementCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXElementCard.h; sourceTree = "<group>"; };
 		C955386529F8821500C59CB2 /* UnityAXElementCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementCard.m; sourceTree = "<group>"; };
-		C955387429F8E54E00C59CB2 /* UnityAXElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnityAXElement.h; sourceTree = "<group>"; };
-		C955387629F8E54E00C59CB2 /* UnityAXElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityAXElement.m; sourceTree = "<group>"; };
+		C955387429F8E54E00C59CB2 /* UnityAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnityAccessibility.h; sourceTree = "<group>"; };
+		C955387629F8E54E00C59CB2 /* UnityAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityAccessibility.m; sourceTree = "<group>"; };
 		C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityViewAccessibility.m; sourceTree = "<group>"; };
 		C9588CC829ECCD4600055160 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "iOSBuild/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
 		C95E924F29F65F8300166778 /* UEOUnityEngineTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineTransform.h; sourceTree = "<group>"; };
 		C95E925029F65F8300166778 /* UEOUnityEngineTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineTransform.m; sourceTree = "<group>"; };
-		C95E925529F780C600166778 /* UnityAXElementText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXElementText.h; sourceTree = "<group>"; };
 		C95E925629F780C600166778 /* UnityAXElementText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementText.m; sourceTree = "<group>"; };
 		C95E925929F791AD00166778 /* UEOUnityEngineCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UEOUnityEngineCamera.h; sourceTree = "<group>"; };
 		C95E925A29F791AD00166778 /* UEOUnityEngineCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UEOUnityEngineCamera.m; sourceTree = "<group>"; };
@@ -192,16 +182,10 @@
 		C94BD1B329F5DAE80084A154 /* DeskSwipeAccessibility */ = {
 			isa = PBXGroup;
 			children = (
-				C955387329F8E50300C59CB2 /* Shared */,
+				C955387429F8E54E00C59CB2 /* UnityAccessibility.h */,
+				C955387629F8E54E00C59CB2 /* UnityAccessibility.m */,
 				C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */,
-				C95E925529F780C600166778 /* UnityAXElementText.h */,
-				C95E925629F780C600166778 /* UnityAXElementText.m */,
-				C955384329F85F3A00C59CB2 /* UnityAXElementProgressDisplay.h */,
-				C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */,
-				C955385629F86B3A00C59CB2 /* UnityAXElementBarGroup.h */,
-				C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */,
-				C955386429F8821500C59CB2 /* UnityAXElementCard.h */,
-				C955386529F8821500C59CB2 /* UnityAXElementCard.m */,
+				C9AA104429FA2B7800B02DD7 /* Accessibility */,
 			);
 			name = DeskSwipeAccessibility;
 			path = DeskSwipe/Assets/DeskSwipeAccessibility/PlugIns/iOS;
@@ -216,16 +200,6 @@
 				C955385329F8696D00C59CB2 /* UEOUnityEngineUIImage.m */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		C955387329F8E50300C59CB2 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				C955387429F8E54E00C59CB2 /* UnityAXElement.h */,
-				C955387629F8E54E00C59CB2 /* UnityAXElement.m */,
-				C94BD1B429F5DB310084A154 /* AccessibilityGlue.m */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		C9588CE929ED2CDF00055160 /* UnityObjCRuntime */ = {
@@ -256,6 +230,17 @@
 			);
 			name = UnityObjCRuntime;
 			path = UnityObjCRuntime/Runtime/iOS;
+			sourceTree = "<group>";
+		};
+		C9AA104429FA2B7800B02DD7 /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
+				C95E925629F780C600166778 /* UnityAXElementText.m */,
+				C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */,
+				C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */,
+				C955386529F8821500C59CB2 /* UnityAXElementCard.m */,
+			);
+			path = Accessibility;
 			sourceTree = "<group>";
 		};
 		C9FBDC6129F5AF8200A306B4 /* Products */ = {
@@ -327,7 +312,7 @@
 			files = (
 				C9FBDC4E29F5A34D00A306B4 /* UEOUnityEngineObject.h in Headers */,
 				C94BD1AE29F5D4340084A154 /* UEOUnityEngineGameObject.h in Headers */,
-				C9AA103229FA0BDC00B02DD7 /* UnityAXElement.h in Headers */,
+				C9AA103229FA0BDC00B02DD7 /* UnityAccessibility.h in Headers */,
 				C95E925129F65F8300166778 /* UEOUnityEngineTransform.h in Headers */,
 				C95E925B29F791AD00166778 /* UEOUnityEngineCamera.h in Headers */,
 				C9FBDC4A29F5A34D00A306B4 /* UEOUnityEngineComponent.h in Headers */,
@@ -337,11 +322,7 @@
 				C95E926429F83EE900166778 /* UEOUnityEngineScreen.h in Headers */,
 				C9FBDC4629F5A34D00A306B4 /* UEOUnityEngineScene.h in Headers */,
 				C955385429F8696D00C59CB2 /* UEOUnityEngineUIImage.h in Headers */,
-				C9AA103329FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.h in Headers */,
 				C955384C29F867FE00C59CB2 /* UEOUnityEngineUIText.h in Headers */,
-				C9AA103529FA0BDC00B02DD7 /* UnityAXElementBarGroup.h in Headers */,
-				C9AA103129FA0BDC00B02DD7 /* UnityAXElementText.h in Headers */,
-				C9AA103829FA0BDC00B02DD7 /* UnityAXElementCard.h in Headers */,
 				C9FBDC4C29F5A34D00A306B4 /* UnityEngineObjC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,13 +473,12 @@
 				C955385529F8696D00C59CB2 /* UEOUnityEngineUIImage.m in Sources */,
 				C9AA103629FA0BDC00B02DD7 /* UnityAXElementBarGroup.m in Sources */,
 				C95E925229F65F8300166778 /* UEOUnityEngineTransform.m in Sources */,
-				C9AA103429FA0BDC00B02DD7 /* AccessibilityGlue.m in Sources */,
 				C955384D29F867FE00C59CB2 /* UEOUnityEngineUIText.m in Sources */,
 				C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */,
 				C95E925C29F791AD00166778 /* UEOUnityEngineCamera.m in Sources */,
 				C9FBDC4929F5A34D00A306B4 /* UEOUnityEngineComponent.m in Sources */,
 				C9FBDC4729F5A34D00A306B4 /* UEOUnityEngineScene.m in Sources */,
-				C9AA103C29FA0BDC00B02DD7 /* UnityAXElement.m in Sources */,
+				C9AA103C29FA0BDC00B02DD7 /* UnityAccessibility.m in Sources */,
 				C9AA103929FA0BDC00B02DD7 /* UnityAXElementCard.m in Sources */,
 				C955385129F8686E00C59CB2 /* UEOUnityEngineMonoBehaviour.m in Sources */,
 				C9AA103B29FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.m in Sources */,
