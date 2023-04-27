@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <dlfcn.h>
 #import "UnityEngineObjC.h"
 #import "UnityAXElement.h"
 #import "UnityAXElementText.h"
@@ -38,7 +39,11 @@ ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 + (void)objCOverrideSetupExistingObjects
 {
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self);
+    Boolean (*axEnabled)(void) = dlsym(dlopen("usr/lib/libAccessibility.dylib", RTLD_NOW), "_AXSApplicationAccessibilityEnabled");
+    if ( axEnabled() )
+    {
+        UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+    }
 }
 
 // by default Unity engine sets this to YES
