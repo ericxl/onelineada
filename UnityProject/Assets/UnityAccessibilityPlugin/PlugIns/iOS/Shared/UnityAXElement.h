@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface UEOUnityObjCRuntimeBehaviour(AccessibilityExtension)
-@property (nonatomic, strong) NSString *className;
+@property (nonatomic, assign) BOOL createAXElement;
+@property (nonatomic, strong, setter=setAXClassName:) NSString *axClassName;
+- (void)accessibleWithClass:(nullable Class)cls;
 @end
 
 NS_ASSUME_NONNULL_END

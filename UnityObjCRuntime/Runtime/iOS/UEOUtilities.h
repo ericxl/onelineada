@@ -29,6 +29,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector3ForKeyStatic, const ch
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKeyStatic, const char *, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKeyStatic, int, (const char *, const char *));
 
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpBoolForKey, void, (int, const char *, BOOL));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpFloatForKey, void, (int, const char *, float));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpStringForKey, void, (int, const char *, const char *));
 
@@ -64,7 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)_ueoDropLast:(NSString *)substring;
 @end
 
-@interface NSArray<ObjectType> (UEOExtensions)
+@interface NSArray<__covariant ObjectType> (UEOExtensions)
+- (NSArray<ObjectType> *)_ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item, NSUInteger index))filterBlock;
 - (NSArray *)_ueoMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
 - (NSArray *)_ueoFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
 - (ObjectType)_ueoMaxObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;

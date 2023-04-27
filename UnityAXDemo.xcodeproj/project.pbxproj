@@ -269,7 +269,7 @@
 				C95E926329F83EE900166778 /* UEOUnityEngineScreen.m */,
 			);
 			name = UnityObjCRuntime;
-			path = UnityObjCRuntime/PlugIns/iOS;
+			path = UnityObjCRuntime/Runtime/iOS;
 			sourceTree = "<group>";
 		};
 		C9FBDC6129F5AF8200A306B4 /* Products */ = {

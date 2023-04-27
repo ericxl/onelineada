@@ -56,7 +56,7 @@
     {
         cls = UEOUnityEngineUIImage.class;
     }
-    else if ( [typeFullName isEqualToString:@"UnityObjCRuntimeBehaviour"] )
+    else if ( [typeFullName isEqualToString:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] )
     {
         cls = UEOUnityObjCRuntimeBehaviour.class;
     }
@@ -152,6 +152,11 @@
 + (UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key forType:(NSString *)cSharpType
 {
     return [UEOUnityEngineObject objectWithID:UnityEngineObjectSafeCSharpObjectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))];
+}
+
+- (void)safeSetCSharpBoolForKey:(NSString *)key value:(BOOL)value
+{
+    UnityEngineObjectSafeSetCSharpBoolForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
 }
 
 - (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value

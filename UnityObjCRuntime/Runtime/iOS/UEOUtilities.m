@@ -27,6 +27,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector3ForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpStringForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpObjectForKeyStatic);
 
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpBoolForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpFloatForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpStringForKey);
 
@@ -101,6 +102,24 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineRectTransformUtilityWorldToScreenPoint);
 @end
 
 @implementation NSArray (UEOExtensions)
+
+- (NSArray *)_ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(id item, NSUInteger index))filterBlock
+{
+    if ( filterBlock == nil )
+    {
+        return [self copy];
+    }
+
+    NSMutableArray *result = [NSMutableArray array];
+    [self enumerateObjectsUsingBlock:^(id __nonnull obj, NSUInteger idx, BOOL *__nonnull stop) {
+        if ( filterBlock(obj, idx) )
+        {
+            [result addObject:obj];
+        }
+    }];
+
+    return result;
+}
 
 - (NSArray *)_ueoMapedObjectsWithBlock:(id (^)(id))block
 {

@@ -10,7 +10,11 @@
 #import <objc/runtime.h>
 
 #import "UnityEngineObjC.h"
-#import "UnityAccessibilityNode.h"
+#import "UnityAXElement.h"
+#import "UnityAXElementText.h"
+#import "UnityAXElementProgressDisplay.h"
+#import "UnityAXElementBarGroup.h"
+#import "UnityAXElementCard.h"
 
 ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
@@ -36,7 +40,14 @@ ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 + (void)objCOverrideSetupExistingObjects
 {
-    
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementText.class];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementProgressDisplay.class];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementBarGroup.class];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementBarGroup.class];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementBarGroup.class];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementBarGroup.class];
+    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] accessibleWithClass:UnityAXElementCard.class];
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self);
 }
 
 // by default Unity engine sets this to YES
@@ -53,15 +64,21 @@ ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 - (NSArray *)accessibilityElements
 {
-    NSArray *nodeComponents = [UEOUnityEngineObject findObjectsOfType:@"UnityObjCRuntimeBehaviour"];
-    NSArray *nodes = [nodeComponents _ueoFlatMapedObjectsWithBlock:^id _Nonnull(id  _Nonnull obj) {
-        if ( [obj isKindOfClass:UEOUnityObjCRuntimeBehaviour.class] )
-        {
-            return [UnityAXElement nodeFrom:(UEOUnityObjCRuntimeBehaviour *)obj];
-        }
-        return nil;
+    NSArray *nodeComponents = [[UEOUnityEngineObject findObjectsOfType:@"UnityObjCRuntime.UnityObjCRuntimeBehaviour"] _ueoFilterObjectsUsingBlock:^BOOL(UEOUnityEngineObject * _Nonnull item, NSUInteger index) {
+        return [item isKindOfClass:UEOUnityObjCRuntimeBehaviour.class] && [(UEOUnityObjCRuntimeBehaviour *)item createAXElement];
     }];
-    return [nodes _unityAccessibilitySorted];
+    NSArray *nodes = [nodeComponents _ueoFlatMapedObjectsWithBlock:^id _Nonnull(id  _Nonnull obj) {
+        return [UnityAXElement nodeFrom:(UEOUnityObjCRuntimeBehaviour *)obj];
+    }];
+    id modal = [nodes _unityAccessibilityModalElement];
+    if ( modal != nil )
+    {
+        return @[modal];
+    }
+    else
+    {
+        return [nodes _unityAccessibilitySorted];
+    }
 }
 
 @end

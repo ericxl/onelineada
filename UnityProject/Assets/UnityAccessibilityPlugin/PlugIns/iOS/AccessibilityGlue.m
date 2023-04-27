@@ -7,29 +7,40 @@
 
 #import <Foundation/Foundation.h>
 #import "UnityEngineObjC.h"
+#import <dlfcn.h>
 #import "UnityAXElement.h"
 
-@interface _AXLoader: NSObject
-@end
-@implementation _AXLoader
-
-+ (void)load
+static void loadAX(void)
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 15 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [_AXLoader addAccessibility];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _ObjCSafeOverrideInstall(@"UnityViewAccessibility");
     });
 }
 
-+ (void)addAccessibility
+static BOOL isAXOn(void)
 {
-    _ObjCSafeOverrideInstall(@"UnityViewAccessibility");
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Version Text"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementText"];
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Bottom Pane/Progress Display"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementProgressDisplay"];
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Coal Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Food Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Health Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/HUD Canvas/Top Pane/Stats Display/Hope Bar Group"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementBarGroup"];
-    [(UEOUnityObjCRuntimeBehaviour *)[[UEOUnityEngineGameObject find:@"/In-world Canvas/Card Description Display/Card Text"] addComponent:@"UnityObjCRuntimeBehaviour"] setClassName:@"UnityAXElementCard"];
+    Boolean (*axEnabled)(void) = dlsym(dlopen("usr/lib/libAccessibility.dylib", RTLD_NOW), "_AXSApplicationAccessibilityEnabled");
+    return axEnabled();
 }
 
-@end
+static void _axPrefChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
+{
+    if ( isAXOn() )
+    {
+        loadAX();
+    }
+}
+
+extern void _InitializeAccessibility(void)
+{
+    if ( isAXOn() )
+    {
+        loadAX();
+    }
+    else
+    {
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), 0, _axPrefChanged, CFSTR("com.apple.accessibility.cache.app.ax"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+    }
+}
+

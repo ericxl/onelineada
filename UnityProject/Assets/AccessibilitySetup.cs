@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityObjCRuntime;
 
 public class AccessibilitySetup : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class AccessibilitySetup : MonoBehaviour
 
 
 
-        //var tmpro = textObject.GetComponent<TMPro.TextMeshProUGUI>();
+        var tmpro = textObject.GetComponent<TMPro.TextMeshProUGUI>();
         //var node = textObject.AddComponent<UnityAccessibilityNode>();
         //var v3 = Vector3.zero;
         //Debug.Log("0 instanceID: " + CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(0).ToString());
@@ -40,8 +41,8 @@ public class AccessibilitySetup : MonoBehaviour
         //Debug.Log(tmpro.gameObject.transform);
         //Debug.Log("reflectedText: " + CSharpRuntimeSupportUtilities.safeValueForKey<string>(node, "ClassName"));
         //tmpro.ClassName
-        //var transform = CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(tmpro, "transform");
-        //Debug.Log("reflectedTransform: " + transform.ToString());
+        var transform = CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(tmpro, "transform");
+        Debug.Log("reflectedTransform: " + transform.ToString());
         ////Camera.main.
         ////Debug.Log("reflectedTransformPos: " + CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(node, "nodePosition"));
 

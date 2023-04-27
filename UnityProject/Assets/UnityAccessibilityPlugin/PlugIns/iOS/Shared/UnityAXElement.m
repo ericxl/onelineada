@@ -26,17 +26,13 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
 
 + (instancetype)nodeFrom:(UEOUnityObjCRuntimeBehaviour *)component
 {
-    if ( component == nil )
-    {
-        return nil;
-    }
-    if ( ![component.typeFullName isEqualToString:@"UnityObjCRuntimeBehaviour"] )
+    if ( component == nil || ![component isKindOfClass:UEOUnityObjCRuntimeBehaviour.class] )
     {
         return nil;
     }
     id object = [_gNodeMap objectForKey:@(component.instanceID)];
     Class cls = UnityAXElement.class;
-    NSString *className = [component className];
+    NSString *className = [component axClassName];
     if ( className.length != 0 && NSClassFromString(className) != Nil)
     {
         cls = NSClassFromString(className);
@@ -72,14 +68,33 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
 
 @implementation UEOUnityObjCRuntimeBehaviour(AccessibilityExtension)
 
-- (NSString *)className
+- (BOOL)createAXElement
+{
+    return [self safeCSharpBoolForKey:@"CreateAccessibilityElement"];;
+}
+
+- (void)setCreateAXElement:(BOOL)createAXElement
+{
+    [self safeSetCSharpBoolForKey:@"CreateAccessibilityElement" value:createAXElement];
+}
+
+- (NSString *)axClassName
 {
     return [self safeCSharpStringForKey:@"AccessibilityElementClassName"];;
 }
 
-- (void)setClassName:(NSString *)className
+- (void)setAXClassName:(NSString *)axClassName
 {
-    [self safeSetCSharpStringForKey:@"AccessibilityElementClassName" value:className];
+    [self safeSetCSharpStringForKey:@"AccessibilityElementClassName" value:axClassName];
+}
+
+- (void)accessibleWithClass:(nullable Class)cls
+{
+    [self setCreateAXElement:YES];
+    if ( cls != Nil )
+    {
+        [self setAXClassName:NSStringFromClass(cls)];
+    }
 }
 
 @end
