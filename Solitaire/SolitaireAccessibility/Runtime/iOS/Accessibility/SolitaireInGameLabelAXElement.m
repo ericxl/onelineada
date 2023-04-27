@@ -1,20 +1,37 @@
 //
-//  UnityAXElementBarGroup.m
-//  UnityEngineAPI+Accessibility+Plugin
+//  SolitaireInGameLabelAXElement.m
+//  SolitaireAccessibility
 //
-//  Created by Eric Liang on 4/25/23.
+//  Created by Eric Liang on 4/27/23.
 //
 
+#import <Foundation/Foundation.h>
 #import "UnityAccessibility.h"
 
-@interface UnityAXElementBarGroup : UnityAXElement
+@interface SolitaireInGameLabelAXElement : UnityAXElement
 @end
 
-@implementation UnityAXElementBarGroup
+@implementation SolitaireInGameLabelAXElement
 
-- (CGRect)accessibilityFrame
+- (BOOL)isAccessibilityElement
 {
-    NSArray<NSString *> *corners = [(UEOUnityEngineRectTransform *)[self.gameObject transform] getWorldCorners];
+    return YES;
+}
+
+
+- (NSString *)accessibilityLabel
+{
+    return [[[self.transform find:[NSString stringWithFormat:@"Label%@", self.transform.name]] getComponent:@"TMPro.TextMeshProUGUI"] safeCSharpStringForKey:@"text"];
+}
+
+- (NSString *)accessibilityValue
+{
+    return [[[self.transform find:[NSString stringWithFormat:@"Label%@Value", self.transform.name]] getComponent:@"TMPro.TextMeshProUGUI"] safeCSharpStringForKey:@"text"];
+}
+
+- (CGRect)accessibilityFrameForGO:(UEOUnityEngineGameObject *)gameObject
+{
+    NSArray<NSString *> *corners = [(UEOUnityEngineRectTransform *)[gameObject transform] getWorldCorners];
     NSArray<NSArray<NSNumber *> *> *screenCorners = [corners ueoMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
         simd_float3 vector = UEOSimdFloat3FromString(obj);
         simd_float2 screenCorner = [UEOUnityEngineRectTransform rectUtilityWorldToScreenPoint:nil worldPoint:vector];
@@ -36,21 +53,9 @@
     return RECT_TO_SCREEN_RECT(CGRectMake(minX, UEOUnityEngineScreen.height - maxY, maxX - minX, maxY - minY));
 }
 
-- (NSString *)accessibilityLabel
+- (CGRect)accessibilityFrame
 {
-    return [self.gameObject.name ueoDropLast:@" Bar Group"];
-}
-
-- (NSString *)accessibilityValue
-{
-    id image = [self.gameObject.transform find:[self.gameObject.name ueoDropLast:@" Group"]];
-    UEOUnityEngineUIImage *imageComponent = SAFE_CAST_CLASS(UEOUnityEngineUIImage, [image getComponent:@"UnityEngine.UI.Image"]);
-    return UEOFormatFloatWithPercentage(imageComponent.fillAmount);
-}
-
-- (BOOL)isAccessibilityElement
-{
-    return YES;
+    return [self accessibilityFrameForGO:[self gameObject]];
 }
 
 @end

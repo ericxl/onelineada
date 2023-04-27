@@ -20,7 +20,12 @@
 
 - (UIAccessibilityTraits)accessibilityTraits
 {
-    return UIAccessibilityTraitButton;
+    UIAccessibilityTraits traits = UIAccessibilityTraitButton;
+    if ( SAFE_CAST_CLASS(UEOUnityEngineUIButton, [self.gameObject getComponent:@"UnityEngine.UI.Button"]) != nil && !SAFE_CAST_CLASS(UEOUnityEngineUIButton, [self.gameObject getComponent:@"UnityEngine.UI.Button"]).interactable )
+    {
+        traits |= UIAccessibilityTraitNotEnabled;
+    }
+    return traits;
 }
 
 - (NSString *)accessibilityLabel

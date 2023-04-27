@@ -66,6 +66,10 @@
     {
         cls = UEOUnityEngineUIImage.class;
     }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Button"] )
+    {
+        cls = UEOUnityEngineUIButton.class;
+    }
     else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Toggle"] )
     {
         cls = UEOUnityEngineUIToggle.class;

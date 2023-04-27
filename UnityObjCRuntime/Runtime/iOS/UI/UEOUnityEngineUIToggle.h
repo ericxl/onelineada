@@ -5,11 +5,11 @@
 //  Created by Eric Liang on 4/26/23.
 //
 
-#import "UEOUnityEngineMonoBehaviour.h"
+#import "UEOUnityEngineUISelectable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UEOUnityEngineUIToggle : UEOUnityEngineMonoBehaviour
+@interface UEOUnityEngineUIToggle : UEOUnityEngineUISelectable
 
 @property (nonatomic, assign) BOOL isOn;
 

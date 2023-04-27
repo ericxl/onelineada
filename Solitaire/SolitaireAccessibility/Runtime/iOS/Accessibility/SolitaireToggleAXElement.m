@@ -20,12 +20,16 @@
 
 - (UIAccessibilityTraits)accessibilityTraits
 {
-    UIAccessibilityTraits result = ((uint64_t)1 << 53);
+    UIAccessibilityTraits traits = ((uint64_t)1 << 53);
     if ( SAFE_CAST_CLASS(UEOUnityEngineUIToggle, [self.gameObject getComponent:@"UnityEngine.UI.Toggle"]).isOn )
     {
-        result |= UIAccessibilityTraitSelected;
+        traits |= UIAccessibilityTraitSelected;
     }
-    return result;
+    if ( SAFE_CAST_CLASS(UEOUnityEngineUIToggle, [self.gameObject getComponent:@"UnityEngine.UI.Toggle"]) != nil && !SAFE_CAST_CLASS(UEOUnityEngineUIToggle, [self.gameObject getComponent:@"UnityEngine.UI.Toggle"]).interactable )
+    {
+        traits |= UIAccessibilityTraitNotEnabled;
+    }
+    return traits;
 }
 
 - (CGPoint)accessibilityActivationPoint

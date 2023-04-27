@@ -31,6 +31,36 @@
         ];
         return [elements _axModaledSorted];
     }
+    else if ( [self.gameObject.name isEqualToString:@"CanvasGameInfo"] )
+    {
+        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:2,
+                             [UnityAXElement node:[self.transform find:@"Points"] withClass:NSClassFromString(@"SolitaireInGameLabelAXElement")],
+                             [UnityAXElement node:[self.transform find:@"Moves"] withClass:NSClassFromString(@"SolitaireInGameLabelAXElement")]
+        ];
+        return [elements _axModaledSorted];
+    }
+    else if ( [self.gameObject.name isEqualToString:@"CanvasGameControls"] )
+    {
+        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:6,
+                             [UnityAXElement node:[self.transform find:@"ButtonOptions"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
+                             [UnityAXElement node:[self.transform find:@"ButtonHome"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
+                             [UnityAXElement node:[self.transform find:@"ButtonMatch"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
+                             [UnityAXElement node:[self.transform find:@"ButtonUndo"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
+                             [UnityAXElement node:[self.transform find:@"ButtonHint"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
+                             [UnityAXElement node:[self.transform find:@"ButtonLeaderboard"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")]
+        ];
+        return [elements _axModaledSorted];
+    }
+    else if ( [self.gameObject.name isEqualToString:@"CanvasPopupMatch"] )
+    {
+        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:4,
+                             [UnityAXElement node:[self.transform find:@"Background/LabelTitle"] withClass:NSClassFromString(@"UnityAXElementText")],
+                             [UnityAXElement node:[self.transform find:@"Background/ButtonRestart"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")],
+                             [UnityAXElement node:[self.transform find:@"Background/ButtonNewMatch"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")],
+                             [UnityAXElement node:[self.transform find:@"Background/ButtonContinue"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")]
+        ];
+        return [elements _axModaledSorted];
+    }
     else if ( [self.gameObject.name isEqualToString:@"CanvasPopupOptions"] )
     {
         NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:4,

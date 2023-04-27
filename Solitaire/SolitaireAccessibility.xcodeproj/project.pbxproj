@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C9AA103229FA0BDC00B02DD7 /* UnityAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = C955387429F8E54E00C59CB2 /* UnityAccessibility.h */; };
-		C9AA103629FA0BDC00B02DD7 /* UnityAXElementBarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */; };
 		C9AA103729FA0BDC00B02DD7 /* UnityViewAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */; };
-		C9AA103929FA0BDC00B02DD7 /* UnityAXElementCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C955386529F8821500C59CB2 /* UnityAXElementCard.m */; };
 		C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925629F780C600166778 /* UnityAXElementText.m */; };
-		C9AA103B29FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */; };
 		C9AA103C29FA0BDC00B02DD7 /* UnityAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387629F8E54E00C59CB2 /* UnityAccessibility.m */; };
 		C9AA105B29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA105A29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m */; };
 		C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */; };
@@ -20,6 +17,7 @@
 		C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */; };
 		C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */; };
 		C9AA10A129FA5D7100B02DD7 /* liblibUnityObjCRuntime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA109E29FA5D5A00B02DD7 /* liblibUnityObjCRuntime.a */; };
+		C9AA10A729FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +42,6 @@
 		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementProgressDisplay.m; sourceTree = "<group>"; };
-		C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementBarGroup.m; sourceTree = "<group>"; };
-		C955386529F8821500C59CB2 /* UnityAXElementCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementCard.m; sourceTree = "<group>"; };
 		C955387429F8E54E00C59CB2 /* UnityAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnityAccessibility.h; sourceTree = "<group>"; };
 		C955387629F8E54E00C59CB2 /* UnityAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityAccessibility.m; sourceTree = "<group>"; };
 		C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityViewAccessibility.m; sourceTree = "<group>"; };
@@ -57,6 +52,7 @@
 		C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireButtonRoundAXElement.m; sourceTree = "<group>"; };
 		C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireToggleAXElement.m; sourceTree = "<group>"; };
 		C9AA109929FA5D5A00B02DD7 /* UnityObjCRuntime.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnityObjCRuntime.xcodeproj; path = ../UnityObjCRuntime.xcodeproj; sourceTree = "<group>"; };
+		C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireInGameLabelAXElement.m; sourceTree = "<group>"; };
 		C9FBDC3F29F5A33900A306B4 /* SolitaireAccessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SolitaireAccessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4327E8826335B3600376CAB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E4327E8A26335B3600376CAB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -94,10 +90,8 @@
 				C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */,
 				C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */,
 				C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */,
+				C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */,
 				C95E925629F780C600166778 /* UnityAXElementText.m */,
-				C955384429F85F3A00C59CB2 /* UnityAXElementProgressDisplay.m */,
-				C955385729F86B3A00C59CB2 /* UnityAXElementBarGroup.m */,
-				C955386529F8821500C59CB2 /* UnityAXElementCard.m */,
 			);
 			path = Accessibility;
 			sourceTree = "<group>";
@@ -239,14 +233,12 @@
 			files = (
 				C9AA106C29FA468100B02DD7 /* SolitaireButtonRectAXElement.m in Sources */,
 				C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */,
-				C9AA103629FA0BDC00B02DD7 /* UnityAXElementBarGroup.m in Sources */,
 				C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */,
 				C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */,
 				C9AA105B29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m in Sources */,
 				C9AA103C29FA0BDC00B02DD7 /* UnityAccessibility.m in Sources */,
-				C9AA103929FA0BDC00B02DD7 /* UnityAXElementCard.m in Sources */,
 				C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */,
-				C9AA103B29FA0BDC00B02DD7 /* UnityAXElementProgressDisplay.m in Sources */,
+				C9AA10A729FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m in Sources */,
 				C9AA103729FA0BDC00B02DD7 /* UnityViewAccessibility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
