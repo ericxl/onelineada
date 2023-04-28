@@ -24,13 +24,13 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     });
 }
 
-+ (instancetype)node:(UEOUnityEngineObject *)component withClass:(Class)axClass
++ (instancetype)node:(UCObject *)component withClass:(Class)axClass
 {
-    if ( ![component isKindOfClass:UEOUnityEngineGameObject.class] )
+    if ( ![component isKindOfClass:UCGameObject.class] )
     {
-        if ( [component isKindOfClass:UEOUnityEngineComponent.class] )
+        if ( [component isKindOfClass:UCComponent.class] )
         {
-            component = [(UEOUnityEngineComponent *)component gameObject];
+            component = [(UCComponent *)component gameObject];
         }
     }
     if ( component == nil )
@@ -56,14 +56,14 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     return object;
 }
 
-- (UEOUnityEngineTransform *)transform
+- (UCTransform *)transform
 {
     return [self.gameObject transform];
 }
 
-- (UEOUnityEngineGameObject *)gameObject
+- (UCGameObject *)gameObject
 {
-    return [UEOUnityEngineGameObject objectWithID:self->_instanceID];
+    return [UCGameObject objectWithID:self->_instanceID];
 }
 
 @end
@@ -72,7 +72,7 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
 
 - (NSArray *)_axModaledSorted
 {
-    id modalElement = [self ueoFirstObjectUsingBlock:^BOOL(id  _Nonnull item) {
+    id modalElement = [self ucFirstObjectUsingBlock:^BOOL(id  _Nonnull item) {
         return [item accessibilityViewIsModal] && ![item accessibilityElementsHidden];
     }];
     if ( modalElement != nil )
@@ -81,7 +81,7 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     }
     else
     {
-        return [[self ueoFilterObjectsUsingBlock:^BOOL(id  _Nonnull item) {
+        return [[self ucFilterObjectsUsingBlock:^BOOL(id  _Nonnull item) {
             return ![item accessibilityElementsHidden];
         }] sortedArrayUsingSelector:NSSelectorFromString(@"accessibilityCompareGeometry:")];
     }

@@ -6,16 +6,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UnityEngineObjC.h"
+#import "UnityObjC.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UnityAXElement : NSObject
 
-+ (instancetype)node:(UEOUnityEngineObject *)component withClass:(Class)axClass;
++ (instancetype)node:(UCObject *)component withClass:(Class)axClass;
 
-@property (nonatomic, strong, readonly, nullable) UEOUnityEngineTransform *transform;
-@property (nonatomic, strong, readonly, nullable) UEOUnityEngineGameObject *gameObject;
+@property (nonatomic, strong, readonly, nullable) UCTransform *transform;
+@property (nonatomic, strong, readonly, nullable) UCGameObject *gameObject;
 
 @end
 

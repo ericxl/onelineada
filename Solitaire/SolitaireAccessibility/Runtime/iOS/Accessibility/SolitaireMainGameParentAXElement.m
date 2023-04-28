@@ -15,7 +15,7 @@
 
 - (BOOL)accessibilityElementsHidden
 {
-    return !SAFE_CAST_CLASS(UEOUnityEngineCanvas, [[UEOUnityEngineGameObject find:@"/UI/CanvasGameControls"] getComponent:@"UnityEngine.Canvas"]).enabled;
+    return !SAFE_CAST_CLASS(UCCanvas, [[UCGameObject find:@"/UI/CanvasGameControls"] getComponent:@"UnityEngine.Canvas"]).enabled;
 }
 
 - (CGRect)accessibilityFrame
@@ -25,20 +25,20 @@
 
 - (NSArray *)accessibilityElements
 {
-    NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:13,
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Foundation1"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Foundation2"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Foundation3"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Foundation4"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Waste"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Stock"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau1"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau2"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau3"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau4"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau5"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau6"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
-                         [UnityAXElement node:[UEOUnityEngineGameObject find:@"/Tableau7"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")]
+    NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:13,
+                         [UnityAXElement node:[UCGameObject find:@"/Foundation1"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Foundation2"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Foundation3"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Foundation4"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Waste"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Stock"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau1"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau2"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau3"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau4"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau5"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau6"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")],
+                         [UnityAXElement node:[UCGameObject find:@"/Tableau7"] withClass:NSClassFromString(@"SolitairePilePresenterAXElement")]
     ];
     return [elements _axModaledSorted];
 }

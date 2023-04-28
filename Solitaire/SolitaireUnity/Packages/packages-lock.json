@@ -57,8 +57,8 @@
       "source": "local",
       "dependencies": {}
     },
-    "com.xiaoyongliang.unityobjcruntime": {
-      "version": "file:../../../UnityObjCRuntime",
+    "com.xiaoyongliang.unityobjc": {
+      "version": "file:../../../UnityObjC",
       "depth": 0,
       "source": "local",
       "dependencies": {}

@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 53;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C9AA108629FA5C9200B02DD7 /* UCUIToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA107429FA53DC00B02DD7 /* UCUIToggle.m */; };
+		C9AA108729FA5C9200B02DD7 /* UCObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3329F5A2EB00A306B4 /* UCObject.m */; };
+		C9AA108829FA5C9200B02DD7 /* UCTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925029F65F8300166778 /* UCTransform.m */; };
+		C9AA108929FA5C9200B02DD7 /* UCUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C955385329F8696D00C59CB2 /* UCUIImage.m */; };
+		C9AA108A29FA5C9200B02DD7 /* UCScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E926329F83EE900166778 /* UCScreen.m */; };
+		C9AA108B29FA5C9200B02DD7 /* UCCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106129FA3A6700B02DD7 /* UCCanvas.m */; };
+		C9AA108C29FA5C9200B02DD7 /* UCComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3929F5A2EB00A306B4 /* UCComponent.m */; };
+		C9AA108D29FA5C9200B02DD7 /* UCMonoBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = C955384F29F8686E00C59CB2 /* UCMonoBehaviour.m */; };
+		C9AA108E29FA5C9200B02DD7 /* UCGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C94BD1AD29F5D4340084A154 /* UCGameObject.m */; };
+		C9AA108F29FA5C9200B02DD7 /* UCScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3529F5A2EB00A306B4 /* UCScene.m */; };
+		C9AA109029FA5C9200B02DD7 /* UCBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA105D29FA396300B02DD7 /* UCBehaviour.m */; };
+		C9AA109129FA5C9200B02DD7 /* UCUIText.m in Sources */ = {isa = PBXBuildFile; fileRef = C955384B29F867FE00C59CB2 /* UCUIText.m */; };
+		C9AA109229FA5C9200B02DD7 /* UCCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925A29F791AD00166778 /* UCCamera.m */; };
+		C9AA109329FA5C9200B02DD7 /* UCRectTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925E29F7A40300166778 /* UCRectTransform.m */; };
+		C9AA109429FA5C9600B02DD7 /* UCUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3729F5A2EB00A306B4 /* UCUtilities.m */; };
+		C9AA10AA29FAFF6A00B02DD7 /* UCUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10A929FAFF6A00B02DD7 /* UCUIButton.m */; };
+		C9AA10AD29FB004500B02DD7 /* UCUISelectable.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10AC29FB004500B02DD7 /* UCUISelectable.m */; };
+		C9AA10B629FB2D1300B02DD7 /* UCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10B529FB2D1300B02DD7 /* UCRenderer.m */; };
+		C9AA10B929FB2D5400B02DD7 /* UCSpriteRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10B829FB2D5400B02DD7 /* UCSpriteRenderer.m */; };
+		C9AA10BC29FB2D9700B02DD7 /* UCSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10BB29FB2D9700B02DD7 /* UCSprite.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C9AA107B29FA5C5A00B02DD7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		079C00DD26ACEA98000784CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		C94BD1AC29F5D4340084A154 /* UCGameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCGameObject.h; sourceTree = "<group>"; };
+		C94BD1AD29F5D4340084A154 /* UCGameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCGameObject.m; sourceTree = "<group>"; };
+		C955384A29F867FE00C59CB2 /* UCUIText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUIText.h; sourceTree = "<group>"; };
+		C955384B29F867FE00C59CB2 /* UCUIText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUIText.m; sourceTree = "<group>"; };
+		C955384E29F8686E00C59CB2 /* UCMonoBehaviour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCMonoBehaviour.h; sourceTree = "<group>"; };
+		C955384F29F8686E00C59CB2 /* UCMonoBehaviour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCMonoBehaviour.m; sourceTree = "<group>"; };
+		C955385229F8696D00C59CB2 /* UCUIImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUIImage.h; sourceTree = "<group>"; };
+		C955385329F8696D00C59CB2 /* UCUIImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUIImage.m; sourceTree = "<group>"; };
+		C95E924F29F65F8300166778 /* UCTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCTransform.h; sourceTree = "<group>"; };
+		C95E925029F65F8300166778 /* UCTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCTransform.m; sourceTree = "<group>"; };
+		C95E925929F791AD00166778 /* UCCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCCamera.h; sourceTree = "<group>"; };
+		C95E925A29F791AD00166778 /* UCCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCCamera.m; sourceTree = "<group>"; };
+		C95E925D29F7A40300166778 /* UCRectTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCRectTransform.h; sourceTree = "<group>"; };
+		C95E925E29F7A40300166778 /* UCRectTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCRectTransform.m; sourceTree = "<group>"; };
+		C95E926229F83EE900166778 /* UCScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCScreen.h; sourceTree = "<group>"; };
+		C95E926329F83EE900166778 /* UCScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCScreen.m; sourceTree = "<group>"; };
+		C9AA105C29FA396300B02DD7 /* UCBehaviour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCBehaviour.h; sourceTree = "<group>"; };
+		C9AA105D29FA396300B02DD7 /* UCBehaviour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCBehaviour.m; sourceTree = "<group>"; };
+		C9AA106029FA3A6700B02DD7 /* UCCanvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCCanvas.h; sourceTree = "<group>"; };
+		C9AA106129FA3A6700B02DD7 /* UCCanvas.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCCanvas.m; sourceTree = "<group>"; };
+		C9AA107329FA53DC00B02DD7 /* UCUIToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUIToggle.h; sourceTree = "<group>"; };
+		C9AA107429FA53DC00B02DD7 /* UCUIToggle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUIToggle.m; sourceTree = "<group>"; };
+		C9AA107D29FA5C5A00B02DD7 /* libUnityObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnityObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9AA10A829FAFF6A00B02DD7 /* UCUIButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUIButton.h; sourceTree = "<group>"; };
+		C9AA10A929FAFF6A00B02DD7 /* UCUIButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUIButton.m; sourceTree = "<group>"; };
+		C9AA10AB29FB004500B02DD7 /* UCUISelectable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUISelectable.h; sourceTree = "<group>"; };
+		C9AA10AC29FB004500B02DD7 /* UCUISelectable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUISelectable.m; sourceTree = "<group>"; };
+		C9AA10B429FB2D1300B02DD7 /* UCRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCRenderer.h; sourceTree = "<group>"; };
+		C9AA10B529FB2D1300B02DD7 /* UCRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCRenderer.m; sourceTree = "<group>"; };
+		C9AA10B729FB2D5400B02DD7 /* UCSpriteRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCSpriteRenderer.h; sourceTree = "<group>"; };
+		C9AA10B829FB2D5400B02DD7 /* UCSpriteRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCSpriteRenderer.m; sourceTree = "<group>"; };
+		C9AA10BA29FB2D9700B02DD7 /* UCSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCSprite.h; sourceTree = "<group>"; };
+		C9AA10BB29FB2D9700B02DD7 /* UCSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCSprite.m; sourceTree = "<group>"; };
+		C9FBDC3129F5A2EB00A306B4 /* UCComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCComponent.h; sourceTree = "<group>"; };
+		C9FBDC3229F5A2EB00A306B4 /* UCUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUtilities.h; sourceTree = "<group>"; };
+		C9FBDC3329F5A2EB00A306B4 /* UCObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCObject.m; sourceTree = "<group>"; };
+		C9FBDC3429F5A2EB00A306B4 /* UCScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCScene.h; sourceTree = "<group>"; };
+		C9FBDC3529F5A2EB00A306B4 /* UCScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCScene.m; sourceTree = "<group>"; };
+		C9FBDC3629F5A2EB00A306B4 /* UnityObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityObjC.h; sourceTree = "<group>"; };
+		C9FBDC3729F5A2EB00A306B4 /* UCUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUtilities.m; sourceTree = "<group>"; };
+		C9FBDC3829F5A2EB00A306B4 /* UCObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCObject.h; sourceTree = "<group>"; };
+		C9FBDC3929F5A2EB00A306B4 /* UCComponent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCComponent.m; sourceTree = "<group>"; };
+		E4327E8826335B3600376CAB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E4327E8A26335B3600376CAB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C9AA107A29FA5C5A00B02DD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C955384929F867BD00C59CB2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C955384A29F867FE00C59CB2 /* UCUIText.h */,
+				C955384B29F867FE00C59CB2 /* UCUIText.m */,
+				C955385229F8696D00C59CB2 /* UCUIImage.h */,
+				C955385329F8696D00C59CB2 /* UCUIImage.m */,
+				C9AA10A829FAFF6A00B02DD7 /* UCUIButton.h */,
+				C9AA10A929FAFF6A00B02DD7 /* UCUIButton.m */,
+				C9AA107329FA53DC00B02DD7 /* UCUIToggle.h */,
+				C9AA107429FA53DC00B02DD7 /* UCUIToggle.m */,
+				C9AA10AB29FB004500B02DD7 /* UCUISelectable.h */,
+				C9AA10AC29FB004500B02DD7 /* UCUISelectable.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C9588CE929ED2CDF00055160 /* UnityObjC */ = {
+			isa = PBXGroup;
+			children = (
+				C9FBDC3629F5A2EB00A306B4 /* UnityObjC.h */,
+				C9FBDC3229F5A2EB00A306B4 /* UCUtilities.h */,
+				C9FBDC3729F5A2EB00A306B4 /* UCUtilities.m */,
+				C955384929F867BD00C59CB2 /* UI */,
+				C9FBDC3829F5A2EB00A306B4 /* UCObject.h */,
+				C9FBDC3329F5A2EB00A306B4 /* UCObject.m */,
+				C95E925929F791AD00166778 /* UCCamera.h */,
+				C95E925A29F791AD00166778 /* UCCamera.m */,
+				C9AA106029FA3A6700B02DD7 /* UCCanvas.h */,
+				C9AA106129FA3A6700B02DD7 /* UCCanvas.m */,
+				C9FBDC3129F5A2EB00A306B4 /* UCComponent.h */,
+				C9FBDC3929F5A2EB00A306B4 /* UCComponent.m */,
+				C94BD1AC29F5D4340084A154 /* UCGameObject.h */,
+				C94BD1AD29F5D4340084A154 /* UCGameObject.m */,
+				C9AA105C29FA396300B02DD7 /* UCBehaviour.h */,
+				C9AA105D29FA396300B02DD7 /* UCBehaviour.m */,
+				C955384E29F8686E00C59CB2 /* UCMonoBehaviour.h */,
+				C955384F29F8686E00C59CB2 /* UCMonoBehaviour.m */,
+				C95E924F29F65F8300166778 /* UCTransform.h */,
+				C95E925029F65F8300166778 /* UCTransform.m */,
+				C95E925D29F7A40300166778 /* UCRectTransform.h */,
+				C95E925E29F7A40300166778 /* UCRectTransform.m */,
+				C9AA10B429FB2D1300B02DD7 /* UCRenderer.h */,
+				C9AA10B529FB2D1300B02DD7 /* UCRenderer.m */,
+				C9FBDC3429F5A2EB00A306B4 /* UCScene.h */,
+				C9FBDC3529F5A2EB00A306B4 /* UCScene.m */,
+				C95E926229F83EE900166778 /* UCScreen.h */,
+				C95E926329F83EE900166778 /* UCScreen.m */,
+				C9AA10BA29FB2D9700B02DD7 /* UCSprite.h */,
+				C9AA10BB29FB2D9700B02DD7 /* UCSprite.m */,
+				C9AA10B729FB2D5400B02DD7 /* UCSpriteRenderer.h */,
+				C9AA10B829FB2D5400B02DD7 /* UCSpriteRenderer.m */,
+			);
+			name = UnityObjC;
+			path = UnityObjC/Runtime/iOS;
+			sourceTree = "<group>";
+		};
+		E4327E6026335A9900376CAB = {
+			isa = PBXGroup;
+			children = (
+				C9588CE929ED2CDF00055160 /* UnityObjC */,
+				E4327E8726335B3600376CAB /* Frameworks */,
+				E4327E6A26335A9900376CAB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E4327E6A26335A9900376CAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9AA107D29FA5C5A00B02DD7 /* libUnityObjC.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4327E8726335B3600376CAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07EDA6F926C0E6870002F9ED /* WebKit.framework */,
+				079C00DD26ACEA98000784CB /* StoreKit.framework */,
+				07C3307226A12AD700EBA463 /* GameKit.framework */,
+				E4327E8826335B3600376CAB /* WidgetKit.framework */,
+				E4327E8A26335B3600376CAB /* SwiftUI.framework */,
+				07D904F42635232F009276E7 /* Intents.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C9AA107C29FA5C5A00B02DD7 /* UnityObjC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9AA108529FA5C5A00B02DD7 /* Build configuration list for PBXNativeTarget "UnityObjC" */;
+			buildPhases = (
+				C9AA107929FA5C5A00B02DD7 /* Sources */,
+				C9AA107A29FA5C5A00B02DD7 /* Frameworks */,
+				C9AA107B29FA5C5A00B02DD7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnityObjC;
+			productName = libUnityObjCRuntime;
+			productReference = C9AA107D29FA5C5A00B02DD7 /* libUnityObjC.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E4327E6126335A9900376CAB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					C9AA107C29FA5C5A00B02DD7 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = E4327E6426335A9900376CAB /* Build configuration list for PBXProject "UnityObjC" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E4327E6026335A9900376CAB;
+			productRefGroup = E4327E6A26335A9900376CAB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C9AA107C29FA5C5A00B02DD7 /* UnityObjC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C9AA107929FA5C5A00B02DD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9AA108C29FA5C9200B02DD7 /* UCComponent.m in Sources */,
+				C9AA108A29FA5C9200B02DD7 /* UCScreen.m in Sources */,
+				C9AA108B29FA5C9200B02DD7 /* UCCanvas.m in Sources */,
+				C9AA10AD29FB004500B02DD7 /* UCUISelectable.m in Sources */,
+				C9AA108729FA5C9200B02DD7 /* UCObject.m in Sources */,
+				C9AA108629FA5C9200B02DD7 /* UCUIToggle.m in Sources */,
+				C9AA10AA29FAFF6A00B02DD7 /* UCUIButton.m in Sources */,
+				C9AA108829FA5C9200B02DD7 /* UCTransform.m in Sources */,
+				C9AA109429FA5C9600B02DD7 /* UCUtilities.m in Sources */,
+				C9AA109329FA5C9200B02DD7 /* UCRectTransform.m in Sources */,
+				C9AA10B929FB2D5400B02DD7 /* UCSpriteRenderer.m in Sources */,
+				C9AA108D29FA5C9200B02DD7 /* UCMonoBehaviour.m in Sources */,
+				C9AA10BC29FB2D9700B02DD7 /* UCSprite.m in Sources */,
+				C9AA108E29FA5C9200B02DD7 /* UCGameObject.m in Sources */,
+				C9AA109129FA5C9200B02DD7 /* UCUIText.m in Sources */,
+				C9AA108F29FA5C9200B02DD7 /* UCScene.m in Sources */,
+				C9AA109029FA5C9200B02DD7 /* UCBehaviour.m in Sources */,
+				C9AA109229FA5C9200B02DD7 /* UCCamera.m in Sources */,
+				C9AA10B629FB2D1300B02DD7 /* UCRenderer.m in Sources */,
+				C9AA108929FA5C9200B02DD7 /* UCUIImage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C9AA108329FA5C5A00B02DD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2HKDY23RK;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C9AA108429FA5C5A00B02DD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2HKDY23RK;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E4327E7B26335A9A00376CAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E4327E7C26335A9A00376CAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C9AA108529FA5C5A00B02DD7 /* Build configuration list for PBXNativeTarget "UnityObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9AA108329FA5C5A00B02DD7 /* Debug */,
+				C9AA108429FA5C5A00B02DD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4327E6426335A9900376CAB /* Build configuration list for PBXProject "UnityObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4327E7B26335A9A00376CAB /* Debug */,
+				E4327E7C26335A9A00376CAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E4327E6126335A9900376CAB /* Project object */;
+}

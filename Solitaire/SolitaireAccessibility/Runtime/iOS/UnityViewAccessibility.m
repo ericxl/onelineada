@@ -39,20 +39,20 @@ ObjCDefineSafeOverride(@"UnityView", UnityViewAccessibility)
 
 - (NSArray *)accessibilityElements
 {
-    if ( ![UEOUnityEngineScene activeSceneIsLoaded] || ![UEOUnityEngineScene.activeSceneName isEqualToString:@"Game"] )
+    if ( ![UCScene activeSceneIsLoaded] || ![UCScene.activeSceneName isEqualToString:@"Game"] )
     {
         return [super accessibilityElements];
     }
     NSArray *elements =
-    [NSArray ueoArrayByIgnoringNilElementsWithCount:8,
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGameInfo"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasGameControls"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasWin"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasHome"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupMatch"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupOptions"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/UI/CanvasPopupLeaderboard"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
-     [UnityAXElement node:[UEOUnityEngineGameObject find:@"/GamePresenter"] withClass:NSClassFromString(@"SolitaireMainGameParentAXElement")]
+    [NSArray ucArrayByIgnoringNilElementsWithCount:8,
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasGameInfo"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasGameControls"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasWin"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasHome"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasPopupMatch"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasPopupOptions"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/UI/CanvasPopupLeaderboard"] withClass:NSClassFromString(@"SolitaireCanvasGroupAXElement")],
+     [UnityAXElement node:[UCGameObject find:@"/GamePresenter"] withClass:NSClassFromString(@"SolitaireMainGameParentAXElement")]
     ];
 
     return [elements _axModaledSorted];

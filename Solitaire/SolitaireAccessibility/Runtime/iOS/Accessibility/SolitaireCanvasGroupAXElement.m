@@ -15,14 +15,14 @@
 
 - (BOOL)accessibilityElementsHidden
 {
-    return !SAFE_CAST_CLASS(UEOUnityEngineCanvas, [self.gameObject getComponent:@"UnityEngine.Canvas"]).enabled;
+    return !SAFE_CAST_CLASS(UCCanvas, [self.gameObject getComponent:@"UnityEngine.Canvas"]).enabled;
 }
 
 - (NSArray *)accessibilityElements
 {
     if ( [self.gameObject.name isEqualToString:@"CanvasHome"] )
     {
-        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:5,
+        NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:5,
                              [UnityAXElement node:[self.transform find:@"Logo"] withClass:NSClassFromString(@"SolitaireLogoAXElement")],
                               [UnityAXElement node:[self.transform find:@"ButtonNewMatch"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")],
                               [UnityAXElement node:[self.transform find:@"ButtonContinue"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")],
@@ -33,7 +33,7 @@
     }
     else if ( [self.gameObject.name isEqualToString:@"CanvasGameInfo"] )
     {
-        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:2,
+        NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:2,
                              [UnityAXElement node:[self.transform find:@"Points"] withClass:NSClassFromString(@"SolitaireInGameLabelAXElement")],
                              [UnityAXElement node:[self.transform find:@"Moves"] withClass:NSClassFromString(@"SolitaireInGameLabelAXElement")]
         ];
@@ -41,7 +41,7 @@
     }
     else if ( [self.gameObject.name isEqualToString:@"CanvasGameControls"] )
     {
-        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:6,
+        NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:6,
                              [UnityAXElement node:[self.transform find:@"ButtonOptions"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
                              [UnityAXElement node:[self.transform find:@"ButtonHome"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
                              [UnityAXElement node:[self.transform find:@"ButtonMatch"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
@@ -53,7 +53,7 @@
     }
     else if ( [self.gameObject.name isEqualToString:@"CanvasPopupMatch"] )
     {
-        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:4,
+        NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:4,
                              [UnityAXElement node:[self.transform find:@"Background/LabelTitle"] withClass:NSClassFromString(@"UnityAXElementText")],
                              [UnityAXElement node:[self.transform find:@"Background/ButtonRestart"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")],
                              [UnityAXElement node:[self.transform find:@"Background/ButtonNewMatch"] withClass:NSClassFromString(@"SolitaireButtonRectAXElement")],
@@ -63,7 +63,7 @@
     }
     else if ( [self.gameObject.name isEqualToString:@"CanvasPopupOptions"] )
     {
-        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:4,
+        NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:4,
                              [UnityAXElement node:[self.transform find:@"Background/LabelTitle"] withClass:NSClassFromString(@"UnityAXElementText")],
                              [UnityAXElement node:[self.transform find:@"Background/ButtonClose"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
                              [UnityAXElement node:[self.transform find:@"Background/ToggleDraw"] withClass:NSClassFromString(@"SolitaireToggleAXElement")],
@@ -73,7 +73,7 @@
     }
     else if ( [self.gameObject.name isEqualToString:@"CanvasPopupLeaderboard"] )
     {
-        NSArray *elements = [NSArray ueoArrayByIgnoringNilElementsWithCount:3,
+        NSArray *elements = [NSArray ucArrayByIgnoringNilElementsWithCount:3,
                              [UnityAXElement node:[self.transform find:@"Background/LabelTitle"] withClass:NSClassFromString(@"UnityAXElementText")],
                              [UnityAXElement node:[self.transform find:@"Background/ButtonClose"] withClass:NSClassFromString(@"SolitaireButtonRoundAXElement")],
                              [UnityAXElement node:[self.transform find:@"Background/LabelEmpty"] withClass:NSClassFromString(@"UnityAXElementText")]
@@ -90,26 +90,26 @@
 
 - (CGRect)accessibilityFrame
 {
-    NSArray<NSString *> *corners = [(UEOUnityEngineRectTransform *)[self.gameObject transform] getWorldCorners];
-    NSArray<NSArray<NSNumber *> *> *screenCorners = [corners ueoMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
-        simd_float3 vector = UEOSimdFloat3FromString(obj);
-        simd_float2 screenCorner = [UEOUnityEngineRectTransform rectUtilityWorldToScreenPoint:nil worldPoint:vector];
-        return UEOSimdFloat2ToArray(screenCorner);
+    NSArray<NSString *> *corners = [(UCRectTransform *)[self.gameObject transform] getWorldCorners];
+    NSArray<NSArray<NSNumber *> *> *screenCorners = [corners ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
+        simd_float3 vector = UCSimdFloat3FromString(obj);
+        simd_float2 screenCorner = [UCRectTransform rectUtilityWorldToScreenPoint:nil worldPoint:vector];
+        return UCSimdFloat2ToArray(screenCorner);
     }];
-    float maxX = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    float maxX = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:0];
-    }] ueoMaxNumber].floatValue;
-    float minX = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    }] ucMaxNumber].floatValue;
+    float minX = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:0];
-    }] ueoMinNumber].floatValue;
-    float maxY = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    }] ucMinNumber].floatValue;
+    float maxY = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:1];
-    }] ueoMaxNumber].floatValue;
-    float minY = [[screenCorners ueoMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
+    }] ucMaxNumber].floatValue;
+    float minY = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
         return [obj objectAtIndex:1];
-    }] ueoMinNumber].floatValue;
+    }] ucMinNumber].floatValue;
 
-    return RECT_TO_SCREEN_RECT(CGRectMake(minX, UEOUnityEngineScreen.height - maxY, maxX - minX, maxY - minY));
+    return RECT_TO_SCREEN_RECT(CGRectMake(minX, UCScreen.height - maxY, maxX - minX, maxY - minY));
 }
 
 @end
