@@ -110,9 +110,14 @@ typedef CF_ENUM(CFIndex, SolitairePresenterType)
     {
         NSArray<UEOUnityEngineComponent *> *cards = [[allCards ueoFilterObjectsUsingBlock:^BOOL(UEOUnityEngineComponent * _Nonnull item) {
             simd_float3 itemPos = [self positionForCard:item].ueoSIMDFloat3Value;
-            return itemPos.y == position.y && itemPos.x >= position.x && itemPos.x < 6.2;
+            return itemPos.y == position.y && itemPos.x >= position.x && itemPos.x < 3.2;
         }] sortedArrayUsingComparator:^NSComparisonResult(UEOUnityEngineComponent * _Nonnull obj1, UEOUnityEngineComponent * _Nonnull obj2) {
-            return ![@([self positionForCard:obj1].ueoSIMDFloat3Value.x) compare:@([self positionForCard:obj2].ueoSIMDFloat3Value.x)];
+            NSComparisonResult result = [@([self positionForCard:obj2].ueoSIMDFloat3Value.x) compare:@([self positionForCard:obj1].ueoSIMDFloat3Value.x)];
+            if ( result == NSOrderedSame )
+            {
+                result = [@(SAFE_CAST_CLASS(UEOUnityEngineSpriteRenderer, [obj1 getComponent:@"UnityEngine.SpriteRenderer"]).sortingOrder) compare: @(SAFE_CAST_CLASS(UEOUnityEngineSpriteRenderer, [obj2 getComponent:@"UnityEngine.SpriteRenderer"]).sortingOrder)];
+            }
+            return result;
         }];
         UEOUnityEngineComponent *topCard = [cards firstObject];
         
@@ -126,9 +131,7 @@ typedef CF_ENUM(CFIndex, SolitairePresenterType)
         }
         else
         {
-            NSMutableArray *firstRemoved = [cards mutableCopy];
-            [firstRemoved removeObjectAtIndex:0];
-            NSArray *behindCardNames = [firstRemoved ueoMapedObjectsWithBlock:^id _Nonnull(UEOUnityEngineComponent * _Nonnull obj) {
+            NSArray *behindCardNames = [[NSArray ueoArrayByIgnoringNilElementsWithCount:2, [cards ueoSafeObjectAtIndex:1], [cards ueoSafeObjectAtIndex:2]] ueoMapedObjectsWithBlock:^id _Nonnull(UEOUnityEngineComponent * _Nonnull obj) {
                 return [self cardLabelForGameObjectName:obj.gameObject.name];
             }];
             return [NSString stringWithFormat:@"%@ on top, %@ behind", [self cardLabelForGameObjectName:topCard.gameObject.name], [behindCardNames componentsJoinedByString:@", "]];

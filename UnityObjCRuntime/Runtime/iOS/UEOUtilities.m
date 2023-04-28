@@ -133,6 +133,15 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
 
 @implementation NSArray (UEOExtensions)
 
+- (id)ueoSafeObjectAtIndex:(NSUInteger)index
+{
+    if ( index < [self count] )
+    {
+        return [self objectAtIndex:index];
+    }
+    return nil;
+}
+
 - (NSArray *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(id item))filterBlock
 {
     if ( filterBlock == nil )

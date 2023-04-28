@@ -83,6 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSArray<__covariant ObjectType> (UEOExtensions)
+- (nullable ObjectType)ueoSafeObjectAtIndex:(NSUInteger)index;
 - (NSArray<ObjectType> *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))filterBlock;
 - (nullable ObjectType)ueoFirstObjectUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))predicateBlock;
 - (NSArray *)ueoMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
