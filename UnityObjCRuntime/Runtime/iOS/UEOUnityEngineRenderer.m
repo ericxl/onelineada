@@ -9,4 +9,14 @@
 
 @implementation UEOUnityEngineRenderer
 
+- (int)sortingOrder
+{
+    return [self safeCSharpIntForKey:@"sortingOrder"];
+}
+
+- (void)setSortingOrder:(int)sortingOrder
+{
+    [self safeSetCSharpIntForKey:@"sortingOrder" value:sortingOrder];
+}
+
 @end

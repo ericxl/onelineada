@@ -33,8 +33,12 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpStringForKeyStatic);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpObjectForKeyStatic);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpBoolForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpIntForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpFloatForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpDoubleForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector2ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector3ForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector4ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpStringForKey);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineComponentGetComponent);
@@ -129,7 +133,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
 
 @implementation NSArray (UEOExtensions)
 
-- (NSArray *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(id item, NSUInteger index))filterBlock
+- (NSArray *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(id item))filterBlock
 {
     if ( filterBlock == nil )
     {
@@ -138,7 +142,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
 
     NSMutableArray *result = [NSMutableArray array];
     [self enumerateObjectsUsingBlock:^(id __nonnull obj, NSUInteger idx, BOOL *__nonnull stop) {
-        if ( filterBlock(obj, idx) )
+        if ( filterBlock(obj) )
         {
             [result addObject:obj];
         }
@@ -252,6 +256,82 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
         }
     }
     va_end(args);
+    return result;
+}
+
+@end
+
+@implementation NSValue (UEOGExtensions)
++ (NSValue *)ueoValueWithCGPoint:(CGPoint)point
+{
+    return [NSValue valueWithBytes:&point objCType:@encode(CGPoint)];
+}
+
++ (NSValue *)ueoValueWithCGSize:(CGSize)size
+{
+    return [NSValue valueWithBytes:&size objCType:@encode(CGSize)];
+}
+
++ (NSValue *)ueoValueWithCGRect:(CGRect)rect
+{
+    return [NSValue valueWithBytes:&rect objCType:@encode(CGRect)];
+}
+
++ (NSValue *)ueoValueWithSIMDFloat2:(simd_float2)vector2
+{
+    return [NSValue valueWithBytes:&vector2 objCType:@encode(float[4])];
+}
+
++ (NSValue *)ueoValueWithSIMDFloat3:(simd_float3)vector3
+{
+    return [NSValue valueWithBytes:&vector3 objCType:@encode(float[4])];
+}
+
++ (NSValue *)ueoValueWithSIMDFloat4:(simd_float4)vector4
+{
+    return [NSValue valueWithBytes:&vector4 objCType:@encode(float[4])];
+}
+
+- (CGPoint)ueoCGPointValue
+{
+    CGPoint result;
+    [self getValue:&result size:sizeof(CGPoint)];
+    return result;
+}
+
+
+- (CGSize)ueoCGSizeValue
+{
+    CGSize result;
+    [self getValue:&result size:sizeof(CGSize)];
+    return result;
+}
+
+- (CGRect)ueoCGRectValue
+{
+    CGRect result;
+    [self getValue:&result size:sizeof(CGRect)];
+    return result;
+}
+
+- (simd_float2)ueoSIMDFloat2Value
+{
+    simd_float2 result;
+    [self getValue:&result size:sizeof(simd_float2)];
+    return result;
+}
+
+- (simd_float3)ueoSIMDFloat3Value
+{
+    simd_float3 result;
+    [self getValue:&result size:sizeof(simd_float3)];
+    return result;
+}
+
+- (simd_float4)ueoSIMDFloat4Value
+{
+    simd_float4 result;
+    [self getValue:&result size:sizeof(simd_float4)];
     return result;
 }
 
@@ -422,6 +502,27 @@ CGRect _UEORectForRects(CGRect firstArgument, ...)
     return result;
 }
 
+CGRect UEOUnionRects(NSArray<NSValue *> *rects)
+{
+    CGRect result = CGRectNull;
+    BOOL done = NO;
+    for (NSValue *value in rects)
+    {
+        CGRect next = [value ueoCGRectValue];
+        if ( !CGRectIsEmpty(next) )
+        {
+            if ( CGRectIsEmpty(result) )
+            {
+                result = next;
+            }
+            else
+            {
+                result = CGRectUnion(result, next);
+            }
+        }
+    }
+    return result;
+}
 
 @implementation _ObjCSafeOverride
 

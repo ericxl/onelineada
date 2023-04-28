@@ -210,14 +210,34 @@
     UnityEngineObjectSafeSetCSharpBoolForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
 }
 
+- (void)safeSetCSharpIntForKey:(NSString *)key value:(int)value
+{
+    UnityEngineObjectSafeSetCSharpIntForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
+}
+
 - (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value
 {
     UnityEngineObjectSafeSetCSharpFloatForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
 }
 
+- (void)safeSetCSharpDoubleForKey:(NSString *)key value:(double)value
+{
+    UnityEngineObjectSafeSetCSharpDoubleForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
+}
+
+- (void)safeSetCSharpVector2ForKey:(NSString *)key value:(simd_float2)value
+{
+    UnityEngineObjectSafeSetCSharpVector2ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UEOSimdFloat2ToString(value)));
+}
+
 - (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value
 {
     UnityEngineObjectSafeSetCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UEOSimdFloat3ToString(value)));
+}
+
+- (void)safeSetCSharpVector4ForKey:(NSString *)key value:(simd_float4)value
+{
+    UnityEngineObjectSafeSetCSharpVector4ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UEOSimdFloat4ToString(value)));
 }
 
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)value

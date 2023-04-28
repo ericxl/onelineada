@@ -35,7 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable UEOUnityEngineObject *)safeCSharpObjectForKey:(NSString *)key forType:(NSString *)cSharpType;
 
 - (void)safeSetCSharpBoolForKey:(NSString *)key value:(BOOL)value;
+- (void)safeSetCSharpIntForKey:(NSString *)key value:(int)value;
 - (void)safeSetCSharpFloatForKey:(NSString *)key value:(float)value;
+- (void)safeSetCSharpDoubleForKey:(NSString *)key value:(double)value;
 - (void)safeSetCSharpVector2ForKey:(NSString *)key value:(simd_float2)value;
 - (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value;
 - (void)safeSetCSharpVector4ForKey:(NSString *)key value:(simd_float4)value;

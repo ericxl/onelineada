@@ -49,6 +49,24 @@ namespace UnityObjCRuntime
             }
         }
 
+        internal static bool TryToVector4(this string s, out Vector4 result)
+        {
+            string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
+
+            // Parse the components as floats
+            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z)  && float.TryParse(components[3], out float w))
+            {
+                // Create a new Vector2 from the parsed values
+                result = new Vector4(x, y, z, w);
+                return true;
+            }
+            else
+            {
+                result = Vector4.zero;
+                return false;
+            }
+        }
+
         internal static string ToCGString(this Rect rect)
         {
             return "{{" + $"{rect.x}, {rect.y}" + "}, {" + $"{rect.width}, {rect.height}" + "}}";
@@ -591,6 +609,18 @@ namespace UnityObjCRuntime
             CSharpRuntimeSupportUtilities.safeSetValueForKey<bool>(obj, key, value);
         }
 
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpIntForKey(int objectInstanceID, string key, int value);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpIntForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpIntForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpIntForKey))]
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpIntForKey(int objectInstanceID, string key, int value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<int>(obj, key, value);
+        }
+
         private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey(int objectInstanceID, string key, float value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpFloatForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey))]
@@ -601,6 +631,32 @@ namespace UnityObjCRuntime
             if (obj == null) return;
 
             CSharpRuntimeSupportUtilities.safeSetValueForKey<float>(obj, key, value);
+        }
+
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpDoubleForKey(int objectInstanceID, string key, double value);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpDoubleForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpDoubleForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpFloatForKey))]
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpDoubleForKey(int objectInstanceID, string key, double value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<double>(obj, key, value);
+        }
+
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey(int objectInstanceID, string key, string value);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector2ForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey))]
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector2ForKey(int objectInstanceID, string key, string value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            if (!value.TryToVector2(out Vector2 vector2)) return;
+
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector2>(obj, key, vector2);
         }
 
         private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, string value);
@@ -615,6 +671,20 @@ namespace UnityObjCRuntime
             if (obj == null) return;
 
             CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector3>(obj, key, vector3);
+        }
+
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey(int objectInstanceID, string key, string value);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector4ForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey))]
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector4ForKey(int objectInstanceID, string key, string value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            if (!value.TryToVector4(out Vector4 vector4)) return;
+
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector4>(obj, key, vector4);
         }
 
         private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value);
@@ -756,8 +826,12 @@ namespace UnityObjCRuntime
             _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKeyStatic(_CSharpImpl_UnityEngineObjectSafeCSharpObjectForKeyStatic);
 
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpBoolForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpBoolForKey);
+            _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpIntForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpIntForKey);
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpFloatForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpFloatForKey);
+            _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpDoubleForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpDoubleForKey);
+            _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector2ForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpVector2ForKey);
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector3ForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpVector3ForKey);
+            _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector4ForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpVector4ForKey);
             _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey);
 
             _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpImpl_UnityEngineObjectFindObjectsOfType);

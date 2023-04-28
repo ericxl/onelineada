@@ -67,6 +67,7 @@ namespace Solitaire.Services
 
         public void PlayMusic(string key, float volume)
         {
+            return;
             // Try to get clip based on key
             if (!_audioMap.TryGetValue(key, out AudioClip clip))
             {

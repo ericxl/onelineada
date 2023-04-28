@@ -81,7 +81,7 @@ static NSMutableDictionary<NSNumber *, UnityAXElement *> *_gNodeMap;
     }
     else
     {
-        return [[self ueoFilterObjectsUsingBlock:^BOOL(id  _Nonnull item, NSUInteger index) {
+        return [[self ueoFilterObjectsUsingBlock:^BOOL(id  _Nonnull item) {
             return ![item accessibilityElementsHidden];
         }] sortedArrayUsingSelector:NSSelectorFromString(@"accessibilityCompareGeometry:")];
     }

@@ -34,8 +34,12 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKeyStatic, const cha
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKeyStatic, int, (const char *, const char *));
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpBoolForKey, void, (int, const char *, BOOL));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpIntForKey, void, (int, const char *, int));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpFloatForKey, void, (int, const char *, float));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpDoubleForKey, void, (int, const char *, double));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector2ForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector3ForKey, void, (int, const char *, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector4ForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpStringForKey, void, (int, const char *, const char *));
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectFindObjectsOfType, const char *, (const char *));
@@ -79,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSArray<__covariant ObjectType> (UEOExtensions)
-- (NSArray<ObjectType> *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item, NSUInteger index))filterBlock;
+- (NSArray<ObjectType> *)ueoFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))filterBlock;
 - (nullable ObjectType)ueoFirstObjectUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))predicateBlock;
 - (NSArray *)ueoMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
 - (NSArray *)ueoFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
@@ -88,6 +92,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSNumber *)ueoMaxNumber;
 - (NSNumber *)ueoMinNumber;
 + (nullable instancetype)ueoArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...;
+@end
+
+@interface NSValue (UEOGExtensions)
++ (NSValue *)ueoValueWithCGPoint:(CGPoint)point;
++ (NSValue *)ueoValueWithCGSize:(CGSize)size;
++ (NSValue *)ueoValueWithCGRect:(CGRect)rect;
++ (NSValue *)ueoValueWithSIMDFloat2:(simd_float2)vector2;
++ (NSValue *)ueoValueWithSIMDFloat3:(simd_float3)vector3;
++ (NSValue *)ueoValueWithSIMDFloat4:(simd_float4)vector4;
+
+- (CGPoint)ueoCGPointValue;
+- (CGSize)ueoCGSizeValue;
+- (CGRect)ueoCGRectValue;
+- (simd_float2)ueoSIMDFloat2Value;
+- (simd_float3)ueoSIMDFloat3Value;
+- (simd_float4)ueoSIMDFloat4Value;
 @end
 
 extern CGPoint UEOCGRectGetCenter(CGRect rect);
@@ -118,7 +138,7 @@ extern NSString *UEOFormatFloatWithPercentage(float value);
 #define __UEORectForRectsSentinel CGRectMake(CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX)
 #define UEORectForRects(firstRect, ...) _UEORectForRects(firstRect, ##__VA_ARGS__, __UEORectForRectsSentinel)
 extern CGRect _UEORectForRects(CGRect firstArgument, ...);
-
+extern CGRect UEOUnionRects(NSArray<NSValue *> *rects);
 
 #pragma mark Safe Override
 
