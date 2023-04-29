@@ -51,8 +51,8 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.xiaoyongliang.solitaireaccessibility": {
-      "version": "file:../../Packages/SolitaireAccessibility",
+    "com.xiaoyongliang.iosunityaccessibilityplugin": {
+      "version": "file:../../Packages/iOSUnityAccessibilityPlugin",
       "depth": 0,
       "source": "local",
       "dependencies": {}
