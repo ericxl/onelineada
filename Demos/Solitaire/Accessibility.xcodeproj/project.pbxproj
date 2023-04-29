@@ -1,0 +1,481 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C9AA103729FA0BDC00B02DD7 /* UnityViewAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */; };
+		C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925629F780C600166778 /* UnityAXElementText.m */; };
+		C9AA105B29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA105A29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m */; };
+		C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */; };
+		C9AA106C29FA468100B02DD7 /* SolitaireButtonRectAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */; };
+		C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */; };
+		C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */; };
+		C9AA10A729FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */; };
+		C9AA10AF29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10AE29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m */; };
+		C9AA10B129FB067000B02DD7 /* SolitairePilePresenterAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10B029FB067000B02DD7 /* SolitairePilePresenterAXElement.m */; };
+		C9AA10F429FCDA3200B02DD7 /* libUnityAXUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA10DC29FCD91100B02DD7 /* libUnityAXUtils.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C9AA10DB29FCD91100B02DD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9AA10D729FCD91100B02DD7 /* UnityAXUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C9AA107D29FA5C5A00B02DD7;
+			remoteInfo = UnityAXUtils;
+		};
+		C9AA10F529FCDA3600B02DD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9AA10D729FCD91100B02DD7 /* UnityAXUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C9AA107C29FA5C5A00B02DD7;
+			remoteInfo = UnityAXUtils;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		079C00DD26ACEA98000784CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnityViewAccessibility.m; sourceTree = "<group>"; };
+		C95E925629F780C600166778 /* UnityAXElementText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXElementText.m; sourceTree = "<group>"; };
+		C9AA105A29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireCanvasGroupAXElement.m; sourceTree = "<group>"; };
+		C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireLogoAXElement.m; sourceTree = "<group>"; };
+		C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireButtonRectAXElement.m; sourceTree = "<group>"; };
+		C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireButtonRoundAXElement.m; sourceTree = "<group>"; };
+		C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireToggleAXElement.m; sourceTree = "<group>"; };
+		C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireInGameLabelAXElement.m; sourceTree = "<group>"; };
+		C9AA10AE29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitaireMainGameParentAXElement.m; sourceTree = "<group>"; };
+		C9AA10B029FB067000B02DD7 /* SolitairePilePresenterAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SolitairePilePresenterAXElement.m; sourceTree = "<group>"; };
+		C9AA10D729FCD91100B02DD7 /* UnityAXUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnityAXUtils.xcodeproj; path = ../../Plugins/UnityAXUtils.xcodeproj; sourceTree = "<group>"; };
+		C9FBDC3F29F5A33900A306B4 /* SolitaireAccessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SolitaireAccessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4327E8826335B3600376CAB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E4327E8A26335B3600376CAB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C9FBDC3C29F5A33900A306B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9AA10F429FCDA3200B02DD7 /* libUnityAXUtils.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C94BD1B329F5DAE80084A154 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */,
+				C9AA105A29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m */,
+				C9AA106529FA431300B02DD7 /* SolitaireLogoAXElement.m */,
+				C9AA106B29FA468100B02DD7 /* SolitaireButtonRectAXElement.m */,
+				C9AA106D29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m */,
+				C9AA106F29FA51D000B02DD7 /* SolitaireToggleAXElement.m */,
+				C9AA10A629FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m */,
+				C9AA10AE29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m */,
+				C9AA10B029FB067000B02DD7 /* SolitairePilePresenterAXElement.m */,
+				C95E925629F780C600166778 /* UnityAXElementText.m */,
+			);
+			name = Source;
+			path = Accessibility/Runtime/iOS;
+			sourceTree = "<group>";
+		};
+		C9AA10D829FCD91100B02DD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9AA10DC29FCD91100B02DD7 /* libUnityAXUtils.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4327E6026335A9900376CAB = {
+			isa = PBXGroup;
+			children = (
+				C9AA10D729FCD91100B02DD7 /* UnityAXUtils.xcodeproj */,
+				C94BD1B329F5DAE80084A154 /* Source */,
+				E4327E8726335B3600376CAB /* Frameworks */,
+				E4327E6A26335A9900376CAB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E4327E6A26335A9900376CAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9FBDC3F29F5A33900A306B4 /* SolitaireAccessibility.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4327E8726335B3600376CAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07EDA6F926C0E6870002F9ED /* WebKit.framework */,
+				079C00DD26ACEA98000784CB /* StoreKit.framework */,
+				07C3307226A12AD700EBA463 /* GameKit.framework */,
+				E4327E8826335B3600376CAB /* WidgetKit.framework */,
+				E4327E8A26335B3600376CAB /* SwiftUI.framework */,
+				07D904F42635232F009276E7 /* Intents.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C9FBDC3A29F5A33900A306B4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C9FBDC3E29F5A33900A306B4 /* SolitaireAccessibility */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "SolitaireAccessibility" */;
+			buildPhases = (
+				C9FBDC3A29F5A33900A306B4 /* Headers */,
+				C9FBDC3B29F5A33900A306B4 /* Sources */,
+				C9FBDC3C29F5A33900A306B4 /* Frameworks */,
+				C9FBDC3D29F5A33900A306B4 /* Resources */,
+				C9AA110D29FCF67A00B02DD7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9AA10F629FCDA3600B02DD7 /* PBXTargetDependency */,
+			);
+			name = SolitaireAccessibility;
+			productName = UnityEngineAPI;
+			productReference = C9FBDC3F29F5A33900A306B4 /* SolitaireAccessibility.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E4327E6126335A9900376CAB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					C9FBDC3E29F5A33900A306B4 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = E4327E6426335A9900376CAB /* Build configuration list for PBXProject "Accessibility" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E4327E6026335A9900376CAB;
+			productRefGroup = E4327E6A26335A9900376CAB /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C9AA10D829FCD91100B02DD7 /* Products */;
+					ProjectRef = C9AA10D729FCD91100B02DD7 /* UnityAXUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C9FBDC3E29F5A33900A306B4 /* SolitaireAccessibility */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C9AA10DC29FCD91100B02DD7 /* libUnityAXUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUnityAXUtils.a;
+			remoteRef = C9AA10DB29FCD91100B02DD7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C9FBDC3D29F5A33900A306B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C9AA110D29FCF67A00B02DD7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python3;
+			shellScript = "import os\nimport shutil\n\nif os.path.exists(os.path.join(os.getcwd(), \"Packages/SolitaireAccessibility\")):\n    shutil.rmtree(os.path.join(os.getcwd(), \"Packages/SolitaireAccessibility\"))\nshutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), \"Plugins/UnityObjC\"), os.path.join(os.getcwd(), \"Packages/SolitaireAccessibility/UnityObjC\"))\nshutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), \"Plugins/UnityAXUtils\"), os.path.join(os.getcwd(), \"Packages/SolitaireAccessibility/UnityAXUtils\"))\nshutil.copytree(os.path.join(os.getcwd(), \"Accessibility\"), os.path.join(os.getcwd(), \"Packages/SolitaireAccessibility/Accessibility\"))\nwith open(os.path.join(os.getcwd(), \"Packages/SolitaireAccessibility/package.json\"), \"w\") as file:\n    file.write(\"\"\"{\n  \"name\": \"com.xiaoyongliang.solitaireaccessibility\",\n  \"displayName\": \"SolitaireAccessibility\",\n  \"description\": \"Provides accessibility for Solitaire\",\n  \"version\": \"1.0.0\",\n  \"unity\": \"2019.2\",\n  \"keywords\": [\n    \"accessibility\"\n  ],\n  \"author\": {\n    \"name\": \"Xiaoyong Liang\",\n    \"email\": \"jklelxy@gmail.com\",\n    \"url\": \"https://www.xiaoyongliang.com\"\n  }\n}\"\"\")\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C9FBDC3B29F5A33900A306B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9AA106C29FA468100B02DD7 /* SolitaireButtonRectAXElement.m in Sources */,
+				C9AA106629FA431300B02DD7 /* SolitaireLogoAXElement.m in Sources */,
+				C9AA10B129FB067000B02DD7 /* SolitairePilePresenterAXElement.m in Sources */,
+				C9AA107029FA51D000B02DD7 /* SolitaireToggleAXElement.m in Sources */,
+				C9AA103A29FA0BDC00B02DD7 /* UnityAXElementText.m in Sources */,
+				C9AA105B29FA384E00B02DD7 /* SolitaireCanvasGroupAXElement.m in Sources */,
+				C9AA10AF29FB052F00B02DD7 /* SolitaireMainGameParentAXElement.m in Sources */,
+				C9AA106E29FA472600B02DD7 /* SolitaireButtonRoundAXElement.m in Sources */,
+				C9AA10A729FAF90900B02DD7 /* SolitaireInGameLabelAXElement.m in Sources */,
+				C9AA103729FA0BDC00B02DD7 /* UnityViewAccessibility.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C9AA10F629FCDA3600B02DD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UnityAXUtils;
+			targetProxy = C9AA10F529FCDA3600B02DD7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C9FBDC4429F5A33900A306B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = V2HKDY23RK;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../Plugins/**";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aiassistant.UnityEngineAPI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C9FBDC4529F5A33900A306B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = V2HKDY23RK;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../Plugins/**";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aiassistant.UnityEngineAPI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E4327E7B26335A9A00376CAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E4327E7C26335A9A00376CAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C9FBDC4329F5A33900A306B4 /* Build configuration list for PBXNativeTarget "SolitaireAccessibility" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FBDC4429F5A33900A306B4 /* Debug */,
+				C9FBDC4529F5A33900A306B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4327E6426335A9900376CAB /* Build configuration list for PBXProject "Accessibility" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4327E7B26335A9A00376CAB /* Debug */,
+				E4327E7C26335A9A00376CAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E4327E6126335A9900376CAB /* Project object */;
+}

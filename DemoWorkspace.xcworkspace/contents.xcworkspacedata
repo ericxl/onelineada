@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DeskSwipe/iOSBuild/Unity-iPhone.xcodeproj">
+      location = "group:Demos/DeskSwipe/iOSBuild/Unity-iPhone.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Solitaire/iOSBuild/Unity-iPhone.xcodeproj">
+      location = "group:Demos/Solitaire/iOSBuild/Unity-iPhone.xcodeproj">
    </FileRef>
 </Workspace>
