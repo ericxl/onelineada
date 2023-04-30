@@ -12,6 +12,7 @@
 		C9AA110029FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10FF29FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m */; };
 		C9AA110329FCDF7C00B02DD7 /* UnityAXSafeCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA110229FCDF7C00B02DD7 /* UnityAXSafeCategory.m */; };
 		C9AA110629FCE2C900B02DD7 /* UnityAXFrameUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA110529FCE2C900B02DD7 /* UnityAXFrameUtilities.m */; };
+		C9DC399529FEF6E700DBB56D /* UnityViewAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DC399429FEF6E700DBB56D /* UnityViewAccessibility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		C9AA110229FCDF7C00B02DD7 /* UnityAXSafeCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXSafeCategory.m; sourceTree = "<group>"; };
 		C9AA110429FCE2C900B02DD7 /* UnityAXFrameUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAXFrameUtilities.h; sourceTree = "<group>"; };
 		C9AA110529FCE2C900B02DD7 /* UnityAXFrameUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAXFrameUtilities.m; sourceTree = "<group>"; };
+		C9DC399329FEF6E700DBB56D /* UnityViewAccessibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityViewAccessibility.h; sourceTree = "<group>"; };
+		C9DC399429FEF6E700DBB56D /* UnityViewAccessibility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityViewAccessibility.m; sourceTree = "<group>"; };
 		E4327E8826335B3600376CAB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E4327E8A26335B3600376CAB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -87,6 +90,8 @@
 				C9AA110229FCDF7C00B02DD7 /* UnityAXSafeCategory.m */,
 				C9AA110429FCE2C900B02DD7 /* UnityAXFrameUtilities.h */,
 				C9AA110529FCE2C900B02DD7 /* UnityAXFrameUtilities.m */,
+				C9DC399329FEF6E700DBB56D /* UnityViewAccessibility.h */,
+				C9DC399429FEF6E700DBB56D /* UnityViewAccessibility.m */,
 			);
 			name = Source;
 			path = UnityAXUtils/Runtime/iOS;
@@ -210,6 +215,7 @@
 				C9AA10D529FCD8E000B02DD7 /* UnityAccessibilityNode.m in Sources */,
 				C9AA110329FCDF7C00B02DD7 /* UnityAXSafeCategory.m in Sources */,
 				C9AA110629FCE2C900B02DD7 /* UnityAXFrameUtilities.m in Sources */,
+				C9DC399529FEF6E700DBB56D /* UnityViewAccessibility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

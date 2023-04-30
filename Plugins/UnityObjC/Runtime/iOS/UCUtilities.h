@@ -76,6 +76,8 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneName, const char *,
 #pragma mark Camera
 CSHARP_BRIDGE_INTERFACE(UnityEngineCameraWorldToScreenPoint, const char *, (int, const char *));
 
+extern BOOL _UEOCSharpFunctionsRegistrationCompleted(void);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (UEOExtensions)

@@ -65,6 +65,68 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
 
+BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
+{
+    return YES
+    && UnityEngineObjectTypeFullName_CSharpFunc != NULL
+    && UnityEngineObjectTypeFullName_CSharpFunc != NULL
+    && UnityEngineObjectFindObjectsOfType_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVoidForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpBoolForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpIntForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpFloatForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpDoubleForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVector2ForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVector3ForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVector4ForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpRectForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpStringForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpObjectForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpBoolForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpIntForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpFloatForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpDoubleForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVector2ForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVector3ForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpVector4ForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpRectForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpStringForKeyStatic_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpObjectForKeyStatic_CSharpFunc != NULL
+
+    && UnityEngineObjectSafeSetCSharpBoolForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpIntForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpFloatForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpDoubleForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpVector2ForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpVector3ForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpVector4ForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpObjectForKey_CSharpFunc != NULL
+
+    && UnityEngineComponentGetComponent_CSharpFunc != NULL
+    && UnityEngineComponentGetComponents_CSharpFunc != NULL
+    && UnityEngineComponentGetComponentInChildren_CSharpFunc != NULL
+    && UnityEngineComponentGetComponentsInChildren_CSharpFunc != NULL
+    && UnityEngineComponentGetComponentInParent_CSharpFunc != NULL
+    && UnityEngineComponentGetComponentsInParent_CSharpFunc != NULL
+
+    && UnityEngineGameObjectFind_CSharpFunc != NULL
+    && UnityEngineGameObjectAddComponent_CSharpFunc != NULL
+    && UnityEngineGameObjectGetComponent_CSharpFunc != NULL
+
+    && UnityEngineTransformFind_CSharpFunc != NULL
+
+    && UnityEngineRectTransformGetWorldCorners_CSharpFunc != NULL
+    && UnityEngineRectTransformUtilityWorldToScreenPoint_CSharpFunc != NULL
+
+    && UnityEngineSceneManagerGetActiveSceneIsLoaded_CSharpFunc != NULL
+    && UnityEngineSceneManagerGetActiveSceneName_CSharpFunc != NULL
+
+    && UnityEngineCameraWorldToScreenPoint_CSharpFunc != NULL
+    ;
+}
+
 @implementation NSString (UEOExtensions)
 
 - (NSArray<NSNumber *> *)ucToNumberArray

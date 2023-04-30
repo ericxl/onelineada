@@ -14,5 +14,6 @@
 #import "NSArray+UnityAccessibilityNode.h"
 #import "UnityAXSafeCategory.h"
 #import "UnityAXFrameUtilities.h"
+#import "UnityViewAccessibility.h"
 
 #endif /* UnityAXUtils_h */

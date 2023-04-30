@@ -10,49 +10,13 @@
 #import <dlfcn.h>
 #import "UnityAXUtils.h"
 
-@interface _AXGameGlue: NSObject
-@end
-@implementation _AXGameGlue
-+ (void)load
+@implementation UnityViewAccessibility (AXPriv)
+
+- (NSArray *)unityViewAccessibilityElements
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        UnityAXSafeCategoryInstall(@"UnityViewAccessibility");
-    });
-}
-@end
-
-UnityAXDefineSafeCategory(@"UnityView", UnityViewAccessibility)
-
-@implementation UnityViewAccessibility
-
-+ (void)unityAXCategorySetupExistingObjects
-{
-    Boolean (*axEnabled)(void) = dlsym(dlopen("usr/lib/libAccessibility.dylib", RTLD_NOW), "_AXSApplicationAccessibilityEnabled");
-    if ( axEnabled() )
+    if ( ![UCScene.activeSceneName isEqualToString:@"Game"] )
     {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
-        });
-    }
-}
-
-// by default Unity engine sets this to YES
-- (BOOL)isAccessibilityElement
-{
-    return NO;
-}
-
-// by default Unity engine sets this to direct touch container, so we need to reset
-- (UIAccessibilityTraits)accessibilityTraits
-{
-    return UIAccessibilityTraitNone;
-}
-
-- (NSArray *)accessibilityElements
-{
-    if ( ![UCScene activeSceneIsLoaded] || ![UCScene.activeSceneName isEqualToString:@"Game"] )
-    {
-        return [super accessibilityElements];
+        return nil;
     }
     NSArray *elements =
     [NSArray ucArrayByIgnoringNilElementsWithCount:8,
