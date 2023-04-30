@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9472F6029FF2D7600376C20 /* UCUIGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = C9472F5F29FF2D7600376C20 /* UCUIGraphic.m */; };
 		C9AA108629FA5C9200B02DD7 /* UCUIToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA107429FA53DC00B02DD7 /* UCUIToggle.m */; };
 		C9AA108729FA5C9200B02DD7 /* UCObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBDC3329F5A2EB00A306B4 /* UCObject.m */; };
 		C9AA108829FA5C9200B02DD7 /* UCTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E925029F65F8300166778 /* UCTransform.m */; };
@@ -46,6 +47,8 @@
 		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		C9472F5E29FF2D7600376C20 /* UCUIGraphic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUIGraphic.h; sourceTree = "<group>"; };
+		C9472F5F29FF2D7600376C20 /* UCUIGraphic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCUIGraphic.m; sourceTree = "<group>"; };
 		C94BD1AC29F5D4340084A154 /* UCGameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCGameObject.h; sourceTree = "<group>"; };
 		C94BD1AD29F5D4340084A154 /* UCGameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCGameObject.m; sourceTree = "<group>"; };
 		C955384A29F867FE00C59CB2 /* UCUIText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCUIText.h; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				C955385329F8696D00C59CB2 /* UCUIImage.m */,
 				C9AA10A829FAFF6A00B02DD7 /* UCUIButton.h */,
 				C9AA10A929FAFF6A00B02DD7 /* UCUIButton.m */,
+				C9472F5E29FF2D7600376C20 /* UCUIGraphic.h */,
+				C9472F5F29FF2D7600376C20 /* UCUIGraphic.m */,
 				C9AA107329FA53DC00B02DD7 /* UCUIToggle.h */,
 				C9AA107429FA53DC00B02DD7 /* UCUIToggle.m */,
 				C9AA10AB29FB004500B02DD7 /* UCUISelectable.h */,
@@ -251,6 +256,7 @@
 				C9AA108C29FA5C9200B02DD7 /* UCComponent.m in Sources */,
 				C9AA108A29FA5C9200B02DD7 /* UCScreen.m in Sources */,
 				C9AA108B29FA5C9200B02DD7 /* UCCanvas.m in Sources */,
+				C9472F6029FF2D7600376C20 /* UCUIGraphic.m in Sources */,
 				C9AA10AD29FB004500B02DD7 /* UCUISelectable.m in Sources */,
 				C9AA108729FA5C9200B02DD7 /* UCObject.m in Sources */,
 				C9AA108629FA5C9200B02DD7 /* UCUIToggle.m in Sources */,

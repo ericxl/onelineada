@@ -54,7 +54,7 @@ namespace UnityObjC
             string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
 
             // Parse the components as floats
-            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z)  && float.TryParse(components[3], out float w))
+            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z) && float.TryParse(components[3], out float w))
             {
                 // Create a new Vector2 from the parsed values
                 result = new Vector4(x, y, z, w);
@@ -144,6 +144,38 @@ namespace UnityObjC
             }
         }
 
+        static bool IsGenericTypeAssignableFrom<T>(Type type)
+        {
+            if (typeof(T).IsAssignableFrom(type))
+            {
+                return true;
+            }
+            if (type.IsEnum)
+            {
+                return typeof(T) == typeof(string) || typeof(T) == typeof(int);
+            }
+            return false;
+        }
+
+        static T CastValueToGenericType<T>(object obj)
+        {
+            if (obj.GetType().IsEnum)
+            {
+                if (typeof(T) == typeof(string))
+                {
+                    object str = obj.ToString();
+                    return (T)str;
+                }
+                else if (typeof(T) == typeof(int))
+                {
+                    int number = (int)obj;
+                    object numberObj = number;
+                    return (T)numberObj;
+                } 
+            }
+            return (T)obj;
+        }
+
         public static T safeValueForKey<T>(object obj, string methodName)
         {
             var type = obj.GetType();
@@ -151,21 +183,21 @@ namespace UnityObjC
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetProperty);
             var fieldInfo = type.GetField(methodName);
             var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
-            if (methodInfo != null && typeof(T).IsAssignableFrom(methodInfo.ReturnType))
+            if (methodInfo != null && IsGenericTypeAssignableFrom<T>(methodInfo.ReturnType))
             {
-                return (T)methodInfo.Invoke(obj, null);
+                return CastValueToGenericType<T>(methodInfo.Invoke(obj, null));
             }
-            else if (propertyInfo != null && propertyInfo.CanRead && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom<T>(propertyInfo.PropertyType))
             {
-                return (T)propertyInfo.GetValue(obj);
+                return CastValueToGenericType<T>(propertyInfo.GetValue(obj));
             }
-            else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
+            else if (fieldInfo != null && IsGenericTypeAssignableFrom<T>(fieldInfo.FieldType))
             {
-                return (T)fieldInfo.GetValue(obj);
+                return CastValueToGenericType<T>(fieldInfo.GetValue(obj));
             }
             else if (indexerInfo != null && indexerInfo.CanRead && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
             {
-                return (T)indexerInfo.GetValue(obj, new string[] { methodName });
+                return CastValueToGenericType<T>(indexerInfo.GetValue(obj, new string[] { methodName }));
             }
             return default(T);
         }
@@ -175,17 +207,17 @@ namespace UnityObjC
             var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             var fieldInfo = type.GetField(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-            if (methodInfo != null && typeof(T).IsAssignableFrom(methodInfo.ReturnType))
+            if (methodInfo != null && IsGenericTypeAssignableFrom<T>(methodInfo.ReturnType))
             {
-                return (T)methodInfo.Invoke(null, null);
+                return CastValueToGenericType<T>(methodInfo.Invoke(null, null));
             }
-            else if (propertyInfo != null && propertyInfo.CanRead && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom<T>(propertyInfo.PropertyType))
             {
-                return (T)propertyInfo.GetValue(null);
+                return CastValueToGenericType<T>(propertyInfo.GetValue(null));
             }
-            else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
+            else if (fieldInfo != null && IsGenericTypeAssignableFrom<T>(fieldInfo.FieldType))
             {
-                return (T)fieldInfo.GetValue(null);
+                return CastValueToGenericType<T>(fieldInfo.GetValue(null));
             }
             return default(T);
         }

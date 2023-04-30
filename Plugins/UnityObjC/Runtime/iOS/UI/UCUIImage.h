@@ -5,11 +5,11 @@
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UCMonoBehaviour.h"
+#import "UCUIGraphic.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCUIImage : UCMonoBehaviour
+@interface UCUIImage : UCUIGraphic
 
 @property (nonatomic, assign) float fillAmount;
 

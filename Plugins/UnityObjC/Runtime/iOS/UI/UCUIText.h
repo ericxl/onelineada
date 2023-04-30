@@ -5,11 +5,11 @@
 //  Created by Eric Liang on 4/25/23.
 //
 
-#import "UCMonoBehaviour.h"
+#import "UCUIGraphic.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCUIText : UCMonoBehaviour
+@interface UCUIText : UCUIGraphic
 
 @property (nonatomic, strong, nullable) NSString *text;
 
