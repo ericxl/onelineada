@@ -5,16 +5,15 @@ import sys
 import shutil
 
 # print("helo" + os.environ["BUILT_PRODUCTS_DIR"])
-
-if os.path.exists(os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin")):
-    shutil.rmtree(os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin"))
-shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityObjC/Runtime"), os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/UnityObjC/Runtime"))
-shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityObjC/Source"), os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/UnityObjC/Runtime/iOS"))
-shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityAXUtils/Source"), os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/UnityAXUtils/Runtime/iOS"))
+plugin_folder = os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin");
+if os.path.exists(plugin_folder):
+    shutil.rmtree(plugin_folder)
+shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityObjC/Runtime"), os.path.join(plugin_folder, "UnityObjC/Runtime"))
+shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityAXUtils/Runtime/iOS"), os.path.join(plugin_folder, "UnityAXUtils/Runtime/iOS"))
 # shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityObjC/Source"), os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/UnityObjC/Runtime/iOS"))
 # shutil.copytree(os.environ["BUILT_PRODUCTS_DIR"], os.path.join(os.getcwd(),  os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/Runtime/iOS")))
 # shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityAXUtils"), os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/UnityAXUtils"))
-shutil.copytree(os.path.join(os.getcwd(), "Accessibility"), os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/Accessibility/Runtime/iOS"))
+shutil.copytree(os.path.join(os.getcwd(), "Accessibility/Runtime/iOS"), os.path.join(plugin_folder, "Accessibility/Runtime/iOS"))
 with open(os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin/package.json"), "w") as file:
     file.write("""{
   "name": "com.xiaoyongliang.iosunityaccessibilityplugin",

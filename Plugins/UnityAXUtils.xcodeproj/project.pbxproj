@@ -89,7 +89,7 @@
 				C9AA110529FCE2C900B02DD7 /* UnityAXFrameUtilities.m */,
 			);
 			name = Source;
-			path = UnityAXUtils/Source;
+			path = UnityAXUtils/Runtime/iOS;
 			sourceTree = "<group>";
 		};
 		C9AA10E329FCD95700B02DD7 /* Products */ = {

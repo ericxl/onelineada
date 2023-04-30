@@ -75,7 +75,7 @@
 				C9AA111429FCFEC200B02DD7 /* UnityAXElementText.m */,
 			);
 			name = Source;
-			path = Accessibility;
+			path = Accessibility/Runtime/iOS;
 			sourceTree = "<group>";
 		};
 		C9AA10D829FCD91100B02DD7 /* Products */ = {

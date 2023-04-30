@@ -92,8 +92,20 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.xiaoyongliang.deskswipeaccessibility": {
-      "version": "file:../../Packages/DeskSwipeAccessibility",
+    "com.xiaoyongliang.iosunityaccessibilityplugin": {
+      "version": "file:../../Accessibility",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.xiaoyongliang.unityaxutils": {
+      "version": "file:../../../../Plugins/UnityAXUtils",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.xiaoyongliang.unityobjc": {
+      "version": "file:../../../../Plugins/UnityObjC",
       "depth": 0,
       "source": "local",
       "dependencies": {}

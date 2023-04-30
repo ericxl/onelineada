@@ -111,7 +111,7 @@ namespace UnityObjC
             return "[" + joined + "]";
         }
 
-        internal static UnityEngine.Object FindObjectFromInstanceID(int iid)
+        public static UnityEngine.Object FindObjectFromInstanceID(int iid)
         {
             return (UnityEngine.Object)typeof(UnityEngine.Object)
                     .GetMethod("FindObjectFromInstanceID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
@@ -128,11 +128,27 @@ namespace UnityObjC
             }
         }
 
+        public static void PrintProperties(object obj)
+        {
+            if (obj == null) return;
+
+            Type objType = obj.GetType();
+            PropertyInfo[] properties = objType.GetProperties();
+
+            Debug.Log($"Properties of object {objType.Name}:");
+            foreach (PropertyInfo property in properties)
+            {
+                string propertyName = property.Name;
+                object propertyValue = property.GetValue(obj);
+                Debug.Log($"{propertyName}: {propertyValue}");
+            }
+        }
+
         public static T safeValueForKey<T>(object obj, string methodName)
         {
             var type = obj.GetType();
             var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
-            var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetProperty);
             var fieldInfo = type.GetField(methodName);
             var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
             if (methodInfo != null && typeof(T).IsAssignableFrom(methodInfo.ReturnType))
@@ -163,7 +179,7 @@ namespace UnityObjC
             {
                 return (T)methodInfo.Invoke(null, null);
             }
-            else if (propertyInfo != null && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+            else if (propertyInfo != null && propertyInfo.CanRead && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
             {
                 return (T)propertyInfo.GetValue(null);
             }
@@ -503,8 +519,9 @@ namespace UnityObjC
             if (string.IsNullOrEmpty(key)) return 0;
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return 0;
+            var result = CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(obj, key);
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<UnityEngine.Object>(obj, key)?.GetInstanceID() ?? 0;
+            return result?.GetInstanceID() ?? 0;
         }
 
         private delegate bool _CSharpDelegate_UnityEngineObjectSafeCSharpBoolForKeyStatic(string typeName, string key);

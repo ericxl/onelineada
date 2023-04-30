@@ -157,7 +157,7 @@
 				C9AA10B829FB2D5400B02DD7 /* UCSpriteRenderer.m */,
 			);
 			name = Source;
-			path = UnityObjC/Source;
+			path = UnityObjC/Runtime/iOS;
 			sourceTree = "<group>";
 		};
 		E4327E6026335A9900376CAB = {
