@@ -13,7 +13,7 @@
 
 - (NSArray *)unityViewAccessibilityElements
 {
-    if ( ![UCScene.activeSceneName isEqualToString:@"Main"] )
+    if ( ![UCScene.activeSceneName isEqualToString:@"GameplayScene"] )
     {
         return nil;
     }
