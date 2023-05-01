@@ -6,11 +6,19 @@ using UnityEngine;
 
 namespace UnityObjC
 {
-    public static class CSharpRuntimeSupportUtilities
+    internal static class CSharpRuntimeSupportUtilities
     {
         internal static Type GetSafeTypeName(string typeName)
         {
-            return Type.GetType(typeName);
+            var type = Type.GetType(typeName);
+            if (type != null) return type;
+            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                type = a.GetType(typeName);
+                if (type != null)
+                    return type;
+            }
+            return null;
         }
 
         internal static bool TryToVector2(this string s, out Vector2 result)
@@ -111,14 +119,14 @@ namespace UnityObjC
             return "[" + joined + "]";
         }
 
-        public static UnityEngine.Object FindObjectFromInstanceID(int iid)
+        internal static UnityEngine.Object FindObjectFromInstanceID(int iid)
         {
             return (UnityEngine.Object)typeof(UnityEngine.Object)
                     .GetMethod("FindObjectFromInstanceID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
                     .Invoke(null, new object[] { iid });
         }
 
-        public static void safeVoidForKey(object obj, string methodName)
+        internal static void safeVoidForKey(object obj, string methodName)
         {
             var type = obj.GetType();
             var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
@@ -128,7 +136,7 @@ namespace UnityObjC
             }
         }
 
-        public static void PrintProperties(object obj)
+        internal static void PrintProperties(object obj)
         {
             if (obj == null) return;
 
@@ -144,7 +152,16 @@ namespace UnityObjC
             }
         }
 
-        static bool IsGenericTypeAssignableFrom<T>(Type type)
+        internal static bool ObjectIsKindOfType<T>(object obj)
+        {
+            if (typeof(T).IsAssignableFrom(obj.GetType()))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        internal static bool IsGenericTypeAssignableFrom<T>(Type type)
         {
             if (typeof(T).IsAssignableFrom(type))
             {
@@ -157,7 +174,7 @@ namespace UnityObjC
             return false;
         }
 
-        static T CastValueToGenericType<T>(object obj)
+        internal static T CastValueToGenericType<T>(object obj)
         {
             if (obj.GetType().IsEnum)
             {
@@ -176,7 +193,7 @@ namespace UnityObjC
             return (T)obj;
         }
 
-        public static T safeValueForKey<T>(object obj, string methodName)
+        internal static T safeValueForKey<T>(object obj, string methodName)
         {
             var type = obj.GetType();
             var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
@@ -202,7 +219,7 @@ namespace UnityObjC
             return default(T);
         }
 
-        public static T safeValueForKeyStatic<T>(Type type, string methodName)
+        internal static T safeValueForKeyStatic<T>(Type type, string methodName)
         {
             var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
@@ -222,7 +239,7 @@ namespace UnityObjC
             return default(T);
         }
 
-        public static void safeSetValueForKey<T>(object obj, string methodName, T value)
+        internal static void safeSetValueForKey<T>(object obj, string methodName, T value)
         {
             var type = obj.GetType();
             var methodInfo = type.GetMethod(methodName, new[] { typeof(T) });
@@ -248,7 +265,7 @@ namespace UnityObjC
         }
     }
 
-    static class ObjcRuntimeUnityEngineGameObject
+    internal static class ObjcRuntimeUnityEngineGameObject
     {
         private delegate int _CSharpDelegate_UnityEngineGameObjectFind(string name);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpDelegate_UnityEngineGameObjectFind func);
@@ -265,7 +282,7 @@ namespace UnityObjC
         private static int _CSharpImpl_UnityEngineGameObjectAddComponent(int objectInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null || obj is not GameObject) return 0;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<GameObject>(obj)) return 0;
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return 0;
 
@@ -279,7 +296,7 @@ namespace UnityObjC
         private static int _CSharpImpl_UnityEngineGameObjectGetComponent(int objectInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null || obj is not GameObject) return 0;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<GameObject>(obj)) return 0;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return 0;
@@ -299,7 +316,7 @@ namespace UnityObjC
         }
     }
 
-    static class ObjcRuntimeUnityEngineTransform
+    internal static class ObjcRuntimeUnityEngineTransform
     {
         private delegate int _CSharpDelegate_UnityEngineTransformFind(int transformInstanceID, string childName);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineTransformFind(_CSharpDelegate_UnityEngineTransformFind func);
@@ -307,7 +324,7 @@ namespace UnityObjC
         private static int _CSharpImpl_UnityEngineTransformFind(int transformInstanceID, string childName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(transformInstanceID);
-            if (obj == null || obj is not Transform) return 0;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Transform>(obj)) return 0;
 
             var child = (obj as Transform).Find(childName);
             return child ? child.GetInstanceID() : 0;
@@ -322,7 +339,7 @@ namespace UnityObjC
         }
     }
 
-    static class ObjcRuntimeUnityEngineRectTransform
+    internal static class ObjcRuntimeUnityEngineRectTransform
     {
         private delegate string _CSharpDelegate_UnityEngineRectTransformGetWorldCorners(int objectInstanceID);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners func);
@@ -330,7 +347,7 @@ namespace UnityObjC
         private static string _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null || obj is not RectTransform) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<RectTransform>(obj)) return null;
 
             Vector3[] corners = new Vector3[4];
             (obj as RectTransform).GetWorldCorners(corners);
@@ -343,7 +360,7 @@ namespace UnityObjC
         private static string _CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, string vector3String)
         {
             var camera = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(cameraInstanceID);
-            if (camera != null && camera is not Camera) return Vector2.zero.ToString();
+            if (camera != null && !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Camera>(camera)) return Vector2.zero.ToString();
             if (!vector3String.TryToVector3(out Vector3 vector3)) return Vector2.zero.ToString();
 
             return RectTransformUtility.WorldToScreenPoint((Camera)camera, vector3).ToString();
@@ -359,7 +376,7 @@ namespace UnityObjC
         }
     }
 
-    static class ObjcRuntimeUnityEngineScene
+    internal static class ObjcRuntimeUnityEngineScene
     {
         private delegate bool _CSharpDelegate_UnityEngineSceneManagerGetActiveSceneIsLoaded();
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneIsLoaded(_CSharpDelegate_UnityEngineSceneManagerGetActiveSceneIsLoaded func);
@@ -387,7 +404,7 @@ namespace UnityObjC
         }
     }
 
-    static class ObjcRuntimeUnityEngineCamera
+    internal static class ObjcRuntimeUnityEngineCamera
     {
         private delegate string _CSharpDelegate_UnityEngineCameraWorldToScreenPoint(int cameraInstanceID, string vector3String);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineCameraWorldToScreenPoint(_CSharpDelegate_UnityEngineCameraWorldToScreenPoint func);
@@ -395,7 +412,7 @@ namespace UnityObjC
         private static string _CSharpImpl_UnityEngineCameraWorldToScreenPoint(int cameraInstanceID, string vector3String)
         {
             var camera = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(cameraInstanceID);
-            if (camera == null || camera is not Camera) return Vector2.zero.ToString();
+            if (camera == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Camera>(camera)) return Vector2.zero.ToString();
             if (!vector3String.TryToVector3(out Vector3 vector3)) return Vector2.zero.ToString();
 
             return (camera as Camera).WorldToScreenPoint(vector3).ToString();
@@ -410,7 +427,7 @@ namespace UnityObjC
         }
     }
 
-    static class CSharpRuntimeSupport
+    internal static class CSharpRuntimeSupport
     {
         private delegate string _CSharpDelegate_UnityEngineObjectTypeFullName(int objectInstanceID);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpDelegate_UnityEngineObjectTypeFullName func);
@@ -801,7 +818,7 @@ namespace UnityObjC
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return;
             var objectValue = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(value);
-            if (obj != null && objectValue is not UnityEngine.Object) return;
+            if (obj != null && !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<UnityEngine.Object>(obj)) return;
 
             CSharpRuntimeSupportUtilities.safeSetValueForKey<UnityEngine.Object>(obj, key, objectValue);
         }
@@ -823,7 +840,7 @@ namespace UnityObjC
         private static int _CSharpImpl_UnityEngineComponentGetComponent(int componnetInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || obj is not Component) return 0;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return 0;
@@ -838,7 +855,7 @@ namespace UnityObjC
         private static string _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || obj is not Component) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return null;
@@ -852,7 +869,7 @@ namespace UnityObjC
         private static int _CSharpImpl_UnityEngineComponentGetComponentInChildren(int componnetInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || obj is not Component) return 0;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return 0;
@@ -867,7 +884,7 @@ namespace UnityObjC
         private static string _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || obj is not Component) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return null;
@@ -881,7 +898,7 @@ namespace UnityObjC
         private static int _CSharpImpl_UnityEngineComponentGetComponentInParent(int componnetInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || obj is not Component) return 0;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return 0;
@@ -896,7 +913,7 @@ namespace UnityObjC
         private static string _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || obj is not Component) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return null;

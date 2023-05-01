@@ -26,8 +26,9 @@ public class AccessibilitySetup : MonoBehaviour
 
 
 
-        var textObject = GameObject.Find("/HUD Canvas");
-
+        var textObject = GameObject.Find("/HUD Canvas").transform;
+        //Debug.Log("textObject is component:" + CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(textObject));
+        //Debug.Log("parent id: " + CSharpRuntimeSupport._CSharpImpl_UnityEngineComponentGetComponentInParent(textObject.GetInstanceID(), "UnityEngine.Canvas"));
 
 
 
@@ -42,8 +43,8 @@ public class AccessibilitySetup : MonoBehaviour
         //Debug.Log(tmpro.gameObject.transform);
         //Debug.Log("reflectedText: " + CSharpRuntimeSupportUtilities.safeValueForKey<string>(node, "ClassName"));
         //tmpro.ClassName
-        var transform = CSharpRuntimeSupportUtilities.safeValueForKey<int>(tmpro, "renderMode");
-        Debug.Log("reflectedTransform: " + transform.ToString());
+        //var transform = CSharpRuntimeSupportUtilities.safeValueForKey<int>(tmpro, "renderMode");
+        //Debug.Log("reflectedTransform: " + transform.ToString());
         ////Camera.main.
         ////Debug.Log("reflectedTransformPos: " + CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(node, "nodePosition"));
 
