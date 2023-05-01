@@ -5,7 +5,7 @@ import sys
 import shutil
 
 # print("helo" + os.environ["BUILT_PRODUCTS_DIR"])
-plugin_folder = os.path.join(os.getcwd(), "Packages/iOSUnityAccessibilityPlugin");
+plugin_folder = os.path.join(os.getcwd(), "unity_package/iOSUnityAccessibilityPlugin");
 if os.path.exists(plugin_folder):
     shutil.rmtree(plugin_folder)
 shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "Plugins/UnityObjC/Runtime"), os.path.join(plugin_folder, "UnityObjC/Runtime"))
