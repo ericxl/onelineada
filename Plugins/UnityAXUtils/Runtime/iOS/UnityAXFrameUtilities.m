@@ -15,7 +15,7 @@
 {
     NSArray<NSString *> *corners = [self getWorldCorners];
     UCCanvas *canvas = SAFE_CAST_CLASS(UCCanvas, [self.transform getComponentInParent:@"UnityEngine.Canvas"]);
-    UCCamera *camera = [canvas renderMode] == UCCanvasRenderModeScreenSpaceCamera ? canvas.worldCamera : nil;
+    UCCamera *camera = [canvas renderMode] != UCCanvasRenderModeScreenSpaceOverlay ? canvas.worldCamera : nil;
     NSArray<NSArray<NSNumber *> *> *screenCorners = [corners ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
         simd_float3 vector = UCSimdFloat3FromString(obj);
         simd_float2 screenCorner = [UCRectTransform rectUtilityWorldToScreenPoint:camera worldPoint:vector];
