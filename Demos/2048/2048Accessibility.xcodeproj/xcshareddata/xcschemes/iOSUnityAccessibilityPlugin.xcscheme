@@ -17,7 +17,7 @@
                BlueprintIdentifier = "C9DC395129FDA6DF00DBB56D"
                BuildableName = "libiOSUnityAccessibilityPlugin.a"
                BlueprintName = "iOSUnityAccessibilityPlugin"
-               ReferencedContainer = "container:Accessibility.xcodeproj">
+               ReferencedContainer = "container:2048Accessibility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -56,7 +56,7 @@
             BlueprintIdentifier = "C9DC395129FDA6DF00DBB56D"
             BuildableName = "libiOSUnityAccessibilityPlugin.a"
             BlueprintName = "iOSUnityAccessibilityPlugin"
-            ReferencedContainer = "container:Accessibility.xcodeproj">
+            ReferencedContainer = "container:2048Accessibility.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

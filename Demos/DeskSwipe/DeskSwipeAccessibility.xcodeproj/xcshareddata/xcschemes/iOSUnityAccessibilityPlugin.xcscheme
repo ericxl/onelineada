@@ -17,7 +17,7 @@
                BlueprintIdentifier = "C9DC395129FDA6DF00DBB56D"
                BuildableName = "libiOSUnityAccessibilityPlugin.a"
                BlueprintName = "iOSUnityAccessibilityPlugin"
-               ReferencedContainer = "container:Accessibility.xcodeproj">
+               ReferencedContainer = "container:DeskSwipeAccessibility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,15 +50,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C9DC395129FDA6DF00DBB56D"
-            BuildableName = "libiOSUnityAccessibilityPlugin.a"
-            BlueprintName = "iOSUnityAccessibilityPlugin"
-            ReferencedContainer = "container:Accessibility.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
