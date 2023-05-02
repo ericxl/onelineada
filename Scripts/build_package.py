@@ -23,7 +23,7 @@ else:
 with open(os.path.join(plugin_folder, "package.json"), "w") as file:
     file.write(f'''{{
   "name": "com.ai.revui.unityplugin.{xcodeproj_name.lower()}",
-  "displayName": , "{plugin_name}"
+  "displayName": "{plugin_name}",
   "description": "Provides iOS accessibility for this project",
   "version": "1.0.0",
   "unity": "2019.2",
