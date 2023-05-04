@@ -52,6 +52,7 @@ static NSMutableDictionary<NSNumber *, UnityAccessibilityNode *> *_gNodeMap;
         UnityAccessibilityNode *node = [cls new];
         node->_instanceID = component.instanceID;
         [_gNodeMap setObject:node forKey:@(component.instanceID)];
+        object = node;
     }
     return object;
 }
