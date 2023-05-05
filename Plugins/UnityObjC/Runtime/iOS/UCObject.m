@@ -74,6 +74,10 @@
     {
         cls = UCUIText.class;
     }
+    else if ( [typeFullName isEqualToString:@"TMPro.TextMeshProUGUI"] )
+    {
+        cls = UCTMProTextUGUI.class;
+    }
     else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Image"] )
     {
         cls = UCUIImage.class;
@@ -81,6 +85,10 @@
     else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Button"] )
     {
         cls = UCUIButton.class;
+    }
+    else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Outline"] )
+    {
+        cls = UCUIOutline.class;
     }
     else if ( [typeFullName isEqualToString:@"UnityEngine.UI.Toggle"] )
     {

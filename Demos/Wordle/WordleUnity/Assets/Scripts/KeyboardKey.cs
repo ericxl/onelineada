@@ -52,22 +52,11 @@ public class KeyboardKey : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => {
             iOSInput.pressedKey = GetLetter();
         });
-        //EventTrigger trigger = gameObject.AddComponent<EventTrigger>();
-        //var pointerDown = new EventTrigger.Entry();
-        //pointerDown.eventID = EventTriggerType.PointerDown;
-        //pointerDown.callback.AddListener((e) =>
-        //{
-        //    iOSInput.pressedKey = GetLetter();
-        //});
-        //trigger.triggers.Add(pointerDown);
-
-        //var pointerUp = new EventTrigger.Entry();
-        //pointerUp.eventID = EventTriggerType.PointerUp;
-        //pointerUp.callback.AddListener((e) =>
-        //{
-        //    iOSInput.pressedKey = null;
-        //});
-        //trigger.triggers.Add(pointerUp);
+        Debug.Log(Color.white.ToString());
+        //FontStyle s = GetComponent<Text>().fontStyle;
+        //if (GetComponentInChildren<TextMeshProUGUI>() != null)
+        //    UnityObjC.CSharpRuntimeSupportUtilities.safeSetValueForKey<int>(GetComponentInChildren<TextMeshProUGUI>(), "fontStyle", 1);
+        //Color s1 = GetComponent<UnityEngine.UI.Outline>();
     }
     private void LateUpdate()
     {

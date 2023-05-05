@@ -17,7 +17,27 @@
 
 - (void)setText:(NSString *)text
 {
-    return [self safeSetCSharpStringForKey:@"text" value:text];
+    [self safeSetCSharpStringForKey:@"text" value:text];
+}
+
+- (int)fontSize
+{
+    return [self safeCSharpIntForKey:@"fontSize"];
+}
+
+- (void)setFontSize:(int)fontSize
+{
+    [self safeSetCSharpIntForKey:@"fontSize" value:fontSize];
+}
+
+- (UCUIFontStyle)fontStyle
+{
+    return [self safeCSharpIntForKey:@"fontStyle"];
+}
+
+- (void)setFontStyle:(UCUIFontStyle)fontStyle
+{
+    [self safeSetCSharpIntForKey:@"fontStyle" value:(int)fontStyle];
 }
 
 @end

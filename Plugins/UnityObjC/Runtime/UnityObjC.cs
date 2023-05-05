@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UnityObjC
 {
-    internal static class CSharpRuntimeSupportUtilities
+    public static class CSharpRuntimeSupportUtilities
     {
         internal static Type GetSafeTypeName(string typeName)
         {
@@ -93,6 +93,24 @@ namespace UnityObjC
             }
         }
 
+        internal static bool TryToColor(this string s, out Color result)
+        {
+            string[] components = s.Trim(new char[] { 'R', 'G', 'B', 'A', '(', ')'}).Split(',');
+
+            // Parse the components as floats
+            if (float.TryParse(components[0], out float r) && float.TryParse(components[1], out float g) && float.TryParse(components[2], out float b) && float.TryParse(components[3], out float a))
+            {
+                // Create a new Vector2 from the parsed values
+                result = new Color(r, g, b, a);
+                return true;
+            }
+            else
+            {
+                result = Color.white;
+                return false;
+            }
+        }
+
         internal static string ToCGString(this Rect rect)
         {
             return "{{" + $"{rect.x}, {rect.y}" + "}, {" + $"{rect.width}, {rect.height}" + "}}";
@@ -161,15 +179,15 @@ namespace UnityObjC
             return false;
         }
 
-        internal static bool IsGenericTypeAssignableFrom<T>(Type type)
+        internal static bool IsGenericTypeAssignableFrom(Type type, Type assignableFromType)
         {
-            if (typeof(T).IsAssignableFrom(type))
+            if (type.IsAssignableFrom(assignableFromType))
             {
                 return true;
             }
-            if (type.IsEnum)
+            if (assignableFromType.IsEnum)
             {
-                return typeof(T) == typeof(string) || typeof(T) == typeof(int);
+                return type == typeof(string) || type == typeof(int);
             }
             return false;
         }
@@ -200,15 +218,15 @@ namespace UnityObjC
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetProperty);
             var fieldInfo = type.GetField(methodName);
             var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
-            if (methodInfo != null && IsGenericTypeAssignableFrom<T>(methodInfo.ReturnType))
+            if (methodInfo != null && IsGenericTypeAssignableFrom(typeof(T), methodInfo.ReturnType))
             {
                 return CastValueToGenericType<T>(methodInfo.Invoke(obj, null));
             }
-            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom<T>(propertyInfo.PropertyType))
+            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
             {
                 return CastValueToGenericType<T>(propertyInfo.GetValue(obj));
             }
-            else if (fieldInfo != null && IsGenericTypeAssignableFrom<T>(fieldInfo.FieldType))
+            else if (fieldInfo != null && IsGenericTypeAssignableFrom(typeof(T), fieldInfo.FieldType))
             {
                 return CastValueToGenericType<T>(fieldInfo.GetValue(obj));
             }
@@ -224,22 +242,22 @@ namespace UnityObjC
             var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             var fieldInfo = type.GetField(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-            if (methodInfo != null && IsGenericTypeAssignableFrom<T>(methodInfo.ReturnType))
+            if (methodInfo != null && IsGenericTypeAssignableFrom(typeof(T), methodInfo.ReturnType))
             {
                 return CastValueToGenericType<T>(methodInfo.Invoke(null, null));
             }
-            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom<T>(propertyInfo.PropertyType))
+            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
             {
                 return CastValueToGenericType<T>(propertyInfo.GetValue(null));
             }
-            else if (fieldInfo != null && IsGenericTypeAssignableFrom<T>(fieldInfo.FieldType))
+            else if (fieldInfo != null && IsGenericTypeAssignableFrom(typeof(T), fieldInfo.FieldType))
             {
                 return CastValueToGenericType<T>(fieldInfo.GetValue(null));
             }
             return default(T);
         }
 
-        internal static void safeSetValueForKey<T>(object obj, string methodName, T value)
+        public static void safeSetValueForKey<T>(object obj, string methodName, T value)
         {
             var type = obj.GetType();
             var methodInfo = type.GetMethod(methodName, new[] { typeof(T) });
@@ -250,7 +268,7 @@ namespace UnityObjC
             {
                 methodInfo.Invoke(obj, new[] { (object)value });
             }
-            else if (propertyInfo != null && propertyInfo.CanWrite && typeof(T).IsAssignableFrom(propertyInfo.PropertyType))
+            else if (propertyInfo != null && propertyInfo.CanWrite && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
             {
                 propertyInfo.SetValue(obj, value);
             }
@@ -548,6 +566,18 @@ namespace UnityObjC
             return CSharpRuntimeSupportUtilities.safeValueForKey<Rect>(obj, key).ToCGString();
         }
 
+        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpColorForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey))]
+        private static string _CSharpImpl_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key)
+        {
+            if (string.IsNullOrEmpty(key)) return Color.white.ToString();
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return Color.white.ToString();
+
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Color>(obj, key).ToString();
+        }
+
         private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey))]
@@ -797,6 +827,20 @@ namespace UnityObjC
             CSharpRuntimeSupportUtilities.safeSetValueForKey<Rect>(obj, key, rect);
         }
 
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey(int objectInstanceID, string key, string value);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpColorForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey))]
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpColorForKey(int objectInstanceID, string key, string value)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            if (!value.TryToColor(out Color color)) return;
+
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Color>(obj, key, color);
+        }
+
         private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey))]
@@ -927,6 +971,8 @@ namespace UnityObjC
         static void FixMe_SymbolsDoNotStrip()
         {
             _ = (null as SpriteRenderer).sprite;
+            _ = (null as UnityEngine.UI.Text).fontStyle;
+            _ = (null as UnityEngine.UI.Text).fontSize;
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
@@ -946,6 +992,7 @@ namespace UnityObjC
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKey(_CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector4ForKey(_CSharpImpl_UnityEngineObjectSafeCSharpVector4ForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpRectForKey(_CSharpImpl_UnityEngineObjectSafeCSharpRectForKey);
+                _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpColorForKey(_CSharpImpl_UnityEngineObjectSafeCSharpColorForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeCSharpStringForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpObjectForKey(_CSharpImpl_UnityEngineObjectSafeCSharpObjectForKey);
 
@@ -968,6 +1015,7 @@ namespace UnityObjC
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector3ForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpVector3ForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector4ForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpVector4ForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpRectForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpRectForKey);
+                _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpColorForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpColorForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpObjectForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpObjectForKey);
 

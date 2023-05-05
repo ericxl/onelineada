@@ -49,8 +49,10 @@ extern void _UEORegisterCSharpFunc_##name (void *func) { name##_CSharpFunc = fun
 #import "UCSpriteRenderer.h"
 
 #import "UCUIText.h"
+#import "UCTMProTextUGUI.h"
 #import "UCUIImage.h"
 #import "UCUIButton.h"
+#import "UCUIOutline.h"
 #import "UCUIGraphic.h"
 #import "UCUIToggle.h"
 #import "UCUISelectable.h"

@@ -10,6 +10,7 @@
 		C96AE3932A046D74001875C8 /* WordleKeyboardAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3922A046D74001875C8 /* WordleKeyboardAXElement.m */; };
 		C96AE3952A046E3E001875C8 /* WordleTileAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3942A046E3E001875C8 /* WordleTileAXElement.m */; };
 		C96AE3972A0473BA001875C8 /* WordleKeyboardKeyAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3962A0473BA001875C8 /* WordleKeyboardKeyAXElement.m */; };
+		C96AE39E2A04DB6B001875C8 /* FontChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE39D2A04DB6B001875C8 /* FontChanger.m */; };
 		C9DC393929FDA39600DBB56D /* WordleBoardAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA105A29FA384E00B02DD7 /* WordleBoardAXElement.m */; };
 		C9DC393A29FDA39600DBB56D /* UnityViewAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = C955387729F8E54E00C59CB2 /* UnityViewAccessibility.m */; };
 		C9DC394229FDA3B000DBB56D /* libUnityAXUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA10DC29FCD91100B02DD7 /* libUnityAXUtils.a */; };
@@ -46,6 +47,7 @@
 		C96AE3922A046D74001875C8 /* WordleKeyboardAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordleKeyboardAXElement.m; sourceTree = "<group>"; };
 		C96AE3942A046E3E001875C8 /* WordleTileAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordleTileAXElement.m; sourceTree = "<group>"; };
 		C96AE3962A0473BA001875C8 /* WordleKeyboardKeyAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordleKeyboardKeyAXElement.m; sourceTree = "<group>"; };
+		C96AE39D2A04DB6B001875C8 /* FontChanger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FontChanger.m; sourceTree = "<group>"; };
 		C9AA105A29FA384E00B02DD7 /* WordleBoardAXElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordleBoardAXElement.m; sourceTree = "<group>"; };
 		C9AA10D729FCD91100B02DD7 /* UnityAXUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnityAXUtils.xcodeproj; path = ../../Plugins/UnityAXUtils.xcodeproj; sourceTree = "<group>"; };
 		C9DC392529FDA33700DBB56D /* libiOSUnityAccessibilityPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiOSUnityAccessibilityPlugin.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 				C96AE3942A046E3E001875C8 /* WordleTileAXElement.m */,
 				C96AE3922A046D74001875C8 /* WordleKeyboardAXElement.m */,
 				C96AE3962A0473BA001875C8 /* WordleKeyboardKeyAXElement.m */,
+				C96AE39D2A04DB6B001875C8 /* FontChanger.m */,
 			);
 			name = Source;
 			path = Accessibility/Runtime/iOS;
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96AE3972A0473BA001875C8 /* WordleKeyboardKeyAXElement.m in Sources */,
+				C96AE39E2A04DB6B001875C8 /* FontChanger.m in Sources */,
 				C96AE3932A046D74001875C8 /* WordleKeyboardAXElement.m in Sources */,
 				C9DC393929FDA39600DBB56D /* WordleBoardAXElement.m in Sources */,
 				C96AE3952A046E3E001875C8 /* WordleTileAXElement.m in Sources */,
