@@ -20,4 +20,14 @@
     return [self safeSetCSharpVector2ForKey:@"effectDistance" value:effectDistance];
 }
 
+- (simd_float4)effectColor
+{
+    return [self safeCSharpColorForKey:@"effectColor"];
+}
+
+- (void)setEffectColor:(simd_float4)effectColor
+{
+    return [self safeSetCSharpColorForKey:@"effectColor" value:effectColor];
+}
+
 @end

@@ -95,18 +95,14 @@ namespace UnityObjC
 
         internal static bool TryToColor(this string s, out Color result)
         {
-            string[] components = s.Trim(new char[] { 'R', 'G', 'B', 'A', '(', ')'}).Split(',');
-
-            // Parse the components as floats
-            if (float.TryParse(components[0], out float r) && float.TryParse(components[1], out float g) && float.TryParse(components[2], out float b) && float.TryParse(components[3], out float a))
+            if (s.TryToVector4(out Vector4 vector))
             {
-                // Create a new Vector2 from the parsed values
-                result = new Color(r, g, b, a);
+                result = new Color(vector.x, vector.y, vector.z, vector.w);
                 return true;
             }
             else
             {
-                result = Color.white;
+                result = new Color();
                 return false;
             }
         }
@@ -114,6 +110,11 @@ namespace UnityObjC
         internal static string ToCGString(this Rect rect)
         {
             return "{{" + $"{rect.x}, {rect.y}" + "}, {" + $"{rect.width}, {rect.height}" + "}}";
+        }
+
+        internal static string ToNativeString(this Color color)
+        {
+            return new Vector4(color.r, color.g, color.b, color.a).ToString();
         }
 
         internal static string ToJsonString(this Vector2[] vectors)
@@ -281,6 +282,16 @@ namespace UnityObjC
                 indexerInfo.SetValue(obj, value, new string[] { methodName });
             }
         }
+
+#if ENABLE_IL2CPP
+        [UnityEngine.Scripting.Preserve]
+#endif
+        static void FixMe_SymbolsDoNotStrip()
+        {
+            _ = (null as SpriteRenderer).sprite;
+            _ = (null as UnityEngine.UI.Text).fontStyle;
+            _ = (null as UnityEngine.UI.Text).fontSize;
+        }
     }
 
     internal static class ObjcRuntimeUnityEngineGameObject
@@ -326,10 +337,121 @@ namespace UnityObjC
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         static void AfterAssembliesLoaded()
         {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpImpl_UnityEngineGameObjectFind);
-            _UEORegisterCSharpFunc_UnityEngineGameObjectAddComponent(_CSharpImpl_UnityEngineGameObjectAddComponent);
-            _UEORegisterCSharpFunc_UnityEngineGameObjectGetComponent(_CSharpImpl_UnityEngineGameObjectGetComponent);
+#if UNITY_IOS || UNITY_TVOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
+            {
+                _UEORegisterCSharpFunc_UnityEngineGameObjectFind(_CSharpImpl_UnityEngineGameObjectFind);
+                _UEORegisterCSharpFunc_UnityEngineGameObjectAddComponent(_CSharpImpl_UnityEngineGameObjectAddComponent);
+                _UEORegisterCSharpFunc_UnityEngineGameObjectGetComponent(_CSharpImpl_UnityEngineGameObjectGetComponent);
+            }
+#endif
+        }
+    }
+
+    internal static class ObjcRuntimeUnityEngineComponent
+    {
+
+        private delegate int _CSharpDelegate_UnityEngineComponentGetComponent(int objectInstanceID, string componentName);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponent(_CSharpDelegate_UnityEngineComponentGetComponent func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponent))]
+        private static int _CSharpImpl_UnityEngineComponentGetComponent(int componnetInstanceID, string componentName)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
+
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return 0;
+
+            var component = (obj as Component).GetComponent(type);
+            return component ? component.GetInstanceID() : 0;
+        }
+
+        private delegate string _CSharpDelegate_UnityEngineComponentGetComponents(int objectInstanceID, string componentName);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponents(_CSharpDelegate_UnityEngineComponentGetComponents func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponents))]
+        private static string _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
+
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return null;
+
+            return (obj as Component).GetComponents(type).InstanceIDsToJsonString();
+        }
+
+        private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInChildren(int objectInstanceID, string componentName);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInChildren(_CSharpDelegate_UnityEngineComponentGetComponentInChildren func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentInChildren))]
+        private static int _CSharpImpl_UnityEngineComponentGetComponentInChildren(int componnetInstanceID, string componentName)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
+
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return 0;
+
+            var component = (obj as Component).GetComponentInChildren(type);
+            return component ? component.GetInstanceID() : 0;
+        }
+
+        private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInChildren(int objectInstanceID, string componentName);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInChildren(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren))]
+        private static string _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
+
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return null;
+
+            return (obj as Component).GetComponentsInChildren(type).InstanceIDsToJsonString();
+        }
+
+        private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInParent(int objectInstanceID, string componentName);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInParent(_CSharpDelegate_UnityEngineComponentGetComponentInParent func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentInParent))]
+        private static int _CSharpImpl_UnityEngineComponentGetComponentInParent(int componnetInstanceID, string componentName)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
+
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return 0;
+
+            var component = (obj as Component).GetComponentInParent(type);
+            return component ? component.GetInstanceID() : 0;
+        }
+
+        private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInParent(int objectInstanceID, string componentName);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInParent(_CSharpDelegate_UnityEngineComponentGetComponentsInParent func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInParent))]
+        private static string _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
+
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return null;
+
+            return (obj as Component).GetComponentsInParent(type).InstanceIDsToJsonString();
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        static void AfterAssembliesLoaded()
+        {
+#if UNITY_IOS || UNITY_TVOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
+            {
+
+                _UEORegisterCSharpFunc_UnityEngineComponentGetComponent(_CSharpImpl_UnityEngineComponentGetComponent);
+                _UEORegisterCSharpFunc_UnityEngineComponentGetComponents(_CSharpImpl_UnityEngineComponentGetComponents);
+                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInChildren(_CSharpImpl_UnityEngineComponentGetComponentInChildren);
+                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInChildren(_CSharpImpl_UnityEngineComponentGetComponentsInChildren);
+                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInParent(_CSharpImpl_UnityEngineComponentGetComponentInParent);
+                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInParent(_CSharpImpl_UnityEngineComponentGetComponentsInParent);
+            }
 #endif
         }
     }
@@ -351,8 +473,11 @@ namespace UnityObjC
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         static void AfterAssembliesLoaded()
         {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            _UEORegisterCSharpFunc_UnityEngineTransformFind(_CSharpImpl_UnityEngineTransformFind);
+#if UNITY_IOS || UNITY_TVOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
+            {
+                _UEORegisterCSharpFunc_UnityEngineTransformFind(_CSharpImpl_UnityEngineTransformFind);
+            }
 #endif
         }
     }
@@ -387,9 +512,12 @@ namespace UnityObjC
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         static void AfterAssembliesLoaded()
         {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpImpl_UnityEngineRectTransformGetWorldCorners);
-            _UEORegisterCSharpFunc_UnityEngineRectTransformUtilityWorldToScreenPoint(_CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint);
+#if UNITY_IOS || UNITY_TVOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
+            {
+                _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpImpl_UnityEngineRectTransformGetWorldCorners);
+                _UEORegisterCSharpFunc_UnityEngineRectTransformUtilityWorldToScreenPoint(_CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint);
+            }
 #endif
         }
     }
@@ -415,9 +543,12 @@ namespace UnityObjC
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         static void AfterAssembliesLoaded()
         {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneIsLoaded(_CSharpImpl_UnityEngineSceneManagerGetActiveSceneIsLoaded);
-            _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneName(_CSharpImpl_UnityEngineSceneManagerGetActiveSceneName);
+#if UNITY_IOS || UNITY_TVOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
+            {
+                _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneIsLoaded(_CSharpImpl_UnityEngineSceneManagerGetActiveSceneIsLoaded);
+                _UEORegisterCSharpFunc_UnityEngineSceneManagerGetActiveSceneName(_CSharpImpl_UnityEngineSceneManagerGetActiveSceneName);
+            }
 #endif
         }
     }
@@ -439,13 +570,16 @@ namespace UnityObjC
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         static void AfterAssembliesLoaded()
         {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            _UEORegisterCSharpFunc_UnityEngineCameraWorldToScreenPoint(_CSharpImpl_UnityEngineCameraWorldToScreenPoint);
+#if UNITY_IOS || UNITY_TVOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
+            {
+                _UEORegisterCSharpFunc_UnityEngineCameraWorldToScreenPoint(_CSharpImpl_UnityEngineCameraWorldToScreenPoint);
+            }
 #endif
         }
     }
 
-    internal static class CSharpRuntimeSupport
+    internal static class ObjcRuntimeUnityEngineObject
     {
         private delegate string _CSharpDelegate_UnityEngineObjectTypeFullName(int objectInstanceID);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpDelegate_UnityEngineObjectTypeFullName func);
@@ -571,11 +705,11 @@ namespace UnityObjC
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey))]
         private static string _CSharpImpl_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Color.white.ToString();
+            if (string.IsNullOrEmpty(key)) return new Color().ToNativeString();
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null) return Color.white.ToString();
+            if (obj == null) return new Color().ToNativeString();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<Color>(obj, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Color>(obj, key).ToNativeString();
         }
 
         private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key);
@@ -867,6 +1001,17 @@ namespace UnityObjC
             CSharpRuntimeSupportUtilities.safeSetValueForKey<UnityEngine.Object>(obj, key, objectValue);
         }
 
+        private delegate void _CSharpDelegate_UnityEngineObjectDestroy(int objectInstanceID);
+        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectDestroy(_CSharpDelegate_UnityEngineObjectDestroy func);
+        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectDestroy))]
+        private static void _CSharpImpl_UnityEngineObjectDestroy(int objectInstanceID)
+        {
+            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
+            if (obj == null) return;
+
+            UnityEngine.Object.Destroy(obj);
+        }
+
         private delegate string _CSharpDelegate_UnityEngineObjectFindObjectsOfType(string componentName);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpDelegate_UnityEngineObjectFindObjectsOfType func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectFindObjectsOfType))]
@@ -878,103 +1023,6 @@ namespace UnityObjC
             return UnityEngine.Object.FindObjectsOfType(type).InstanceIDsToJsonString();
         }
 
-        private delegate int _CSharpDelegate_UnityEngineComponentGetComponent(int objectInstanceID, string componentName);
-        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponent(_CSharpDelegate_UnityEngineComponentGetComponent func);
-        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponent))]
-        private static int _CSharpImpl_UnityEngineComponentGetComponent(int componnetInstanceID, string componentName)
-        {
-            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
-
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return 0;
-
-            var component = (obj as Component).GetComponent(type);
-            return component ? component.GetInstanceID() : 0;
-        }
-
-        private delegate string _CSharpDelegate_UnityEngineComponentGetComponents(int objectInstanceID, string componentName);
-        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponents(_CSharpDelegate_UnityEngineComponentGetComponents func);
-        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponents))]
-        private static string _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
-        {
-            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
-
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
-
-            return (obj as Component).GetComponents(type).InstanceIDsToJsonString();
-        }
-
-        private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInChildren(int objectInstanceID, string componentName);
-        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInChildren(_CSharpDelegate_UnityEngineComponentGetComponentInChildren func);
-        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentInChildren))]
-        private static int _CSharpImpl_UnityEngineComponentGetComponentInChildren(int componnetInstanceID, string componentName)
-        {
-            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
-
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return 0;
-
-            var component = (obj as Component).GetComponentInChildren(type);
-            return component ? component.GetInstanceID() : 0;
-        }
-
-        private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInChildren(int objectInstanceID, string componentName);
-        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInChildren(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren func);
-        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren))]
-        private static string _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
-        {
-            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
-
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
-
-            return (obj as Component).GetComponentsInChildren(type).InstanceIDsToJsonString();
-        }
-
-        private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInParent(int objectInstanceID, string componentName);
-        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInParent(_CSharpDelegate_UnityEngineComponentGetComponentInParent func);
-        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentInParent))]
-        private static int _CSharpImpl_UnityEngineComponentGetComponentInParent(int componnetInstanceID, string componentName)
-        {
-            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return 0;
-
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return 0;
-
-            var component = (obj as Component).GetComponentInParent(type);
-            return component ? component.GetInstanceID() : 0;
-        }
-
-        private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInParent(int objectInstanceID, string componentName);
-        [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInParent(_CSharpDelegate_UnityEngineComponentGetComponentsInParent func);
-        [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInParent))]
-        private static string _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
-        {
-            var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
-
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
-
-            return (obj as Component).GetComponentsInParent(type).InstanceIDsToJsonString();
-        }
-
-#if ENABLE_IL2CPP
-        [UnityEngine.Scripting.Preserve]
-#endif
-        static void FixMe_SymbolsDoNotStrip()
-        {
-            _ = (null as SpriteRenderer).sprite;
-            _ = (null as UnityEngine.UI.Text).fontStyle;
-            _ = (null as UnityEngine.UI.Text).fontSize;
-        }
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         static void AfterAssembliesLoaded()
         {
@@ -982,6 +1030,9 @@ namespace UnityObjC
             if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS )
             {
                 _UEORegisterCSharpFunc_UnityEngineObjectTypeFullName(_CSharpImpl_UnityEngineObjectTypeFullName);
+
+                _UEORegisterCSharpFunc_UnityEngineObjectDestroy(_CSharpImpl_UnityEngineObjectDestroy);
+                _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpImpl_UnityEngineObjectFindObjectsOfType);
 
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVoidForKey(_CSharpImpl_UnityEngineObjectSafeCSharpVoidForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpBoolForKey(_CSharpImpl_UnityEngineObjectSafeCSharpBoolForKey);
@@ -1019,14 +1070,6 @@ namespace UnityObjC
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpStringForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpStringForKey);
                 _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpObjectForKey(_CSharpImpl_UnityEngineObjectSafeSetCSharpObjectForKey);
 
-                _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpImpl_UnityEngineObjectFindObjectsOfType);
-
-                _UEORegisterCSharpFunc_UnityEngineComponentGetComponent(_CSharpImpl_UnityEngineComponentGetComponent);
-                _UEORegisterCSharpFunc_UnityEngineComponentGetComponents(_CSharpImpl_UnityEngineComponentGetComponents);
-                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInChildren(_CSharpImpl_UnityEngineComponentGetComponentInChildren);
-                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInChildren(_CSharpImpl_UnityEngineComponentGetComponentsInChildren);
-                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentInParent(_CSharpImpl_UnityEngineComponentGetComponentInParent);
-                _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInParent(_CSharpImpl_UnityEngineComponentGetComponentsInParent);
             }
 #endif
         }

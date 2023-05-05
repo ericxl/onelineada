@@ -11,6 +11,7 @@
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectTypeFullName);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectFindObjectsOfType);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectDestroy);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVoidForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpBoolForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpIntForKey);
@@ -71,8 +72,8 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
 {
     return YES
     && UnityEngineObjectTypeFullName_CSharpFunc != NULL
-    && UnityEngineObjectTypeFullName_CSharpFunc != NULL
     && UnityEngineObjectFindObjectsOfType_CSharpFunc != NULL
+    && UnityEngineObjectDestroy_CSharpFunc != NULL
     
     && UnityEngineObjectSafeCSharpVoidForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpBoolForKey_CSharpFunc != NULL

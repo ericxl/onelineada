@@ -123,6 +123,11 @@
     return [self safeSetCSharpStringForKey:@"name" value:name];
 }
 
+- (void)destroy
+{
+    UnityEngineObjectDestroy_CSharpFunc(self.instanceID);
+}
+
 - (void)safeCSharpPerformFunctionForKey:(NSString *)key
 {
     UnityEngineObjectSafeCSharpVoidForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
@@ -166,6 +171,11 @@
 - (CGRect)safeCSharpRectForKey:(NSString *)key
 {
     return CGRectFromString(TO_NSSTRING(UnityEngineObjectSafeCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+}
+
+- (simd_float4)safeCSharpColorForKey:(NSString *)key
+{
+    return UCSimdFloat4FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpColorForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
 }
 
 - (NSString *)safeCSharpStringForKey:(NSString *)key
@@ -266,6 +276,11 @@
 - (void)safeSetCSharpRectForKey:(NSString *)key value:(CGRect)value
 {
     UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(NSStringFromCGRect(value)));
+}
+
+- (void)safeSetCSharpColorForKey:(NSString *)key value:(simd_float4)value
+{
+    UnityEngineObjectSafeSetCSharpColorForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UCSimdFloat4ToString(value)));
 }
 
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)value

@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *name;
 
+- (void)destroy;
+
 - (void)safeCSharpPerformFunctionForKey:(NSString *)key;
 - (BOOL)safeCSharpBoolForKey:(NSString *)key;
 - (int)safeCSharpIntForKey:(NSString *)key;
@@ -33,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (simd_float3)safeCSharpVector3ForKey:(NSString *)key;
 - (simd_float4)safeCSharpVector4ForKey:(NSString *)key;
 - (CGRect)safeCSharpRectForKey:(NSString *)key;
+- (simd_float4)safeCSharpColorForKey:(NSString *)key;
 - (nullable NSString *)safeCSharpStringForKey:(NSString *)key;
 - (nullable UCObject *)safeCSharpObjectForKey:(NSString *)key;
 
@@ -55,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value;
 - (void)safeSetCSharpVector4ForKey:(NSString *)key value:(simd_float4)value;
 - (void)safeSetCSharpRectForKey:(NSString *)key value:(CGRect)value;
+- (void)safeSetCSharpColorForKey:(NSString *)key value:(simd_float4)value;
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(nullable NSString *)value;
 
 + (nullable NSArray<UCObject *> *)findObjectsOfType:(NSString *)component;
