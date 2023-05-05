@@ -20,6 +20,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector2ForKey, const char *, 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector3ForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector4ForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpRectForKey, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpColorForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKey, int, (int, const char *));
 
@@ -43,6 +44,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector2ForKey, void, (int,
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector3ForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector4ForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpRectForKey, void, (int, const char *, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpColorForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpStringForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpObjectForKey, void, (int, const char *, int));
 

@@ -20,6 +20,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector2ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector3ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpVector4ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpRectForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpColorForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpStringForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpObjectForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeCSharpBoolForKeyStatic);
@@ -41,6 +42,7 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector2ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector3ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpVector4ForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpRectForKey);
+CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpColorForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpStringForKey);
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineObjectSafeSetCSharpObjectForKey);
 
@@ -71,6 +73,7 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
     && UnityEngineObjectTypeFullName_CSharpFunc != NULL
     && UnityEngineObjectTypeFullName_CSharpFunc != NULL
     && UnityEngineObjectFindObjectsOfType_CSharpFunc != NULL
+    
     && UnityEngineObjectSafeCSharpVoidForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpBoolForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpIntForKey_CSharpFunc != NULL
@@ -80,8 +83,10 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
     && UnityEngineObjectSafeCSharpVector3ForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpVector4ForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpRectForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeCSharpColorForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpStringForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpObjectForKey_CSharpFunc != NULL
+    
     && UnityEngineObjectSafeCSharpBoolForKeyStatic_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpIntForKeyStatic_CSharpFunc != NULL
     && UnityEngineObjectSafeCSharpFloatForKeyStatic_CSharpFunc != NULL
@@ -101,6 +106,7 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
     && UnityEngineObjectSafeSetCSharpVector3ForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeSetCSharpVector4ForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc != NULL
+    && UnityEngineObjectSafeSetCSharpColorForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc != NULL
     && UnityEngineObjectSafeSetCSharpObjectForKey_CSharpFunc != NULL
 
