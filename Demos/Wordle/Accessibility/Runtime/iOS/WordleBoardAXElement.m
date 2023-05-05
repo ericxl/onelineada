@@ -18,7 +18,7 @@
     NSArray *elements = [[self.transform getComponentsInChildren:@"Tile"] ucMapedObjectsWithBlock:^id(UCComponent *component) {
         return [UnityAccessibilityNode node:component withClass:NSClassFromString(@"WordleTileAXElement")];
     }];
-    return [elements _axModaledSorted];
+    return elements;
 }
 
 - (CGRect)unitySpaceAccessibilityFrame

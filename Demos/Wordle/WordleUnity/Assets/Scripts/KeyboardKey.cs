@@ -52,7 +52,7 @@ public class KeyboardKey : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => {
             iOSInput.pressedKey = GetLetter();
         });
-        Debug.Log(Color.white.ToString());
+
         //FontStyle s = GetComponent<Text>().fontStyle;
         //if (GetComponentInChildren<TextMeshProUGUI>() != null)
         //    UnityObjC.CSharpRuntimeSupportUtilities.safeSetValueForKey<int>(GetComponentInChildren<TextMeshProUGUI>(), "fontStyle", 1);

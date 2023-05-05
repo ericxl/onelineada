@@ -11,6 +11,17 @@
 #define FROM_NSSTRING(nsstring) (nsstring ? nsstring.UTF8String : NULL)
 #define TO_NSSTRING(str) (str ? [NSString stringWithUTF8String:str] : nil)
 
+#define FROM_NATIVE_VECTOR2(vector) (simd_make_float2(vector.x, vector.y))
+#define TO_NATIVE_VECTOR2(vector) ((NativeVector2){vector.x, vector.y})
+#define FROM_NATIVE_VECTOR3(vector) (simd_make_float3(vector.x, vector.y, vector.z))
+#define TO_NATIVE_VECTOR3(vector) ((NativeVector3){vector.x, vector.y, vector.z})
+#define FROM_NATIVE_VECTOR4(vector) (simd_make_float4(vector.x, vector.y, vector.z, vector.w))
+#define TO_NATIVE_VECTOR4(vector) ((NativeVector4){vector.x, vector.y, vector.z, vector.w})
+#define FROM_NATIVE_RECT(rect) (CGRectMake(rect.x, rect.y, rect.width, rect.height))
+#define TO_NATIVE_RECT(rect) ((NativeRect){rect.origin.x, rect.origin.y, rect.size.width, rect.size.height})
+#define FROM_NATIVE_COLOR(color) (simd_make_float4(color.r, color.g, color.b, color.a))
+#define TO_NATIVE_COLOR(color) ((NativeColor){color.x, color.y, color.z, color.w})
+
 #define SAFE_CAST_CLASS(cls, obj) \
     ({ \
         id object = obj; \

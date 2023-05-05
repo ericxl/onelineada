@@ -17,7 +17,7 @@
 
 + (simd_float2)rectUtilityWorldToScreenPoint:(nullable UCCamera *)camera worldPoint:(simd_float3)worldPoint
 {
-    return UCSimdFloat2FromString(TO_NSSTRING(UnityEngineRectTransformUtilityWorldToScreenPoint_CSharpFunc(camera.instanceID, FROM_NSSTRING(UCSimdFloat3ToString(worldPoint)))));
+    return FROM_NATIVE_VECTOR2( UnityEngineRectTransformUtilityWorldToScreenPoint_CSharpFunc(camera.instanceID, TO_NATIVE_VECTOR3(worldPoint)));
 }
 
 @end

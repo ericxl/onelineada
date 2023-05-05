@@ -6,8 +6,90 @@ using UnityEngine;
 
 namespace UnityObjC
 {
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeVector2
+    {
+        internal float x;
+        internal float y;
+    }
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeVector3
+    {
+        internal float x;
+        internal float y;
+        internal float z;
+    }
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeVector4
+    {
+        internal float x;
+        internal float y;
+        internal float z;
+        internal float w;
+    }
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeRect
+    {
+        internal float x;
+        internal float y;
+        internal float width;
+        internal float height;
+    }
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeColor
+    {
+        internal float r;
+        internal float g;
+        internal float b;
+        internal float a;
+    }
     public static class CSharpRuntimeSupportUtilities
     {
+        internal static Vector2 ToCSharp(this NativeVector2 value)
+        {
+            return new Vector2(value.x, value.y);
+        }
+        internal static NativeVector2 ToNative(this Vector2 value)
+        {
+            return new NativeVector2 { x = value.x, y = value.y };
+        }
+
+        internal static Vector3 ToCSharp(this NativeVector3 value)
+        {
+            return new Vector3(value.x, value.y, value.z);
+        }
+        internal static NativeVector3 ToNative(this Vector3 value)
+        {
+            return new NativeVector3 { x = value.x, y = value.y, z = value.z };
+        }
+
+        internal static Vector4 ToCSharp(this NativeVector4 value)
+        {
+            return new Vector4(value.x, value.y);
+        }
+        internal static NativeVector4 ToNative(this Vector4 value)
+        {
+            return new NativeVector4 { x = value.x, y = value.y, z = value.z, w = value.w };
+        }
+
+        internal static Rect ToCSharp(this NativeRect value)
+        {
+            return new Rect(value.x, value.y, value.width, value.height);
+        }
+        internal static NativeRect ToNative(this Rect value)
+        {
+            return new NativeRect { x = value.x, y = value.y, width = value.width, height = value.height };
+        }
+
+        internal static Color ToCSharp(this NativeColor value)
+        {
+            return new Color(value.r, value.g, value.b, value.a);
+        }
+        internal static NativeColor ToNative(this Color value)
+        {
+            return new NativeColor { r = value.r, g = value.g, b = value.b, a = value.a };
+        }
+
         internal static Type GetSafeTypeName(string typeName)
         {
             var type = Type.GetType(typeName);
@@ -19,102 +101,6 @@ namespace UnityObjC
                     return type;
             }
             return null;
-        }
-
-        internal static bool TryToVector2(this string s, out Vector2 result)
-        {
-            string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
-
-            // Parse the components as floats
-            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y))
-            {
-                // Create a new Vector2 from the parsed values
-                result = new Vector2(x, y);
-                return true;
-            }
-            else
-            {
-                result = Vector2.zero;
-                return false;
-            }
-        }
-
-        internal static bool TryToVector3(this string s, out Vector3 result)
-        {
-            string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
-
-            // Parse the components as floats
-            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z))
-            {
-                // Create a new Vector2 from the parsed values
-                result = new Vector3(x, y, z);
-                return true;
-            }
-            else
-            {
-                result = Vector3.zero;
-                return false;
-            }
-        }
-
-        internal static bool TryToVector4(this string s, out Vector4 result)
-        {
-            string[] components = s.Trim(new char[] { '(', ')' }).Split(',');
-
-            // Parse the components as floats
-            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float z) && float.TryParse(components[3], out float w))
-            {
-                // Create a new Vector2 from the parsed values
-                result = new Vector4(x, y, z, w);
-                return true;
-            }
-            else
-            {
-                result = Vector4.zero;
-                return false;
-            }
-        }
-
-        internal static bool TryToRect(this string s, out Rect result)
-        {
-            string[] components = s.Trim(new char[] { '{', '}' }).Split(',');
-
-            // Parse the components as floats
-            if (float.TryParse(components[0], out float x) && float.TryParse(components[1], out float y) && float.TryParse(components[2], out float width) && float.TryParse(components[3], out float height))
-            {
-                // Create a new Vector2 from the parsed values
-                result = new Rect(x, y, width, height);
-                return true;
-            }
-            else
-            {
-                result = Rect.zero;
-                return false;
-            }
-        }
-
-        internal static bool TryToColor(this string s, out Color result)
-        {
-            if (s.TryToVector4(out Vector4 vector))
-            {
-                result = new Color(vector.x, vector.y, vector.z, vector.w);
-                return true;
-            }
-            else
-            {
-                result = new Color();
-                return false;
-            }
-        }
-
-        internal static string ToCGString(this Rect rect)
-        {
-            return "{{" + $"{rect.x}, {rect.y}" + "}, {" + $"{rect.width}, {rect.height}" + "}}";
-        }
-
-        internal static string ToNativeString(this Color color)
-        {
-            return new Vector4(color.r, color.g, color.b, color.a).ToString();
         }
 
         internal static string ToJsonString(this Vector2[] vectors)
@@ -215,69 +201,81 @@ namespace UnityObjC
         internal static T safeValueForKey<T>(object obj, string methodName)
         {
             var type = obj.GetType();
-            var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetProperty);
+            if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
+            {
+                return CastValueToGenericType<T>(propertyInfo.GetValue(obj));
+            }
+
             var fieldInfo = type.GetField(methodName);
-            var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
+            if (fieldInfo != null && IsGenericTypeAssignableFrom(typeof(T), fieldInfo.FieldType))
+            {
+                return CastValueToGenericType<T>(fieldInfo.GetValue(obj));
+            }
+
+            var methodInfo = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
             if (methodInfo != null && IsGenericTypeAssignableFrom(typeof(T), methodInfo.ReturnType))
             {
                 return CastValueToGenericType<T>(methodInfo.Invoke(obj, null));
             }
-            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
-            {
-                return CastValueToGenericType<T>(propertyInfo.GetValue(obj));
-            }
-            else if (fieldInfo != null && IsGenericTypeAssignableFrom(typeof(T), fieldInfo.FieldType))
-            {
-                return CastValueToGenericType<T>(fieldInfo.GetValue(obj));
-            }
-            else if (indexerInfo != null && indexerInfo.CanRead && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
+
+            var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
+            if (indexerInfo != null && indexerInfo.CanRead && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
             {
                 return CastValueToGenericType<T>(indexerInfo.GetValue(obj, new string[] { methodName }));
             }
+
             return default(T);
         }
 
         internal static T safeValueForKeyStatic<T>(Type type, string methodName)
         {
-            var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
+            {
+                return CastValueToGenericType<T>(propertyInfo.GetValue(null));
+            }
+
             var fieldInfo = type.GetField(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            if (fieldInfo != null && IsGenericTypeAssignableFrom(typeof(T), fieldInfo.FieldType))
+            {
+                return CastValueToGenericType<T>(fieldInfo.GetValue(null));
+            }
+
+            var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
             if (methodInfo != null && IsGenericTypeAssignableFrom(typeof(T), methodInfo.ReturnType))
             {
                 return CastValueToGenericType<T>(methodInfo.Invoke(null, null));
             }
-            else if (propertyInfo != null && propertyInfo.CanRead && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
-            {
-                return CastValueToGenericType<T>(propertyInfo.GetValue(null));
-            }
-            else if (fieldInfo != null && IsGenericTypeAssignableFrom(typeof(T), fieldInfo.FieldType))
-            {
-                return CastValueToGenericType<T>(fieldInfo.GetValue(null));
-            }
+
             return default(T);
         }
 
         public static void safeSetValueForKey<T>(object obj, string methodName, T value)
         {
             var type = obj.GetType();
-            var methodInfo = type.GetMethod(methodName, new[] { typeof(T) });
+
             var propertyInfo = type.GetProperty(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            if (propertyInfo != null && propertyInfo.CanWrite && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
+            {
+                propertyInfo.SetValue(obj, value);
+            }
+
             var fieldInfo = type.GetField(methodName);
-            var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
+            if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
+            {
+                fieldInfo.SetValue(obj, value);
+            }
+
+            var methodInfo = type.GetMethod(methodName, new[] { typeof(T) });
             if (methodInfo != null && methodInfo.ReturnType == typeof(void))
             {
                 methodInfo.Invoke(obj, new[] { (object)value });
             }
-            else if (propertyInfo != null && propertyInfo.CanWrite && IsGenericTypeAssignableFrom(typeof(T), propertyInfo.PropertyType))
-            {
-                propertyInfo.SetValue(obj, value);
-            }
-            else if (fieldInfo != null && typeof(T).IsAssignableFrom(fieldInfo.FieldType))
-            {
-                fieldInfo.SetValue(obj, value);
-            }
-            else if (indexerInfo != null && indexerInfo.CanWrite && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
+
+            var indexerInfo = type.GetProperties().FirstOrDefault(x => x.GetIndexParameters().Select(y => y.ParameterType).SequenceEqual(new[] { typeof(string) }));
+            if (indexerInfo != null && indexerInfo.CanWrite && indexerInfo.PropertyType.IsAssignableFrom(typeof(T)))
             {
                 indexerInfo.SetValue(obj, value, new string[] { methodName });
             }
@@ -497,16 +495,15 @@ namespace UnityObjC
             return corners.ToJsonString();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, string vector3String);
+        private delegate NativeVector2 _CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, NativeVector3 vector);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineRectTransformUtilityWorldToScreenPoint(_CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint))]
-        private static string _CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, string vector3String)
+        private static NativeVector2 _CSharpImpl_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, NativeVector3 vector)
         {
             var camera = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(cameraInstanceID);
-            if (camera != null && !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Camera>(camera)) return Vector2.zero.ToString();
-            if (!vector3String.TryToVector3(out Vector3 vector3)) return Vector2.zero.ToString();
+            if (camera != null && !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Camera>(camera)) return Vector2.zero.ToNative();
 
-            return RectTransformUtility.WorldToScreenPoint((Camera)camera, vector3).ToString();
+            return RectTransformUtility.WorldToScreenPoint((Camera)camera, vector.ToCSharp()).ToNative();
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
@@ -555,16 +552,15 @@ namespace UnityObjC
 
     internal static class ObjcRuntimeUnityEngineCamera
     {
-        private delegate string _CSharpDelegate_UnityEngineCameraWorldToScreenPoint(int cameraInstanceID, string vector3String);
+        private delegate NativeVector3 _CSharpDelegate_UnityEngineCameraWorldToScreenPoint(int cameraInstanceID, NativeVector3 vector);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineCameraWorldToScreenPoint(_CSharpDelegate_UnityEngineCameraWorldToScreenPoint func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineCameraWorldToScreenPoint))]
-        private static string _CSharpImpl_UnityEngineCameraWorldToScreenPoint(int cameraInstanceID, string vector3String)
+        private static NativeVector3 _CSharpImpl_UnityEngineCameraWorldToScreenPoint(int cameraInstanceID, NativeVector3 vector)
         {
             var camera = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(cameraInstanceID);
-            if (camera == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Camera>(camera)) return Vector2.zero.ToString();
-            if (!vector3String.TryToVector3(out Vector3 vector3)) return Vector2.zero.ToString();
+            if (camera == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Camera>(camera)) return Vector3.zero.ToNative();
 
-            return (camera as Camera).WorldToScreenPoint(vector3).ToString();
+            return (camera as Camera).WorldToScreenPoint(vector.ToCSharp()).ToNative();
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
@@ -652,64 +648,64 @@ namespace UnityObjC
             return CSharpRuntimeSupportUtilities.safeValueForKey<double>(obj, key);
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKey(int objectInstanceID, string key);
+        private delegate NativeVector2 _CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKey(int objectInstanceID, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector2ForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKey))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector2ForKey(int objectInstanceID, string key)
+        private static NativeVector2 _CSharpImpl_UnityEngineObjectSafeCSharpVector2ForKey(int objectInstanceID, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Vector2.zero.ToString();
+            if (string.IsNullOrEmpty(key)) return Vector2.zero.ToNative();
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null) return Vector2.zero.ToString();
+            if (obj == null) return Vector2.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<Vector2>(obj, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Vector2>(obj, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey(int objectInstanceID, string key);
+        private delegate NativeVector3 _CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey(int objectInstanceID, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKey))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKey(int objectInstanceID, string key)
+        private static NativeVector3 _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKey(int objectInstanceID, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Vector3.zero.ToString();
+            if (string.IsNullOrEmpty(key)) return Vector3.zero.ToNative();
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null) return Vector3.zero.ToString();
+            if (obj == null) return Vector3.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(obj, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Vector3>(obj, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKey(int objectInstanceID, string key);
+        private delegate NativeVector4 _CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKey(int objectInstanceID, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector4ForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKey))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector4ForKey(int objectInstanceID, string key)
+        private static NativeVector4 _CSharpImpl_UnityEngineObjectSafeCSharpVector4ForKey(int objectInstanceID, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Vector4.zero.ToString();
+            if (string.IsNullOrEmpty(key)) return Vector4.zero.ToNative();
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null) return Vector4.zero.ToString();
+            if (obj == null) return Vector4.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<Vector4>(obj, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Vector4>(obj, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpRectForKey(int objectInstanceID, string key);
+        private delegate NativeRect _CSharpDelegate_UnityEngineObjectSafeCSharpRectForKey(int objectInstanceID, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpRectForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpRectForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpRectForKey))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpRectForKey(int objectInstanceID, string key)
+        private static NativeRect _CSharpImpl_UnityEngineObjectSafeCSharpRectForKey(int objectInstanceID, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Rect.zero.ToCGString();
+            if (string.IsNullOrEmpty(key)) return Rect.zero.ToNative();
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null) return Rect.zero.ToCGString();
+            if (obj == null) return Rect.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<Rect>(obj, key).ToCGString();
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Rect>(obj, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key);
+        private delegate NativeColor _CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpColorForKey(_CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpColorForKey))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key)
+        private static NativeColor _CSharpImpl_UnityEngineObjectSafeCSharpColorForKey(int objectInstanceID, string key)
         {
-            if (string.IsNullOrEmpty(key)) return new Color().ToNativeString();
+            if (string.IsNullOrEmpty(key)) return new Color().ToNative();
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null) return new Color().ToNativeString();
+            if (obj == null) return new Color().ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKey<Color>(obj, key).ToNativeString();
+            return CSharpRuntimeSupportUtilities.safeValueForKey<Color>(obj, key).ToNative();
         }
 
         private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKey(int objectInstanceID, string key);
@@ -785,52 +781,52 @@ namespace UnityObjC
             return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<double>(type, key);
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKeyStatic(string typeName, string key);
+        private delegate NativeVector2 _CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKeyStatic(string typeName, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector2ForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKeyStatic func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector2ForKeyStatic))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector2ForKeyStatic(string typeName, string key)
+        private static NativeVector2 _CSharpImpl_UnityEngineObjectSafeCSharpVector2ForKeyStatic(string typeName, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Vector2.zero.ToString();
+            if (string.IsNullOrEmpty(key)) return Vector2.zero.ToNative();
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
-            if (type == null) return Vector2.zero.ToString();
+            if (type == null) return Vector2.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector2>(type, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector2>(type, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key);
+        private delegate NativeVector3 _CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector3ForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector3ForKeyStatic))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key)
+        private static NativeVector3 _CSharpImpl_UnityEngineObjectSafeCSharpVector3ForKeyStatic(string typeName, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Vector3.zero.ToString();
+            if (string.IsNullOrEmpty(key)) return Vector3.zero.ToNative();
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
-            if (type == null) return Vector3.zero.ToString();
+            if (type == null) return Vector3.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector3>(type, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector3>(type, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKeyStatic(string typeName, string key);
+        private delegate NativeVector4 _CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKeyStatic(string typeName, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpVector4ForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKeyStatic func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpVector4ForKeyStatic))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpVector4ForKeyStatic(string typeName, string key)
+        private static NativeVector4 _CSharpImpl_UnityEngineObjectSafeCSharpVector4ForKeyStatic(string typeName, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Vector4.zero.ToString();
+            if (string.IsNullOrEmpty(key)) return Vector4.zero.ToNative();
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
-            if (type == null) return Vector4.zero.ToString();
+            if (type == null) return Vector4.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector4>(type, key).ToString();
+            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Vector4>(type, key).ToNative();
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpRectForKeyStatic(string typeName, string key);
+        private delegate NativeRect _CSharpDelegate_UnityEngineObjectSafeCSharpRectForKeyStatic(string typeName, string key);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeCSharpRectForKeyStatic(_CSharpDelegate_UnityEngineObjectSafeCSharpRectForKeyStatic func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeCSharpRectForKeyStatic))]
-        private static string _CSharpImpl_UnityEngineObjectSafeCSharpRectForKeyStatic(string typeName, string key)
+        private static NativeRect _CSharpImpl_UnityEngineObjectSafeCSharpRectForKeyStatic(string typeName, string key)
         {
-            if (string.IsNullOrEmpty(key)) return Rect.zero.ToCGString();
+            if (string.IsNullOrEmpty(key)) return Rect.zero.ToNative();
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(typeName);
-            if (type == null) return Rect.zero.ToCGString();
+            if (type == null) return Rect.zero.ToNative();
 
-            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Rect>(type, key).ToCGString();
+            return CSharpRuntimeSupportUtilities.safeValueForKeyStatic<Rect>(type, key).ToNative();
         }
 
         private delegate string _CSharpDelegate_UnityEngineObjectSafeCSharpStringForKeyStatic(string typeName, string key);
@@ -905,74 +901,69 @@ namespace UnityObjC
             CSharpRuntimeSupportUtilities.safeSetValueForKey<double>(obj, key, value);
         }
 
-        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey(int objectInstanceID, string key, string value);
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey(int objectInstanceID, string key, NativeVector2 value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector2ForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector2ForKey))]
-        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector2ForKey(int objectInstanceID, string key, string value)
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector2ForKey(int objectInstanceID, string key, NativeVector2 value)
         {
             if (string.IsNullOrEmpty(key)) return;
-            if (!value.TryToVector2(out Vector2 vector2)) return;
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return;
 
-            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector2>(obj, key, vector2);
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector2>(obj, key, value.ToCSharp());
         }
 
-        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, string value);
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, NativeVector3 value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector3ForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector3ForKey))]
-        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, string value)
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector3ForKey(int objectInstanceID, string key, NativeVector3 value)
         {
             if (string.IsNullOrEmpty(key)) return;
-            if (!value.TryToVector3(out Vector3 vector3)) return;
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return;
 
-            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector3>(obj, key, vector3);
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector3>(obj, key, value.ToCSharp());
         }
 
-        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey(int objectInstanceID, string key, string value);
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey(int objectInstanceID, string key, NativeVector4 value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpVector4ForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpVector4ForKey))]
-        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector4ForKey(int objectInstanceID, string key, string value)
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpVector4ForKey(int objectInstanceID, string key, NativeVector4 value)
         {
             if (string.IsNullOrEmpty(key)) return;
-            if (!value.TryToVector4(out Vector4 vector4)) return;
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return;
 
-            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector4>(obj, key, vector4);
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Vector4>(obj, key, value.ToCSharp());
         }
 
-        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpRectForKey(int objectInstanceID, string key, string value);
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpRectForKey(int objectInstanceID, string key, NativeRect value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpRectForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpRectForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpRectForKey))]
-        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpRectForKey(int objectInstanceID, string key, string value)
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpRectForKey(int objectInstanceID, string key, NativeRect value)
         {
             if (string.IsNullOrEmpty(key)) return;
-            if (!value.TryToRect(out Rect rect)) return;
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return;
 
-            CSharpRuntimeSupportUtilities.safeSetValueForKey<Rect>(obj, key, rect);
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Rect>(obj, key, value.ToCSharp());
         }
 
-        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey(int objectInstanceID, string key, string value);
+        private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey(int objectInstanceID, string key, NativeColor value);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectSafeSetCSharpColorForKey(_CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectSafeSetCSharpColorForKey))]
-        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpColorForKey(int objectInstanceID, string key, string value)
+        private static void _CSharpImpl_UnityEngineObjectSafeSetCSharpColorForKey(int objectInstanceID, string key, NativeColor value)
         {
             if (string.IsNullOrEmpty(key)) return;
-            if (!value.TryToColor(out Color color)) return;
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null) return;
 
-            CSharpRuntimeSupportUtilities.safeSetValueForKey<Color>(obj, key, color);
+            CSharpRuntimeSupportUtilities.safeSetValueForKey<Color>(obj, key, value.ToCSharp());
         }
 
         private delegate void _CSharpDelegate_UnityEngineObjectSafeSetCSharpStringForKey(int objectInstanceID, string key, string value);

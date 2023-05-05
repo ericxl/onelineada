@@ -18,7 +18,7 @@
     NSArray *elements = [[self.transform getComponentsInChildren:@"KeyboardKey"] ucMapedObjectsWithBlock:^id(UCComponent *component) {
         return [UnityAccessibilityNode node:component withClass:NSClassFromString(@"WordleKeyboardKeyAXElement")];
     }];
-    return [elements _axModaledSorted];
+    return elements;
 }
 
 - (CGRect)unitySpaceAccessibilityFrame

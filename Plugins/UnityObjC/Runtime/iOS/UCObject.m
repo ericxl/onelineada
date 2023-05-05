@@ -155,27 +155,27 @@
 
 - (simd_float2)safeCSharpVector2ForKey:(NSString *)key
 {
-    return UCSimdFloat2FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector2ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+    return FROM_NATIVE_VECTOR2(UnityEngineObjectSafeCSharpVector2ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
 - (simd_float3)safeCSharpVector3ForKey:(NSString *)key
 {
-    return UCSimdFloat3FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+    return FROM_NATIVE_VECTOR3(UnityEngineObjectSafeCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
 - (simd_float4)safeCSharpVector4ForKey:(NSString *)key
 {
-    return UCSimdFloat4FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector4ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+    return FROM_NATIVE_VECTOR4(UnityEngineObjectSafeCSharpVector4ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
 - (CGRect)safeCSharpRectForKey:(NSString *)key
 {
-    return CGRectFromString(TO_NSSTRING(UnityEngineObjectSafeCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+    return FROM_NATIVE_RECT(UnityEngineObjectSafeCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
 - (simd_float4)safeCSharpColorForKey:(NSString *)key
 {
-    return UCSimdFloat4FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpColorForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key))));
+    return FROM_NATIVE_COLOR(UnityEngineObjectSafeCSharpColorForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
 }
 
 - (NSString *)safeCSharpStringForKey:(NSString *)key
@@ -210,22 +210,22 @@
 
 + (simd_float2)safeCSharpVector2ForKey:(NSString *)key forType:(NSString *)cSharpType
 {
-    return UCSimdFloat2FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector2ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+    return FROM_NATIVE_VECTOR2(UnityEngineObjectSafeCSharpVector2ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key)));
 }
 
 + (simd_float3)safeCSharpVector3ForKey:(NSString *)key forType:(NSString *)cSharpType
 {
-    return UCSimdFloat3FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector3ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+    return FROM_NATIVE_VECTOR3(UnityEngineObjectSafeCSharpVector3ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key)));
 }
 
 + (simd_float4)safeCSharpVector4ForKey:(NSString *)key forType:(NSString *)cSharpType
 {
-    return UCSimdFloat4FromString(TO_NSSTRING(UnityEngineObjectSafeCSharpVector4ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+    return FROM_NATIVE_VECTOR4(UnityEngineObjectSafeCSharpVector4ForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key)));
 }
 
 + (CGRect)safeCSharpRectForKey:(NSString *)key forType:(NSString *)cSharpType
 {
-    return CGRectFromString(TO_NSSTRING(UnityEngineObjectSafeCSharpRectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key))));
+    return FROM_NATIVE_RECT(UnityEngineObjectSafeCSharpRectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key)));
 }
 
 + (NSString *)safeCSharpStringForKey:(NSString *)key forType:(NSString *)cSharpType
@@ -260,27 +260,27 @@
 
 - (void)safeSetCSharpVector2ForKey:(NSString *)key value:(simd_float2)value
 {
-    UnityEngineObjectSafeSetCSharpVector2ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UCSimdFloat2ToString(value)));
+    UnityEngineObjectSafeSetCSharpVector2ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), TO_NATIVE_VECTOR2(value));
 }
 
 - (void)safeSetCSharpVector3ForKey:(NSString *)key value:(simd_float3)value
 {
-    UnityEngineObjectSafeSetCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UCSimdFloat3ToString(value)));
+    UnityEngineObjectSafeSetCSharpVector3ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), TO_NATIVE_VECTOR3(value));
 }
 
 - (void)safeSetCSharpVector4ForKey:(NSString *)key value:(simd_float4)value
 {
-    UnityEngineObjectSafeSetCSharpVector4ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UCSimdFloat4ToString(value)));
+    UnityEngineObjectSafeSetCSharpVector4ForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), TO_NATIVE_VECTOR4(value));
 }
 
 - (void)safeSetCSharpRectForKey:(NSString *)key value:(CGRect)value
 {
-    UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(NSStringFromCGRect(value)));
+    UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), TO_NATIVE_RECT(value));
 }
 
 - (void)safeSetCSharpColorForKey:(NSString *)key value:(simd_float4)value
 {
-    UnityEngineObjectSafeSetCSharpColorForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(UCSimdFloat4ToString(value)));
+    UnityEngineObjectSafeSetCSharpColorForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), TO_NATIVE_COLOR(value));
 }
 
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(NSString *)value

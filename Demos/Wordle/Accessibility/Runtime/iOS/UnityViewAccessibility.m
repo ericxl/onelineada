@@ -24,7 +24,7 @@
      [UnityAccessibilityNode node:[UCGameObject find:@"/Canvas/Keyboard"] withClass:NSClassFromString(@"WordleKeyboardAXElement")]
     ];
 
-    return [elements _axModaledSorted];
+    return elements;
 }
 
 @end

@@ -17,8 +17,7 @@
 
 - (simd_float3)worldToScreenPoint:(simd_float3)screenPoint
 {
-    const char *vectorStr = UnityEngineCameraWorldToScreenPoint_CSharpFunc(self.instanceID, FROM_NSSTRING(UCSimdFloat3ToString(screenPoint)));
-    return UCSimdFloat3FromString(TO_NSSTRING(vectorStr));
+    return FROM_NATIVE_VECTOR3(UnityEngineCameraWorldToScreenPoint_CSharpFunc(self.instanceID, TO_NATIVE_VECTOR3(screenPoint)));
 }
 
 @end

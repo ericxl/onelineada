@@ -398,14 +398,14 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
 - (simd_float2)ucSIMDFloat2Value
 {
     simd_float2 result;
-    [self getValue:&result size:sizeof(simd_float2)];
+    [self getValue:&result size:sizeof(simd_float4)]; // not a mistake!
     return result;
 }
 
 - (simd_float3)ucSIMDFloat3Value
 {
     simd_float3 result;
-    [self getValue:&result size:sizeof(simd_float3)];
+    [self getValue:&result size:sizeof(simd_float4)]; // not a mistake!
     return result;
 }
 
@@ -423,32 +423,6 @@ CGPoint UCCGRectGetCenter(CGRect rect)
     return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
 }
 
-NSString *UCSimdFloat2ToString(simd_float2 vector)
-{
-    return [NSString stringWithFormat:@"(%f, %f)", vector[0], vector[1]];
-}
-
-NSString *UCSimdFloat3ToString(simd_float3 vector)
-{
-    return [NSString stringWithFormat:@"(%f, %f, %f)", vector.x, vector.y, vector.z];
-}
-
-NSString *UCSimdFloat4ToString(simd_float4 vector)
-{
-    return [NSString stringWithFormat:@"(%f, %f, %f, %f)", vector.x, vector.y, vector.z, vector.w];
-}
-
-simd_float2 UCSimdFloat2FromString(NSString *str)
-{
-    NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
-    NSArray *components = [trimmedString componentsSeparatedByString:@","];
-    if ( components.count != 2)
-    {
-        return simd_make_float2(0, 0);
-    }
-    return simd_make_float2([components[0] floatValue], [components[1] floatValue]);
-}
-
 simd_float3 UCSimdFloat3FromString(NSString *str)
 {
     NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
@@ -458,59 +432,6 @@ simd_float3 UCSimdFloat3FromString(NSString *str)
         return simd_make_float3(0, 0, 0);
     }
     return simd_make_float3([components[0] floatValue], [components[1] floatValue], [components[2] floatValue]);
-}
-
-simd_float4 UCSimdFloat4FromString(NSString *str)
-{
-    NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
-    NSArray *components = [trimmedString componentsSeparatedByString:@","];
-    if ( components.count != 4 )
-    {
-        return simd_make_float4(0, 0, 0, 0);
-    }
-    return simd_make_float4([components[0] floatValue], [components[1] floatValue], [components[2] floatValue], [components[3] floatValue]);
-}
-
-NSArray<NSNumber *> *UCSimdFloat2ToArray(simd_float2 vector)
-{
-    return [NSArray arrayWithObjects:@(vector.x), @(vector.y), nil];
-}
-
-NSArray<NSNumber *> *UCSimdFloat3ToArray(simd_float3 vector)
-{
-    return [NSArray arrayWithObjects:@(vector.x), @(vector.y), @(vector.z), nil];
-}
-
-NSArray<NSNumber *> *UCSimdFloat4ToArray(simd_float4 vector)
-{
-    return [NSArray arrayWithObjects:@(vector.x), @(vector.y), @(vector.z), @(vector.w), nil];
-}
-
-simd_float2 UCSimdFloat2FromArray(NSArray<NSNumber *> *array)
-{
-    if ( [array count] != 2 )
-    {
-        return simd_make_float2(0, 0);
-    }
-    return simd_make_float2([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue);
-}
-
-simd_float3 UCSimdFloat3FromArray(NSArray<NSNumber *> *array)
-{
-    if ( [array count] != 3 )
-    {
-        return simd_make_float3(0, 0, 0);
-    }
-    return simd_make_float3([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue, [array objectAtIndex:2].floatValue);
-}
-
-simd_float4 UCSimdFloat4FromArray(NSArray<NSNumber *> *array)
-{
-    if ( [array count] != 4 )
-    {
-        return simd_make_float4(0, 0, 0, 0);
-    }
-    return simd_make_float4([array objectAtIndex:0].floatValue, [array objectAtIndex:1].floatValue, [array objectAtIndex:2].floatValue, [array objectAtIndex:3].floatValue);
 }
 
 float UCSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2)

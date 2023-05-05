@@ -16,23 +16,23 @@
     NSArray<NSString *> *corners = [self getWorldCorners];
     UCCanvas *canvas = SAFE_CAST_CLASS(UCCanvas, [self.transform getComponentInParent:@"UnityEngine.Canvas"]);
     UCCamera *camera = [canvas renderMode] != UCCanvasRenderModeScreenSpaceOverlay ? canvas.worldCamera : nil;
-    NSArray<NSArray<NSNumber *> *> *screenCorners = [corners ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
+    NSArray<NSValue *> *screenCorners = [corners ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
         simd_float3 vector = UCSimdFloat3FromString(obj);
         simd_float2 screenCorner = [UCRectTransform rectUtilityWorldToScreenPoint:camera worldPoint:vector];
-        return UCSimdFloat2ToArray(screenCorner);
+        return [NSValue ucValueWithSIMDFloat2:screenCorner];
     }];
-    float maxX = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
-        return [obj objectAtIndex:0];
-    }] ucMaxNumber].floatValue;
-    float minX = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
-        return [obj objectAtIndex:0];
-    }] ucMinNumber].floatValue;
-    float maxY = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
-        return [obj objectAtIndex:1];
-    }] ucMaxNumber].floatValue;
-    float minY = [[screenCorners ucMapedObjectsWithBlock:^id _Nonnull(NSArray<NSNumber *> * _Nonnull obj) {
-        return [obj objectAtIndex:1];
-    }] ucMinNumber].floatValue;
+    float maxX = [screenCorners ucMaxObjectWithBlock:^NSComparisonResult(NSValue *obj1, NSValue * obj2) {
+        return [@(obj1.ucSIMDFloat2Value.x) compare:@(obj2.ucSIMDFloat2Value.x)];
+    }].ucSIMDFloat2Value.x;
+    float minX = [screenCorners ucMinObjectWithBlock:^NSComparisonResult(NSValue *obj1, NSValue * obj2) {
+        return [@(obj1.ucSIMDFloat2Value.x) compare:@(obj2.ucSIMDFloat2Value.x)];
+    }].ucSIMDFloat2Value.x;
+    float maxY = [screenCorners ucMaxObjectWithBlock:^NSComparisonResult(NSValue *obj1, NSValue * obj2) {
+        return [@(obj1.ucSIMDFloat2Value.y) compare:@(obj2.ucSIMDFloat2Value.y)];
+    }].ucSIMDFloat2Value.y;
+    float minY = [screenCorners ucMinObjectWithBlock:^NSComparisonResult(NSValue *obj1, NSValue * obj2) {
+        return [@(obj1.ucSIMDFloat2Value.y) compare:@(obj2.ucSIMDFloat2Value.y)];
+    }].ucSIMDFloat2Value.y;
 
     return CGRectMake(minX, UCScreen.height - maxY, maxX - minX, maxY - minY);
 }
