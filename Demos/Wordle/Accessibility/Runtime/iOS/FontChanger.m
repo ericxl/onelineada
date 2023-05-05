@@ -61,29 +61,31 @@ static float _UnityAX_UIAccessibilityPreferredContentSizeMultiplier(void)
             }
         }
     }
-    else if ( [notification.name isEqualToString:UIAccessibilityButtonShapesEnabledStatusDidChangeNotification] )
+    else if ( [notification.name isEqualToString:UIAccessibilityButtonShapesEnabledStatusDidChangeNotification] || [notification.name isEqualToString:UIAccessibilityBoldTextStatusDidChangeNotification] )
     {
         BOOL shapesEnabled = UIAccessibilityButtonShapesEnabled();
+        BOOL isBold = UIAccessibilityIsBoldTextEnabled();
         for (UCObject *obj in [[UCGameObject find:@"/Canvas/Keyboard"].transform getComponentsInChildren:@"KeyboardKey"]) {
             if ( shapesEnabled && [(UCComponent *)obj getComponent:@"UnityEngine.UI.Outline"] == nil )
             {
                 UCUIOutline *outline = SAFE_CAST_CLASS(UCUIOutline, [[(UCComponent *)obj gameObject] addComponent:@"UnityEngine.UI.Outline"]);
                 [outline setEffectDistance:simd_make_float2(8, -8)];
+                [outline setEffectColor:simd_make_float4(0, 0, 0, 1)];
             }
             else if ( !shapesEnabled && [(UCComponent *)obj getComponent:@"UnityEngine.UI.Outline"] != nil )
             {
-                // TODO:
+                [SAFE_CAST_CLASS(UCUIOutline, [[(UCComponent *)obj gameObject] getComponent:@"UnityEngine.UI.Outline"]) destroy];
             }
-        }
-    }
-    else if ( [notification.name isEqualToString:UIAccessibilityBoldTextStatusDidChangeNotification] )
-    {
-        BOOL isBold = UIAccessibilityIsBoldTextEnabled();
-        for (UCObject *obj in [[UCGameObject find:@"/Canvas/Keyboard"].transform getComponentsInChildren:@"TMPro.TextMeshProUGUI"]) {
-            if ( [obj isKindOfClass:UCTMProTextUGUI.class] )
+            UCUITMProFontStyles fontStyle = UCUITMProFontStylesNormal;
+            if ( shapesEnabled )
             {
-                [(UCTMProTextUGUI *)obj setFontStyle:isBold ? UCUITMProFontStylesBold : UCUITMProFontStylesNormal];
+                fontStyle |= UCUITMProFontStylesUnderline;
             }
+            if ( isBold )
+            {
+                fontStyle |= UCUITMProFontStylesBold;
+            }
+            [SAFE_CAST_CLASS(UCTMProTextUGUI, [(UCComponent *)obj getComponentInChildren:@"TMPro.TextMeshProUGUI"]) setFontStyle:fontStyle];
         }
     }
 }
