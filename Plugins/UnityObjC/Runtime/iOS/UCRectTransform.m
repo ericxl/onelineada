@@ -23,9 +23,8 @@ static simd_float3 _SimdFloat3FromString(NSString *str)
 
 - (NSArray<NSValue *> *)getWorldCorners
 {
-    return [[TO_NSSTRING(UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID)) ucToStringArray] ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
-        return [NSValue ucValueWithSIMDFloat3:_SimdFloat3FromString(obj)];
-    }];
+    UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID);
+    return _UEOCSharpGetLatestData();
 }
 
 + (simd_float2)rectUtilityWorldToScreenPoint:(nullable UCCamera *)camera worldPoint:(simd_float3)worldPoint

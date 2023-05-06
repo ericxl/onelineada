@@ -65,13 +65,6 @@ namespace UnityObjC
             return null;
         }
 
-        internal static string ToJsonString(this Vector3[] vectors)
-        {
-            var strings = vectors.Select(v => v.ToString()).ToArray();
-            var joined = string.Join(",", strings);
-            return "[" + joined + "]";
-        }
-
         internal static UnityEngine.Object FindObjectFromInstanceID(int iid)
         {
             return (UnityEngine.Object)typeof(UnityEngine.Object)
@@ -241,6 +234,9 @@ namespace UnityObjC
 
         [DllImport("__Internal")] internal static extern void _UEODataBridgeClear();
         [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateIntArray(IntPtr array, int length);
+        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateVector2Array(IntPtr array, int length);
+        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateVector3Array(IntPtr array, int length);
+        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateVector4Array(IntPtr array, int length);
     }
 
     internal static class ObjcRuntimeUnityEngineGameObject
@@ -454,17 +450,25 @@ namespace UnityObjC
 
     internal static class ObjcRuntimeUnityEngineRectTransform
     {
-        private delegate string _CSharpDelegate_UnityEngineRectTransformGetWorldCorners(int objectInstanceID);
+        private delegate void _CSharpDelegate_UnityEngineRectTransformGetWorldCorners(int objectInstanceID);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners))]
-        private static string _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID)
+        private static void _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID)
         {
+            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<RectTransform>(obj)) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<RectTransform>(obj)) return;
 
             Vector3[] corners = new Vector3[4];
             (obj as RectTransform).GetWorldCorners(corners);
-            return corners.ToJsonString();
+            IntPtr nativeVec3Array = Marshal.AllocHGlobal(corners.Length * Marshal.SizeOf<Vector3>());
+            for (int i = 0; i < corners.Length; i++)
+            {
+                Marshal.StructureToPtr(corners[i], nativeVec3Array + i * Marshal.SizeOf<Vector3>(), false);
+            }
+            CSharpRuntimeSupportUtilities._UEODataBridgePopulateVector3Array(nativeVec3Array, corners.Length);
+            Marshal.FreeHGlobal(nativeVec3Array);
         }
 
         private delegate Vector2 _CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, Vector3 vector);

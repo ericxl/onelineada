@@ -73,7 +73,13 @@ extern void _UEODataBridgeClear(void)
 {
     _gDataBridge = nil;
 }
-extern void _UEODataBridgePopulateIntArray(const int32_t* array, int32_t length)
+
+id _UEOCSharpGetLatestData(void)
+{
+    return _gDataBridge;
+}
+
+extern void _UEODataBridgePopulateIntArray(const int* array, int length)
 {
     _gDataBridge = [NSMutableArray new];
     for (int32_t i = 0; i < length; ++i) {
@@ -81,9 +87,28 @@ extern void _UEODataBridgePopulateIntArray(const int32_t* array, int32_t length)
     }
 }
 
-id _UEOCSharpGetLatestData(void)
+extern void _UEODataBridgePopulateVector2Array(const NativeVector2* array, int length)
 {
-    return _gDataBridge;
+    _gDataBridge = [NSMutableArray new];
+    for (int32_t i = 0; i < length; ++i) {
+        [_gDataBridge addObject:[NSValue ucValueWithSIMDFloat2:FROM_NATIVE_VECTOR2(array[i])]];
+    }
+}
+
+extern void _UEODataBridgePopulateVector3Array(const NativeVector3* array, int length)
+{
+    _gDataBridge = [NSMutableArray new];
+    for (int32_t i = 0; i < length; ++i) {
+        [_gDataBridge addObject:[NSValue ucValueWithSIMDFloat3:FROM_NATIVE_VECTOR3(array[i])]];
+    }
+}
+
+extern void _UEODataBridgePopulateVector4Array(const NativeVector4* array, int length)
+{
+    _gDataBridge = [NSMutableArray new];
+    for (int32_t i = 0; i < length; ++i) {
+        [_gDataBridge addObject:[NSValue ucValueWithSIMDFloat4:FROM_NATIVE_VECTOR4(array[i])]];
+    }
 }
 
 
@@ -154,20 +179,6 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
 }
 
 @implementation NSString (UEOExtensions)
-
-- (NSArray<NSString *> *)ucToStringArray
-{
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\((.*?)\\)" options:NSRegularExpressionCaseInsensitive error:nil];
-    NSArray *matches = [regex matchesInString:self options:0 range:NSMakeRange(0, [self length])];
-
-    NSMutableArray *substrings = [NSMutableArray arrayWithCapacity:[matches count]];
-    for (NSTextCheckingResult *match in matches)
-    {
-        NSString *substring = [self substringWithRange:[match rangeAtIndex:0]];
-        [substrings addObject:substring];
-    }
-    return [substrings copy];
-}
 
 - (NSString *)ucDropFirst:(NSString *)substring
 {

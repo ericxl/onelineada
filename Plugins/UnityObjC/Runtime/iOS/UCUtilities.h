@@ -99,7 +99,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineGameObjectGetComponent, int, (int, const char
 CSHARP_BRIDGE_INTERFACE(UnityEngineTransformFind, int, (int, const char *));
 
 #pragma mark RectTransform
-CSHARP_BRIDGE_INTERFACE(UnityEngineRectTransformGetWorldCorners, const char *, (int));
+CSHARP_BRIDGE_INTERFACE(UnityEngineRectTransformGetWorldCorners, void, (int));
 CSHARP_BRIDGE_INTERFACE(UnityEngineRectTransformUtilityWorldToScreenPoint, NativeVector2, (int, NativeVector3));
 
 #pragma mark Scene
@@ -115,7 +115,6 @@ extern id _UEOCSharpGetLatestData(void);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (UEOExtensions)
-- (nullable NSArray<NSString *> *)ucToStringArray;
 - (NSString *)ucDropFirst:(NSString *)substring;
 - (NSString *)ucDropLast:(NSString *)substring;
 @end
