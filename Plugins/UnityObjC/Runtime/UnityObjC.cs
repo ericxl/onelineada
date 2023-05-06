@@ -222,6 +222,53 @@ namespace UnityObjC
             }
         }
 
+        public static void ClearNativeData()
+        {
+            _UEODataBridgeClear();
+        }
+
+        public static void WriteNativeData(int[] array)
+        {
+            IntPtr nativeArray = Marshal.AllocHGlobal(array.Length * Marshal.SizeOf<int>());
+            Marshal.Copy(array, 0, nativeArray, array.Length);
+            _UEODataBridgePopulateIntArray(nativeArray, array.Length);
+            Marshal.FreeHGlobal(nativeArray);
+        }
+
+        public static void WriteNativeData(Vector2[] array)
+        {
+            IntPtr nativeArray = Marshal.AllocHGlobal(array.Length * Marshal.SizeOf<Vector2>());
+            for (int i = 0; i < array.Length; i++)
+            {
+                Marshal.StructureToPtr(array[i], nativeArray + i * Marshal.SizeOf<Vector2>(), false);
+            }
+            _UEODataBridgePopulateVector2Array(nativeArray, array.Length);
+            Marshal.FreeHGlobal(nativeArray);
+        }
+
+        public static void WriteNativeData(Vector3[] array)
+        {
+            IntPtr nativeArray = Marshal.AllocHGlobal(array.Length * Marshal.SizeOf<Vector3>());
+            for (int i = 0; i < array.Length; i++)
+            {
+                Marshal.StructureToPtr(array[i], nativeArray + i * Marshal.SizeOf<Vector3>(), false);
+            }
+            _UEODataBridgePopulateVector3Array(nativeArray, array.Length);
+            Marshal.FreeHGlobal(nativeArray);
+        }
+
+        public static void WriteNativeData(Vector4[] array)
+        {
+            IntPtr nativeArray = Marshal.AllocHGlobal(array.Length * Marshal.SizeOf<Vector4>());
+            for (int i = 0; i < array.Length; i++)
+            {
+                Marshal.StructureToPtr(array[i], nativeArray + i * Marshal.SizeOf<Vector4>(), false);
+            }
+            _UEODataBridgePopulateVector4Array(nativeArray, array.Length);
+            Marshal.FreeHGlobal(nativeArray);
+        }
+
+
 #if ENABLE_IL2CPP
         [UnityEngine.Scripting.Preserve]
 #endif
@@ -232,11 +279,11 @@ namespace UnityObjC
             _ = (null as UnityEngine.UI.Text).fontSize;
         }
 
-        [DllImport("__Internal")] internal static extern void _UEODataBridgeClear();
-        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateIntArray(IntPtr array, int length);
-        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateVector2Array(IntPtr array, int length);
-        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateVector3Array(IntPtr array, int length);
-        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateVector4Array(IntPtr array, int length);
+        [DllImport("__Internal")] private static extern void _UEODataBridgeClear();
+        [DllImport("__Internal")] private static extern void _UEODataBridgePopulateIntArray(IntPtr array, int length);
+        [DllImport("__Internal")] private static extern void _UEODataBridgePopulateVector2Array(IntPtr array, int length);
+        [DllImport("__Internal")] private static extern void _UEODataBridgePopulateVector3Array(IntPtr array, int length);
+        [DllImport("__Internal")] private static extern void _UEODataBridgePopulateVector4Array(IntPtr array, int length);
     }
 
     internal static class ObjcRuntimeUnityEngineGameObject
@@ -316,7 +363,7 @@ namespace UnityObjC
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponents))]
         private static void _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
         {
-            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+            CSharpRuntimeSupportUtilities.ClearNativeData();
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
             if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return;
@@ -325,11 +372,7 @@ namespace UnityObjC
             if (type == null) return;
 
             var componentIDs = (obj as Component).GetComponents(type).Select(c => c.GetInstanceID()).ToArray();
-
-            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
-            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
-            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
-            Marshal.FreeHGlobal(nativeIntArray);
+            CSharpRuntimeSupportUtilities.WriteNativeData(componentIDs);
         }
 
         private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInChildren(int objectInstanceID, string componentName);
@@ -352,7 +395,7 @@ namespace UnityObjC
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren))]
         private static void _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
         {
-            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+            CSharpRuntimeSupportUtilities.ClearNativeData();
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
             if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return;
@@ -361,11 +404,7 @@ namespace UnityObjC
             if (type == null) return;
 
             var componentIDs = (obj as Component).GetComponentsInChildren(type).Select(c => c.GetInstanceID()).ToArray();
-
-            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
-            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
-            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
-            Marshal.FreeHGlobal(nativeIntArray);
+            CSharpRuntimeSupportUtilities.WriteNativeData(componentIDs);
         }
 
         private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInParent(int objectInstanceID, string componentName);
@@ -388,7 +427,7 @@ namespace UnityObjC
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInParent))]
         private static void _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
         {
-            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+            CSharpRuntimeSupportUtilities.ClearNativeData();
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
             if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return;
@@ -397,11 +436,7 @@ namespace UnityObjC
             if (type == null) return;
 
             var componentIDs = (obj as Component).GetComponentsInParent(type).Select(c => c.GetInstanceID()).ToArray();
-
-            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
-            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
-            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
-            Marshal.FreeHGlobal(nativeIntArray);
+            CSharpRuntimeSupportUtilities.WriteNativeData(componentIDs);
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
@@ -455,20 +490,14 @@ namespace UnityObjC
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners))]
         private static void _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID)
         {
-            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+            CSharpRuntimeSupportUtilities.ClearNativeData();
 
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
             if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<RectTransform>(obj)) return;
 
             Vector3[] corners = new Vector3[4];
             (obj as RectTransform).GetWorldCorners(corners);
-            IntPtr nativeVec3Array = Marshal.AllocHGlobal(corners.Length * Marshal.SizeOf<Vector3>());
-            for (int i = 0; i < corners.Length; i++)
-            {
-                Marshal.StructureToPtr(corners[i], nativeVec3Array + i * Marshal.SizeOf<Vector3>(), false);
-            }
-            CSharpRuntimeSupportUtilities._UEODataBridgePopulateVector3Array(nativeVec3Array, corners.Length);
-            Marshal.FreeHGlobal(nativeVec3Array);
+            CSharpRuntimeSupportUtilities.WriteNativeData(corners);
         }
 
         private delegate Vector2 _CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, Vector3 vector);
@@ -984,17 +1013,13 @@ namespace UnityObjC
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectFindObjectsOfType))]
         private static void _CSharpImpl_UnityEngineObjectFindObjectsOfType(string componentName)
         {
-            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+            CSharpRuntimeSupportUtilities.ClearNativeData();
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
             if (type == null) return;
 
             var componentIDs = UnityEngine.Object.FindObjectsOfType(type).Select(c => c.GetInstanceID()).ToArray();
-
-            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
-            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
-            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
-            Marshal.FreeHGlobal(nativeIntArray);
+            CSharpRuntimeSupportUtilities.WriteNativeData(componentIDs);
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]

@@ -10,17 +10,6 @@
 
 @implementation UCRectTransform
 
-static simd_float3 _SimdFloat3FromString(NSString *str)
-{
-    NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
-    NSArray *components = [trimmedString componentsSeparatedByString:@","];
-    if ( components.count != 3 )
-    {
-        return simd_make_float3(0, 0, 0);
-    }
-    return simd_make_float3([components[0] floatValue], [components[1] floatValue], [components[2] floatValue]);
-}
-
 - (NSArray<NSValue *> *)getWorldCorners
 {
     UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID);
