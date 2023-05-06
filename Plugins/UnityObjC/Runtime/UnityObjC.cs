@@ -72,6 +72,13 @@ namespace UnityObjC
             return "[" + joined + "]";
         }
 
+        internal static string ToJsonString(this Vector3[] vectors)
+        {
+            var strings = vectors.Select(v => v.ToString()).ToArray();
+            var joined = string.Join(",", strings);
+            return "[" + joined + "]";
+        }
+
         internal static UnityEngine.Object FindObjectFromInstanceID(int iid)
         {
             return (UnityEngine.Object)typeof(UnityEngine.Object)
@@ -430,21 +437,17 @@ namespace UnityObjC
 
     internal static class ObjcRuntimeUnityEngineRectTransform
     {
-        private delegate void _CSharpDelegate_UnityEngineRectTransformGetWorldCorners(int objectInstanceID, [In, Out] Vector3[] vectorArray);
+        private delegate string _CSharpDelegate_UnityEngineRectTransformGetWorldCorners(int objectInstanceID);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineRectTransformGetWorldCorners(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineRectTransformGetWorldCorners))]
-        private static void _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID, [In, Out] Vector3[] vectorArray)
+        private static string _CSharpImpl_UnityEngineRectTransformGetWorldCorners(int objectInstanceID)
         {
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(objectInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<RectTransform>(obj)) return;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<RectTransform>(obj)) return null;
 
             Vector3[] corners = new Vector3[4];
             (obj as RectTransform).GetWorldCorners(corners);
-
-            vectorArray[0] = corners[0];
-            vectorArray[1] = corners[1];
-            vectorArray[2] = corners[2];
-            vectorArray[3] = corners[3];
+            return corners.ToJsonString();
         }
 
         private delegate Vector2 _CSharpDelegate_UnityEngineRectTransformUtilityWorldToScreenPoint(int cameraInstanceID, Vector3 vector);

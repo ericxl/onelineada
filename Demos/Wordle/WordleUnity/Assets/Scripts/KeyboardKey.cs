@@ -57,7 +57,7 @@ public class KeyboardKey : MonoBehaviour
         //if (GetComponentInChildren<TextMeshProUGUI>() != null)
         //    UnityObjC.CSharpRuntimeSupportUtilities.safeSetValueForKey<int>(GetComponentInChildren<TextMeshProUGUI>(), "fontStyle", 1);
         //Color s1 = GetComponent<UnityEngine.UI.Outline>();
-        //GetComponentInChildren<Outline>().effectColor = TextStyl
+        //GetComponentInChildren<Image>().color = TextStyl
     }
     private void LateUpdate()
     {
