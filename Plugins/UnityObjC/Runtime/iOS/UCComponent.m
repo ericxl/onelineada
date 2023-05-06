@@ -36,9 +36,12 @@
 - (NSArray<UCComponent *> *)getComponents:(NSString *)component
 {
     UnityEngineComponentGetComponents_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
-        return [UCObject objectWithID:obj.intValue];
+    NSArray *instanceIDs = _UEOCSharpGetLatestData();
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[instanceIDs count]];
+    [instanceIDs enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+        [result addObject:[UCObject objectWithID:obj.intValue]];
     }];
+    return result;
 }
 
 - (UCComponent *)getComponentInChildren:(NSString *)component
@@ -50,9 +53,12 @@
 - (NSArray<UCComponent *> *)getComponentsInChildren:(NSString *)component
 {
     UnityEngineComponentGetComponentsInChildren_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
-        return [UCObject objectWithID:obj.intValue];
+    NSArray *instanceIDs = _UEOCSharpGetLatestData();
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[instanceIDs count]];
+    [instanceIDs enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+        [result addObject:[UCObject objectWithID:obj.intValue]];
     }];
+    return result;
 }
 
 - (UCComponent *)getComponentInParent:(NSString *)component
@@ -64,9 +70,12 @@
 - (NSArray<UCComponent *> *)getComponentsInParent:(NSString *)component
 {
     UnityEngineComponentGetComponentsInParent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
-    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
-        return [UCObject objectWithID:obj.intValue];
+    NSArray *instanceIDs = _UEOCSharpGetLatestData();
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[instanceIDs count]];
+    [instanceIDs enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+        [result addObject:[UCObject objectWithID:obj.intValue]];
     }];
+    return result;
 }
 
 @end

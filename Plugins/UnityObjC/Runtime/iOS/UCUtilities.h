@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UnityObjC.h"
+#import <CoreGraphics/CoreGraphics.h>
 #import <simd/simd.h>
+#import "UnityObjC.h"
 
 #pragma pack(push)
 #pragma pack(8)
@@ -114,24 +115,6 @@ extern id _UEOCSharpGetLatestData(void);
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSString (UEOExtensions)
-- (NSString *)ucDropFirst:(NSString *)substring;
-- (NSString *)ucDropLast:(NSString *)substring;
-@end
-
-@interface NSArray<__covariant ObjectType> (UEOExtensions)
-- (nullable ObjectType)ucSafeObjectAtIndex:(NSUInteger)index;
-- (NSArray<ObjectType> *)ucFilterObjectsUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))filterBlock;
-- (nullable ObjectType)ucFirstObjectUsingBlock:(BOOL (NS_NOESCAPE ^)(ObjectType item))predicateBlock;
-- (NSArray *)ucMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
-- (NSArray *)ucFlatMapedObjectsWithBlock:(id (^)(ObjectType obj))block;
-- (ObjectType)ucMaxObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
-- (ObjectType)ucMinObjectWithBlock:(NSComparisonResult (^)(ObjectType obj1, ObjectType obj2))block;
-- (NSNumber *)ucMaxNumber;
-- (NSNumber *)ucMinNumber;
-+ (nullable instancetype)ucArrayByIgnoringNilElementsWithCount:(NSUInteger)elementCount, ...;
-@end
-
 @interface NSValue (UEOGExtensions)
 + (NSValue *)ucValueWithCGPoint:(CGPoint)point;
 + (NSValue *)ucValueWithCGSize:(CGSize)size;
@@ -147,19 +130,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (simd_float3)ucSIMDFloat3Value;
 - (simd_float4)ucSIMDFloat4Value;
 @end
-
-extern CGPoint UCCGRectGetCenter(CGRect rect);
-
-extern float UCSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2);
-extern BOOL UCSimdFloat3Equal(simd_float3 v1, simd_float3 v2);
-extern BOOL UCSimdFloat3ApproximatelyEqual(simd_float3 v1, simd_float3 v2);
-extern BOOL UCSimdFloat3ApproximatelyEqualWithinMargin(simd_float3 v1, simd_float3 v2, float margin);
-
-extern NSString *UCFormatFloatWithPercentage(float value);
-
-#define __UCRectForRectsSentinel CGRectMake(CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX)
-#define UCRectForRects(firstRect, ...) _UCRectForRects(firstRect, ##__VA_ARGS__, __UCRectForRectsSentinel)
-extern CGRect _UCRectForRects(CGRect firstArgument, ...);
-extern CGRect UCUnionRects(NSArray<NSValue *> *rects);
 
 NS_ASSUME_NONNULL_END

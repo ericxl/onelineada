@@ -7,6 +7,7 @@
 
 #import "NSArray+UnityAccessibilityNode.h"
 #import "UnityObjC.h"
+#import "NSArray+UnityAXUtils.h"
 
 @implementation NSArray (UnityAccessibilityAdditions)
 

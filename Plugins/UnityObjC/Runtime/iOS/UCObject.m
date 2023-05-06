@@ -291,9 +291,12 @@
 + (NSArray<UCObject *> *)findObjectsOfType:(NSString *)component
 {
     UnityEngineObjectFindObjectsOfType_CSharpFunc(FROM_NSSTRING(component));
-    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
-        return [UCObject objectWithID:obj.intValue];
+    NSArray *instanceIDs = _UEOCSharpGetLatestData();
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[instanceIDs count]];
+    [instanceIDs enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+        [result addObject:[UCObject objectWithID:obj.intValue]];
     }];
+    return result;
 }
 
 @end

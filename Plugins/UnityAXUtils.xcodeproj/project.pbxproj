@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C96AE3B52A06DBE3001875C8 /* NSArray+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3B42A06DBE3001875C8 /* NSArray+UnityAXUtils.m */; };
+		C96AE3B82A06DDF1001875C8 /* NSString+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3B72A06DDF1001875C8 /* NSString+UnityAXUtils.m */; };
+		C96AE3BB2A06DE5C001875C8 /* Simd+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3BA2A06DE5C001875C8 /* Simd+UnityAXUtils.m */; };
+		C96AE3BE2A06DED9001875C8 /* CGRect+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3BD2A06DED9001875C8 /* CGRect+UnityAXUtils.m */; };
 		C9AA10D529FCD8E000B02DD7 /* UnityAccessibilityNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10D429FCD8E000B02DD7 /* UnityAccessibilityNode.m */; };
 		C9AA10EA29FCD96300B02DD7 /* libUnityObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA10E729FCD95700B02DD7 /* libUnityObjC.a */; };
 		C9AA110029FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10FF29FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m */; };
@@ -49,6 +53,14 @@
 		07C3307226A12AD700EBA463 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		07D904F42635232F009276E7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		07EDA6F926C0E6870002F9ED /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		C96AE3B32A06DBE3001875C8 /* NSArray+UnityAXUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+UnityAXUtils.h"; sourceTree = "<group>"; };
+		C96AE3B42A06DBE3001875C8 /* NSArray+UnityAXUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+UnityAXUtils.m"; sourceTree = "<group>"; };
+		C96AE3B62A06DDF1001875C8 /* NSString+UnityAXUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+UnityAXUtils.h"; sourceTree = "<group>"; };
+		C96AE3B72A06DDF1001875C8 /* NSString+UnityAXUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+UnityAXUtils.m"; sourceTree = "<group>"; };
+		C96AE3B92A06DE5C001875C8 /* Simd+UnityAXUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simd+UnityAXUtils.h"; sourceTree = "<group>"; };
+		C96AE3BA2A06DE5C001875C8 /* Simd+UnityAXUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Simd+UnityAXUtils.m"; sourceTree = "<group>"; };
+		C96AE3BC2A06DED9001875C8 /* CGRect+UnityAXUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CGRect+UnityAXUtils.h"; sourceTree = "<group>"; };
+		C96AE3BD2A06DED9001875C8 /* CGRect+UnityAXUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CGRect+UnityAXUtils.m"; sourceTree = "<group>"; };
 		C9AA107D29FA5C5A00B02DD7 /* libUnityAXUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnityAXUtils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9AA10D329FCD8E000B02DD7 /* UnityAccessibilityNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAccessibilityNode.h; sourceTree = "<group>"; };
 		C9AA10D429FCD8E000B02DD7 /* UnityAccessibilityNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAccessibilityNode.m; sourceTree = "<group>"; };
@@ -81,6 +93,7 @@
 		C9588CE929ED2CDF00055160 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C96AE3BF2A06DFE1001875C8 /* Extensions */,
 				C9AA10F729FCDACC00B02DD7 /* UnityAXUtils.h */,
 				C9AA10D329FCD8E000B02DD7 /* UnityAccessibilityNode.h */,
 				C9AA10D429FCD8E000B02DD7 /* UnityAccessibilityNode.m */,
@@ -95,6 +108,21 @@
 			);
 			name = Source;
 			path = UnityAXUtils/Runtime/iOS;
+			sourceTree = "<group>";
+		};
+		C96AE3BF2A06DFE1001875C8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C96AE3B32A06DBE3001875C8 /* NSArray+UnityAXUtils.h */,
+				C96AE3B42A06DBE3001875C8 /* NSArray+UnityAXUtils.m */,
+				C96AE3B62A06DDF1001875C8 /* NSString+UnityAXUtils.h */,
+				C96AE3B72A06DDF1001875C8 /* NSString+UnityAXUtils.m */,
+				C96AE3BC2A06DED9001875C8 /* CGRect+UnityAXUtils.h */,
+				C96AE3BD2A06DED9001875C8 /* CGRect+UnityAXUtils.m */,
+				C96AE3B92A06DE5C001875C8 /* Simd+UnityAXUtils.h */,
+				C96AE3BA2A06DE5C001875C8 /* Simd+UnityAXUtils.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		C9AA10E329FCD95700B02DD7 /* Products */ = {
@@ -211,7 +239,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C96AE3B82A06DDF1001875C8 /* NSString+UnityAXUtils.m in Sources */,
+				C96AE3BB2A06DE5C001875C8 /* Simd+UnityAXUtils.m in Sources */,
 				C9AA110029FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m in Sources */,
+				C96AE3B52A06DBE3001875C8 /* NSArray+UnityAXUtils.m in Sources */,
+				C96AE3BE2A06DED9001875C8 /* CGRect+UnityAXUtils.m in Sources */,
 				C9AA10D529FCD8E000B02DD7 /* UnityAccessibilityNode.m in Sources */,
 				C9AA110329FCDF7C00B02DD7 /* UnityAXSafeCategory.m in Sources */,
 				C9AA110629FCE2C900B02DD7 /* UnityAXFrameUtilities.m in Sources */,
