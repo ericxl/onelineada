@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UCTransform : UCComponent
 
 - (nullable UCTransform *)find:(NSString *)childName;
+@property (nonatomic, assign) int siblingIndex;
+@property (nonatomic, strong) UCTransform *parent;
 @property (nonatomic, assign) simd_float3 position;
 @property (nonatomic, assign) simd_float3 localScale;
 @end

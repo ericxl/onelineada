@@ -41,7 +41,10 @@
 
 - (NSString *)accessibilityValue
 {
-    return @"test tile";
+    UCTransform *transform = self.transform;
+    int column = [transform siblingIndex];
+    int row = [transform.parent siblingIndex];
+    return [NSString stringWithFormat:@"column %d row %d", column, row];
 }
 
 - (CGRect)unitySpaceAccessibilityFrame

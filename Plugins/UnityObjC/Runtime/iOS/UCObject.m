@@ -288,6 +288,11 @@
     UnityEngineObjectSafeSetCSharpStringForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), FROM_NSSTRING(value));
 }
 
+- (void)safeSetCSharpObjectForKey:(NSString *)key value:(UCObject *)value
+{
+    UnityEngineObjectSafeSetCSharpObjectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value.instanceID);
+}
+
 + (NSArray<UCObject *> *)findObjectsOfType:(NSString *)component
 {
     UnityEngineObjectFindObjectsOfType_CSharpFunc(FROM_NSSTRING(component));

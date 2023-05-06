@@ -16,6 +16,26 @@
     return SAFE_CAST_CLASS(UCTransform, [UCTransform objectWithID:instanceID]);
 }
 
+- (int)siblingIndex
+{
+    return [self safeCSharpIntForKey:@"GetSiblingIndex"];
+}
+
+- (void)setSiblingIndex:(int)siblingIndex
+{
+    [self safeSetCSharpIntForKey:@"SetSiblingIndex" value:siblingIndex];
+}
+
+- (UCTransform *)parent
+{
+    return SAFE_CAST_CLASS(UCTransform, [self safeCSharpObjectForKey:@"parent"]);
+}
+
+- (void)setParent:(UCTransform *)parent
+{
+    [self safeSetCSharpObjectForKey:@"parent" value:parent];
+}
+
 - (simd_float3)position
 {
     return [self safeCSharpVector3ForKey:@"position"];

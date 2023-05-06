@@ -139,7 +139,7 @@ namespace UnityObjC
             return (T)obj;
         }
 
-        internal static T safeValueForKey<T>(object obj, string methodName)
+        public static T safeValueForKey<T>(object obj, string methodName)
         {
             var type = obj.GetType();
 
@@ -274,9 +274,12 @@ namespace UnityObjC
 #endif
         static void FixMe_SymbolsDoNotStrip()
         {
-            _ = (null as SpriteRenderer).sprite;
+            _ = (null as UnityEngine.SpriteRenderer).sprite;
             _ = (null as UnityEngine.UI.Text).fontStyle;
             _ = (null as UnityEngine.UI.Text).fontSize;
+            _ = (null as UnityEngine.Transform).parent;
+            (null as UnityEngine.Transform).GetSiblingIndex();
+            (null as UnityEngine.Transform).SetSiblingIndex(0);
         }
 
         [DllImport("__Internal")] private static extern void _UEODataBridgeClear();

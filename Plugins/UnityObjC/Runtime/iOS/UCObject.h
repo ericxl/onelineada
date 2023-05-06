@@ -60,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)safeSetCSharpRectForKey:(NSString *)key value:(CGRect)value;
 - (void)safeSetCSharpColorForKey:(NSString *)key value:(simd_float4)value;
 - (void)safeSetCSharpStringForKey:(NSString *)key value:(nullable NSString *)value;
+- (void)safeSetCSharpObjectForKey:(NSString *)key value:(nullable UCObject *)value;
 
 + (nullable NSArray<UCObject *> *)findObjectsOfType:(NSString *)component;
 
