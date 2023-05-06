@@ -10,9 +10,22 @@
 
 @implementation UCRectTransform
 
-- (NSArray<NSString *> *)getWorldCorners
+static simd_float3 _SimdFloat3FromString(NSString *str)
 {
-    return [TO_NSSTRING(UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID)) ucToStringArray];
+    NSString *trimmedString = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
+    NSArray *components = [trimmedString componentsSeparatedByString:@","];
+    if ( components.count != 3 )
+    {
+        return simd_make_float3(0, 0, 0);
+    }
+    return simd_make_float3([components[0] floatValue], [components[1] floatValue], [components[2] floatValue]);
+}
+
+- (NSArray<NSValue *> *)getWorldCorners
+{
+    return [[TO_NSSTRING(UnityEngineRectTransformGetWorldCorners_CSharpFunc(self.instanceID)) ucToStringArray] ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
+        return [NSValue ucValueWithSIMDFloat3:_SimdFloat3FromString(obj)];
+    }];
 }
 
 + (simd_float2)rectUtilityWorldToScreenPoint:(nullable UCCamera *)camera worldPoint:(simd_float3)worldPoint

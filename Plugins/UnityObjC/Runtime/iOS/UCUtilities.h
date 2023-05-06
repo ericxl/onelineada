@@ -151,8 +151,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern CGPoint UCCGRectGetCenter(CGRect rect);
 
-extern simd_float3 UCSimdFloat3FromString(NSString *str);
-
 extern float UCSimdFloat3SquareMagnitude(simd_float3 v1, simd_float3 v2);
 extern BOOL UCSimdFloat3Equal(simd_float3 v1, simd_float3 v2);
 extern BOOL UCSimdFloat3ApproximatelyEqual(simd_float3 v1, simd_float3 v2);

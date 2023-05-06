@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCRectTransform : UCTransform
 
-@property (nonatomic, strong, readonly) NSArray<NSString *> *getWorldCorners;
+@property (nonatomic, strong, readonly) NSArray<NSValue *> *getWorldCorners;
 + (simd_float2)rectUtilityWorldToScreenPoint:(nullable UCCamera *)camera worldPoint:(simd_float3)worldPoint;
 
 @end

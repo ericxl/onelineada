@@ -32,11 +32,10 @@
 #define CSHARP_BRIDGE_INTERFACE(name, return_type, params) \
 typedef return_type(* _CSharpDelegate_##name) params; \
 extern _CSharpDelegate_##name name##_CSharpFunc; \
-extern void _UEORegisterCSharpFunc_##name (void *func);
 
 #define CSHARP_BRIDGE_IMPLEMENTATION(name) \
 _CSharpDelegate_##name name##_CSharpFunc = NULL; \
-void _UEORegisterCSharpFunc_##name (void *func) { name##_CSharpFunc = func ; }
+extern void _UEORegisterCSharpFunc_##name (void *func) { name##_CSharpFunc = func ; }
 
 #define CSHARP_BRIDGE_INTERFACE_AND_IMPLEMENTATION(name, return_type, params) \
 typedef return_type(* _CSharpDelegate_##name) params; \

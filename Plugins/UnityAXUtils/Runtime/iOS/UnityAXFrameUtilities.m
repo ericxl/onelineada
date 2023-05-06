@@ -13,11 +13,11 @@
 
 - (CGRect)unityAXFrameInScreenSpace
 {
-    NSArray<NSString *> *corners = [self getWorldCorners];
+    NSArray<NSValue *> *corners = [self getWorldCorners];
     UCCanvas *canvas = SAFE_CAST_CLASS(UCCanvas, [self.transform getComponentInParent:@"UnityEngine.Canvas"]);
     UCCamera *camera = [canvas renderMode] != UCCanvasRenderModeScreenSpaceOverlay ? canvas.worldCamera : nil;
-    NSArray<NSValue *> *screenCorners = [corners ucMapedObjectsWithBlock:^id _Nonnull(NSString * _Nonnull obj) {
-        simd_float3 vector = UCSimdFloat3FromString(obj);
+    NSArray<NSValue *> *screenCorners = [corners ucMapedObjectsWithBlock:^id _Nonnull(NSValue * _Nonnull obj) {
+        simd_float3 vector = [obj ucSIMDFloat3Value];
         simd_float2 screenCorner = [UCRectTransform rectUtilityWorldToScreenPoint:camera worldPoint:vector];
         return [NSValue ucValueWithSIMDFloat2:screenCorner];
     }];
