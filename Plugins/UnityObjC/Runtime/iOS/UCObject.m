@@ -290,8 +290,8 @@
 
 + (NSArray<UCObject *> *)findObjectsOfType:(NSString *)component
 {
-    NSString *arrayString = TO_NSSTRING(UnityEngineObjectFindObjectsOfType_CSharpFunc(FROM_NSSTRING(component)));
-    return [[arrayString ucToNumberArray] ucMapedObjectsWithBlock:^id(NSNumber *obj) {
+    UnityEngineObjectFindObjectsOfType_CSharpFunc(FROM_NSSTRING(component));
+    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UCObject objectWithID:obj.intValue];
     }];
 }

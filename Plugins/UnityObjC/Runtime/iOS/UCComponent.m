@@ -35,8 +35,8 @@
 
 - (NSArray<UCComponent *> *)getComponents:(NSString *)component
 {
-    NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponents_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString ucToNumberArray] ucMapedObjectsWithBlock:^id(NSNumber *obj) {
+    UnityEngineComponentGetComponents_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
+    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UCObject objectWithID:obj.intValue];
     }];
 }
@@ -49,8 +49,8 @@
 
 - (NSArray<UCComponent *> *)getComponentsInChildren:(NSString *)component
 {
-    NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponentsInChildren_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString ucToNumberArray] ucMapedObjectsWithBlock:^id(NSNumber *obj) {
+    UnityEngineComponentGetComponentsInChildren_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
+    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UCObject objectWithID:obj.intValue];
     }];
 }
@@ -63,8 +63,8 @@
 
 - (NSArray<UCComponent *> *)getComponentsInParent:(NSString *)component
 {
-    NSString *arrayString = TO_NSSTRING(UnityEngineComponentGetComponentsInParent_CSharpFunc(self.instanceID, FROM_NSSTRING(component)));
-    return [[arrayString ucToNumberArray] ucMapedObjectsWithBlock:^id(NSNumber *obj) {
+    UnityEngineComponentGetComponentsInParent_CSharpFunc(self.instanceID, FROM_NSSTRING(component));
+    return [(NSArray *)_UEOCSharpGetLatestData() ucMapedObjectsWithBlock:^id(NSNumber *obj) {
         return [UCObject objectWithID:obj.intValue];
     }];
 }

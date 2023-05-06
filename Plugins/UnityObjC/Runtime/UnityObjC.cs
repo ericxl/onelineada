@@ -65,13 +65,6 @@ namespace UnityObjC
             return null;
         }
 
-        internal static string InstanceIDsToJsonString(this UnityEngine.Object[] objects)
-        {
-            var ids = objects.Select(s => s.GetInstanceID().ToString()).ToArray();
-            var joined = string.Join(",", ids);
-            return "[" + joined + "]";
-        }
-
         internal static string ToJsonString(this Vector3[] vectors)
         {
             var strings = vectors.Select(v => v.ToString()).ToArray();
@@ -245,6 +238,9 @@ namespace UnityObjC
             _ = (null as UnityEngine.UI.Text).fontStyle;
             _ = (null as UnityEngine.UI.Text).fontSize;
         }
+
+        [DllImport("__Internal")] internal static extern void _UEODataBridgeClear();
+        [DllImport("__Internal")] internal static extern void _UEODataBridgePopulateIntArray(IntPtr array, int length);
     }
 
     internal static class ObjcRuntimeUnityEngineGameObject
@@ -319,18 +315,25 @@ namespace UnityObjC
             return component ? component.GetInstanceID() : 0;
         }
 
-        private delegate string _CSharpDelegate_UnityEngineComponentGetComponents(int objectInstanceID, string componentName);
+        private delegate void _CSharpDelegate_UnityEngineComponentGetComponents(int objectInstanceID, string componentName);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponents(_CSharpDelegate_UnityEngineComponentGetComponents func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponents))]
-        private static string _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
+        private static void _CSharpImpl_UnityEngineComponentGetComponents(int componnetInstanceID, string componentName)
         {
+            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
+            if (type == null) return;
 
-            return (obj as Component).GetComponents(type).InstanceIDsToJsonString();
+            var componentIDs = (obj as Component).GetComponents(type).Select(c => c.GetInstanceID()).ToArray();
+
+            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
+            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
+            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
+            Marshal.FreeHGlobal(nativeIntArray);
         }
 
         private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInChildren(int objectInstanceID, string componentName);
@@ -348,18 +351,25 @@ namespace UnityObjC
             return component ? component.GetInstanceID() : 0;
         }
 
-        private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInChildren(int objectInstanceID, string componentName);
+        private delegate void _CSharpDelegate_UnityEngineComponentGetComponentsInChildren(int objectInstanceID, string componentName);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInChildren(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInChildren))]
-        private static string _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
+        private static void _CSharpImpl_UnityEngineComponentGetComponentsInChildren(int componnetInstanceID, string componentName)
         {
+            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
+            if (type == null) return;
 
-            return (obj as Component).GetComponentsInChildren(type).InstanceIDsToJsonString();
+            var componentIDs = (obj as Component).GetComponentsInChildren(type).Select(c => c.GetInstanceID()).ToArray();
+
+            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
+            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
+            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
+            Marshal.FreeHGlobal(nativeIntArray);
         }
 
         private delegate int _CSharpDelegate_UnityEngineComponentGetComponentInParent(int objectInstanceID, string componentName);
@@ -377,18 +387,25 @@ namespace UnityObjC
             return component ? component.GetInstanceID() : 0;
         }
 
-        private delegate string _CSharpDelegate_UnityEngineComponentGetComponentsInParent(int objectInstanceID, string componentName);
+        private delegate void _CSharpDelegate_UnityEngineComponentGetComponentsInParent(int objectInstanceID, string componentName);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineComponentGetComponentsInParent(_CSharpDelegate_UnityEngineComponentGetComponentsInParent func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineComponentGetComponentsInParent))]
-        private static string _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
+        private static void _CSharpImpl_UnityEngineComponentGetComponentsInParent(int componnetInstanceID, string componentName)
         {
+            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
+
             var obj = CSharpRuntimeSupportUtilities.FindObjectFromInstanceID(componnetInstanceID);
-            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return null;
+            if (obj == null || !CSharpRuntimeSupportUtilities.ObjectIsKindOfType<Component>(obj)) return;
 
             var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
+            if (type == null) return;
 
-            return (obj as Component).GetComponentsInParent(type).InstanceIDsToJsonString();
+            var componentIDs = (obj as Component).GetComponentsInParent(type).Select(c => c.GetInstanceID()).ToArray();
+
+            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
+            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
+            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
+            Marshal.FreeHGlobal(nativeIntArray);
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
@@ -958,15 +975,22 @@ namespace UnityObjC
             UnityEngine.Object.Destroy(obj);
         }
 
-        private delegate string _CSharpDelegate_UnityEngineObjectFindObjectsOfType(string componentName);
+        private delegate void _CSharpDelegate_UnityEngineObjectFindObjectsOfType(string componentName);
         [DllImport("__Internal")] private static extern void _UEORegisterCSharpFunc_UnityEngineObjectFindObjectsOfType(_CSharpDelegate_UnityEngineObjectFindObjectsOfType func);
         [AOT.MonoPInvokeCallback(typeof(_CSharpDelegate_UnityEngineObjectFindObjectsOfType))]
-        private static string _CSharpImpl_UnityEngineObjectFindObjectsOfType(string componentName)
+        private static void _CSharpImpl_UnityEngineObjectFindObjectsOfType(string componentName)
         {
-            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
-            if (type == null) return null;
+            CSharpRuntimeSupportUtilities._UEODataBridgeClear();
 
-            return UnityEngine.Object.FindObjectsOfType(type).InstanceIDsToJsonString();
+            var type = CSharpRuntimeSupportUtilities.GetSafeTypeName(componentName);
+            if (type == null) return;
+
+            var componentIDs = UnityEngine.Object.FindObjectsOfType(type).Select(c => c.GetInstanceID()).ToArray();
+
+            IntPtr nativeIntArray = Marshal.AllocHGlobal(componentIDs.Length * Marshal.SizeOf<int>());
+            Marshal.Copy(componentIDs, 0, nativeIntArray, componentIDs.Length);
+            CSharpRuntimeSupportUtilities._UEODataBridgePopulateIntArray(nativeIntArray, componentIDs.Length);
+            Marshal.FreeHGlobal(nativeIntArray);
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]

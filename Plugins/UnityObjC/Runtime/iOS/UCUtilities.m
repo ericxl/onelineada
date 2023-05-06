@@ -68,6 +68,25 @@ CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineSceneManagerGetActiveSceneName);
 
 CSHARP_BRIDGE_IMPLEMENTATION(UnityEngineCameraWorldToScreenPoint);
 
+static id _gDataBridge = nil;
+extern void _UEODataBridgeClear(void)
+{
+    _gDataBridge = nil;
+}
+extern void _UEODataBridgePopulateIntArray(const int32_t* array, int32_t length)
+{
+    _gDataBridge = [NSMutableArray new];
+    for (int32_t i = 0; i < length; ++i) {
+        [_gDataBridge addObject:@(array[i])];
+    }
+}
+
+id _UEOCSharpGetLatestData(void)
+{
+    return _gDataBridge;
+}
+
+
 BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
 {
     return YES
@@ -135,31 +154,6 @@ BOOL _UEOCSharpFunctionsRegistrationCompleted(void)
 }
 
 @implementation NSString (UEOExtensions)
-
-- (NSArray<NSNumber *> *)ucToNumberArray
-{
-    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
-
-    // Use NSJSONSerialization to parse the JSON data
-    NSError *error;
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-
-    if (jsonArray && !error) {
-        // Create a mutable array to store the NSNumber objects
-        NSMutableArray<NSNumber *> *numberArray = [NSMutableArray arrayWithCapacity:[jsonArray count]];
-
-        // Iterate through the parsed array and convert each element to NSNumber
-        for (id element in jsonArray) {
-            if ([element isKindOfClass:[NSNumber class]]) {
-                [numberArray addObject:(NSNumber *)element];
-            }
-        }
-
-        // Convert the mutable array to an NSArray
-        return [NSArray arrayWithArray:numberArray];
-    }
-    return nil;
-}
 
 - (NSArray<NSString *> *)ucToStringArray
 {

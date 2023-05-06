@@ -41,7 +41,7 @@ typedef struct {
 #pragma pack(pop)
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectTypeFullName, const char *, (int));
-CSHARP_BRIDGE_INTERFACE(UnityEngineObjectFindObjectsOfType, const char *, (const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectFindObjectsOfType, void, (const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectDestroy, void, (int));
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVoidForKey, void, (int, const char *));
@@ -82,11 +82,11 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpStringForKey, void, (int, 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpObjectForKey, void, (int, const char *, int));
 
 CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponent, int, (int, const char *));
-CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponents, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponents, void, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentInChildren, int, (int, const char *));
-CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentsInChildren, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentsInChildren, void, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentInParent, int, (int, const char *));
-CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentsInParent, const char *, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineComponentGetComponentsInParent, void, (int, const char *));
 
 #pragma mark GameObject
 
@@ -110,11 +110,11 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneName, const char *,
 CSHARP_BRIDGE_INTERFACE(UnityEngineCameraWorldToScreenPoint, NativeVector3, (int, NativeVector3));
 
 extern BOOL _UEOCSharpFunctionsRegistrationCompleted(void);
+extern id _UEOCSharpGetLatestData(void);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (UEOExtensions)
-- (nullable NSArray<NSNumber *> *)ucToNumberArray;
 - (nullable NSArray<NSString *> *)ucToStringArray;
 - (NSString *)ucDropFirst:(NSString *)substring;
 - (NSString *)ucDropLast:(NSString *)substring;
