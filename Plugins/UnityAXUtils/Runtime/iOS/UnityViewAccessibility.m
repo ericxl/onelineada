@@ -14,11 +14,11 @@
 @implementation _AXGameGlue
 + (void)load
 {
-    UnityAXSafeCategoryInstall(@"UnityViewAccessibility");
+    UnityAXSafeCategoryInstall(@"UnityViewAccessibility", @"UnityView");
 }
 @end
 
-UnityAXDefineDeclaredSafeCategory(@"UnityView", UnityViewAccessibility)
+UnityAXDefineDeclaredSafeCategory(UnityViewAccessibility)
 
 @implementation UnityViewAccessibility
 

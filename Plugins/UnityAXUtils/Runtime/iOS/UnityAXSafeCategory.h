@@ -7,11 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
-extern void UnityAXSafeCategoryInstall(NSString *categoryName);
+extern void UnityAXSafeCategoryInstall(NSString *categoryName, NSString *className);
 
-#define UnityAXDefineSafeCategory(quotedTargetClassName, category) \
+#define UnityAXDefineSafeCategory(category) \
     UnityAXDeclareSafeCategory(category) \
-    UnityAXDefineDeclaredSafeCategory(quotedTargetClassName, category)
+    UnityAXDefineDeclaredSafeCategory(category)
 
 #define UnityAXDeclareSafeCategory(category) \
     __attribute__((visibility("hidden"))) \
@@ -21,18 +21,10 @@ extern void UnityAXSafeCategoryInstall(NSString *categoryName);
     @interface category : __##category##_super \
     @end
 
-#define UnityAXDefineDeclaredSafeCategory(quotedTargetClassName, category) \
+#define UnityAXDefineDeclaredSafeCategory(category) \
     @implementation __##category##_super \
     @end \
     @implementation category (SafeCategory) \
-    + (NSString *)unityAXSafeCategoryTargetClassName \
-    { \
-        return quotedTargetClassName; \
-    } \
-    + (void)_initializeUnityAXSafeCategory \
-    { \
-        [self installUnityAXSafeCategoryOnClassNamed:quotedTargetClassName]; \
-    } \
     @end \
 
 @interface _UnityAXSafeCategory : NSObject

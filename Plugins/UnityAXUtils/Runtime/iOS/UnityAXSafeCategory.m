@@ -117,20 +117,20 @@
 
 @end
 
-void UnityAXSafeCategoryInstall(NSString *categoryName)
+void UnityAXSafeCategoryInstall(NSString *categoryName, NSString *className)
 {
     Class class = NSClassFromString(categoryName);
     if ( class != nil )
     {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        SEL initializeUnityAXSafeCategorySelector = @selector(_initializeUnityAXSafeCategory);
+        SEL initializeUnityAXSafeCategorySelector = @selector(installUnityAXSafeCategoryOnClassNamed:);
 #pragma clang diagnostic pop
         if ( initializeUnityAXSafeCategorySelector != nil && [class respondsToSelector:initializeUnityAXSafeCategorySelector] )
         {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [class performSelector:initializeUnityAXSafeCategorySelector];
+            [class performSelector:initializeUnityAXSafeCategorySelector withObject:className];
 #pragma clang diagnostic pop
         }
     }

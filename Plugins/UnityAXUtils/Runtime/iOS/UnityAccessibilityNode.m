@@ -83,10 +83,10 @@ __attribute__((visibility("hidden")))
 @interface _UnityAccessibilityNodeFrameCorrectionLoader: NSObject
 @end
 @implementation _UnityAccessibilityNodeFrameCorrectionLoader
-+ (void)load { UnityAXSafeCategoryInstall(@"UnityAccessibilityNodeFrameAccessibility"); }
++ (void)load { UnityAXSafeCategoryInstall(@"UnityAccessibilityNodeFrameAccessibility", @"UnityAccessibilityNode"); }
 @end
 
-UnityAXDefineSafeCategory(@"UnityAccessibilityNode", UnityAccessibilityNodeFrameAccessibility)
+UnityAXDefineSafeCategory(UnityAccessibilityNodeFrameAccessibility)
 
 @implementation UnityAccessibilityNodeFrameAccessibility
 
