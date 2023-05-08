@@ -11,6 +11,7 @@
 		C96AE3B82A06DDF1001875C8 /* NSString+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3B72A06DDF1001875C8 /* NSString+UnityAXUtils.m */; };
 		C96AE3BB2A06DE5C001875C8 /* Simd+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3BA2A06DE5C001875C8 /* Simd+UnityAXUtils.m */; };
 		C96AE3BE2A06DED9001875C8 /* CGRect+UnityAXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3BD2A06DED9001875C8 /* CGRect+UnityAXUtils.m */; };
+		C96AE3CE2A0708CB001875C8 /* JavascriptRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AE3CD2A0708CB001875C8 /* JavascriptRuntime.m */; };
 		C9AA10D529FCD8E000B02DD7 /* UnityAccessibilityNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10D429FCD8E000B02DD7 /* UnityAccessibilityNode.m */; };
 		C9AA10EA29FCD96300B02DD7 /* libUnityObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA10E729FCD95700B02DD7 /* libUnityObjC.a */; };
 		C9AA110029FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA10FF29FCDE3C00B02DD7 /* NSArray+UnityAccessibilityNode.m */; };
@@ -61,6 +62,7 @@
 		C96AE3BA2A06DE5C001875C8 /* Simd+UnityAXUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Simd+UnityAXUtils.m"; sourceTree = "<group>"; };
 		C96AE3BC2A06DED9001875C8 /* CGRect+UnityAXUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CGRect+UnityAXUtils.h"; sourceTree = "<group>"; };
 		C96AE3BD2A06DED9001875C8 /* CGRect+UnityAXUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CGRect+UnityAXUtils.m"; sourceTree = "<group>"; };
+		C96AE3CD2A0708CB001875C8 /* JavascriptRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JavascriptRuntime.m; sourceTree = "<group>"; };
 		C9AA107D29FA5C5A00B02DD7 /* libUnityAXUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnityAXUtils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9AA10D329FCD8E000B02DD7 /* UnityAccessibilityNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityAccessibilityNode.h; sourceTree = "<group>"; };
 		C9AA10D429FCD8E000B02DD7 /* UnityAccessibilityNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAccessibilityNode.m; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				C9AA110529FCE2C900B02DD7 /* UnityAXFrameUtilities.m */,
 				C9DC399329FEF6E700DBB56D /* UnityViewAccessibility.h */,
 				C9DC399429FEF6E700DBB56D /* UnityViewAccessibility.m */,
+				C96AE3CD2A0708CB001875C8 /* JavascriptRuntime.m */,
 			);
 			name = Source;
 			path = UnityAXUtils/Runtime/iOS;
@@ -246,6 +249,7 @@
 				C96AE3BE2A06DED9001875C8 /* CGRect+UnityAXUtils.m in Sources */,
 				C9AA10D529FCD8E000B02DD7 /* UnityAccessibilityNode.m in Sources */,
 				C9AA110329FCDF7C00B02DD7 /* UnityAXSafeCategory.m in Sources */,
+				C96AE3CE2A0708CB001875C8 /* JavascriptRuntime.m in Sources */,
 				C9AA110629FCE2C900B02DD7 /* UnityAXFrameUtilities.m in Sources */,
 				C9DC399529FEF6E700DBB56D /* UnityViewAccessibility.m in Sources */,
 			);

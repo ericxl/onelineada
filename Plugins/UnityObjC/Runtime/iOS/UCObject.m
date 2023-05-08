@@ -170,7 +170,7 @@
 
 - (CGRect)safeCSharpRectForKey:(NSString *)key
 {
-    return FROM_NATIVE_RECT(UnityEngineObjectSafeCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key)));
+    return UnityEngineObjectSafeCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key));
 }
 
 - (simd_float4)safeCSharpColorForKey:(NSString *)key
@@ -225,7 +225,7 @@
 
 + (CGRect)safeCSharpRectForKey:(NSString *)key forType:(NSString *)cSharpType
 {
-    return FROM_NATIVE_RECT(UnityEngineObjectSafeCSharpRectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key)));
+    return UnityEngineObjectSafeCSharpRectForKeyStatic_CSharpFunc(FROM_NSSTRING(cSharpType), FROM_NSSTRING(key));
 }
 
 + (NSString *)safeCSharpStringForKey:(NSString *)key forType:(NSString *)cSharpType
@@ -275,7 +275,7 @@
 
 - (void)safeSetCSharpRectForKey:(NSString *)key value:(CGRect)value
 {
-    UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), TO_NATIVE_RECT(value));
+    UnityEngineObjectSafeSetCSharpRectForKey_CSharpFunc(self.instanceID, FROM_NSSTRING(key), value);
 }
 
 - (void)safeSetCSharpColorForKey:(NSString *)key value:(simd_float4)value

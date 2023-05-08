@@ -31,7 +31,7 @@
 
 #define CSHARP_BRIDGE_INTERFACE(name, return_type, params) \
 typedef return_type(* _CSharpDelegate_##name) params; \
-extern _CSharpDelegate_##name name##_CSharpFunc; \
+extern __attribute__((visibility("default"))) _CSharpDelegate_##name name##_CSharpFunc; \
 
 #define CSHARP_BRIDGE_IMPLEMENTATION(name) \
 _CSharpDelegate_##name name##_CSharpFunc = NULL; \

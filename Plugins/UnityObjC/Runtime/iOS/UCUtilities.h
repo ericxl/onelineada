@@ -28,12 +28,6 @@ typedef struct {
     float w;
 } NativeVector4;
 typedef struct {
-    float x;
-    float y;
-    float width;
-    float height;
-} NativeRect;
-typedef struct {
     float r;
     float g;
     float b;
@@ -53,7 +47,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpDoubleForKey, double, (int, c
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector2ForKey, NativeVector2, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector3ForKey, NativeVector3, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector4ForKey, NativeVector4, (int, const char *));
-CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpRectForKey, NativeRect, (int, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpRectForKey, CGRect, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpColorForKey, NativeColor, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKey, const char *, (int, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKey, int, (int, const char *));
@@ -66,7 +60,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpDoubleForKeyStatic, double, (
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector2ForKeyStatic, NativeVector2, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector3ForKeyStatic, NativeVector3, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpVector4ForKeyStatic, NativeVector4, (const char *, const char *));
-CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpRectForKeyStatic, NativeRect, (const char *, const char *));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpRectForKeyStatic, CGRect, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpStringForKeyStatic, const char *, (const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeCSharpObjectForKeyStatic, int, (const char *, const char *));
 
@@ -77,7 +71,7 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpDoubleForKey, void, (int, 
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector2ForKey, void, (int, const char *, NativeVector2));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector3ForKey, void, (int, const char *, NativeVector3));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpVector4ForKey, void, (int, const char *, NativeVector4));
-CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpRectForKey, void, (int, const char *, NativeRect));
+CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpRectForKey, void, (int, const char *, CGRect));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpColorForKey, void, (int, const char *, NativeColor));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpStringForKey, void, (int, const char *, const char *));
 CSHARP_BRIDGE_INTERFACE(UnityEngineObjectSafeSetCSharpObjectForKey, void, (int, const char *, int));
@@ -110,8 +104,8 @@ CSHARP_BRIDGE_INTERFACE(UnityEngineSceneManagerGetActiveSceneName, const char *,
 #pragma mark Camera
 CSHARP_BRIDGE_INTERFACE(UnityEngineCameraWorldToScreenPoint, NativeVector3, (int, NativeVector3));
 
-extern BOOL _UEOCSharpFunctionsRegistrationCompleted(void);
-extern id _UEOCSharpGetLatestData(void);
+extern __attribute__((visibility("default"))) BOOL _UEOCSharpFunctionsRegistrationCompleted(void);
+extern __attribute__((visibility("default"))) id _UEOCSharpGetLatestData(void);
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "UnityAXUtils.h"
 
-@interface _AXGameGlue: NSObject
+__attribute__((visibility("hidden")))
+@interface _UnityViewAccessibilityInstaller: NSObject
 @end
-@implementation _AXGameGlue
+@implementation _UnityViewAccessibilityInstaller
 + (void)load
 {
     UnityAXSafeCategoryInstall(@"UnityViewAccessibility", @"UnityView");
