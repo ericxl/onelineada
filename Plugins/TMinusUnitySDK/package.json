@@ -1,0 +1,15 @@
+{
+  "name": "com.tminus.ai.unitysdk",
+  "displayName": "TMinusUnitySDK",
+  "description": "Provides accessibility for Unity game",
+  "version": "1.0.0",
+  "unity": "2019.2",
+  "keywords": [
+    "accessibility"
+  ],
+  "author": {
+    "name": "Xiaoyong Liang",
+    "email": "jklelxy@gmail.com",
+    "url": "https://www.xiaoyongliang.com"
+  }
+}

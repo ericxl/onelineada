@@ -5,9 +5,9 @@ import sys
 import shutil
 
 baseScript = '''
-    jsContext[@"FUNCTION_NAME"] = BLOCK_DECLARATION {
+    [self jsContext][@"FUNCTION_NAME"] = BLOCK_DECLARATION {
         BOOL isFuncPtr = [symbol hasPrefix:@"*"];
-        void *handle = dlsym(dlopen(0, RTLD_NOW), isFuncPtr ? [symbol substringFromIndex:1].UTF8String : symbol.UTF8String);
+        void *handle = dlsym(RTLD_DEFAULT, isFuncPtr ? [symbol substringFromIndex:1].UTF8String : symbol.UTF8String);
         if ( handle == NULL || (isFuncPtr && *((void **)handle) == NULL) ) 
         { } else {
             if ( TYPE_CONDITION_CLAUSE ) {
@@ -57,34 +57,10 @@ typeInfo = {
         "jsTypeCondition": lambda s: f'{s}.isNumber',
         "jsTypeToNativeConversion": lambda s: f'{s}.toDouble'
     },
-    'simd_float2': {
-        "formalName": "Vector2",
-        "jsTypeString": "JSValue *",
-        "jsTypeConversion": lambda s: f'[JSValueSoft valueWithObject:@{{ @"x":@({s}.x), @"y":@({s}.y) }} inContext:_gAppJSContext]',
-        "jsTypeDefault": "nil",
-        "jsTypeCondition": lambda s: f'{s}.isObject',
-        "jsTypeToNativeConversion": lambda s: f'simd_make_float2({s}[@"x"].toDouble, {s}[@"y"].toDouble)'
-    },
-    'simd_float3': {
-        "formalName": "Vector3",
-        "jsTypeString": "JSValue *",
-        "jsTypeConversion": lambda s: f'[JSValueSoft valueWithObject:@{{ @"x":@({s}.x), @"y":@({s}.y), @"z":@({s}.z) }} inContext:_gAppJSContext]',
-        "jsTypeDefault": "nil",
-        "jsTypeCondition": lambda s: f'{s}.isObject',
-        "jsTypeToNativeConversion": lambda s: f'simd_make_float3({s}[@"x"].toDouble, {s}[@"y"].toDouble, {s}[@"z"].toDouble)'
-    },
-    'simd_float4': {
-        "formalName": "Vector4",
-        "jsTypeString": "JSValue *",
-        "jsTypeConversion": lambda s: f'[JSValueSoft valueWithObject:@{{ @"x":@({s}.x), @"y":@({s}.y), @"z":@({s}.z), @"w":@({s}.w) }} inContext:_gAppJSContext]',
-        "jsTypeDefault": "nil",
-        "jsTypeCondition": lambda s: f'{s}.isObject',
-        "jsTypeToNativeConversion": lambda s: f'simd_make_float4({s}[@"x"].toDouble, {s}[@"y"].toDouble, {s}[@"z"].toDouble, {s}[@"w"].toDouble)'
-    },
     'CGRect': {
         "formalName": "Rect",
         "jsTypeString": "JSValue *",
-        "jsTypeConversion": lambda s: f'[JSValueSoft valueWithRect:{s} inContext:_gAppJSContext]',
+        "jsTypeConversion": lambda s: f'[JSValueSoft valueWithRect:{s} inContext:[self jsContext]]',
         "jsTypeDefault": "nil",
         "jsTypeCondition": lambda s: f'{s}.isObject',
         "jsTypeToNativeConversion": lambda s: f'{s}.toRect'
@@ -102,8 +78,22 @@ typeInfo = {
         "jsTypeString": "JSValue *",
         "jsTypeConversion": lambda s: s,
         "jsTypeDefault": "nil",
-        "jsTypeCondition": lambda s: f'{s}.isObject',
-        "jsTypeToNativeConversion": lambda s: s
+        "jsTypeCondition": lambda s: f'({s}.isString || {s}.isArray || {s}.isDate || {s}.isObject || {s}.isNull || {s}.isUndefined)',
+        "jsTypeToNativeConversion": lambda s: f'''({{ 
+          id __value = nil; 
+          if ( {s}.isString ) {{ __value = {s}.toString; }} 
+          else if ( {s}.isArray ) {{ __value = {s}.toArray; }} 
+          else if ( {s}.isDate ) {{ __value = {s}.toDate; }} 
+          else if ( {s}.isObject || {s}.isNull || {s}.isUndefined ) {{ __value = {s}.toObject; }}
+          __value; }})'''
+    },
+    'SEL': {
+        "formalName": "Selector",
+        "jsTypeString": "NSString *",
+        "jsTypeConversion": lambda s: f'NSStringFromSelector({s})',
+        "jsTypeDefault": "NULL",
+        "jsTypeCondition": lambda s: f'{s}.isString',
+        "jsTypeToNativeConversion": lambda s: f'NSSelectorFromString({s}.toString)'
     },
   }
 
@@ -111,33 +101,48 @@ def typeMap(type):
   return typeInfo.get(type)
 
 def process_string(returnType, parameters):
-    functionName = 'InvokeFunc_' + typeMap(returnType)['formalName']
-    params = [f"{(typeMap(element)['formalName'])}{index}" for index, element in enumerate(parameters) ]
-    functionName = "_".join([functionName] + params)
+    if parameters is None:
+        functionName = 'LookupSymbol_' + typeMap(returnType)['formalName']
+    else:
+        functionName = 'InvokeFunc_' + typeMap(returnType)['formalName']
+        params = [f"{(typeMap(element)['formalName'])}{index}" for index, element in enumerate(parameters) ]
+        functionName = "_".join([functionName] + params)
 
-
-    block_decls = ", ".join(["NSString *symbol"] + [f"JSValue *arg{index}" for index, _ in enumerate(parameters)])
+    if parameters is None:
+        jsvalue_decls = []
+    else:
+        jsvalue_decls = [f"JSValue *arg{index}" for index, _ in enumerate(parameters)]
+    block_decls = ", ".join(["NSString *symbol"] + jsvalue_decls)
     blockDeclaration = f"^{typeMap(returnType)['jsTypeString']}({block_decls})"
 
 
-    type_clause = [f"{(typeMap(element)['jsTypeCondition'](f'arg{index}'))}" for index, element in enumerate(parameters)]
-    type_clause = " && ".join(type_clause) if len(type_clause) > 0 else "YES" 
+    if parameters is None:
+        type_clause = "YES"
+    else:
+        type_clause = [f"{(typeMap(element)['jsTypeCondition'](f'arg{index}'))}" for index, element in enumerate(parameters)]
+        type_clause = " && ".join(type_clause) if len(type_clause) > 0 else "YES" 
 
 
-    native_function_decl = f'{returnType} (*func)({", ".join(parameters)}) = isFuncPtr ? *((void **)handle) : handle;'
+    if parameters is None:
+        native_function_decl = f'{returnType} (*func) = isFuncPtr ? *((void **)handle) : handle;'
+    else:
+        native_function_decl = f'{returnType} (*func)({", ".join(parameters)}) = isFuncPtr ? *((void **)handle) : handle;'
 
 
-    func_value_params = [f"{(typeMap(element)['jsTypeToNativeConversion'](f'arg{index}'))}" for index, element in enumerate(parameters) ]
-    native_function_invoke = f'func({", ".join(func_value_params)})'
+    if parameters is None:
+        native_function_invoke = f'*func'
+    else:
+        func_value_params = [f"{(typeMap(element)['jsTypeToNativeConversion'](f'arg{index}'))}" for index, element in enumerate(parameters) ]
+        native_function_invoke = f'func({", ".join(func_value_params)})'
     if returnType != "void":
         native_function_invoke = f'{returnType} result = {native_function_invoke};'
     else:
-       native_function_invoke = f'{native_function_invoke};'
+        native_function_invoke = f'{native_function_invoke};'
 
     if returnType != "void":
         jsvalue_return = f'return {typeMap(returnType)["jsTypeConversion"]("result")};'
     else:
-       jsvalue_return = "return;"
+        jsvalue_return = "return;"
 
     if returnType != "void":
         fallback = f'return {typeMap(returnType)["jsTypeDefault"]};'
@@ -156,6 +161,9 @@ def process_string(returnType, parameters):
     return codeScript
 
 
+# FIXME: allow id
+for returnType in filter(lambda x: x != "void" and x != "id", typeInfo.keys()):
+  print(process_string(returnType, None))
 
 for returnType in typeInfo.keys():
   print(process_string(returnType, []))
@@ -167,12 +175,18 @@ for returnType in typeInfo.keys():
 for returnType in typeInfo.keys():
   for param0 in filter(lambda x: x != "void", typeInfo.keys()):
     for param1 in filter(lambda x: x != "void", typeInfo.keys()):
-      if not (param0.startswith("simd") and param1.startswith("simd") and param0 != param1):
-        print(process_string(returnType, [param0, param1]))
+      # if not (param0.startswith("NativeVector") and param1.startswith("NativeVector") and param0 != param1):
+      print(process_string(returnType, [param0, param1]))
 
+for returnType in typeInfo.keys():
+  for param0 in filter(lambda x: x != "void", typeInfo.keys()):
+    for param1 in filter(lambda x: x != "void", typeInfo.keys()):
+      for param2 in filter(lambda x: x != "void", typeInfo.keys()):
+        if returnType == "void" and param0 == "int" and param1 == "const char *":
+          print(process_string(returnType, [param0, param1, param2]))
+        if param0 == "id" and param1 == "SEL":
+          print(process_string(returnType, [param0, param1, param2]))
 
-for param2 in filter(lambda x: x != "void", typeInfo.keys()):
-  print(process_string("void", ["int", "const char *", param2]))
 # for returnType in typeInfo.keys():
 #   for param0 in filter(lambda x: x != "void", typeInfo.keys()):
 #     for param1 in filter(lambda x: x != "void", typeInfo.keys()):
