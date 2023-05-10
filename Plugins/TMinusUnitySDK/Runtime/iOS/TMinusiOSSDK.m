@@ -87,9 +87,28 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
         return;
     }
 
-    NSError *err;
-    NSString *jsScript = [NSString stringWithContentsOfFile:[NSBundle.mainBundle pathForResource:@"Data/Raw/accessibility" ofType:@"js"] encoding:NSUTF8StringEncoding error:&err];
-    [[self jsContext] evaluateScript:jsScript];
+    NSURL *url = [NSURL URLWithString:@"http://contentserver.ericxl.repl.co/get_main_app_script"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    NSDictionary *jsonBodyDict = @{@"project_id": projectId};
+    NSError *jsonError;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonBodyDict options:NSJSONWritingPrettyPrinted error:&jsonError];
+    request.HTTPBody = jsonData;
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            [NSException raise:NSGenericException format:@"Can't download accessibility script."];
+            return;
+        }
+
+        NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        [[self jsContext] evaluateScript:responseString];
+    }];
+
+    [task resume];
 }
 
 + (void)_setupConsoleForwarding __attribute__((objc_direct))

@@ -23,7 +23,7 @@ namespace TMinusAI
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void AfterSceneLoad()
         {
-            SetUpWithProjectId("Template");
+            SetUpWithProjectId(Application.identifier);
         }
 
         [DllImport("__Internal")] private static extern void _TMinusSDKSetupWithProjectId(string projectId);
