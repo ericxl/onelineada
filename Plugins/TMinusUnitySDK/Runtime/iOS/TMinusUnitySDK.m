@@ -111,6 +111,29 @@ extern __attribute__((visibility("hidden"))) void _TMinusUnityDataBridgePopulate
     }
 }
 
+extern __attribute__((visibility("default"))) CGFloat _TMinusUnityUIAccessibilityPreferredContentSizeMultiplier(void)
+{
+    if ( @available(iOS 10.0, tvOS 10.0, *) )
+    {
+        UITraitCollection *defaultTraitCollection = [UITraitCollection traitCollectionWithPreferredContentSizeCategory:UIContentSizeCategoryLarge];
+        UITraitCollection *newTraitCollection = [UITraitCollection traitCollectionWithPreferredContentSizeCategory:UIApplication.sharedApplication.preferredContentSizeCategory];
+
+        UIFont *defaultFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody compatibleWithTraitCollection:defaultTraitCollection];
+        UIFont *newFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody compatibleWithTraitCollection:newTraitCollection];
+
+        CGFloat percentage = ((newFont.pointSize / defaultFont.pointSize) * 100);
+
+        int roundedPercentage = (int)percentage;
+        roundedPercentage = roundedPercentage - (roundedPercentage % 5); // bucketize by 5s
+        if ( roundedPercentage == 100 ) // avoid rounding error
+        {
+            return 1;
+        }
+        return (float)roundedPercentage / (float)100;
+    }
+    return 1;
+}
+
 @interface NSObject (TMinusSDKPriv)
 + (void)setupWithProjectId:(NSString *)projectId;
 @end

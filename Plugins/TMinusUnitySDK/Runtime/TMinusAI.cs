@@ -38,7 +38,7 @@ namespace TMinusAI
             x = vector.x;
             y = vector.y;
             z = 0;
-            w = 0; ;
+            w = 0;
         }
         internal Vector2 ToVector2()
         {
@@ -299,6 +299,8 @@ namespace TMinusAI
             _ = (null as UnityEngine.UI.Text).fontStyle;
             _ = (null as UnityEngine.UI.Text).fontSize;
             _ = (null as UnityEngine.Transform).parent;
+            _ = (null as UnityEngine.UI.Outline).effectColor;
+            _ = (null as UnityEngine.UI.Outline).effectDistance;
             (null as UnityEngine.Transform).GetSiblingIndex();
             (null as UnityEngine.Transform).SetSiblingIndex(0);
         }

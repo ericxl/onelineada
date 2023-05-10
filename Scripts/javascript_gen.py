@@ -124,7 +124,10 @@ def process_string(returnType, parameters):
 
 
     if parameters is None:
-        native_function_decl = f'{returnType} (*func) = isFuncPtr ? *((void **)handle) : handle;'
+        if returnType == "id":
+            native_function_decl = 'id __unsafe_unretained *func = isFuncPtr ? (id __unsafe_unretained *)(*((void **)handle)) : (id __unsafe_unretained *)handle;'
+        else:
+            native_function_decl = f'{returnType} (*func) = isFuncPtr ? *((void **)handle) : handle;'
     else:
         native_function_decl = f'{returnType} (*func)({", ".join(parameters)}) = isFuncPtr ? *((void **)handle) : handle;'
 
@@ -161,8 +164,7 @@ def process_string(returnType, parameters):
     return codeScript
 
 
-# FIXME: allow id
-for returnType in filter(lambda x: x != "void" and x != "id", typeInfo.keys()):
+for returnType in filter(lambda x: x != "void", typeInfo.keys()):
   print(process_string(returnType, None))
 
 for returnType in typeInfo.keys():

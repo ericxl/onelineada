@@ -78,8 +78,9 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
     dispatch_once(&onceToken, ^{
         [self _setupConsoleForwarding];
         [self _setupExceptionForwarding];
-        [self _setupNativeFunctionInvocation];
         [self _setupObjCHelper];
+        [self _setupNotificationHelper];
+        [self _setupNativeFunctionInvocation];
     });
     if ( projectId.length == 0 )
     {
@@ -105,7 +106,9 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
         }
 
         NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        [[self jsContext] evaluateScript:responseString];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self jsContext] evaluateScript:responseString];
+        });
     }];
 
     [task resume];
@@ -168,9 +171,22 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
     };
 }
 
++ (void)_setupNotificationHelper __attribute__((objc_direct))
+{
+    [[self jsContext] evaluateScript:@"var Notifications = {};"];
+    [self jsContext][@"Notifications"][@"addObserver"] = ^(NSString *notificationName, JSValue *block) {
+        [NSNotificationCenter.defaultCenter addObserverForName:notificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [block callWithArguments:@[[JSValueSoft valueWithObject:@{
+                @"name":note.name ?: NSNull.null,
+                @"object":note.object ?: NSNull.null,
+                @"userInfo":note.userInfo ?: NSNull.null
+            } inContext:[self jsContext]]]];
+        }];
+    };
+}
+
 + (void)_setupNativeFunctionInvocation __attribute__((objc_direct))
 {
-    
     [self jsContext][@"LookupSymbol_Bool"] = ^BOOL(NSString *symbol) {
         BOOL isFuncPtr = [symbol hasPrefix:@"*"];
         void *handle = dlsym(RTLD_DEFAULT, isFuncPtr ? [symbol substringFromIndex:1].UTF8String : symbol.UTF8String);
@@ -250,6 +266,20 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
                 const char * (*func) = isFuncPtr ? *((void **)handle) : handle;
                 const char * result = *func;
                 return [NSString stringWithUTF8String:result];
+            } else { }
+        }
+        return nil;
+    };
+
+    [self jsContext][@"LookupSymbol_Id"] = ^JSValue *(NSString *symbol) {
+        BOOL isFuncPtr = [symbol hasPrefix:@"*"];
+        void *handle = dlsym(RTLD_DEFAULT, isFuncPtr ? [symbol substringFromIndex:1].UTF8String : symbol.UTF8String);
+        if ( handle == NULL || (isFuncPtr && *((void **)handle) == NULL) )
+        { } else {
+            if ( YES ) {
+                id __unsafe_unretained *func = isFuncPtr ? (id __unsafe_unretained *)(*((void **)handle)) : (id __unsafe_unretained *)handle;
+                id result = *func;
+                return result;
             } else { }
         }
         return nil;
@@ -11996,7 +12026,6 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
         }
         return NULL;
     };
-
 }
 
 @end
