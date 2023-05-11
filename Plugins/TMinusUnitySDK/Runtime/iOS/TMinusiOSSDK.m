@@ -104,6 +104,13 @@ SOFT_LINK_CLASS(JavascriptCore, JSValue)
             [NSException raise:NSGenericException format:@"Can't download accessibility script."];
             return;
         }
+        if ([(NSHTTPURLResponse *)response statusCode] != 200) {
+            if (data != nil) {
+                NSString *errorMessage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [NSException raise:NSGenericException format:@"%@", errorMessage];
+                return;
+            }
+        }
 
         NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         dispatch_async(dispatch_get_main_queue(), ^{

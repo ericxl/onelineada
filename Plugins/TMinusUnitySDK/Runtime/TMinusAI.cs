@@ -299,6 +299,7 @@ namespace TMinusAI
             _ = (null as UnityEngine.UI.Text).fontStyle;
             _ = (null as UnityEngine.UI.Text).fontSize;
             _ = (null as UnityEngine.Transform).parent;
+            _ = (null as UnityEngine.GameObject).gameObject;
             _ = (null as UnityEngine.UI.Outline).effectColor;
             _ = (null as UnityEngine.UI.Outline).effectDistance;
             (null as UnityEngine.Transform).GetSiblingIndex();

@@ -157,7 +157,7 @@ extern __attribute__((visibility("hidden"))) void _TMinusSDKSetupWithProjectId(c
 {
     int _instanceID;
 }
-+ (instancetype)nodeFromID:(int)instanceID withClassname:(NSString *)axClassName;
+
 @end
 @interface NSObject (UnityNodeFrame)
 - (CGRect)unitySpaceAccessibilityFrame;
@@ -192,6 +192,10 @@ static NSMutableDictionary<NSNumber *, UnityAccessibilityNode *> *_gNodeMap;
     }
     id object = [_gNodeMap objectForKey:@(instanceID)];
     Class cls = NSClassFromString(axClassName);
+    if ( cls == nil )
+    {
+        return nil;
+    }
     if ( object != nil )
     {
         if ( [object class] != cls )

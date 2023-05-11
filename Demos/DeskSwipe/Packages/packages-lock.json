@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.tminus.ai.unitysdk": {
+      "version": "file:../../../Plugins/TMinusUnitySDK",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -91,24 +97,6 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
-    },
-    "com.xiaoyongliang.iosunityaccessibilityplugin": {
-      "version": "file:../../Accessibility",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
-    "com.xiaoyongliang.unityaxutils": {
-      "version": "file:../../../../Plugins/UnityAXUtils",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
-    "com.xiaoyongliang.unityobjc": {
-      "version": "file:../../../../Plugins/UnityObjC",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
