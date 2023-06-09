@@ -9,7 +9,9 @@ Note that adding/changing app behaviors is against Apple's App Store policies; b
 
 # Getting started:
 For Unity: In a Unity project, include Plugins/TMinusUnitySDK in Unity Package Manager.
+`serverservercode` is a Python Flask project that you should host; with this server, you could push code directly to customer's devices that could add accessibility features on the fly.
 The above SDK can download the following code that you could put on a server to make the game accessible: `serverservercode/JSProjects/shared.js` and all scripts in `serverservercode/JSProjects/com.GruzWorks.DeskSwipe`.
+
 
 # How does this work
 1. There are two important scripts: `Plugins/TMinusUnitySDK/Runtime/iOS/TMinusiOSSDK.m` and `Plugins/TMinusUnitySDK/Runtime/iOS/TMinusUnitySDK.m` (only needed for apps created with Unity)
