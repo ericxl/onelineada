@@ -1,0 +1,174 @@
+/* Basic setup */
+/* Some code modified from bootstrap official guide */
+/* ref: https://getbootstrap.com/docs/4.0/examples/sticky-footer/ */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 2em;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    /* Set the fixed height of the footer here */
+    line-height: 1.5em;
+    /* Vertically center the text there */
+    background-color: #f5f5f5;
+}
+
+hr {
+    width: 50%;
+    margin: auto;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table tr {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* bootstrap modifications */
+/* .container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+} */
+
+.extra-bottom {
+    padding-bottom: 2em;
+}
+
+.task {
+    width: 50%;
+}
+
+.task-id {
+    width: 10%;
+}
+
+.status {
+    width: 20%;
+}
+
+.update {
+    width: 10%;
+}
+
+.language-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.language-button {
+  background-color: #f5f7fa;
+  /* color: #32325d; */
+  border: 2px solid #c9c9c9;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-right: 10px;
+}
+
+.language-button:hover {
+  background-color: #edf0f3;
+}
+
+.language-button.active {
+  /* background-color: #6772e5; */
+  /* color: #fff;
+    background-color: #5763d1; */
+  border-color: #6772e5;
+}
+
+.language-button.active:hover {
+  /* background-color: #5763d1; */
+}
+
+
+
+.vs-theme {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 16px;
+  color: #d4d4d4;
+  background-color: #1e1e1e;
+  /* padding: 10px; */
+  /* border-radius: 3px; */
+  line-height: 1.5;
+  /* overflow-x: auto; */
+  /* text-align: left; */
+}
+
+.vs-kw {
+  color: #9cdcfe;
+  /* font-weight:; */
+}
+
+.vs-cls {
+  color: #4ec9b0;
+}
+
+.vs-func {
+  color: #c586c0;
+}
+
+.vs-str {
+  color: #d69d85;
+}
+
+
+.xc-theme {
+  font-family: Menlo, monospace;
+  font-size: 16px;
+  color: #d4d4d4;
+  background-color: #1e1e1e;
+  /* padding: 10px; */
+  /* border-radius: 3px; */
+  line-height: 1.5;
+  /* overflow-x: auto; */
+  /* text-align: left; */
+}
+
+.xc-kw {
+  color: #FC5FA3;
+  /* font-weight:; */
+}
+
+.xc-cls {
+  color: #5DD8FF;
+}
+
+.xc-syscls {
+  color: #D0A8FF;
+}
+
+.xc-prepro {
+  color: #FD8F3F;
+}
+
+.xc-func {
+  color: #41A1C0;
+}
+
+.xc-str {
+  color: #FC6A5D;
+}
+
+.xc-comment {
+  color: #6C7986;
+}
